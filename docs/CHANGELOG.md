@@ -2,6 +2,22 @@
 
 > Ajouter chaque modification **en haut**, datée, avec : ce qui a changé, pourquoi, fichiers clés, et l'état des vérifications.
 
+## 2026-11-05 — v0.2.0 · Blog, banques partenaires, vocabulaire métier
+
+**Fait**
+- 12 guides rédigés (≈ 5 200 mots) et publiés ; 3 derniers guides sur l’accueil ; guides liés sur chaque service.
+- Partenariats signés avec Al Barid Bank et Bank Al Yousr : noms affichés par défaut (accueil, financement,
+  première installation), pages partenaires indexées et enrichies (profils, produits, pièces du dossier, FAQ).
+  Aucun taux ni délai chiffré.
+- Vocabulaire professionnel : champ `lexique` sur les 14 spécialités (79 termes) + page `/glossaire/` (121 termes,
+  JSON-LD DefinedTermSet).
+- Nouvelle page `/premiere-installation/` (jeunes praticiens : 7 étapes, financement, check-list).
+- Styles des listes numérotées dans les articles ; cartes produits élargies sur les pages bancaires.
+- Documentation : `docs/ARCHITECTURE.md`, `docs/BESOINS.md` (besoins + benchmark international).
+
+**Vérifications** : `astro check` 0/0/0 · build sans avertissement · `audit:seo` OK (70 pages, 67 indexables) ·
+axe-core WCAG 2.2 AA OK sur les nouvelles pages.
+
 ## 2026-11-05 — v0.1.0 · Création du site
 
 **Fait**

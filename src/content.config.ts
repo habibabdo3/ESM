@@ -43,6 +43,7 @@ const specialites = defineCollection({
     aValider: z.array(z.string()).min(1),
     motsCles: z.array(z.string()).min(1),
     servicesLies: z.array(z.string()).min(3),
+    lexique: z.array(z.object({ terme: z.string(), definition: z.string() })).default([]),
     faq,
     cta: z.string(),
   }),

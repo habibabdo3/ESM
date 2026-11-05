@@ -25,13 +25,62 @@
       "Autorisation d’utilisation des appareils de radiologie dentaire auprès de l’AMSSNuR",
       "Gestion des déchets de soins par un prestataire agréé"
     ],
-    "motsCles": ["aménagement cabinet dentaire", "rénovation cabinet dentaire", "plan cabinet dentaire"],
-    "servicesLies": ["conception-amenagement-cabinet-medical", "reseaux-techniques-fluides-medicaux", "hygiene-sterilisation-dechets-medicaux", "salles-imagerie-radioprotection", "equipement-medical-mobilier-technique"],
+    "motsCles": [
+      "aménagement cabinet dentaire",
+      "rénovation cabinet dentaire",
+      "plan cabinet dentaire"
+    ],
+    "servicesLies": [
+      "conception-amenagement-cabinet-medical",
+      "reseaux-techniques-fluides-medicaux",
+      "hygiene-sterilisation-dechets-medicaux",
+      "salles-imagerie-radioprotection",
+      "equipement-medical-mobilier-technique"
+    ],
     "cta": "Aménager mon cabinet dentaire",
     "faq": [
-      { "q": "Quelle surface prévoir pour une salle de soins dentaire ?", "a": "Comptez en repère 15 à 20 m² par salle, selon que vous travaillez à quatre mains, la position du fauteuil et les rangements. La surface exacte se valide sur plan avec vos équipements." },
-      { "q": "Où placer le compresseur et l’aspiration ?", "a": "Dans un local technique dédié, ventilé, traité contre le bruit et accessible au technicien sans traverser les salles de soins." },
-      { "q": "Peut-on prévoir l’ajout d’un fauteuil ?", "a": "Oui. Nous posons dès les travaux les gaines et attentes de fluides nécessaires, ce qui évite de casser les sols plus tard." }
+      {
+        "q": "Quelle surface prévoir pour une salle de soins dentaire ?",
+        "a": "Comptez en repère 15 à 20 m² par salle, selon que vous travaillez à quatre mains, la position du fauteuil et les rangements. La surface exacte se valide sur plan avec vos équipements."
+      },
+      {
+        "q": "Où placer le compresseur et l’aspiration ?",
+        "a": "Dans un local technique dédié, ventilé, traité contre le bruit et accessible au technicien sans traverser les salles de soins."
+      },
+      {
+        "q": "Peut-on prévoir l’ajout d’un fauteuil ?",
+        "a": "Oui. Nous posons dès les travaux les gaines et attentes de fluides nécessaires, ce qui évite de casser les sols plus tard."
+      }
+    ],
+    "lexique": [
+      {
+        "terme": "Unit dentaire",
+        "definition": "Ensemble fauteuil, scialytique, tablette praticien et crachoir. On parle d’« unit » ou de « fauteuil » pour compter les postes de soins d’un cabinet."
+      },
+      {
+        "terme": "Autoclave classe B",
+        "definition": "Stérilisateur à vide fractionné, référence pour les instruments creux et emballés (contre-angles, turbines). Il impose une arrivée d’eau, une évacuation et une ventilation adaptées."
+      },
+      {
+        "terme": "Cone beam (CBCT)",
+        "definition": "Imagerie 3D dentaire utilisée en implantologie et en endodontie. Elle demande une salle dédiée, un blindage calculé et une autorisation de l’AMSSNuR."
+      },
+      {
+        "terme": "Panoramique (OPT)",
+        "definition": "Radiographie panoramique des arcades. Souvent combinée avec le céphalométrique (« télé-crâne ») en orthodontie."
+      },
+      {
+        "terme": "Séparateur d’amalgame",
+        "definition": "Dispositif placé sur l’évacuation de l’aspiration pour retenir les particules de mercure avant le réseau d’eaux usées."
+      },
+      {
+        "terme": "Aspiration chirurgicale humide / sèche",
+        "definition": "Deux technologies d’aspiration centrale : le choix détermine le diamètre des gaines, la pente des canalisations et l’emplacement du moteur."
+      },
+      {
+        "terme": "Travail à quatre mains",
+        "definition": "Organisation praticien + assistante autour du fauteuil, qui fixe la position du fauteuil, des tablettes et des rangements (zones 9 h–12 h–3 h)."
+      }
     ]
   },
   {
@@ -61,13 +110,61 @@
       "Autorisation de l’AMSSNuR avant la mise en service",
       "Prescriptions d’installation du constructeur de chaque appareil"
     ],
-    "motsCles": ["aménagement centre d’imagerie médicale", "blindage salle de radiologie", "installation IRM scanner"],
-    "servicesLies": ["salles-imagerie-radioprotection", "etude-faisabilite-programmation-medicale", "reseaux-techniques-fluides-medicaux", "travaux-amenagement-cabinet-clinique"],
+    "motsCles": [
+      "aménagement centre d’imagerie médicale",
+      "blindage salle de radiologie",
+      "installation IRM scanner"
+    ],
+    "servicesLies": [
+      "salles-imagerie-radioprotection",
+      "etude-faisabilite-programmation-medicale",
+      "reseaux-techniques-fluides-medicaux",
+      "travaux-amenagement-cabinet-clinique"
+    ],
     "cta": "Préparer mon centre d’imagerie",
     "faq": [
-      { "q": "Peut-on installer une IRM dans un immeuble existant ?", "a": "C’est parfois possible, sous conditions : charge du plancher, accès pour la livraison de l’aimant, cage de Faraday et évacuation de l’hélium. L’étude de faisabilité le vérifie avant tout engagement." },
-      { "q": "Qui coordonne le fournisseur de l’appareil ?", "a": "Nous. Les prescriptions d’installation du constructeur sont intégrées aux plans, et ses interventions sont calées dans le planning du chantier." },
-      { "q": "Quand déposer le dossier auprès de l’AMSSNuR ?", "a": "Le dossier se prépare pendant la conception, pour que l’autorisation soit obtenue avant la mise en service. Nous fournissons les pièces techniques : plans, blindage, implantation." }
+      {
+        "q": "Peut-on installer une IRM dans un immeuble existant ?",
+        "a": "C’est parfois possible, sous conditions : charge du plancher, accès pour la livraison de l’aimant, cage de Faraday et évacuation de l’hélium. L’étude de faisabilité le vérifie avant tout engagement."
+      },
+      {
+        "q": "Qui coordonne le fournisseur de l’appareil ?",
+        "a": "Nous. Les prescriptions d’installation du constructeur sont intégrées aux plans, et ses interventions sont calées dans le planning du chantier."
+      },
+      {
+        "q": "Quand déposer le dossier auprès de l’AMSSNuR ?",
+        "a": "Le dossier se prépare pendant la conception, pour que l’autorisation soit obtenue avant la mise en service. Nous fournissons les pièces techniques : plans, blindage, implantation."
+      }
+    ],
+    "lexique": [
+      {
+        "terme": "Équivalent plomb (mm Pb)",
+        "definition": "Épaisseur de plomb équivalente exigée pour un mur, une porte ou un verre plombé, calculée par le physicien selon l’appareil et la charge de travail."
+      },
+      {
+        "terme": "Zonage radiologique",
+        "definition": "Délimitation des zones surveillées et contrôlées, avec signalisation lumineuse « rayons X » à l’entrée de la salle."
+      },
+      {
+        "terme": "Cage de Faraday",
+        "definition": "Blindage radiofréquence de la salle IRM (cuivre ou aluminium), indispensable à la qualité des images."
+      },
+      {
+        "terme": "Ligne de quench",
+        "definition": "Conduit d’évacuation de l’hélium vers l’extérieur en cas de perte de supraconductivité de l’aimant IRM."
+      },
+      {
+        "terme": "PACS / RIS",
+        "definition": "Archivage et communication des images (PACS) et système d’information radiologique (RIS) : ils fixent le câblage, le serveur et l’onduleur."
+      },
+      {
+        "terme": "Pupitre de commande",
+        "definition": "Poste du manipulateur, derrière un verre plombé, d’où il voit le patient pendant l’examen."
+      },
+      {
+        "terme": "Mammographe, scanner, os-poumon",
+        "definition": "Les modalités courantes d’un cabinet de radiologie marocain, chacune avec ses exigences de surface, de charge et de climatisation."
+      }
     ]
   },
   {
@@ -97,13 +194,56 @@
       "Traitement d’air du bloc opératoire",
       "Accessibilité du parcours"
     ],
-    "motsCles": ["aménagement cabinet d’ophtalmologie", "centre d’ophtalmologie"],
-    "servicesLies": ["conception-amenagement-cabinet-medical", "design-interieur-experience-patient", "equipement-medical-mobilier-technique", "reseaux-techniques-fluides-medicaux"],
+    "motsCles": [
+      "aménagement cabinet d’ophtalmologie",
+      "centre d’ophtalmologie"
+    ],
+    "servicesLies": [
+      "conception-amenagement-cabinet-medical",
+      "design-interieur-experience-patient",
+      "equipement-medical-mobilier-technique",
+      "reseaux-techniques-fluides-medicaux"
+    ],
     "cta": "Aménager mon cabinet d’ophtalmologie",
     "faq": [
-      { "q": "Ma salle est trop courte pour la réfraction : que faire ?", "a": "Un dispositif à miroir permet de doubler la distance de lecture. Il se positionne sur plan avec le fauteuil et le projecteur." },
-      { "q": "Comment sécuriser le parcours des patients dilatés ?", "a": "Par des sols continus sans ressaut, un éclairage sans éblouissement, des mains courantes si besoin et une signalétique lisible à faible acuité." },
-      { "q": "Peut-on intégrer un bloc de chirurgie de la cataracte ?", "a": "Oui, si l’activité ambulatoire est prévue : traitement d’air filtré, circuits séparés et stockage stérile sont alors intégrés dès la conception." }
+      {
+        "q": "Ma salle est trop courte pour la réfraction : que faire ?",
+        "a": "Un dispositif à miroir permet de doubler la distance de lecture. Il se positionne sur plan avec le fauteuil et le projecteur."
+      },
+      {
+        "q": "Comment sécuriser le parcours des patients dilatés ?",
+        "a": "Par des sols continus sans ressaut, un éclairage sans éblouissement, des mains courantes si besoin et une signalétique lisible à faible acuité."
+      },
+      {
+        "q": "Peut-on intégrer un bloc de chirurgie de la cataracte ?",
+        "a": "Oui, si l’activité ambulatoire est prévue : traitement d’air filtré, circuits séparés et stockage stérile sont alors intégrés dès la conception."
+      }
+    ],
+    "lexique": [
+      {
+        "terme": "Unit d’ophtalmologie",
+        "definition": "Combiné fauteuil, colonne réfracteur et lampe à fente, qui structure la salle d’examen."
+      },
+      {
+        "terme": "Réfracteur automatique et projecteur de tests",
+        "definition": "Équipements de mesure de la vue ; la distance de lecture conditionne la longueur de la salle ou l’usage d’un miroir."
+      },
+      {
+        "terme": "OCT",
+        "definition": "Tomographie en cohérence optique : imagerie de la rétine, installée dans une salle en pénombre."
+      },
+      {
+        "terme": "Laser YAG / Argon",
+        "definition": "Lasers de traitement ambulatoire, avec consignes de sécurité (porte, signalisation, protection oculaire)."
+      },
+      {
+        "terme": "Phaco (phacoémulsification)",
+        "definition": "Technique de chirurgie de la cataracte, réalisée au bloc avec traitement d’air filtré."
+      },
+      {
+        "terme": "Champ visuel",
+        "definition": "Examen du périmètre visuel (périmétrie), réalisé dans un espace calme et obscurci."
+      }
     ]
   },
   {
@@ -130,13 +270,52 @@
       "Niveau de bruit exigé par le fabricant de la cabine",
       "Procédure de désinfection des endoscopes"
     ],
-    "motsCles": ["aménagement cabinet ORL", "installation cabine audiométrique"],
-    "servicesLies": ["conception-amenagement-cabinet-medical", "hygiene-sterilisation-dechets-medicaux", "equipement-medical-mobilier-technique", "reseaux-techniques-fluides-medicaux"],
+    "motsCles": [
+      "aménagement cabinet ORL",
+      "installation cabine audiométrique"
+    ],
+    "servicesLies": [
+      "conception-amenagement-cabinet-medical",
+      "hygiene-sterilisation-dechets-medicaux",
+      "equipement-medical-mobilier-technique",
+      "reseaux-techniques-fluides-medicaux"
+    ],
     "cta": "Aménager mon cabinet ORL",
     "faq": [
-      { "q": "Où placer la cabine audiométrique ?", "a": "Loin des sources de bruit (rue, local technique, ascenseur) et sur une dalle désolidarisée. Le niveau de bruit visé est celui exigé par le fabricant de la cabine." },
-      { "q": "Faut-il un local dédié pour les endoscopes ?", "a": "Un espace distinct, organisé du sale vers le propre, est recommandé pour la désinfection et le stockage. Sa taille dépend du nombre d’endoscopes et de l’équipement choisi." },
-      { "q": "La cabine peut-elle être déplacée plus tard ?", "a": "Les cabines modulaires se démontent, mais leurs réseaux et leur dalle sont spécifiques. Mieux vaut choisir l’emplacement définitif dès la conception." }
+      {
+        "q": "Où placer la cabine audiométrique ?",
+        "a": "Loin des sources de bruit (rue, local technique, ascenseur) et sur une dalle désolidarisée. Le niveau de bruit visé est celui exigé par le fabricant de la cabine."
+      },
+      {
+        "q": "Faut-il un local dédié pour les endoscopes ?",
+        "a": "Un espace distinct, organisé du sale vers le propre, est recommandé pour la désinfection et le stockage. Sa taille dépend du nombre d’endoscopes et de l’équipement choisi."
+      },
+      {
+        "q": "La cabine peut-elle être déplacée plus tard ?",
+        "a": "Les cabines modulaires se démontent, mais leurs réseaux et leur dalle sont spécifiques. Mieux vaut choisir l’emplacement définitif dès la conception."
+      }
+    ],
+    "lexique": [
+      {
+        "terme": "Cabine audiométrique",
+        "definition": "Cabine insonorisée pour les tests auditifs (audiométrie tonale et vocale), posée sur une dalle désolidarisée."
+      },
+      {
+        "terme": "Unit ORL",
+        "definition": "Poste d’examen combinant fauteuil, aspiration, air et éclairage, avec support des instruments."
+      },
+      {
+        "terme": "Nasofibroscope",
+        "definition": "Endoscope souple utilisé en consultation ORL, désinfecté après chaque patient selon une procédure tracée."
+      },
+      {
+        "terme": "Impédancemétrie / tympanométrie",
+        "definition": "Examens de l’oreille moyenne, réalisés en salle calme."
+      },
+      {
+        "terme": "VNG (vidéonystagmographie)",
+        "definition": "Exploration de l’équilibre, qui demande une salle obscurcie et un fauteuil rotatoire selon l’équipement."
+      }
     ]
   },
   {
@@ -165,13 +344,56 @@
       "Exigences réglementaires propres à l’activité de PMA",
       "Ventilation et surveillance du stockage cryogénique"
     ],
-    "motsCles": ["aménagement cabinet de gynécologie", "aménagement laboratoire PMA"],
-    "servicesLies": ["conception-amenagement-cabinet-medical", "design-interieur-experience-patient", "reseaux-techniques-fluides-medicaux", "etude-faisabilite-programmation-medicale"],
+    "motsCles": [
+      "aménagement cabinet de gynécologie",
+      "aménagement laboratoire PMA"
+    ],
+    "servicesLies": [
+      "conception-amenagement-cabinet-medical",
+      "design-interieur-experience-patient",
+      "reseaux-techniques-fluides-medicaux",
+      "etude-faisabilite-programmation-medicale"
+    ],
     "cta": "Aménager mon cabinet de gynécologie",
     "faq": [
-      { "q": "Comment garantir l’intimité dans une salle d’examen ?", "a": "Par une cabine de déshabillage séparée, un sanitaire attenant, une porte qui ne donne pas directement sur la table et une isolation phonique renforcée." },
-      { "q": "Pourquoi ventiler le stockage cryogénique ?", "a": "L’azote liquide, en s’évaporant, peut appauvrir l’air en oxygène. Le local doit être ventilé et équipé d’une surveillance adaptée." },
-      { "q": "Accompagnez-vous les projets de PMA ?", "a": "Oui, pour l’aménagement : laboratoire, salles de prélèvement et de transfert, traitement d’air et énergie. Les exigences réglementaires de l’activité sont validées avec vous et les autorités compétentes." }
+      {
+        "q": "Comment garantir l’intimité dans une salle d’examen ?",
+        "a": "Par une cabine de déshabillage séparée, un sanitaire attenant, une porte qui ne donne pas directement sur la table et une isolation phonique renforcée."
+      },
+      {
+        "q": "Pourquoi ventiler le stockage cryogénique ?",
+        "a": "L’azote liquide, en s’évaporant, peut appauvrir l’air en oxygène. Le local doit être ventilé et équipé d’une surveillance adaptée."
+      },
+      {
+        "q": "Accompagnez-vous les projets de PMA ?",
+        "a": "Oui, pour l’aménagement : laboratoire, salles de prélèvement et de transfert, traitement d’air et énergie. Les exigences réglementaires de l’activité sont validées avec vous et les autorités compétentes."
+      }
+    ],
+    "lexique": [
+      {
+        "terme": "Table gynécologique",
+        "definition": "Table d’examen à étriers, positionnée pour préserver l’intimité dès l’ouverture de la porte."
+      },
+      {
+        "terme": "Échographe 3D/4D",
+        "definition": "Échographe de suivi de grossesse, utilisé en salle semi-obscure avec un écran déporté pour la patiente."
+      },
+      {
+        "terme": "Colposcope",
+        "definition": "Appareil d’examen du col, installé dans la salle d’examen gynécologique."
+      },
+      {
+        "terme": "FIV / ICSI",
+        "definition": "Techniques de procréation médicalement assistée réalisées au laboratoire ; elles imposent une qualité d’air contrôlée et une énergie sécurisée."
+      },
+      {
+        "terme": "Cuves d’azote (cryoconservation)",
+        "definition": "Stockage des gamètes et embryons à très basse température, dans un local ventilé et surveillé."
+      },
+      {
+        "terme": "Ponction ovocytaire",
+        "definition": "Acte de prélèvement réalisé dans une salle proche du laboratoire, souvent sous anesthésie légère."
+      }
     ]
   },
   {
@@ -195,14 +417,55 @@
       "Décor apaisant et signalétique illustrée",
       "Acoustique renforcée"
     ],
-    "aValider": ["Stockage des vaccins et alarme de température"],
-    "motsCles": ["aménagement cabinet de pédiatrie", "salle d’attente enfants"],
-    "servicesLies": ["design-interieur-experience-patient", "conception-amenagement-cabinet-medical", "travaux-amenagement-cabinet-clinique", "equipement-medical-mobilier-technique"],
+    "aValider": [
+      "Stockage des vaccins et alarme de température"
+    ],
+    "motsCles": [
+      "aménagement cabinet de pédiatrie",
+      "salle d’attente enfants"
+    ],
+    "servicesLies": [
+      "design-interieur-experience-patient",
+      "conception-amenagement-cabinet-medical",
+      "travaux-amenagement-cabinet-clinique",
+      "equipement-medical-mobilier-technique"
+    ],
     "cta": "Aménager mon cabinet de pédiatrie",
     "faq": [
-      { "q": "Comment séparer les enfants malades des nourrissons ?", "a": "Par deux zones d’attente distinctes, idéalement avec des accès séparés aux salles de consultation. Le plan est construit autour de ces deux circuits." },
-      { "q": "Quels matériaux choisir pour une salle d’attente d’enfants ?", "a": "Des sols souples et lessivables, des revêtements muraux résistants aux chocs, du mobilier aux angles arrondis et sans petites pièces détachables." },
-      { "q": "Faut-il une alarme sur le réfrigérateur à vaccins ?", "a": "Un suivi de la température avec alerte est fortement recommandé pour garantir la chaîne du froid. Nous prévoyons l’emplacement et l’alimentation électrique dédiée." }
+      {
+        "q": "Comment séparer les enfants malades des nourrissons ?",
+        "a": "Par deux zones d’attente distinctes, idéalement avec des accès séparés aux salles de consultation. Le plan est construit autour de ces deux circuits."
+      },
+      {
+        "q": "Quels matériaux choisir pour une salle d’attente d’enfants ?",
+        "a": "Des sols souples et lessivables, des revêtements muraux résistants aux chocs, du mobilier aux angles arrondis et sans petites pièces détachables."
+      },
+      {
+        "q": "Faut-il une alarme sur le réfrigérateur à vaccins ?",
+        "a": "Un suivi de la température avec alerte est fortement recommandé pour garantir la chaîne du froid. Nous prévoyons l’emplacement et l’alimentation électrique dédiée."
+      }
+    ],
+    "lexique": [
+      {
+        "terme": "Pèse-bébé et toise",
+        "definition": "Équipements de suivi de croissance à prévoir dans chaque salle de consultation pédiatrique."
+      },
+      {
+        "terme": "Chaîne du froid vaccinale",
+        "definition": "Conservation des vaccins entre +2 et +8 °C dans un réfrigérateur médical avec relevé de température."
+      },
+      {
+        "terme": "Table à langer",
+        "definition": "Plan de change sécurisé, avec point d’eau à proximité."
+      },
+      {
+        "terme": "Circuit fébrile",
+        "definition": "Parcours séparé pour les enfants malades, distinct du suivi des nourrissons et des visites de vaccination."
+      },
+      {
+        "terme": "Coin allaitement",
+        "definition": "Espace calme et discret pour les mamans, apprécié dans les cabinets à forte fréquentation."
+      }
     ]
   },
   {
@@ -232,13 +495,52 @@
       "Évacuation des fumées",
       "Conditions d’exercice de la chirurgie ambulatoire"
     ],
-    "motsCles": ["aménagement clinique esthétique", "aménagement salle laser"],
-    "servicesLies": ["design-interieur-experience-patient", "conception-amenagement-cabinet-medical", "reseaux-techniques-fluides-medicaux", "equipement-medical-mobilier-technique"],
+    "motsCles": [
+      "aménagement clinique esthétique",
+      "aménagement salle laser"
+    ],
+    "servicesLies": [
+      "design-interieur-experience-patient",
+      "conception-amenagement-cabinet-medical",
+      "reseaux-techniques-fluides-medicaux",
+      "equipement-medical-mobilier-technique"
+    ],
     "cta": "Aménager ma clinique esthétique",
     "faq": [
-      { "q": "Que faut-il prévoir dans une salle laser ?", "a": "Un voyant et un verrouillage de porte, des surfaces non réfléchissantes, l’occultation des vitrages, la protection oculaire et l’extraction des fumées, selon les consignes du fabricant de l’appareil." },
-      { "q": "Pourquoi un éclairage à fort rendu des couleurs ?", "a": "Pour observer la peau avec fidélité. Un éclairage à indice de rendu des couleurs élevé limite les erreurs d’appréciation lors du diagnostic et du suivi photographique." },
-      { "q": "Peut-on prévoir une sortie séparée ?", "a": "Oui, quand le local le permet. Une sortie distincte de l’accueil renforce la discrétion des patients après un acte." }
+      {
+        "q": "Que faut-il prévoir dans une salle laser ?",
+        "a": "Un voyant et un verrouillage de porte, des surfaces non réfléchissantes, l’occultation des vitrages, la protection oculaire et l’extraction des fumées, selon les consignes du fabricant de l’appareil."
+      },
+      {
+        "q": "Pourquoi un éclairage à fort rendu des couleurs ?",
+        "a": "Pour observer la peau avec fidélité. Un éclairage à indice de rendu des couleurs élevé limite les erreurs d’appréciation lors du diagnostic et du suivi photographique."
+      },
+      {
+        "q": "Peut-on prévoir une sortie séparée ?",
+        "a": "Oui, quand le local le permet. Une sortie distincte de l’accueil renforce la discrétion des patients après un acte."
+      }
+    ],
+    "lexique": [
+      {
+        "terme": "Dermatoscope",
+        "definition": "Appareil d’examen des lésions cutanées, utilisé sous un éclairage à fort rendu des couleurs."
+      },
+      {
+        "terme": "Laser vasculaire, pigmentaire, CO2 fractionné",
+        "definition": "Les grandes familles de lasers de cabinet ; chacune a ses consignes de sécurité et d’extraction des fumées."
+      },
+      {
+        "terme": "IRC (indice de rendu des couleurs)",
+        "definition": "Qualité de la lumière qui conditionne la fidélité des couleurs de la peau ; on vise un IRC élevé en salle d’examen."
+      },
+      {
+        "terme": "Cryothérapie",
+        "definition": "Traitement par le froid, qui demande un rangement sécurisé des bonbonnes."
+      },
+      {
+        "terme": "Bloc ambulatoire",
+        "definition": "Salle d’intervention pour la chirurgie esthétique ou dermatologique, avec traitement d’air adapté."
+      }
     ]
   },
   {
@@ -262,14 +564,55 @@
       "Poste de pose Holter",
       "Rangements pour câbles et électrodes"
     ],
-    "aValider": ["Protocole d’urgence et accès brancard"],
-    "motsCles": ["aménagement cabinet de cardiologie", "salle d’épreuve d’effort"],
-    "servicesLies": ["reseaux-techniques-fluides-medicaux", "conception-amenagement-cabinet-medical", "equipement-medical-mobilier-technique", "travaux-amenagement-cabinet-clinique"],
+    "aValider": [
+      "Protocole d’urgence et accès brancard"
+    ],
+    "motsCles": [
+      "aménagement cabinet de cardiologie",
+      "salle d’épreuve d’effort"
+    ],
+    "servicesLies": [
+      "reseaux-techniques-fluides-medicaux",
+      "conception-amenagement-cabinet-medical",
+      "equipement-medical-mobilier-technique",
+      "travaux-amenagement-cabinet-clinique"
+    ],
     "cta": "Aménager mon cabinet de cardiologie",
     "faq": [
-      { "q": "Quelle taille pour une salle d’épreuve d’effort ?", "a": "Elle dépend de l’appareil (tapis ou ergocycle) et des dégagements nécessaires pour intervenir autour du patient. Nous la dimensionnons sur plan avec vos équipements." },
-      { "q": "Pourquoi un circuit électrique dédié ?", "a": "Pour protéger les appareils critiques des perturbations et des coupures, avec un onduleur adapté à leur consommation." },
-      { "q": "Comment prévoir l’évacuation d’un patient ?", "a": "Par un accès brancard dégagé entre la salle d’effort et la sortie, vérifié dès la conception et intégré à votre protocole d’urgence." }
+      {
+        "q": "Quelle taille pour une salle d’épreuve d’effort ?",
+        "a": "Elle dépend de l’appareil (tapis ou ergocycle) et des dégagements nécessaires pour intervenir autour du patient. Nous la dimensionnons sur plan avec vos équipements."
+      },
+      {
+        "q": "Pourquoi un circuit électrique dédié ?",
+        "a": "Pour protéger les appareils critiques des perturbations et des coupures, avec un onduleur adapté à leur consommation."
+      },
+      {
+        "q": "Comment prévoir l’évacuation d’un patient ?",
+        "a": "Par un accès brancard dégagé entre la salle d’effort et la sortie, vérifié dès la conception et intégré à votre protocole d’urgence."
+      }
+    ],
+    "lexique": [
+      {
+        "terme": "ECG d’effort",
+        "definition": "Épreuve d’effort sur tapis ou ergocycle, avec chariot d’urgence et défibrillateur à proximité."
+      },
+      {
+        "terme": "ETT / ETO",
+        "definition": "Échocardiographie transthoracique et transœsophagienne, réalisées en salle semi-obscure."
+      },
+      {
+        "terme": "Holter ECG et MAPA",
+        "definition": "Enregistrements sur 24 h du rythme cardiaque et de la tension, posés dans un poste dédié."
+      },
+      {
+        "terme": "Défibrillateur (DAE)",
+        "definition": "Défibrillateur automatisé externe, à placer visiblement et à moins de quelques pas de la salle d’effort."
+      },
+      {
+        "terme": "Doppler vasculaire",
+        "definition": "Exploration des artères et des veines, souvent réalisée dans la même salle que l’échographie cardiaque."
+      }
     ]
   },
   {
@@ -294,14 +637,57 @@
       "Bassin avec traitement de l’eau et de l’air",
       "Rangements pour le matériel"
     ],
-    "aValider": ["Charges au sol", "Normes d’accessibilité", "Qualité de l’eau des bassins"],
-    "motsCles": ["aménagement centre de kinésithérapie", "aménagement salle de rééducation"],
-    "servicesLies": ["etude-faisabilite-programmation-medicale", "travaux-amenagement-cabinet-clinique", "design-interieur-experience-patient", "reseaux-techniques-fluides-medicaux"],
+    "aValider": [
+      "Charges au sol",
+      "Normes d’accessibilité",
+      "Qualité de l’eau des bassins"
+    ],
+    "motsCles": [
+      "aménagement centre de kinésithérapie",
+      "aménagement salle de rééducation"
+    ],
+    "servicesLies": [
+      "etude-faisabilite-programmation-medicale",
+      "travaux-amenagement-cabinet-clinique",
+      "design-interieur-experience-patient",
+      "reseaux-techniques-fluides-medicaux"
+    ],
     "cta": "Aménager mon centre de rééducation",
     "faq": [
-      { "q": "Mon local peut-il accueillir un bassin ?", "a": "Il faut vérifier la charge admissible du plancher, l’étanchéité possible et la place pour le traitement de l’eau et de l’air. L’étude de faisabilité répond à ces questions avant tout engagement." },
-      { "q": "Quel sol choisir pour un plateau technique ?", "a": "Un revêtement antidérapant, amortissant et facile à désinfecter, adapté aux appareils posés au sol et aux exercices au sol." },
-      { "q": "Comment préserver la confidentialité dans les cabines ?", "a": "Par des cloisons acoustiques montant jusqu’au plafond, des portes pleines et une ventilation qui ne transmet pas les sons d’une cabine à l’autre." }
+      {
+        "q": "Mon local peut-il accueillir un bassin ?",
+        "a": "Il faut vérifier la charge admissible du plancher, l’étanchéité possible et la place pour le traitement de l’eau et de l’air. L’étude de faisabilité répond à ces questions avant tout engagement."
+      },
+      {
+        "q": "Quel sol choisir pour un plateau technique ?",
+        "a": "Un revêtement antidérapant, amortissant et facile à désinfecter, adapté aux appareils posés au sol et aux exercices au sol."
+      },
+      {
+        "q": "Comment préserver la confidentialité dans les cabines ?",
+        "a": "Par des cloisons acoustiques montant jusqu’au plafond, des portes pleines et une ventilation qui ne transmet pas les sons d’une cabine à l’autre."
+      }
+    ],
+    "lexique": [
+      {
+        "terme": "Plateau technique",
+        "definition": "Grande salle de rééducation collective équipée d’espaliers, de barres parallèles, de tapis et d’appareils."
+      },
+      {
+        "terme": "Box individuels",
+        "definition": "Cabines de soins fermées pour la kinésithérapie manuelle et l’électrothérapie."
+      },
+      {
+        "terme": "Balnéothérapie",
+        "definition": "Rééducation en bassin, qui impose étanchéité, traitement de l’eau et déshumidification de l’air."
+      },
+      {
+        "terme": "Électrothérapie, ondes de choc, pressothérapie",
+        "definition": "Appareils courants en cabinet, qui demandent des prises dédiées et des rangements."
+      },
+      {
+        "terme": "Cage de Rocher",
+        "definition": "Structure métallique fixée au mur pour les exercices avec poulies et suspensions ; elle impose une fixation et une hauteur adaptées."
+      }
     ]
   },
   {
@@ -324,14 +710,56 @@
       "Fluides médicaux et alimentation électrique sécurisée",
       "Ventilation adaptée"
     ],
-    "aValider": ["Procédure de retraitement des endoscopes", "Gaz médicaux"],
-    "motsCles": ["aménagement salle d’endoscopie", "aménagement cabinet de gastro-entérologie"],
-    "servicesLies": ["hygiene-sterilisation-dechets-medicaux", "reseaux-techniques-fluides-medicaux", "conception-amenagement-cabinet-medical", "travaux-amenagement-cabinet-clinique"],
+    "aValider": [
+      "Procédure de retraitement des endoscopes",
+      "Gaz médicaux"
+    ],
+    "motsCles": [
+      "aménagement salle d’endoscopie",
+      "aménagement cabinet de gastro-entérologie"
+    ],
+    "servicesLies": [
+      "hygiene-sterilisation-dechets-medicaux",
+      "reseaux-techniques-fluides-medicaux",
+      "conception-amenagement-cabinet-medical",
+      "travaux-amenagement-cabinet-clinique"
+    ],
     "cta": "Aménager ma salle d’endoscopie",
     "faq": [
-      { "q": "Combien de salles faut-il pour une activité d’endoscopie ?", "a": "Au minimum une salle d’examen, une salle de réveil et un local de désinfection. Le nombre exact dépend du volume d’examens et du type d’anesthésie pratiquée." },
-      { "q": "Quels fluides médicaux prévoir ?", "a": "Généralement l’aspiration et l’oxygène en salle d’examen et en salle de réveil. Les besoins précis et la source (centrale ou bouteilles) se définissent avec vous." },
-      { "q": "Où placer le local de désinfection ?", "a": "À proximité de la salle d’examen, avec une entrée côté sale et une sortie côté propre, pour que les endoscopes ne croisent jamais leur propre trajet." }
+      {
+        "q": "Combien de salles faut-il pour une activité d’endoscopie ?",
+        "a": "Au minimum une salle d’examen, une salle de réveil et un local de désinfection. Le nombre exact dépend du volume d’examens et du type d’anesthésie pratiquée."
+      },
+      {
+        "q": "Quels fluides médicaux prévoir ?",
+        "a": "Généralement l’aspiration et l’oxygène en salle d’examen et en salle de réveil. Les besoins précis et la source (centrale ou bouteilles) se définissent avec vous."
+      },
+      {
+        "q": "Où placer le local de désinfection ?",
+        "a": "À proximité de la salle d’examen, avec une entrée côté sale et une sortie côté propre, pour que les endoscopes ne croisent jamais leur propre trajet."
+      }
+    ],
+    "lexique": [
+      {
+        "terme": "Colonne d’endoscopie",
+        "definition": "Ensemble processeur, source de lumière, écran et insufflateur, placé sur un chariot ou un bras."
+      },
+      {
+        "terme": "FOGD / coloscopie",
+        "definition": "Fibroscopie œso-gastro-duodénale et coloscopie, les deux examens les plus fréquents en cabinet."
+      },
+      {
+        "terme": "Laveur-désinfecteur d’endoscopes (LDE)",
+        "definition": "Machine de désinfection automatique des endoscopes, avec traçabilité de chaque cycle."
+      },
+      {
+        "terme": "Armoire de stockage ventilée",
+        "definition": "Armoire qui conserve les endoscopes désinfectés au sec, à l’abri de la recontamination."
+      },
+      {
+        "terme": "Salle de réveil",
+        "definition": "Espace de surveillance après sédation, avec oxygène, aspiration et monitorage."
+      }
     ]
   },
   {
@@ -361,13 +789,56 @@
       "Exigences de biosécurité selon les analyses réalisées",
       "Autorisation d’ouverture du laboratoire"
     ],
-    "motsCles": ["aménagement laboratoire d’analyses médicales", "installation paillasse de laboratoire"],
-    "servicesLies": ["etude-faisabilite-programmation-medicale", "reseaux-techniques-fluides-medicaux", "hygiene-sterilisation-dechets-medicaux", "travaux-amenagement-cabinet-clinique"],
+    "motsCles": [
+      "aménagement laboratoire d’analyses médicales",
+      "installation paillasse de laboratoire"
+    ],
+    "servicesLies": [
+      "etude-faisabilite-programmation-medicale",
+      "reseaux-techniques-fluides-medicaux",
+      "hygiene-sterilisation-dechets-medicaux",
+      "travaux-amenagement-cabinet-clinique"
+    ],
     "cta": "Aménager mon laboratoire",
     "faq": [
-      { "q": "Faut-il un poste de sécurité microbiologique ?", "a": "Cela dépend des analyses réalisées. Le niveau de biosécurité requis détermine l’équipement et la ventilation de la salle ; nous le définissons avec vous en amont." },
-      { "q": "Comment sécuriser la chaîne du froid ?", "a": "Par des circuits électriques dédiés, une alimentation secourue pour les enceintes critiques et une supervision des températures avec alertes." },
-      { "q": "Pouvez-vous rénover un laboratoire en activité ?", "a": "Oui, par phases, en maintenant les zones analytiques en fonctionnement. Voir notre méthode de rénovation en site occupé." }
+      {
+        "q": "Faut-il un poste de sécurité microbiologique ?",
+        "a": "Cela dépend des analyses réalisées. Le niveau de biosécurité requis détermine l’équipement et la ventilation de la salle ; nous le définissons avec vous en amont."
+      },
+      {
+        "q": "Comment sécuriser la chaîne du froid ?",
+        "a": "Par des circuits électriques dédiés, une alimentation secourue pour les enceintes critiques et une supervision des températures avec alertes."
+      },
+      {
+        "q": "Pouvez-vous rénover un laboratoire en activité ?",
+        "a": "Oui, par phases, en maintenant les zones analytiques en fonctionnement. Voir notre méthode de rénovation en site occupé."
+      }
+    ],
+    "lexique": [
+      {
+        "terme": "Phase pré-analytique",
+        "definition": "Réception, enregistrement, centrifugation et répartition des échantillons avant analyse."
+      },
+      {
+        "terme": "Automates",
+        "definition": "Analyseurs de biochimie, d’hématologie ou d’immunologie, qui demandent une alimentation protégée, de l’eau purifiée et un câblage réseau."
+      },
+      {
+        "terme": "PSM (poste de sécurité microbiologique)",
+        "definition": "Hotte à flux d’air filtré pour les manipulations en bactériologie."
+      },
+      {
+        "terme": "SIL (système informatique du laboratoire)",
+        "definition": "Logiciel de gestion des demandes et des résultats, connecté aux automates."
+      },
+      {
+        "terme": "Eau osmosée",
+        "definition": "Eau purifiée par osmose inverse, nécessaire au fonctionnement de nombreux automates."
+      },
+      {
+        "terme": "Box de prélèvement",
+        "definition": "Cabine de prélèvement sanguin, confidentielle et équipée d’un fauteuil de prélèvement."
+      }
     ]
   },
   {
@@ -397,13 +868,62 @@
       "Références usuelles (ISO 14644, NF S 90-351, ISO 7396-1, NF C 15-211) à confirmer avec le bureau d’études et l’organisme de contrôle",
       "Autorisation d’ouverture"
     ],
-    "motsCles": ["aménagement bloc opératoire", "construction clinique privée", "rénovation clinique"],
-    "servicesLies": ["etude-faisabilite-programmation-medicale", "reseaux-techniques-fluides-medicaux", "renovation-cabinet-clinique-site-occupe", "travaux-amenagement-cabinet-clinique", "salles-imagerie-radioprotection"],
+    "motsCles": [
+      "aménagement bloc opératoire",
+      "construction clinique privée",
+      "rénovation clinique"
+    ],
+    "servicesLies": [
+      "etude-faisabilite-programmation-medicale",
+      "reseaux-techniques-fluides-medicaux",
+      "renovation-cabinet-clinique-site-occupe",
+      "travaux-amenagement-cabinet-clinique",
+      "salles-imagerie-radioprotection"
+    ],
     "cta": "Parler de mon projet de clinique",
     "faq": [
-      { "q": "Pouvez-vous mettre aux normes une clinique installée dans une villa ?", "a": "Oui. Le diagnostic de l’existant identifie les écarts (circuits, sécurité incendie, traitement d’air, accessibilité) et aboutit à un plan de travaux phasé, compatible avec la poursuite de l’activité." },
-      { "q": "Quelles normes s’appliquent à un bloc opératoire ?", "a": "Les références usuelles portent sur la propreté de l’air, les gaz médicaux et l’électricité. Elles sont confirmées pour chaque projet avec le bureau d’études et l’organisme de contrôle." },
-      { "q": "Travaillez-vous avec un organisme de contrôle ?", "a": "Oui. Nous l’associons au projet pour que les contrôles de réception se déroulent sans surprise." }
+      {
+        "q": "Pouvez-vous mettre aux normes une clinique installée dans une villa ?",
+        "a": "Oui. Le diagnostic de l’existant identifie les écarts (circuits, sécurité incendie, traitement d’air, accessibilité) et aboutit à un plan de travaux phasé, compatible avec la poursuite de l’activité."
+      },
+      {
+        "q": "Quelles normes s’appliquent à un bloc opératoire ?",
+        "a": "Les références usuelles portent sur la propreté de l’air, les gaz médicaux et l’électricité. Elles sont confirmées pour chaque projet avec le bureau d’études et l’organisme de contrôle."
+      },
+      {
+        "q": "Travaillez-vous avec un organisme de contrôle ?",
+        "a": "Oui. Nous l’associons au projet pour que les contrôles de réception se déroulent sans surprise."
+      }
+    ],
+    "lexique": [
+      {
+        "terme": "CTA (centrale de traitement d’air)",
+        "definition": "Installation qui filtre, traite et met en surpression l’air des blocs et des zones à risque."
+      },
+      {
+        "terme": "Flux laminaire / plafond soufflant",
+        "definition": "Diffusion d’air filtré au-dessus de la table d’opération pour réduire le risque infectieux."
+      },
+      {
+        "terme": "Classe ISO 7, ISO 5",
+        "definition": "Classes de propreté de l’air selon l’ISO 14644, à confirmer avec le bureau d’études selon le type de chirurgie."
+      },
+      {
+        "terme": "SSPI",
+        "definition": "Salle de surveillance post-interventionnelle, où le patient est surveillé après l’anesthésie."
+      },
+      {
+        "terme": "Bras plafonniers et scialytique",
+        "definition": "Bras porteurs de fluides et d’équipements et éclairage opératoire, fixés à une structure dans le plafond."
+      },
+      {
+        "terme": "Gaz médicaux et centrale de vide",
+        "definition": "Oxygène, air médical et vide distribués par un réseau de prises normalisées depuis une centrale."
+      },
+      {
+        "terme": "TGBT, inverseur de source et groupe électrogène",
+        "definition": "Tableau général basse tension et basculement automatique sur le secours en cas de coupure du réseau."
+      }
     ]
   },
   {
@@ -428,14 +948,56 @@
       "Espace de téléconsultation insonorisé",
       "Extension anticipée"
     ],
-    "aValider": ["Statut juridique de l’association", "Règles de l’ordre professionnel"],
-    "motsCles": ["aménagement cabinet médical de groupe", "aménagement cabinet de médecine générale"],
-    "servicesLies": ["conception-amenagement-cabinet-medical", "travaux-amenagement-cabinet-clinique", "financement-lancement-suivi-projet-medical", "design-interieur-experience-patient"],
+    "aValider": [
+      "Statut juridique de l’association",
+      "Règles de l’ordre professionnel"
+    ],
+    "motsCles": [
+      "aménagement cabinet médical de groupe",
+      "aménagement cabinet de médecine générale"
+    ],
+    "servicesLies": [
+      "conception-amenagement-cabinet-medical",
+      "travaux-amenagement-cabinet-clinique",
+      "financement-lancement-suivi-projet-medical",
+      "design-interieur-experience-patient"
+    ],
     "cta": "Aménager mon cabinet de groupe",
     "faq": [
-      { "q": "Comment répartir les charges entre associés ?", "a": "Le plan distingue les espaces privatifs et les espaces partagés, avec leurs surfaces. Cette base objective facilite la répartition, qui reste à fixer entre associés." },
-      { "q": "Une salle peut-elle servir à plusieurs spécialités ?", "a": "Oui, si elle est conçue polyvalente : dimensions standard, points d’eau, prises et rangements permettant d’adapter l’équipement." },
-      { "q": "Faut-il une salle dédiée à la téléconsultation ?", "a": "Un petit espace insonorisé, bien éclairé et câblé améliore nettement la qualité des échanges et la confidentialité." }
+      {
+        "q": "Comment répartir les charges entre associés ?",
+        "a": "Le plan distingue les espaces privatifs et les espaces partagés, avec leurs surfaces. Cette base objective facilite la répartition, qui reste à fixer entre associés."
+      },
+      {
+        "q": "Une salle peut-elle servir à plusieurs spécialités ?",
+        "a": "Oui, si elle est conçue polyvalente : dimensions standard, points d’eau, prises et rangements permettant d’adapter l’équipement."
+      },
+      {
+        "q": "Faut-il une salle dédiée à la téléconsultation ?",
+        "a": "Un petit espace insonorisé, bien éclairé et câblé améliore nettement la qualité des échanges et la confidentialité."
+      }
+    ],
+    "lexique": [
+      {
+        "terme": "Divan d’examen",
+        "definition": "Table d’examen à hauteur variable, positionnée pour l’accès des deux côtés."
+      },
+      {
+        "terme": "Salle de soins",
+        "definition": "Espace pour les pansements, injections et petits actes, avec point d’eau et rangements."
+      },
+      {
+        "terme": "Charges communes",
+        "definition": "Dépenses partagées entre associés (accueil, secrétariat, loyer des espaces communs), réparties selon une clé définie."
+      },
+      {
+        "terme": "SCM (société civile de moyens)",
+        "definition": "Forme d’association courante pour partager locaux et équipements entre praticiens, à valider avec votre conseil."
+      },
+      {
+        "terme": "Téléconsultation",
+        "definition": "Consultation à distance, qui demande un espace calme, bien éclairé et câblé."
+      }
     ]
   },
   {
@@ -460,14 +1022,54 @@
       "Mobilier sans élément dangereux",
       "Salle de thérapie de groupe et signalétique rassurante"
     ],
-    "aValider": ["Niveau de sécurité requis selon le public reçu"],
-    "motsCles": ["aménagement cabinet de psychologie", "aménagement cabinet de psychiatrie"],
-    "servicesLies": ["design-interieur-experience-patient", "conception-amenagement-cabinet-medical", "travaux-amenagement-cabinet-clinique"],
+    "aValider": [
+      "Niveau de sécurité requis selon le public reçu"
+    ],
+    "motsCles": [
+      "aménagement cabinet de psychologie",
+      "aménagement cabinet de psychiatrie"
+    ],
+    "servicesLies": [
+      "design-interieur-experience-patient",
+      "conception-amenagement-cabinet-medical",
+      "travaux-amenagement-cabinet-clinique"
+    ],
     "cta": "Aménager mon cabinet",
     "faq": [
-      { "q": "Comment isoler phoniquement un cabinet de consultation ?", "a": "Par des cloisons montant jusqu’à la dalle, des portes pleines à joints, une double porte ou un sas, et une ventilation qui ne transmet pas la voix." },
-      { "q": "Pourquoi une sortie séparée ?", "a": "Pour que le patient qui sort ne croise pas celui qui attend. C’est un gage de discrétion apprécié en santé mentale." },
-      { "q": "Quel mobilier choisir ?", "a": "Un mobilier confortable, stable, sans arêtes vives ni élément détachable dangereux, adapté au public reçu." }
+      {
+        "q": "Comment isoler phoniquement un cabinet de consultation ?",
+        "a": "Par des cloisons montant jusqu’à la dalle, des portes pleines à joints, une double porte ou un sas, et une ventilation qui ne transmet pas la voix."
+      },
+      {
+        "q": "Pourquoi une sortie séparée ?",
+        "a": "Pour que le patient qui sort ne croise pas celui qui attend. C’est un gage de discrétion apprécié en santé mentale."
+      },
+      {
+        "q": "Quel mobilier choisir ?",
+        "a": "Un mobilier confortable, stable, sans arêtes vives ni élément détachable dangereux, adapté au public reçu."
+      }
+    ],
+    "lexique": [
+      {
+        "terme": "Affaiblissement acoustique",
+        "definition": "Capacité d’une cloison ou d’une porte à arrêter la voix, exprimée en décibels ; elle se renforce par des cloisons jusqu’à la dalle."
+      },
+      {
+        "terme": "Sas acoustique",
+        "definition": "Double porte qui protège la confidentialité de l’entretien."
+      },
+      {
+        "terme": "Salle de thérapie de groupe",
+        "definition": "Grande salle modulable pour les séances collectives et la psychoéducation."
+      },
+      {
+        "terme": "Bouton d’alerte",
+        "definition": "Dispositif d’appel discret, prévu selon le public reçu."
+      },
+      {
+        "terme": "Accueil différencié",
+        "definition": "Organisation qui évite que le patient sortant croise celui qui attend."
+      }
     ]
   }
 ]

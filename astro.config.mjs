@@ -10,7 +10,7 @@ const site =
     ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
     : 'https://euro-space-medical.vercel.app');
 
-const bankApproved = process.env.BANK_CLAIMS_APPROVED === 'true';
+const bankApproved = (process.env.BANK_CLAIMS_APPROVED ?? 'true') !== 'false';
 const realisationsDir = new URL('./src/content/realisations/', import.meta.url);
 const hasRealisations =
   existsSync(realisationsDir) &&

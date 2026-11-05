@@ -1,0 +1,113 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PageHero from '@/components/PageHero.astro';
+import Faq from '@/components/Faq.astro';
+import CtaBand from '@/components/CtaBand.astro';
+import RelatedLinks from '@/components/RelatedLinks.astro';
+import { partners } from '@/data/financement';
+import { BANK_DISCLAIMER } from '@/config/site';
+import { breadcrumb, faqPage } from '@/lib/schema';
+import { pad, servicePath, specialitePath } from '@/lib/content';
+
+const base = Astro.site!;
+const path = '/premiere-installation/';
+const crumbs = [{ name: 'Accueil', path: '/' }, { name: 'Première installation', path }];
+const etapes = [
+  { t: 'Définir votre projet', p: 'Spécialité, actes pratiqués, nombre de salles, exercice seul ou en groupe, ville et quartier visés. C’est la base du programme fonctionnel.' },
+  { t: 'Choisir le local', p: 'Nous visitons avec vous les locaux envisagés : surface, hauteur, réseaux, accès, accessibilité, règlement de copropriété. Vous signez en connaissant le coût réel de l’aménagement.' },
+  { t: 'Réunir les autorisations', p: 'Inscription au tableau de l’Ordre, autorisation de l’AMSSNuR si vous utilisez un appareil de radiologie, éventuelle autorisation de la commune pour les travaux.' },
+  { t: 'Concevoir le cabinet', p: 'Plans 2D, rendus 3D, choix des matériaux et de l’équipement. Vous validez chaque salle avant le premier coup de pioche.' },
+  { t: 'Financer l’installation', p: 'Budget global (travaux, équipements, fonds de roulement), business plan et dossier bancaire avec nos partenaires.' },
+  { t: 'Travaux et équipement', p: 'Un maître d’œuvre, une réunion par semaine, un compte rendu photo, puis l’installation et la mise en service des équipements.' },
+  { t: 'Réception et ouverture', p: 'Contrôle par lot, procès-verbal, formation de l’équipe, fiche Google et signalétique : votre cabinet est prêt à recevoir.' },
+];
+const oublis = [
+  'Le fonds de roulement des premiers mois',
+  'Le local technique (compresseur, aspiration, tableau électrique) et son accès pour la maintenance',
+  'La salle de stérilisation dimensionnée à l’activité réelle',
+  'Les gaines en attente pour un futur fauteuil ou un futur appareil',
+  'L’accessibilité des personnes à mobilité réduite',
+  'L’isolation phonique entre la salle d’attente et les salles de consultation',
+];
+const faq = [
+  { q: 'Quand faut-il nous contacter ?', a: 'Idéalement avant de signer le bail. Une visite technique du local permet d’éviter un local inadapté ou des travaux beaucoup plus lourds que prévu.' },
+  { q: 'Peut-on démarrer avec un cabinet simple et l’agrandir ensuite ?', a: 'Oui. Nous concevons le cabinet pour qu’il évolue : gaines et attentes de fluides prévues, salle polyvalente, plan qui accepte une salle supplémentaire.' },
+  { q: 'Mon financement est-il garanti ?', a: `Non : la décision appartient à la banque. Nous préparons un dossier complet et le suivons avec nos banques partenaires. ${BANK_DISCLAIMER}` },
+];
+---
+<BaseLayout
+  title="Première installation : ouvrir son cabinet au Maroc"
+  description="Jeune médecin ou dentiste : du choix du local au financement avec nos banques partenaires, tout pour bien ouvrir votre premier cabinet au Maroc."
+  jsonld={[breadcrumb(base, crumbs), faqPage(faq)]}
+  context="Première installation"
+>
+  <PageHero eyebrow="Jeunes praticiens" h1="Ouvrir votre premier cabinet, sereinement" intro="Vous terminez votre cursus ou vous quittez le secteur public ? Nous vous accompagnons du choix du local jusqu’à l’ouverture, financement compris, avec une méthode pensée pour une première installation." crumbs={crumbs} variant="medecine-generale-cabinets-de-groupe" ctaLabel="Préparer mon installation" />
+
+  <section class="py-20 lg:py-28">
+    <div class="container-lux">
+      <p class="eyebrow text-[var(--color-gold-deep)]">Parcours</p>
+      <h2 class="mt-6 max-w-3xl">Sept étapes jusqu’à l’ouverture</h2>
+      <ol class="mt-14 grid gap-px overflow-hidden bg-[var(--color-line)] sm:grid-cols-2 lg:grid-cols-4">
+        {etapes.map((e, i) => (
+          <li class="bg-[var(--color-ivory)] p-8" data-reveal style={`--i:${i % 4}`}>
+            <span class="num text-5xl">{pad(i + 1)}</span>
+            <h3 class="mt-5 text-[1.5rem]">{e.t}</h3>
+            <p class="mt-3 text-[0.93rem] text-[var(--color-stone-ink)]">{e.p}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section class="bg-[var(--color-night)] py-20 text-[var(--color-ivory)] lg:py-28">
+    <div class="container-lux grid gap-14 lg:grid-cols-2">
+      <div data-reveal>
+        <p class="eyebrow text-[var(--color-gold)]">Financement</p>
+        <h2 class="mt-6">Votre installation financée avec nos banques partenaires</h2>
+        <p class="mt-6 text-[var(--color-ivory)]/75">Crédit professionnel, Intelaka, Mourabaha ou Ijara : nous montons le dossier avec vous et le transmettons à la banque partenaire adaptée à votre situation.</p>
+        <p class="mt-6 text-[0.85rem] italic text-[var(--color-ivory)]/60">{BANK_DISCLAIMER}</p>
+      </div>
+      <ul class="grid gap-px overflow-hidden bg-[var(--color-night-3)]">
+        {partners.map((p) => (
+          <li class="bg-[var(--color-night)]"><a href={p.path} class="group block p-8 no-underline">
+            <p class="caption text-[var(--color-gold)]">{p.short}</p>
+            <p class="display mt-3 text-[1.7rem] transition-colors group-hover:text-[var(--color-gold-soft)]">{p.h1}</p>
+            <p class="mt-3 text-[0.92rem] text-[var(--color-ivory)]/70">{p.accroche}</p>
+          </a></li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="py-20 lg:py-28">
+    <div class="container-lux grid gap-14 lg:grid-cols-12">
+      <div class="lg:col-span-5" data-reveal>
+        <p class="eyebrow text-[var(--color-gold-deep)]">Check-list</p>
+        <h2 class="mt-6">Les oublis qui coûtent cher</h2>
+        <p class="mt-6 text-[var(--color-stone-ink)]">Ce que nous vérifions systématiquement avec les praticiens qui s’installent pour la première fois.</p>
+      </div>
+      <ul class="space-y-4 lg:col-span-7">
+        {oublis.map((o, i) => <li class="flex gap-5 border-b border-[var(--color-line)] pb-4" data-reveal style={`--i:${i}`}><span class="num text-2xl leading-none">{pad(i + 1)}</span>{o}</li>)}
+      </ul>
+    </div>
+  </section>
+
+  <Faq items={faq} tone="sand" />
+
+  <section class="py-20 lg:py-28">
+    <div class="container-lux grid gap-16 lg:grid-cols-2">
+      <RelatedLinks title="Services utiles" links={[
+        { href: servicePath('etude-faisabilite-programmation-medicale'), label: 'Étude de faisabilité', meta: 'Service 01' },
+        { href: servicePath('conception-amenagement-cabinet-medical'), label: 'Conception 2D et 3D', meta: 'Service 02' },
+        { href: servicePath('financement-lancement-suivi-projet-medical'), label: 'Financement et suivi', meta: 'Service 10' },
+      ]} />
+      <RelatedLinks title="Spécialités les plus demandées" links={[
+        { href: specialitePath('cabinet-dentaire-orthodontie'), label: 'Cabinet dentaire et orthodontie', meta: 'Spécialité' },
+        { href: specialitePath('medecine-generale-cabinets-de-groupe'), label: 'Médecine générale et cabinet de groupe', meta: 'Spécialité' },
+        { href: '/blog/cout-amenagement-cabinet-medical-maroc/', label: 'Combien coûte l’aménagement d’un cabinet ?', meta: 'Guide' },
+      ]} />
+    </div>
+  </section>
+
+  <CtaBand context="Première installation" title="Préparer mon installation" />
+</BaseLayout>

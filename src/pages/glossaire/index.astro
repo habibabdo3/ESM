@@ -1,0 +1,62 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PageHero from '@/components/PageHero.astro';
+import CtaBand from '@/components/CtaBand.astro';
+import { glossaireGeneral } from '@/data/glossaire';
+import { getSpecialites, specialitePath } from '@/lib/content';
+import { breadcrumb } from '@/lib/schema';
+
+const specialites = await getSpecialites();
+const base = Astro.site!;
+const path = '/glossaire/';
+const crumbs = [{ name: 'Accueil', path: '/' }, { name: 'Glossaire', path }];
+const slug = (s: string) => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+const groups = [
+  ...glossaireGeneral.map((g) => ({ id: slug(g.categorie), titre: g.categorie, termes: g.termes, lien: null as string | null })),
+  ...specialites.filter((s) => s.data.lexique.length).map((s) => ({ id: s.id, titre: s.data.short, termes: s.data.lexique, lien: specialitePath(s.id) })),
+];
+const all = groups.flatMap((g) => g.termes);
+const ld = {
+  '@type': 'DefinedTermSet',
+  name: 'Glossaire de l’aménagement médical au Maroc',
+  url: new URL(path, base).toString(),
+  hasDefinedTerm: all.map((t) => ({ '@type': 'DefinedTerm', name: t.terme, description: t.definition })),
+};
+---
+<BaseLayout
+  title="Glossaire de l’aménagement médical au Maroc"
+  description="Unit dentaire, autoclave classe B, équivalent plomb, CTA, SSPI, BPDE, réception provisoire, Mourabaha : le vocabulaire de l’aménagement médical au Maroc."
+  jsonld={[breadcrumb(base, crumbs), ld]}
+  context="Glossaire"
+>
+  <PageHero eyebrow="Glossaire" h1="Le vocabulaire de l’aménagement médical" intro={`${all.length} termes employés par les praticiens, les fournisseurs, les bureaux d’études et les banques au Maroc, expliqués simplement.`} crumbs={crumbs} variant="radiologie-imagerie-medicale" />
+
+  <section class="py-20 lg:py-28">
+    <div class="container-lux grid gap-16 lg:grid-cols-12">
+      <nav aria-label="Rubriques du glossaire" class="lg:col-span-3">
+        <ul class="sticky top-32 space-y-2 text-[0.92rem]">
+          {groups.map((g) => <li><a href={`#${g.id}`} class="link-lux text-[var(--color-stone-ink)] hover:text-[var(--color-teal)]">{g.titre}</a></li>)}
+        </ul>
+      </nav>
+      <div class="space-y-20 lg:col-span-9">
+        {groups.map((g) => (
+          <section id={g.id} aria-labelledby={`${g.id}-t`} class="scroll-mt-32">
+            <div class="flex flex-wrap items-end justify-between gap-4 border-b border-[var(--color-line)] pb-5">
+              <h2 id={`${g.id}-t`} class="text-[2.2rem]">{g.titre}</h2>
+              {g.lien && <a href={g.lien} class="text-[0.78rem] font-semibold uppercase tracking-[0.14em] text-[var(--color-gold-deep)] no-underline">Voir la spécialité →</a>}
+            </div>
+            <dl class="mt-6 grid gap-x-10 md:grid-cols-2">
+              {g.termes.map((t) => (
+                <div class="border-b border-[var(--color-line)] py-5">
+                  <dt class="display text-[1.4rem]">{t.terme}</dt>
+                  <dd class="mt-2 text-[0.95rem] leading-relaxed text-[var(--color-stone-ink)]">{t.definition}</dd>
+                </div>
+              ))}
+            </dl>
+          </section>
+        ))}
+      </div>
+    </div>
+  </section>
+  <CtaBand context="Glossaire" title="Un terme, une contrainte, un projet ?" text="Nos équipes traduisent les exigences de votre spécialité en plans, en lots de travaux et en budget." />
+</BaseLayout>

@@ -29,9 +29,12 @@ export const site = {
   metaPixelId: val(env.PUBLIC_META_PIXEL_ID),
 } as const;
 
-/** Mentions bancaires (noms, logos, délais) masquées tant que la banque n'a pas validé par écrit. */
+/**
+ * Partenariats signés avec Al Barid Bank et Bank Al Yousr (confirmé le 2026-11-05) : noms affichés par défaut.
+ * BANK_CLAIMS_APPROVED=false permet de les masquer à nouveau. Aucun taux ni délai chiffré sans accord écrit spécifique.
+ */
 export const bankClaimsApproved =
-  (env.BANK_CLAIMS_APPROVED ?? process.env.BANK_CLAIMS_APPROVED) === 'true';
+  (env.BANK_CLAIMS_APPROVED ?? process.env.BANK_CLAIMS_APPROVED ?? 'true') !== 'false';
 
 export const BANK_DISCLAIMER = 'Sous réserve d’acceptation du dossier par la banque.';
 

@@ -34,7 +34,7 @@ npm run dev          # http://localhost:4321
    - coordonnées `PUBLIC_PHONE`, `PUBLIC_EMAIL`, `PUBLIC_WHATSAPP` (format `2126…`), `PUBLIC_ADDRESS`, réseaux sociaux ;
    - formulaire : `RESEND_API_KEY`, `QUOTE_TO_EMAIL`, `QUOTE_FROM_EMAIL` (domaine vérifié dans Resend) ;
    - mesure : `PUBLIC_PLAUSIBLE_DOMAIN`, `PUBLIC_META_PIXEL_ID` (chargés après consentement) ;
-   - `BANK_CLAIMS_APPROVED=true` **uniquement** après accord écrit des deux banques.
+   - `BANK_CLAIMS_APPROVED` : noms des banques affichés par défaut (partenariats signés) ; `false` pour les masquer.
 3. Redéployer après chaque changement de variable (les valeurs sont intégrées au build).
 
 La fonction `api/devis.js` reçoit le formulaire. Sans clés Resend, elle répond 503 et le formulaire propose WhatsApp.
@@ -59,6 +59,9 @@ Les marqueurs jaunes `[À COMPLÉTER : …]` visibles sur le site disparaissent 
 - [ ] Durée de conservation des données, démarches CNDP (`src/pages/confidentialite/`)
 - [ ] Équipe nommée, assurances, partenaires techniques (`src/pages/a-propos/`)
 - [ ] 5 réalisations avec photos avant/après
-- [ ] Accord écrit d'Al Barid Bank et de Bank Al Yousr (noms, logos, formulations) → `BANK_CLAIMS_APPROVED=true`
+- [x] Partenariats signés avec Al Barid Bank et Bank Al Yousr (noms affichés)
+- [ ] Logos officiels des deux banques et textes validés (aucun taux ni délai affiché sans écrit)
 - [ ] Nom de domaine, comptes Resend, Plausible, Meta
-- [ ] Rédaction des 12 articles du blog
+- [x] Rédaction et publication des 12 articles du blog
+
+Liste détaillée et priorisée : [docs/BESOINS.md](docs/BESOINS.md) · Architecture : [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)

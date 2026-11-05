@@ -29,9 +29,11 @@
 3. Aucun texte repris de lynemedical.ma ou d'un autre site.
 4. Loi 09-08 (CNDP) : consentement cookies (`CookieBanner`), mention dans le formulaire, page confidentialité.
    Analytique (Plausible) et pixel Meta **chargés uniquement après consentement**.
-5. **Banques** : noms/logos/délais d'Al Barid Bank et Bank Al Yousr **masqués tant que `BANK_CLAIMS_APPROVED=false`**
-   (pages partenaires en `noindex`). Toujours afficher « Sous réserve d'acceptation du dossier par la banque. »
-   (`BANK_DISCLAIMER`). Aucun taux ni délai chiffré sans accord écrit. Ne jamais promettre de taux d'acceptation.
+5. **Banques** : partenariats **signés** avec Al Barid Bank et Bank Al Yousr (confirmé le 2026-11-05) → noms affichés
+   par défaut (`BANK_CLAIMS_APPROVED` ≠ `false`). Formulations autorisées : « dossier Intelaka traité en priorité avec
+   Al Barid Bank », « conditions préférentielles avec Bank Al Yousr (Mourabaha, Ijara) ». Toujours afficher
+   « Sous réserve d'acceptation du dossier par la banque. » (`BANK_DISCLAIMER`). **Aucun taux, montant, durée ou délai
+   chiffré** sans accord écrit spécifique. Ne jamais promettre de taux d'acceptation. Logos : en attente des fichiers officiels.
 6. Chiffres affichés = uniquement des faits vérifiables (ex. 14 spécialités, 10 services, 12 régions = périmètre de l'offre).
 7. Références réglementaires validées : AMSSNuR (loi 142-12) pour la radiologie, y compris dentaire ; déchets médicaux :
    loi 28-00 + décret 2-09-139. Normes ISO/NF : « à confirmer avec le bureau d'études et l'organisme de contrôle ».
@@ -61,11 +63,12 @@ src/
   config/site.ts          coordonnées (env), BANK_DISCLAIMER, bankClaimsApproved, whatsappLink()
   content.config.ts       schémas Zod : services, specialites, regions, realisations, blog
   data/services.json      10 services (title ≤60, description 140–155, h1, intro, livrables, faq…)
-  data/specialites.json   14 spécialités (contraintes, offre, aValider, motsCles, servicesLies ≥3, faq)
+  data/specialites.json   14 spécialités (contraintes, offre, aValider, motsCles, servicesLies ≥3, lexique, faq)
   data/regions.json       12 régions du Maroc, texte propre à chacune
-  data/financement.ts     partenaires bancaires (formulations prudentes) + étapes « Projet financé »
+  data/financement.ts     banques partenaires (pourQui, produits, piecesDossier) + étapes « Projet financé »
+  data/glossaire.ts       glossaire général (chantier, autorisations, matériaux, financement)
   data/faq-general.ts     FAQ générale (accueil + /faq/)
-  content/blog/*.md       12 articles en brouillon (draft: true) — non publiés en production
+  content/blog/*.md       12 guides publiés (draft: false), liés aux services via servicesLies
   content/realisations/   études de cas (vide ; modèle `_modele.md` ignoré) → images dans src/assets/realisations/
   lib/content.ts          accès collections + chemins (servicePath, specialitePath, regionPath…)
   lib/schema.ts           JSON-LD : Organization, WebSite, LocalBusiness (HomeAndConstructionBusiness), Service, BreadcrumbList, FAQPage, Article
@@ -81,12 +84,12 @@ api/devis.js              fonction serverless Vercel (Resend), champ piège + li
 scripts/audit-seo.mjs     audit SEO ; scripts/generate-og.mjs ; scripts/check-lengths.mjs (longueurs JSON)
 ```
 
-## 5. Pages (56 générées)
+## 5. Pages (70 générées) — détail dans `docs/ARCHITECTURE.md`
 
 `/` · `/services/` + 10 · `/specialites/` + 14 · `/amenagement-cabinet-medical/` (pilier) + 12 régions ·
-`/renovation-cabinet-clinique/` (pilier) · `/zones-intervention/` · `/financement/` + `/al-barid-bank/` + `/bank-al-yousr/`
-(noindex tant que non validé) · `/realisations/` (noindex tant que vide) + `[slug]` · `/blog/` (noindex tant que vide) +
-`[slug]` · `/faq/` · `/a-propos/` · `/contact/` · `/mentions-legales/` · `/confidentialite/` · `/cookies/` ·
+`/renovation-cabinet-clinique/` (pilier) · `/premiere-installation/` · `/zones-intervention/` · `/financement/` +
+`/al-barid-bank/` + `/bank-al-yousr/` · `/realisations/` (noindex tant que vide) + `[slug]` · `/blog/` + 12 guides publiés ·
+`/glossaire/` (121 termes, DefinedTermSet) · `/faq/` · `/a-propos/` · `/contact/` · `/mentions-legales/` · `/confidentialite/` · `/cookies/` ·
 `/plan-du-site/` · `/styleguide/` (noindex) · `404` · `robots.txt` · `sitemap-index.xml` (exclut les noindex, liste dans `astro.config.mjs`).
 
 Maillage : chaque spécialité → ≥ 3 services ; chaque service → spécialités liées + 4 services suivants ;
@@ -130,8 +133,12 @@ Sans `SITE_URL`, le canonical utilise `VERCEL_PROJECT_PRODUCTION_URL`.
 - Un seul H1 par page, pas de saut de niveau (utiliser `<h2 class="sr-only">` si une grille de cartes h3 suit le héros).
 - Accessibilité WCAG 2.2 AA (vérifiée axe-core) ; Lighthouse mobile accueil : 100/100/100/100 au 2026-11-05.
 
+- **Crédibilité métier** : employer le vocabulaire réel des praticiens et fournisseurs au Maroc (unit, autoclave
+  classe B, cone beam, équivalent plomb, CTA, SSPI, BPDE, PV de réception, Mourabaha…). Tout nouveau terme technique
+  va dans `lexique` (spécialité) ou `src/data/glossaire.ts` (général).
+
 ## 9. État actuel et prochaines étapes
 
-Voir `docs/CHANGELOG.md` (journal) et la section « À compléter » de `README.md`. En bref, il manque côté entreprise :
-coordonnées (tél., e-mail, WhatsApp, adresse), identifiants légaux (RC, IF, ICE), équipe nommée et assurances,
-les 5 réalisations (photos avant/après + accord client), accord écrit des banques, domaine, clés Resend/Plausible/Meta.
+Voir `docs/CHANGELOG.md` (journal) et **`docs/BESOINS.md`** (liste complète des informations à fournir + benchmark
+international + ajouts recommandés). En bref, il manque : coordonnées, identifiants légaux, équipe et assurances,
+les 5 réalisations, logos et textes validés des banques, domaine, clés Resend/Plausible/Meta.

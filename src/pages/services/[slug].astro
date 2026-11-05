@@ -4,7 +4,7 @@ import PageHero from '@/components/PageHero.astro';
 import Faq from '@/components/Faq.astro';
 import CtaBand from '@/components/CtaBand.astro';
 import RelatedLinks from '@/components/RelatedLinks.astro';
-import { getServices, getSpecialites, servicePath, specialitePath, pad, type Service } from '@/lib/content';
+import { getServices, getSpecialites, getPosts, servicePath, specialitePath, postPath, pad, type Service } from '@/lib/content';
 import { breadcrumb, faqPage, service as serviceLd } from '@/lib/schema';
 import { whatsappLink } from '@/config/site';
 
@@ -22,6 +22,7 @@ const allServices = await getServices();
 const specialites = await getSpecialites();
 const linkedSpecs = specialites.filter((s) => d.specialitesLiees.includes(s.id) || s.data.servicesLies.includes(entry.id));
 const related = Array.from({ length: 4 }, (_, k) => allServices[(d.order + k) % allServices.length]!);
+const guides = (await getPosts()).filter((g) => g.data.servicesLies.includes(entry.id)).slice(0, 3);
 const wa = whatsappLink(`Bonjour, je suis intéressé(e) par votre service « ${d.short} ».`);
 ---
 <BaseLayout
@@ -67,6 +68,7 @@ const wa = whatsappLink(`Bonjour, je suis intéressé(e) par votre service « ${
   <section class="py-20 lg:py-28">
     <div class="container-lux grid gap-16 lg:grid-cols-2">
       <RelatedLinks title="Spécialités concernées" links={linkedSpecs.map((s) => ({ href: specialitePath(s.id), label: s.data.short, meta: 'Spécialité' }))} />
+      {guides.length > 0 && <RelatedLinks title="Guides pratiques" links={guides.map((g) => ({ href: postPath(g.id), label: g.data.h1, meta: 'Guide' }))} />}
       <RelatedLinks title="Services associés" links={related.map((s) => ({ href: servicePath(s.id), label: s.data.short, meta: `Service ${pad(s.data.order)}` }))} />
     </div>
   </section>
