@@ -1,0 +1,233 @@
+[
+  {
+    "id": "etude-faisabilite-programmation-medicale",
+    "order": 1,
+    "short": "Étude de faisabilité",
+    "title": "Étude de faisabilité de cabinet médical",
+    "description": "Choix du local, programme fonctionnel et liste des autorisations : validez votre projet de cabinet ou de clinique avant d’engager les travaux.",
+    "h1": "Étude de faisabilité et programmation de votre structure médicale",
+    "intro": "Avant de dessiner un plan, nous vérifions que le local peut accueillir votre activité : surfaces, hauteur sous plafond, charge des planchers, réseaux existants, accès brancard et accessibilité. Nous traduisons ensuite votre pratique en programme fonctionnel : nombre de salles, flux des patients et du personnel, besoins techniques de votre spécialité. Vous savez dès cette étape si le local convient, combien le projet coûtera et quelles autorisations préparer.",
+    "livrables": [
+      "Visite technique et relevé du local",
+      "Programme fonctionnel par spécialité (salles, surfaces, adjacences)",
+      "Estimation budgétaire par lot et planning global",
+      "Liste des autorisations et des pièces à réunir",
+      "Avis de faisabilité écrit : favorable, favorable sous conditions ou défavorable"
+    ],
+    "cta": "Demander une étude de faisabilité",
+    "specialitesLiees": ["cabinet-dentaire-orthodontie", "radiologie-imagerie-medicale", "cliniques-blocs-operatoires", "laboratoire-analyses-medicales"],
+    "faq": [
+      { "q": "À quel moment faut-il réaliser l’étude de faisabilité ?", "a": "Idéalement avant de signer le bail ou l’acte d’achat. L’étude révèle les contraintes qui peuvent rendre un local inadapté : hauteur insuffisante, plancher trop faible pour un appareil lourd, absence d’accès brancard ou réseaux impossibles à faire passer." },
+      { "q": "Que contient l’avis de faisabilité ?", "a": "Un avis écrit et argumenté : favorable, favorable sous conditions (avec la liste des travaux nécessaires) ou défavorable. Il s’accompagne d’une estimation budgétaire par lot et d’un planning global." },
+      { "q": "L’étude est-elle utile pour une rénovation ?", "a": "Oui. Pour une structure existante, elle sert à mesurer l’écart entre l’état actuel et les besoins de votre activité, puis à hiérarchiser les travaux." }
+    ]
+  },
+  {
+    "id": "conception-amenagement-cabinet-medical",
+    "order": 2,
+    "short": "Conception 2D et 3D",
+    "title": "Conception et plans 2D/3D de cabinet médical",
+    "description": "Plans 2D, rendus 3D et dossier technique pour cabinet, clinique ou centre d’imagerie : circuits patients, ergonomie des postes et conformité sanitaire.",
+    "h1": "Conception d’aménagement médical : plans 2D, rendus 3D et dossier technique",
+    "intro": "Un plan médical se construit autour de l’acte de soin. Nous organisons trois circuits qui ne se croisent pas (patient, praticien, matériel du sale vers le propre), puis nous positionnons postes de soins, rangements, éclairage et équipements pour réduire les déplacements. Vous validez chaque espace en rendus 3D réalistes avant le premier coup de pioche, avec des matériaux lessivables, antidérapants et adaptés à l’usage médical.",
+    "livrables": [
+      "Plans de distribution 2D et ergonomie des postes",
+      "Rendus 3D et visite virtuelle",
+      "Choix des matériaux et nuancier",
+      "Plans techniques par lot (électricité, plomberie, ventilation, fluides)",
+      "Dossier de consultation des entreprises (descriptif et quantitatifs)"
+    ],
+    "cta": "Obtenir un devis de conception",
+    "specialitesLiees": ["cabinet-dentaire-orthodontie", "ophtalmologie", "medecine-generale-cabinets-de-groupe", "dermatologie-medecine-esthetique"],
+    "faq": [
+      { "q": "Que sont les trois circuits d’un cabinet médical ?", "a": "Le circuit du patient (accueil, attente, soins, sortie), celui du praticien et du personnel, et celui du matériel qui va du sale vers le propre. Les séparer limite les risques d’infection et fluidifie la journée." },
+      { "q": "Puis-je modifier le plan après les rendus 3D ?", "a": "Oui, c’est leur raison d’être. Les rendus servent à valider chaque espace et à corriger le plan tant que rien n’est construit, ce qui coûte bien moins cher qu’une modification en chantier." },
+      { "q": "Le dossier de conception sert-il à consulter d’autres entreprises ?", "a": "Oui. Le dossier de consultation (descriptif et quantitatifs) permet de comparer les offres sur une base identique, que nous réalisions ou non les travaux." }
+    ]
+  },
+  {
+    "id": "reseaux-techniques-fluides-medicaux",
+    "order": 3,
+    "short": "Réseaux et fluides",
+    "title": "Fluides et réseaux techniques médicaux",
+    "description": "Aspiration, air médical, plomberie, électricité sécurisée, climatisation et réseau informatique : des installations dimensionnées pour votre spécialité.",
+    "h1": "Réseaux techniques et fluides médicaux dimensionnés pour votre spécialité",
+    "intro": "Les réseaux sont invisibles, mais ils décident de la fiabilité de vos soins. Nous dimensionnons l’aspiration, l’air comprimé médical, l’alimentation en eau et les évacuations, l’électricité sécurisée avec onduleurs, la ventilation et la climatisation, ainsi que le câblage informatique et d’imagerie. Chaque réseau est testé avant la mise en service et documenté pour la maintenance.",
+    "livrables": [
+      "Notes de calcul et schémas de principe",
+      "Implantation des locaux techniques (compresseur, aspiration, tableau électrique, serveur) avec traitement acoustique",
+      "Plans d’exécution",
+      "Essais de pression, mesures d’isolement et tests différentiels",
+      "Dossier des ouvrages exécutés et carnet de maintenance"
+    ],
+    "cta": "Faire étudier mes réseaux techniques",
+    "specialitesLiees": ["cabinet-dentaire-orthodontie", "cliniques-blocs-operatoires", "gastro-enterologie-endoscopie", "laboratoire-analyses-medicales"],
+    "faq": [
+      { "q": "Pourquoi isoler le compresseur et l’aspiration dans un local technique ?", "a": "Pour le bruit, la chaleur et la maintenance. Un local dédié, ventilé et traité acoustiquement protège le confort des patients et permet au technicien d’intervenir sans entrer dans les salles de soins." },
+      { "q": "Faut-il un onduleur dans un cabinet ?", "a": "Pour les appareils sensibles (imagerie, informatique, équipements de surveillance), une alimentation protégée évite les pertes de données et les arrêts brutaux. Le besoin se définit appareil par appareil." },
+      { "q": "Que contient le dossier des ouvrages exécutés ?", "a": "Les plans conformes à ce qui a réellement été construit, les fiches des équipements et les résultats des essais. C’est la référence pour toute intervention ou extension future." }
+    ]
+  },
+  {
+    "id": "travaux-amenagement-cabinet-clinique",
+    "order": 4,
+    "short": "Travaux clés en main",
+    "title": "Aménagement de cabinet médical clés en main",
+    "description": "Maître d’œuvre dédié, planning détaillé, corps d’état coordonnés et réception contrôlée : livrez votre cabinet ou votre clinique dans les délais prévus.",
+    "h1": "Travaux d’aménagement de cabinets et de cliniques, clés en main",
+    "intro": "Un seul responsable pour tout le chantier : maçonnerie, cloisons hydrofuges, revêtements médicaux, plomberie, électricité, climatisation, menuiserie sur mesure. Nous planifions les jalons, tenons une réunion hebdomadaire avec compte rendu photo et suivi budgétaire, et traitons les aléas avant qu’ils ne retardent l’ouverture. La réception s’appuie sur une liste de contrôle par lot et un procès-verbal avec levée des réserves.",
+    "livrables": [
+      "Planning détaillé avec jalons",
+      "Réunions hebdomadaires et comptes rendus photo",
+      "Suivi budgétaire par lot",
+      "Contrôle qualité avant réception",
+      "Nettoyage de fin de chantier et procès-verbal de réception"
+    ],
+    "cta": "Planifier mon chantier",
+    "specialitesLiees": ["cabinet-dentaire-orthodontie", "medecine-generale-cabinets-de-groupe", "kinesitherapie-reeducation", "pediatrie"],
+    "faq": [
+      { "q": "Qui est mon interlocuteur pendant le chantier ?", "a": "Un maître d’œuvre dédié, du démarrage à la réception. Il coordonne tous les corps d’état et vous rend compte chaque semaine, photos et suivi budgétaire à l’appui." },
+      { "q": "Comment se passe la réception des travaux ?", "a": "Nous contrôlons chaque lot avec une liste de points, puis nous signons ensemble un procès-verbal. Les réserves éventuelles y sont notées avec une date de levée." },
+      { "q": "Que se passe-t-il en cas d’imprévu ?", "a": "L’aléa est signalé dès sa découverte, avec son impact sur le délai et le budget et les solutions possibles. Rien n’est engagé sans votre accord." }
+    ]
+  },
+  {
+    "id": "renovation-cabinet-clinique-site-occupe",
+    "order": 5,
+    "short": "Rénovation en site occupé",
+    "title": "Rénovation et mise aux normes en site occupé",
+    "description": "Rénovez, agrandissez ou remettez aux normes votre structure médicale sans arrêter l’activité : phasage, cloisons étanches et maîtrise des poussières.",
+    "h1": "Rénovation et extension de structures médicales, sans interrompre vos soins",
+    "intro": "Rénover une structure en activité demande une autre méthode. Nous découpons les travaux en phases, isolons les zones de chantier par des cloisons provisoires étanches, maîtrisons poussières, bruit et vibrations, et maintenons les accès et les fluides critiques. Nous traitons aussi la mise aux normes (hygiène, accessibilité, sécurité incendie, électricité) et l’extension : nouvelles salles, nouvelle spécialité, agrandissement des locaux.",
+    "livrables": [
+      "Diagnostic de l’existant (hygiène, accessibilité, réseaux, sécurité)",
+      "Plan de phasage et de continuité d’activité",
+      "Protocole de chantier (poussières, bruit, circulations)",
+      "Travaux par phase avec réception partielle",
+      "Plan de mise aux normes hiérarchisé"
+    ],
+    "cta": "Demander un diagnostic de rénovation",
+    "specialitesLiees": ["cliniques-blocs-operatoires", "cabinet-dentaire-orthodontie", "radiologie-imagerie-medicale", "laboratoire-analyses-medicales"],
+    "faq": [
+      { "q": "Peut-on vraiment rénover sans fermer ?", "a": "Dans la plupart des cas, oui, à condition de phaser les travaux. Chaque phase isole une zone par des cloisons étanches, pendant que les autres salles continuent de fonctionner. Certaines interventions sur les réseaux se programment hors des heures d’ouverture." },
+      { "q": "Comment limitez-vous la poussière et le bruit ?", "a": "Par un protocole écrit : cloisons provisoires étanches, circulations séparées pour le chantier, aspiration à la source et créneaux réservés aux travaux bruyants, validés avec vous." },
+      { "q": "Par quoi commencer une mise aux normes ?", "a": "Par un diagnostic de l’existant. Il aboutit à un plan hiérarchisé : d’abord la sécurité et l’hygiène, ensuite l’accessibilité et le confort." }
+    ]
+  },
+  {
+    "id": "salles-imagerie-radioprotection",
+    "order": 6,
+    "short": "Imagerie et radioprotection",
+    "title": "Salle de radiologie et radioprotection",
+    "description": "Blindage plombé, poste de commande, circuits patients et dossier d’autorisation : aménagez une salle d’imagerie conforme et prête pour la mise en service.",
+    "h1": "Salles d’imagerie et radioprotection : blindage, circuits et dossier réglementaire",
+    "intro": "Radiologie conventionnelle, panoramique dentaire, CBCT, scanner, mammographie, IRM : chaque appareil impose ses contraintes de blindage, de charge au sol, de climatisation et d’accès. Nous faisons calculer la protection par un physicien ou un organisme compétent, intégrons blindage plombé, portes et vitrages de protection, signalisation lumineuse et poste de commande, puis préparons les pièces du dossier d’autorisation à déposer auprès de l’AMSSNuR.",
+    "livrables": [
+      "Étude de protection radiologique",
+      "Plans de blindage (murs, portes, vitrages, planchers et plafonds)",
+      "Circuits des patients et du personnel",
+      "Poste de commande, réseau et archivage des images",
+      "Appui à la constitution du dossier d’autorisation"
+    ],
+    "cta": "Préparer ma salle d’imagerie",
+    "specialitesLiees": ["radiologie-imagerie-medicale", "cabinet-dentaire-orthodontie", "cliniques-blocs-operatoires"],
+    "faq": [
+      { "q": "Qui calcule l’épaisseur du blindage ?", "a": "Un physicien médical ou un organisme compétent, à partir de l’appareil, de la charge de travail et de l’usage des locaux voisins. Nous intégrons ensuite ce calcul aux plans et au chantier." },
+      { "q": "Une autorisation est-elle nécessaire pour un appareil de radiologie dentaire ?", "a": "Oui. Au Maroc, l’utilisation des appareils de radiologie, y compris dentaires, est soumise à une autorisation de l’AMSSNuR. Nous vous aidons à réunir les pièces techniques du dossier." },
+      { "q": "Faut-il renforcer la dalle pour un scanner ?", "a": "Souvent. Le poids de l’appareil et ses prescriptions d’installation sont vérifiés dès l’étude de faisabilité, avec le fournisseur et, si besoin, un bureau d’études structure." }
+    ]
+  },
+  {
+    "id": "equipement-medical-mobilier-technique",
+    "order": 7,
+    "short": "Équipement médical",
+    "title": "Équipement médical et mobilier technique",
+    "description": "Sélection multimarque, comparatif objectif, installation et formation : équipez votre cabinet ou votre clinique selon votre spécialité et votre budget.",
+    "h1": "Équipement médical : une sélection indépendante, adaptée à votre spécialité",
+    "intro": "Nous comparons plusieurs marques selon votre pratique, votre volume d’activité et votre budget, puis nous négocions et coordonnons la livraison. L’équipement est choisi en même temps que l’aménagement : fluides, alimentation électrique, charges et dimensions sont prévus dès les plans. Installation, mise en service, formation initiale et suivi après-vente sont inclus. Quatre formules sont possibles : Essentiel, Confort, Premium et Sur mesure.",
+    "livrables": [
+      "Audit des besoins cliniques et techniques",
+      "Comparatif de deux à trois solutions par poste",
+      "Négociation et commande",
+      "Livraison, installation et mise en service",
+      "Formation de l’équipe et suivi après-vente"
+    ],
+    "cta": "Recevoir une sélection d’équipements",
+    "specialitesLiees": ["cabinet-dentaire-orthodontie", "ophtalmologie", "orl-audiologie", "cardiologie-explorations-fonctionnelles"],
+    "faq": [
+      { "q": "Pourquoi choisir l’équipement en même temps que l’aménagement ?", "a": "Parce que chaque appareil a ses exigences : arrivées de fluides, puissance électrique, poids, dimensions, dégagements. Les intégrer dès les plans évite les reprises coûteuses une fois les murs fermés." },
+      { "q": "Êtes-vous liés à une marque ?", "a": "Notre méthode repose sur un comparatif de deux à trois solutions par poste, présenté avec leurs avantages et leurs limites. Vous choisissez en connaissance de cause." },
+      { "q": "Que comprennent les formules Essentiel, Confort, Premium et Sur mesure ?", "a": "Elles correspondent à des niveaux de gamme et de service différents. Leur contenu et leur prix sont établis sur devis, selon votre spécialité et votre volume d’activité." }
+    ]
+  },
+  {
+    "id": "design-interieur-experience-patient",
+    "order": 8,
+    "short": "Design et expérience patient",
+    "title": "Design d’intérieur médical et expérience patient",
+    "description": "Accueil, salle d’attente, signalétique, acoustique et lumière : un environnement apaisant et professionnel qui valorise votre cabinet ou votre clinique.",
+    "h1": "Design d’intérieur médical : une expérience patient apaisante et professionnelle",
+    "intro": "Un patient juge la qualité des soins aussi à l’ambiance des lieux. Nous concevons l’accueil, la salle d’attente et les circulations avec une lumière douce, des matériaux faciles d’entretien et une signalétique claire, tout en traitant la confidentialité : isolation phonique entre salles, discrétion à l’accueil, accessibilité pour tous. Votre identité visuelle se retrouve du comptoir jusqu’à la signalétique.",
+    "livrables": [
+      "Concept d’ambiance et planche de matériaux",
+      "Mobilier d’accueil sur mesure",
+      "Éclairage de soins et d’ambiance",
+      "Signalétique directionnelle et réglementaire",
+      "Traitement acoustique et accessibilité"
+    ],
+    "cta": "Parler de mon projet d’intérieur",
+    "specialitesLiees": ["dermatologie-medecine-esthetique", "pediatrie", "psychiatrie-psychologie", "gynecologie-echographie-pma"],
+    "faq": [
+      { "q": "Un design soigné est-il compatible avec les exigences d’hygiène ?", "a": "Oui, à condition de choisir des matériaux lessivables et résistants aux désinfectants, des joints limités et des surfaces faciles d’entretien. L’esthétique se construit avec ces contraintes, pas contre elles." },
+      { "q": "Comment préserver la confidentialité à l’accueil ?", "a": "Par la disposition du comptoir, une zone d’attente à distance, un traitement acoustique des parois et, si besoin, un fond sonore discret." },
+      { "q": "Pouvez-vous reprendre mon identité visuelle ?", "a": "Oui. Couleurs, logo et typographie se déclinent sur le comptoir, la signalétique et les éléments de décor, pour une image cohérente." }
+    ]
+  },
+  {
+    "id": "hygiene-sterilisation-dechets-medicaux",
+    "order": 9,
+    "short": "Hygiène et stérilisation",
+    "title": "Hygiène, stérilisation et déchets médicaux",
+    "description": "Circuit du sale vers le propre, salle de stérilisation, local déchets et traçabilité : concevez des espaces conformes aux exigences d’hygiène médicale.",
+    "h1": "Hygiène, stérilisation et déchets médicaux : des espaces conçus pour la conformité",
+    "intro": "La conformité sanitaire se joue dès les plans. Nous dessinons la salle de stérilisation avec un sens unique du sale vers le propre, prévoyons lavabos, plans de travail et stockage adaptés, puis un local déchets facile d’accès. Le tri à la source et l’enlèvement par un prestataire agréé, dans le cadre de la réglementation marocaine sur les déchets médicaux et pharmaceutiques, sont intégrés au projet dès la conception.",
+    "livrables": [
+      "Plan des circuits de patients, de matériel et de déchets",
+      "Salle de stérilisation dimensionnée à l’activité",
+      "Points d’eau, plans de travail et stockage",
+      "Local de stockage des déchets",
+      "Fiche de protocole de nettoyage par type de local"
+    ],
+    "cta": "Concevoir mon circuit d’hygiène",
+    "specialitesLiees": ["cabinet-dentaire-orthodontie", "gastro-enterologie-endoscopie", "cliniques-blocs-operatoires", "orl-audiologie"],
+    "faq": [
+      { "q": "Que signifie le sens du sale vers le propre ?", "a": "Le matériel suit un trajet unique : réception du sale, lavage, conditionnement, stérilisation puis stockage propre, sans jamais revenir en arrière. Le plan de la salle matérialise ce trajet." },
+      { "q": "Quelle réglementation s’applique aux déchets médicaux au Maroc ?", "a": "La loi 28-00 et le décret 2-09-139 encadrent la gestion des déchets médicaux et pharmaceutiques : tri à la source et enlèvement par un prestataire agréé. Nous prévoyons les espaces et les circuits correspondants." },
+      { "q": "Quelle surface prévoir pour la stérilisation ?", "a": "Elle dépend du volume d’instruments traités et des équipements choisis. Nous la dimensionnons à partir de votre activité réelle, puis la validons sur plan." }
+    ]
+  },
+  {
+    "id": "financement-lancement-suivi-projet-medical",
+    "order": 10,
+    "short": "Financement et suivi",
+    "title": "Financement et suivi de projet médical",
+    "description": "Business plan, dossier bancaire, leasing d’équipements, visibilité locale et suivi après livraison : sécurisez le financement et le lancement du projet.",
+    "h1": "Financer, lancer et faire évoluer votre structure médicale",
+    "intro": "Nous chiffrons votre projet (travaux, équipements, fonds de roulement), construisons un business plan réaliste et préparons le dossier à présenter aux banques ou aux sociétés de leasing. Au lancement, nous activons votre visibilité locale (fiche Google, site, signalétique), puis nous restons présents après la livraison : maintenance, ajustements, extension vers de nouvelles salles ou spécialités.",
+    "livrables": [
+      "Budget global et plan de trésorerie",
+      "Business plan sur 3 à 5 ans",
+      "Dossier bancaire et simulation de leasing",
+      "Plan de lancement local",
+      "Contrat de suivi après livraison"
+    ],
+    "cta": "Simuler le financement de mon projet",
+    "specialitesLiees": ["medecine-generale-cabinets-de-groupe", "cabinet-dentaire-orthodontie", "kinesitherapie-reeducation", "laboratoire-analyses-medicales"],
+    "note": "Les dispositifs publics de soutien évoluent : leurs conditions sont vérifiées à la date de votre dossier.",
+    "faq": [
+      { "q": "Que comprend le budget global d’un projet médical ?", "a": "Les travaux, les équipements et un fonds de roulement pour les premiers mois d’activité. Oublier ce dernier poste est l’une des causes les plus fréquentes de tension de trésorerie à l’ouverture." },
+      { "q": "Montez-vous le dossier bancaire à ma place ?", "a": "Nous préparons avec vous le devis détaillé, les plans, le business plan et la liste des pièces, puis nous suivons le dossier. La décision appartient à la banque." },
+      { "q": "Restez-vous présents après l’ouverture ?", "a": "Oui, par un contrat de suivi : maintenance, ajustements et accompagnement des extensions, comme l’ajout d’une salle ou d’une spécialité." }
+    ]
+  }
+]

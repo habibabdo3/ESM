@@ -1,0 +1,23 @@
+---
+import ProseLayout from '@/layouts/ProseLayout.astro';
+import Todo from '@/components/Todo.astro';
+import { site } from '@/config/site';
+---
+<ProseLayout title="Mentions légales" description="Mentions légales du site Euro Space Medical : éditeur, siège social, identifiants de l’entreprise, hébergement, propriété intellectuelle et responsabilité." h1="Mentions légales" eyebrow="Informations légales" path="/mentions-legales/">
+  <h2>Éditeur du site</h2>
+  <ul>
+    <li>Raison sociale : {site.name} — forme juridique : <Todo label="forme juridique et capital" /></li>
+    <li>Siège social : {site.address ?? <Todo label="adresse" />}, {site.hq}, Maroc</li>
+    <li>Registre du commerce (RC) : <Todo label="numéro RC" /> — Identifiant fiscal (IF) : <Todo label="IF" /> — ICE : <Todo label="ICE" /></li>
+    <li>Téléphone : {site.phone ?? <Todo label="téléphone" />} — E-mail : {site.email ?? <Todo label="e-mail" />}</li>
+    <li>Directeur de la publication : <Todo label="nom du directeur de la publication" /></li>
+  </ul>
+  <h2>Hébergement</h2>
+  <p>Vercel Inc., 440 N Barranca Ave #4133, Covina, CA 91723, États-Unis — vercel.com.</p>
+  <h2>Propriété intellectuelle</h2>
+  <p>L’ensemble des contenus de ce site (textes, plans, illustrations, logo) est la propriété de {site.name}, sauf mention contraire. Toute reproduction sans autorisation écrite préalable est interdite.</p>
+  <h2>Illustrations</h2>
+  <p>Les plans présentés sur ce site sont des illustrations schématiques, non contractuelles. Les surfaces et références techniques citées sont des repères, confirmés pour chaque projet sur plan.</p>
+  <h2>Responsabilité</h2>
+  <p>Les informations publiées sont fournies à titre indicatif. Les références réglementaires et les conditions des dispositifs de financement sont vérifiées pour chaque projet à la date du dossier. Les offres de financement sont soumises à l’acceptation du dossier par la banque.</p>
+</ProseLayout>

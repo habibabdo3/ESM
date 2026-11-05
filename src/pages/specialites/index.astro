@@ -1,0 +1,27 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PageHero from '@/components/PageHero.astro';
+import SpecialtyCard from '@/components/SpecialtyCard.astro';
+import CtaBand from '@/components/CtaBand.astro';
+import { getSpecialites } from '@/lib/content';
+import { breadcrumb } from '@/lib/schema';
+
+const specialites = await getSpecialites();
+const base = Astro.site!;
+const crumbs = [{ name: 'Accueil', path: '/' }, { name: 'Spécialités', path: '/specialites/' }];
+---
+<BaseLayout
+  title="Aménagement par spécialité médicale"
+  description="Dentaire, imagerie, ophtalmologie, ORL, gynécologie, pédiatrie, cardiologie, laboratoires, blocs opératoires : un aménagement adapté à chaque spécialité."
+  jsonld={[breadcrumb(base, crumbs)]}
+  context="Spécialités"
+>
+  <PageHero eyebrow="Spécialités" h1="Quatorze spécialités, autant d’exigences" intro="Radioprotection, salles propres, fluides, acoustique, étanchéité : le plan part de l’acte médical. Choisissez votre discipline pour découvrir ses contraintes et notre offre." crumbs={crumbs} variant="ophtalmologie" />
+  <section class="py-20 lg:py-28">
+    <h2 class="sr-only">Nos quatorze spécialités</h2>
+    <div class="container-lux grid gap-x-8 gap-y-16 sm:grid-cols-2 lg:grid-cols-3">
+      {specialites.map((s, i) => <SpecialtyCard id={s.id} short={s.data.short} contrainte={s.data.contraintes[0]} i={i} />)}
+    </div>
+  </section>
+  <CtaBand context="Spécialités" />
+</BaseLayout>

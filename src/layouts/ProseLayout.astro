@@ -1,0 +1,12 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import PageHero from '@/components/PageHero.astro';
+import { breadcrumb } from '@/lib/schema';
+interface Props { title: string; description: string; h1: string; eyebrow: string; path: string; intro?: string; noindex?: boolean }
+const { title, description, h1, eyebrow, path, intro, noindex } = Astro.props;
+const crumbs = [{ name: 'Accueil', path: '/' }, { name: h1, path }];
+---
+<BaseLayout title={title} description={description} noindex={noindex} jsonld={[breadcrumb(Astro.site!, crumbs)]} context={h1}>
+  <PageHero eyebrow={eyebrow} h1={h1} intro={intro} crumbs={crumbs} />
+  <article class="prose-lux container-lux max-w-3xl py-20 text-[1.02rem] leading-relaxed"><slot /></article>
+</BaseLayout>

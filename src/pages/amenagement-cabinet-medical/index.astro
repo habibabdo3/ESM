@@ -1,0 +1,103 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PageHero from '@/components/PageHero.astro';
+import PlanArt from '@/components/PlanArt.astro';
+import ProcessSteps from '@/components/ProcessSteps.astro';
+import Faq from '@/components/Faq.astro';
+import CtaBand from '@/components/CtaBand.astro';
+import { getServices, getSpecialites, getRegions, servicePath, specialitePath, regionPath, pad } from '@/lib/content';
+import { breadcrumb, faqPage, service as serviceLd } from '@/lib/schema';
+
+const services = await getServices();
+const specialites = await getSpecialites();
+const regions = await getRegions();
+const base = Astro.site!;
+const path = '/amenagement-cabinet-medical/';
+const crumbs = [{ name: 'Accueil', path: '/' }, { name: 'Aménagement de cabinet médical', path }];
+const faq = [
+  { q: 'Combien de temps faut-il pour aménager un cabinet médical ?', a: 'La durée dépend de la surface, de la spécialité, de l’état du local et des autorisations à obtenir. Elle est fixée dans le planning remis à l’issue de l’étude de faisabilité, jalon par jalon.' },
+  { q: 'Quel budget prévoir pour l’aménagement d’un cabinet ?', a: 'Le budget se construit par lot : travaux, réseaux, équipements, mobilier, honoraires et fonds de roulement. Nous l’établissons sur la base de votre local et de votre spécialité, sans forfait générique.' },
+  { q: 'Dois-je avoir trouvé mon local avant de vous contacter ?', a: 'Non. Nous pouvons vous aider à comparer plusieurs locaux : l’étude de faisabilité indique pour chacun s’il convient à votre activité et à quel coût.' },
+  { q: 'Qui dépose les demandes d’autorisation ?', a: 'Les autorisations restent à votre nom. Nous établissons la liste des pièces, préparons les éléments techniques (plans, notices, blindage) et vous accompagnons dans les démarches.' },
+];
+---
+<BaseLayout
+  title="Aménagement de cabinet médical au Maroc"
+  description="Aménagement de cabinet médical au Maroc : faisabilité, plans 2D et 3D, réseaux, travaux, équipement et réception, selon les règles de chaque spécialité."
+  ogImage="/og/amenagement.png"
+  jsonld={[breadcrumb(base, crumbs), serviceLd(base, { name: 'Aménagement de cabinet médical', description: 'Conception, travaux et équipement de cabinets, cliniques et centres médicaux au Maroc.', path }), faqPage(faq)]}
+  context="Aménagement de cabinet médical"
+>
+  <PageHero eyebrow="Aménagement médical" h1="Aménagement de cabinet médical, de l’étude à la réception" intro="L’aménagement d’un cabinet médical réussi commence par l’acte de soin : qui circule, où, avec quel matériel, et sous quelles contraintes réglementaires. Nous partons de votre pratique pour concevoir, construire et équiper un lieu qui fonctionne dès le premier jour, partout au Maroc." crumbs={crumbs} variant="cabinet-dentaire-orthodontie" ctaLabel="Demander un devis" />
+
+  <article class="py-20 lg:py-28">
+    <div class="container-lux grid gap-16 lg:grid-cols-12">
+      <div class="prose-lux text-[1.06rem] leading-relaxed lg:col-span-7">
+        <h2>Pourquoi un cabinet médical ne s’aménage pas comme un bureau</h2>
+        <p>Un local médical concentre, sur quelques dizaines de mètres carrés, des exigences que l’on ne rencontre nulle part ailleurs : hygiène des surfaces, séparation des circuits, réseaux de fluides, protection contre les rayonnements, confidentialité acoustique, accessibilité. Chaque spécialité ajoute ses propres règles. Un cabinet dentaire a besoin d’aspiration et d’air comprimé à chaque fauteuil ; un centre d’imagerie, de murs plombés et parfois d’une dalle renforcée ; un laboratoire, de paillasses résistantes et d’une chaîne du froid sécurisée.</p>
+        <p>Ces contraintes se traitent au moment du plan. Une fois les cloisons montées et les sols posés, chaque oubli devient une reprise coûteuse, un retard d’ouverture ou une non-conformité. C’est pourquoi notre accompagnement commence toujours par une étude de faisabilité et un programme fonctionnel.</p>
+
+        <h2>Les trois circuits, colonne vertébrale du plan</h2>
+        <p>Tout plan médical organise trois circuits qui ne doivent pas se croiser :</p>
+        <ul>
+          <li><strong>le circuit du patient</strong> : accueil, attente, soins, sortie, avec discrétion et accessibilité ;</li>
+          <li><strong>le circuit du praticien et du personnel</strong> : postes de travail, rangements, accès aux locaux techniques ;</li>
+          <li><strong>le circuit du matériel</strong> : du sale vers le propre, sans retour en arrière, jusqu’au stockage stérile.</li>
+        </ul>
+        <p>Nous positionnons ensuite les postes de soins, l’éclairage, les rangements et les équipements pour réduire les déplacements et rendre la journée plus fluide. Vous validez chaque espace en rendus 3D avant le début des travaux.</p>
+
+        <h2>Des réseaux dimensionnés pour votre spécialité</h2>
+        <p>Les réseaux sont invisibles, mais ils décident de la fiabilité de vos soins : aspiration, air médical, eau et évacuations, électricité sécurisée avec onduleurs, ventilation, climatisation, informatique et imagerie. Nous les dimensionnons, les testons avant la mise en service et vous remettons un dossier des ouvrages exécutés pour la maintenance. <a href={servicePath('reseaux-techniques-fluides-medicaux')}>En savoir plus sur nos réseaux techniques</a>.</p>
+
+        <h2>Un chantier piloté, une réception contrôlée</h2>
+        <p>Un seul responsable coordonne tous les corps d’état. Chaque semaine, vous recevez un compte rendu photo et un point budgétaire. À la fin, chaque lot est contrôlé selon une liste de points, puis un procès-verbal de réception est signé, avec la levée des éventuelles réserves. <a href={servicePath('travaux-amenagement-cabinet-clinique')}>Découvrir nos travaux clés en main</a>.</p>
+
+        <h2>Équipement et financement, intégrés dès le départ</h2>
+        <p>L’équipement est choisi en même temps que l’aménagement, pour que les arrivées de fluides, la puissance électrique, les charges et les dimensions soient prévues dans les plans. Le budget global, lui, inclut travaux, équipements et fonds de roulement, et sert de base au dossier de financement. <a href="/financement/">Voir nos solutions de financement</a>.</p>
+      </div>
+
+      <aside class="lg:col-span-5">
+        <div class="sticky top-32 space-y-10">
+          <div class="aspect-[4/3] overflow-hidden rounded-[var(--radius-photo)]" data-reveal-img>
+            <div class="h-full w-full"><PlanArt variant="medecine-generale-cabinets-de-groupe" class="h-full w-full" label="Illustration : plan schématique d’un cabinet de groupe avec circuit patient" /></div>
+          </div>
+          <nav aria-label="Nos services d’aménagement">
+            <p class="caption text-[var(--color-gold-deep)]">Nos services</p>
+            <ul class="mt-4 divide-y divide-[var(--color-line)] border-y border-[var(--color-line)]">
+              {services.map((s) => (
+                <li><a href={servicePath(s.id)} class="flex gap-4 py-3 no-underline hover:text-[var(--color-teal)]"><span class="num">{pad(s.data.order)}</span>{s.data.short}</a></li>
+              ))}
+            </ul>
+          </nav>
+        </div>
+      </aside>
+    </div>
+  </article>
+
+  <section class="bg-[var(--color-sand)] py-20 lg:py-28">
+    <div class="container-lux">
+      <h2 class="max-w-3xl">Notre méthode en six étapes</h2>
+      <div class="mt-14"><ProcessSteps /></div>
+    </div>
+  </section>
+
+  <section class="py-20 lg:py-28">
+    <div class="container-lux grid gap-16 lg:grid-cols-2">
+      <div>
+        <h2>Par spécialité</h2>
+        <ul class="mt-8 grid grid-cols-1 gap-x-8 sm:grid-cols-2">
+          {specialites.map((s) => <li class="border-b border-[var(--color-line)]"><a href={specialitePath(s.id)} class="block py-3 no-underline hover:text-[var(--color-teal)]">{s.data.short}</a></li>)}
+        </ul>
+      </div>
+      <div>
+        <h2>Par région</h2>
+        <ul class="mt-8 grid grid-cols-1 gap-x-8 sm:grid-cols-2">
+          {regions.map((r) => <li class="border-b border-[var(--color-line)]"><a href={regionPath(r.id)} class="block py-3 no-underline hover:text-[var(--color-teal)]">{r.data.name}</a></li>)}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <Faq items={faq} tone="sand" />
+  <CtaBand context="Aménagement de cabinet médical" />
+</BaseLayout>

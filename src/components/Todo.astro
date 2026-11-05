@@ -1,0 +1,6 @@
+---
+/** Marqueur visible d'information manquante. `npm run audit:strict` échoue s'il en reste. */
+interface Props { label: string }
+const { label } = Astro.props;
+---
+<span class="todo">[À COMPLÉTER : {label}]</span>

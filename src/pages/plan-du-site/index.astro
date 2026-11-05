@@ -1,0 +1,36 @@
+---
+import ProseLayout from '@/layouts/ProseLayout.astro';
+import { getServices, getSpecialites, getRegions, getRealisations, getPosts, servicePath, specialitePath, regionPath, realisationPath, postPath } from '@/lib/content';
+import { partners } from '@/data/financement';
+const [services, specialites, regions, realisations, posts] = await Promise.all([getServices(), getSpecialites(), getRegions(), getRealisations(), getPosts()]);
+---
+<ProseLayout title="Plan du site" description="Plan du site Euro Space Medical : services, spécialités médicales, régions desservies, financement, réalisations, guides et pages d’information." h1="Plan du site" eyebrow="Navigation" path="/plan-du-site/">
+  <h2>Pages principales</h2>
+  <ul>
+    <li><a href="/">Accueil</a></li>
+    <li><a href="/amenagement-cabinet-medical/">Aménagement de cabinet médical</a></li>
+    <li><a href="/renovation-cabinet-clinique/">Rénovation de cabinet et de clinique</a></li>
+    <li><a href="/zones-intervention/">Zones d’intervention</a></li>
+    <li><a href="/realisations/">Réalisations</a></li>
+    <li><a href="/blog/">Guides</a></li>
+    <li><a href="/faq/">FAQ</a></li>
+    <li><a href="/a-propos/">À propos</a></li>
+    <li><a href="/contact/">Contact et devis</a></li>
+  </ul>
+  <h2><a href="/services/">Services</a></h2>
+  <ul>{services.map((s) => <li><a href={servicePath(s.id)}>{s.data.h1}</a></li>)}</ul>
+  <h2><a href="/specialites/">Spécialités</a></h2>
+  <ul>{specialites.map((s) => <li><a href={specialitePath(s.id)}>{s.data.h1}</a></li>)}</ul>
+  <h2>Régions</h2>
+  <ul>{regions.map((r) => <li><a href={regionPath(r.id)}>{r.data.name}</a></li>)}</ul>
+  <h2><a href="/financement/">Financement</a></h2>
+  <ul>{partners.map((p) => <li><a href={p.path}>{p.h1}</a></li>)}</ul>
+  {realisations.length > 0 && (<><h2>Réalisations</h2><ul>{realisations.map((r) => <li><a href={realisationPath(r.id)}>{r.data.title}</a></li>)}</ul></>)}
+  {posts.length > 0 && (<><h2>Guides</h2><ul>{posts.map((p) => <li><a href={postPath(p.id)}>{p.data.h1}</a></li>)}</ul></>)}
+  <h2>Informations légales</h2>
+  <ul>
+    <li><a href="/mentions-legales/">Mentions légales</a></li>
+    <li><a href="/confidentialite/">Politique de confidentialité</a></li>
+    <li><a href="/cookies/">Politique de cookies</a></li>
+  </ul>
+</ProseLayout>

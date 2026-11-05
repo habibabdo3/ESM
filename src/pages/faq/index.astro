@@ -1,0 +1,28 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PageHero from '@/components/PageHero.astro';
+import Faq from '@/components/Faq.astro';
+import CtaBand from '@/components/CtaBand.astro';
+import { faqGeneral } from '@/data/faq-general';
+import { getServices, getSpecialites } from '@/lib/content';
+import { breadcrumb, faqPage } from '@/lib/schema';
+
+const services = await getServices();
+const specialites = await getSpecialites();
+const svcFaq = services.flatMap((s) => s.data.faq.slice(0, 1));
+const specFaq = specialites.flatMap((s) => s.data.faq.slice(0, 1));
+const base = Astro.site!;
+const crumbs = [{ name: 'Accueil', path: '/' }, { name: 'FAQ', path: '/faq/' }];
+---
+<BaseLayout
+  title="Questions fréquentes sur l’aménagement médical"
+  description="Délais, budget, autorisations, rénovation sans fermer, financement, équipement : les réponses à vos questions sur l’aménagement de votre cabinet médical."
+  jsonld={[breadcrumb(base, crumbs), faqPage([...faqGeneral, ...svcFaq, ...specFaq])]}
+  context="FAQ"
+>
+  <PageHero eyebrow="FAQ" h1="Questions fréquentes" intro="Les questions que nous posent le plus souvent les praticiens, les cliniques et les investisseurs." crumbs={crumbs} variant="psychiatrie-psychologie" />
+  <Faq items={faqGeneral} title="Euro Space Medical" />
+  <Faq items={svcFaq} title="Nos services" tone="sand" />
+  <Faq items={specFaq} title="Par spécialité" />
+  <CtaBand context="FAQ" title="Une autre question ?" cta="Nous contacter" />
+</BaseLayout>

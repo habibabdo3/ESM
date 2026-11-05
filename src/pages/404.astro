@@ -1,0 +1,20 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PlanArt from '@/components/PlanArt.astro';
+---
+<BaseLayout title="Page introuvable" description="La page demandée n’existe pas ou a été déplacée. Retrouvez nos services d’aménagement, nos spécialités médicales et notre formulaire de devis." noindex context="Page introuvable">
+  <section class="relative isolate overflow-hidden bg-[var(--color-night)] text-[var(--color-ivory)]">
+    <div class="absolute inset-0 -z-10 opacity-40" aria-hidden="true"><PlanArt class="h-full w-full" label="" /></div>
+    <div class="container-lux py-32 lg:py-44">
+      <p class="num text-8xl">404</p>
+      <h1 class="mt-6 max-w-3xl">Cette pièce n’existe pas sur nos plans.</h1>
+      <p class="mt-6 max-w-xl text-lg text-[var(--color-ivory)]/75">La page demandée a peut-être été déplacée. Voici quelques portes de sortie.</p>
+      <div class="mt-10 flex flex-wrap gap-4">
+        <a href="/" class="btn btn-gold">Accueil</a>
+        <a href="/services/" class="btn btn-ghost-light">Services</a>
+        <a href="/specialites/" class="btn btn-ghost-light">Spécialités</a>
+        <a href="/contact/" class="btn btn-ghost-light">Contact</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

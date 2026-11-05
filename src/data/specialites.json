@@ -1,0 +1,473 @@
+[
+  {
+    "id": "cabinet-dentaire-orthodontie",
+    "order": 1,
+    "short": "Dentaire et orthodontie",
+    "title": "Aménagement de cabinet dentaire et d’orthodontie",
+    "description": "Plan par fauteuil, aspiration, compresseur silencieux, stérilisation et radiologie : un cabinet dentaire ou d’orthodontie aménagé pour durer au Maroc.",
+    "h1": "Aménagement de cabinet dentaire et d’orthodontie",
+    "intro": "Un cabinet dentaire concentre dans peu de mètres carrés des réseaux exigeants, un circuit de stérilisation strict et, souvent, de l’imagerie. Nous partons de votre façon de travailler, à quatre mains ou non, pour placer chaque fauteuil, chaque arrivée de fluide et chaque rangement. Le local technique est pensé pour le silence et la maintenance, et des gaines sont prévues pour ajouter un fauteuil le jour où votre activité grandit.",
+    "contraintes": [
+      "Travail à quatre mains : 15 à 20 m² par salle de soins selon la pratique, à valider sur plan",
+      "Réseaux dédiés : aspiration, compresseur silencieux, eau par fauteuil, séparateur d’amalgame",
+      "Stérilisation organisée en circuit du sale vers le propre",
+      "Radiologie intra-orale, panoramique ou CBCT selon l’équipement"
+    ],
+    "offre": [
+      "Plan par fauteuil avec arrivées de fluides positionnées",
+      "Local technique insonorisé et accessible pour la maintenance",
+      "Salle de stérilisation dimensionnée à l’activité",
+      "Salle d’imagerie blindée si nécessaire",
+      "Option salle de chirurgie implantaire : surfaces lessivables, éclairage opératoire",
+      "Gaines en attente pour ajouter un fauteuil plus tard"
+    ],
+    "aValider": [
+      "Autorisation d’utilisation des appareils de radiologie dentaire auprès de l’AMSSNuR",
+      "Gestion des déchets de soins par un prestataire agréé"
+    ],
+    "motsCles": ["aménagement cabinet dentaire", "rénovation cabinet dentaire", "plan cabinet dentaire"],
+    "servicesLies": ["conception-amenagement-cabinet-medical", "reseaux-techniques-fluides-medicaux", "hygiene-sterilisation-dechets-medicaux", "salles-imagerie-radioprotection", "equipement-medical-mobilier-technique"],
+    "cta": "Aménager mon cabinet dentaire",
+    "faq": [
+      { "q": "Quelle surface prévoir pour une salle de soins dentaire ?", "a": "Comptez en repère 15 à 20 m² par salle, selon que vous travaillez à quatre mains, la position du fauteuil et les rangements. La surface exacte se valide sur plan avec vos équipements." },
+      { "q": "Où placer le compresseur et l’aspiration ?", "a": "Dans un local technique dédié, ventilé, traité contre le bruit et accessible au technicien sans traverser les salles de soins." },
+      { "q": "Peut-on prévoir l’ajout d’un fauteuil ?", "a": "Oui. Nous posons dès les travaux les gaines et attentes de fluides nécessaires, ce qui évite de casser les sols plus tard." }
+    ]
+  },
+  {
+    "id": "radiologie-imagerie-medicale",
+    "order": 2,
+    "short": "Radiologie et imagerie",
+    "title": "Aménagement de centre d’imagerie médicale",
+    "description": "Blindage, salles techniques, IRM, scanner, échographie et circuits patients : un centre d’imagerie médicale conçu avec le fournisseur et le physicien.",
+    "h1": "Aménagement de centres de radiologie et d’imagerie médicale",
+    "intro": "Chaque modalité d’imagerie impose ses propres règles : protection contre les rayonnements, renfort de dalle, cage de Faraday, climatisation des salles techniques. Nous coordonnons le fournisseur de l’appareil, le physicien et les corps d’état pour que l’installation se passe sans reprise, et nous organisons les circuits du patient couché et du patient ambulant, de l’accueil jusqu’à la remise des résultats.",
+    "contraintes": [
+      "Radioprotection : plomb dans les murs, les portes et les vitrages ; poste de commande ; cabines de déshabillage ; accès brancard",
+      "Scanner : renfort de dalle, climatisation, salle technique",
+      "IRM : cage de Faraday, zonage des accès, ligne de quench pour l’hélium, matériaux amagnétiques",
+      "Échographie : salles semi-obscures",
+      "Serveur d’images et alimentation protégée par onduleur"
+    ],
+    "offre": [
+      "Étude d’implantation par modalité",
+      "Coordination avec le fournisseur de l’appareil et le physicien",
+      "Blindage et protections intégrés au chantier",
+      "Circuits du patient couché et du patient ambulant",
+      "Réseau informatique d’imagerie et archivage",
+      "Préparation des pièces techniques du dossier AMSSNuR"
+    ],
+    "aValider": [
+      "Autorisation de l’AMSSNuR avant la mise en service",
+      "Prescriptions d’installation du constructeur de chaque appareil"
+    ],
+    "motsCles": ["aménagement centre d’imagerie médicale", "blindage salle de radiologie", "installation IRM scanner"],
+    "servicesLies": ["salles-imagerie-radioprotection", "etude-faisabilite-programmation-medicale", "reseaux-techniques-fluides-medicaux", "travaux-amenagement-cabinet-clinique"],
+    "cta": "Préparer mon centre d’imagerie",
+    "faq": [
+      { "q": "Peut-on installer une IRM dans un immeuble existant ?", "a": "C’est parfois possible, sous conditions : charge du plancher, accès pour la livraison de l’aimant, cage de Faraday et évacuation de l’hélium. L’étude de faisabilité le vérifie avant tout engagement." },
+      { "q": "Qui coordonne le fournisseur de l’appareil ?", "a": "Nous. Les prescriptions d’installation du constructeur sont intégrées aux plans, et ses interventions sont calées dans le planning du chantier." },
+      { "q": "Quand déposer le dossier auprès de l’AMSSNuR ?", "a": "Le dossier se prépare pendant la conception, pour que l’autorisation soit obtenue avant la mise en service. Nous fournissons les pièces techniques : plans, blindage, implantation." }
+    ]
+  },
+  {
+    "id": "ophtalmologie",
+    "order": 3,
+    "short": "Ophtalmologie",
+    "title": "Aménagement de cabinet d’ophtalmologie",
+    "description": "Salle de réfraction, éclairage gradué, imagerie OCT, salle laser et bloc ambulatoire : un cabinet d’ophtalmologie organisé autour du parcours patient.",
+    "h1": "Aménagement de cabinets et de centres d’ophtalmologie",
+    "intro": "En ophtalmologie, la lumière et les distances font partie de l’examen. Vos patients circulent souvent les pupilles dilatées : le parcours doit être simple, sans obstacle et clairement signalé. Nous organisons l’enchaînement accueil, pré-examen, examen et, le cas échéant, optique, avec un éclairage à scénarios et des postes d’imagerie bien placés. Pour la chirurgie ambulatoire, nous concevons un bloc à air filtré avec des circuits séparés.",
+    "contraintes": [
+      "Salle de réfraction avec distance de lecture suffisante, ou dispositif à miroir",
+      "Éclairage gradué jusqu’à la pénombre",
+      "Patients aux pupilles dilatées : sols sans obstacle, signalétique claire",
+      "Appareils d’imagerie : OCT, rétinographe, périmètre",
+      "Salle laser et bloc de chirurgie de la cataracte si l’activité est ambulatoire"
+    ],
+    "offre": [
+      "Plan du parcours : accueil, pré-examen, examen, optique",
+      "Éclairage à scénarios par salle",
+      "Mobilier à hauteur réglable",
+      "Bloc ambulatoire à air filtré avec circuits séparés",
+      "Stockage du matériel stérile"
+    ],
+    "aValider": [
+      "Protection laser selon les consignes du fabricant",
+      "Traitement d’air du bloc opératoire",
+      "Accessibilité du parcours"
+    ],
+    "motsCles": ["aménagement cabinet d’ophtalmologie", "centre d’ophtalmologie"],
+    "servicesLies": ["conception-amenagement-cabinet-medical", "design-interieur-experience-patient", "equipement-medical-mobilier-technique", "reseaux-techniques-fluides-medicaux"],
+    "cta": "Aménager mon cabinet d’ophtalmologie",
+    "faq": [
+      { "q": "Ma salle est trop courte pour la réfraction : que faire ?", "a": "Un dispositif à miroir permet de doubler la distance de lecture. Il se positionne sur plan avec le fauteuil et le projecteur." },
+      { "q": "Comment sécuriser le parcours des patients dilatés ?", "a": "Par des sols continus sans ressaut, un éclairage sans éblouissement, des mains courantes si besoin et une signalétique lisible à faible acuité." },
+      { "q": "Peut-on intégrer un bloc de chirurgie de la cataracte ?", "a": "Oui, si l’activité ambulatoire est prévue : traitement d’air filtré, circuits séparés et stockage stérile sont alors intégrés dès la conception." }
+    ]
+  },
+  {
+    "id": "orl-audiologie",
+    "order": 4,
+    "short": "ORL et audiologie",
+    "title": "Aménagement de cabinet ORL et d’audiologie",
+    "description": "Cabine audiométrique isolée, fauteuil ORL, désinfection des endoscopes et rééducation vestibulaire : un cabinet ORL au calme et conforme aux règles.",
+    "h1": "Aménagement de cabinets ORL et d’audiologie",
+    "intro": "Un cabinet ORL réunit deux exigences opposées : le silence absolu de la cabine audiométrique et l’activité technique de la salle d’examen. Nous implantons la cabine sur une dalle désolidarisée, avec une ventilation silencieuse, et nous organisons la désinfection des endoscopes souples dans un local en circuit du sale vers le propre. La salle de rééducation vestibulaire peut être prévue en option.",
+    "contraintes": [
+      "Cabine audiométrique à isolation acoustique, bruit ambiant maîtrisé",
+      "Fauteuil ORL avec colonne et aspiration",
+      "Endoscopes souples à désinfecter selon une procédure tracée"
+    ],
+    "offre": [
+      "Implantation de la cabine : dalle désolidarisée, ventilation silencieuse",
+      "Salle d’examen équipée",
+      "Local de désinfection des endoscopes en circuit du sale vers le propre",
+      "Armoire de stockage des endoscopes",
+      "Salle de rééducation vestibulaire en option"
+    ],
+    "aValider": [
+      "Niveau de bruit exigé par le fabricant de la cabine",
+      "Procédure de désinfection des endoscopes"
+    ],
+    "motsCles": ["aménagement cabinet ORL", "installation cabine audiométrique"],
+    "servicesLies": ["conception-amenagement-cabinet-medical", "hygiene-sterilisation-dechets-medicaux", "equipement-medical-mobilier-technique", "reseaux-techniques-fluides-medicaux"],
+    "cta": "Aménager mon cabinet ORL",
+    "faq": [
+      { "q": "Où placer la cabine audiométrique ?", "a": "Loin des sources de bruit (rue, local technique, ascenseur) et sur une dalle désolidarisée. Le niveau de bruit visé est celui exigé par le fabricant de la cabine." },
+      { "q": "Faut-il un local dédié pour les endoscopes ?", "a": "Un espace distinct, organisé du sale vers le propre, est recommandé pour la désinfection et le stockage. Sa taille dépend du nombre d’endoscopes et de l’équipement choisi." },
+      { "q": "La cabine peut-elle être déplacée plus tard ?", "a": "Les cabines modulaires se démontent, mais leurs réseaux et leur dalle sont spécifiques. Mieux vaut choisir l’emplacement définitif dès la conception." }
+    ]
+  },
+  {
+    "id": "gynecologie-echographie-pma",
+    "order": 5,
+    "short": "Gynécologie et PMA",
+    "title": "Aménagement de cabinet de gynécologie et PMA",
+    "description": "Intimité, échographie en pénombre, sanitaire attenant et laboratoire de PMA à air contrôlé : un cabinet de gynécologie pensé pour le respect des patientes.",
+    "h1": "Aménagement de cabinets de gynécologie-obstétrique, d’échographie et de PMA",
+    "intro": "L’intimité guide chaque décision : cabine de déshabillage, sanitaire attenant, discrétion acoustique, circuit des patientes qui ne croise pas celui du personnel. Pour l’échographie, nous concevons des salles en pénombre maîtrisée. Pour la procréation médicalement assistée, le laboratoire devient le cœur du projet : qualité d’air contrôlée, énergie sécurisée et stockage cryogénique ventilé et surveillé.",
+    "contraintes": [
+      "Intimité : déshabillage séparé, sanitaire attenant",
+      "Échographie en pénombre",
+      "Table gynécologique avec point d’eau",
+      "Discrétion acoustique entre les salles",
+      "PMA : laboratoire à qualité d’air contrôlée, salles de prélèvement et de transfert, stockage cryogénique"
+    ],
+    "offre": [
+      "Salles d’examen avec cabine de déshabillage",
+      "Circuit des patientes sans croisement avec le personnel",
+      "Laboratoire de PMA : traitement d’air, énergie sécurisée",
+      "Stockage cryogénique ventilé et surveillé",
+      "Salle de repos"
+    ],
+    "aValider": [
+      "Exigences réglementaires propres à l’activité de PMA",
+      "Ventilation et surveillance du stockage cryogénique"
+    ],
+    "motsCles": ["aménagement cabinet de gynécologie", "aménagement laboratoire PMA"],
+    "servicesLies": ["conception-amenagement-cabinet-medical", "design-interieur-experience-patient", "reseaux-techniques-fluides-medicaux", "etude-faisabilite-programmation-medicale"],
+    "cta": "Aménager mon cabinet de gynécologie",
+    "faq": [
+      { "q": "Comment garantir l’intimité dans une salle d’examen ?", "a": "Par une cabine de déshabillage séparée, un sanitaire attenant, une porte qui ne donne pas directement sur la table et une isolation phonique renforcée." },
+      { "q": "Pourquoi ventiler le stockage cryogénique ?", "a": "L’azote liquide, en s’évaporant, peut appauvrir l’air en oxygène. Le local doit être ventilé et équipé d’une surveillance adaptée." },
+      { "q": "Accompagnez-vous les projets de PMA ?", "a": "Oui, pour l’aménagement : laboratoire, salles de prélèvement et de transfert, traitement d’air et énergie. Les exigences réglementaires de l’activité sont validées avec vous et les autorités compétentes." }
+    ]
+  },
+  {
+    "id": "pediatrie",
+    "order": 6,
+    "short": "Pédiatrie",
+    "title": "Aménagement de cabinet de pédiatrie",
+    "description": "Deux circuits pour les enfants fébriles et le suivi, salle d’attente sécurisée, coin allaitement et froid pour vaccins : un cabinet de pédiatrie serein.",
+    "h1": "Aménagement de cabinets de pédiatrie",
+    "intro": "Un cabinet de pédiatrie accueille des enfants malades et des nourrissons en bonne santé, parfois à la même heure. Nous séparons ces flux dès l’entrée et concevons une salle d’attente ludique, sûre et facile à nettoyer. Matériaux anti-chocs, angles arrondis, prises sécurisées, lavabos bas : chaque détail est pensé à hauteur d’enfant, sans oublier le confort des parents.",
+    "contraintes": [
+      "Séparation des flux : enfants fébriles et suivi du nourrisson",
+      "Salle d’attente ludique et sécurisée",
+      "Mobilier à hauteur d’enfant, table à langer, coin allaitement",
+      "Réfrigérateur dédié aux vaccins avec suivi de la température"
+    ],
+    "offre": [
+      "Plan à deux circuits",
+      "Matériaux anti-chocs et angles arrondis",
+      "Prises sécurisées et lavabos bas",
+      "Décor apaisant et signalétique illustrée",
+      "Acoustique renforcée"
+    ],
+    "aValider": ["Stockage des vaccins et alarme de température"],
+    "motsCles": ["aménagement cabinet de pédiatrie", "salle d’attente enfants"],
+    "servicesLies": ["design-interieur-experience-patient", "conception-amenagement-cabinet-medical", "travaux-amenagement-cabinet-clinique", "equipement-medical-mobilier-technique"],
+    "cta": "Aménager mon cabinet de pédiatrie",
+    "faq": [
+      { "q": "Comment séparer les enfants malades des nourrissons ?", "a": "Par deux zones d’attente distinctes, idéalement avec des accès séparés aux salles de consultation. Le plan est construit autour de ces deux circuits." },
+      { "q": "Quels matériaux choisir pour une salle d’attente d’enfants ?", "a": "Des sols souples et lessivables, des revêtements muraux résistants aux chocs, du mobilier aux angles arrondis et sans petites pièces détachables." },
+      { "q": "Faut-il une alarme sur le réfrigérateur à vaccins ?", "a": "Un suivi de la température avec alerte est fortement recommandé pour garantir la chaîne du froid. Nous prévoyons l’emplacement et l’alimentation électrique dédiée." }
+    ]
+  },
+  {
+    "id": "dermatologie-medecine-esthetique",
+    "order": 7,
+    "short": "Dermatologie et esthétique",
+    "title": "Aménagement de clinique esthétique et dermatologie",
+    "description": "Salle laser sécurisée, éclairage à fort rendu des couleurs, cabine photo et parcours discret : une clinique de dermatologie ou d’esthétique haut de gamme.",
+    "h1": "Aménagement de cabinets de dermatologie et de cliniques esthétiques",
+    "intro": "En dermatologie et en médecine esthétique, l’œil du praticien et la discrétion du parcours comptent autant que l’équipement. Nous concevons un éclairage à fort rendu des couleurs pour le diagnostic, une cabine photo à fond neutre, une salle laser conforme aux consignes du fabricant et un accueil confidentiel. Pour la chirurgie esthétique, un bloc ambulatoire complète le projet.",
+    "contraintes": [
+      "Salle laser : protection oculaire, voyant et verrouillage de porte, surfaces non réfléchissantes, extraction des fumées",
+      "Éclairage à fort rendu des couleurs pour le diagnostic",
+      "Zone de photographie médicale",
+      "Petite chirurgie en salle lessivable",
+      "Parcours discret"
+    ],
+    "offre": [
+      "Salle laser conforme aux consignes du fabricant",
+      "Cabine photo à fond neutre",
+      "Salle d’actes",
+      "Accueil confidentiel, entrée et sortie séparées si besoin",
+      "Bloc ambulatoire pour la chirurgie esthétique"
+    ],
+    "aValider": [
+      "Consignes de sécurité laser",
+      "Évacuation des fumées",
+      "Conditions d’exercice de la chirurgie ambulatoire"
+    ],
+    "motsCles": ["aménagement clinique esthétique", "aménagement salle laser"],
+    "servicesLies": ["design-interieur-experience-patient", "conception-amenagement-cabinet-medical", "reseaux-techniques-fluides-medicaux", "equipement-medical-mobilier-technique"],
+    "cta": "Aménager ma clinique esthétique",
+    "faq": [
+      { "q": "Que faut-il prévoir dans une salle laser ?", "a": "Un voyant et un verrouillage de porte, des surfaces non réfléchissantes, l’occultation des vitrages, la protection oculaire et l’extraction des fumées, selon les consignes du fabricant de l’appareil." },
+      { "q": "Pourquoi un éclairage à fort rendu des couleurs ?", "a": "Pour observer la peau avec fidélité. Un éclairage à indice de rendu des couleurs élevé limite les erreurs d’appréciation lors du diagnostic et du suivi photographique." },
+      { "q": "Peut-on prévoir une sortie séparée ?", "a": "Oui, quand le local le permet. Une sortie distincte de l’accueil renforce la discrétion des patients après un acte." }
+    ]
+  },
+  {
+    "id": "cardiologie-explorations-fonctionnelles",
+    "order": 8,
+    "short": "Cardiologie",
+    "title": "Aménagement de cabinet de cardiologie",
+    "description": "Salle d’épreuve d’effort, échocardiographie, alimentation protégée et accès brancard : un cabinet de cardiologie sûr et adapté aux explorations.",
+    "h1": "Aménagement de cabinets de cardiologie et d’explorations fonctionnelles",
+    "intro": "La cardiologie demande de l’espace autour du patient et une électricité sans faille. La salle d’épreuve d’effort doit accueillir tapis ou ergocycle avec des dégagements suffisants, une ventilation renforcée et un chariot d’urgence à portée de main. Nous concevons aussi la salle d’échocardiographie en pénombre, le poste de pose Holter et des rangements pour câbles et électrodes.",
+    "contraintes": [
+      "Salle d’épreuve d’effort plus grande : tapis, ergocycle, ventilation",
+      "Chariot d’urgence et défibrillateur accessibles",
+      "Échocardiographie en pénombre",
+      "Alimentation électrique protégée"
+    ],
+    "offre": [
+      "Plan avec dégagements autour du patient",
+      "Climatisation renforcée",
+      "Circuits électriques dédiés avec onduleur pour les appareils critiques",
+      "Poste de pose Holter",
+      "Rangements pour câbles et électrodes"
+    ],
+    "aValider": ["Protocole d’urgence et accès brancard"],
+    "motsCles": ["aménagement cabinet de cardiologie", "salle d’épreuve d’effort"],
+    "servicesLies": ["reseaux-techniques-fluides-medicaux", "conception-amenagement-cabinet-medical", "equipement-medical-mobilier-technique", "travaux-amenagement-cabinet-clinique"],
+    "cta": "Aménager mon cabinet de cardiologie",
+    "faq": [
+      { "q": "Quelle taille pour une salle d’épreuve d’effort ?", "a": "Elle dépend de l’appareil (tapis ou ergocycle) et des dégagements nécessaires pour intervenir autour du patient. Nous la dimensionnons sur plan avec vos équipements." },
+      { "q": "Pourquoi un circuit électrique dédié ?", "a": "Pour protéger les appareils critiques des perturbations et des coupures, avec un onduleur adapté à leur consommation." },
+      { "q": "Comment prévoir l’évacuation d’un patient ?", "a": "Par un accès brancard dégagé entre la salle d’effort et la sortie, vérifié dès la conception et intégré à votre protocole d’urgence." }
+    ]
+  },
+  {
+    "id": "kinesitherapie-reeducation",
+    "order": 9,
+    "short": "Kinésithérapie",
+    "title": "Aménagement de centre de kinésithérapie",
+    "description": "Plateau technique modulable, cabines insonorisées, balnéothérapie et accessibilité renforcée : un centre de kinésithérapie et de rééducation sur mesure.",
+    "h1": "Aménagement de centres de kinésithérapie, de rééducation et de médecine physique",
+    "intro": "Un centre de rééducation vit de son plateau technique : il doit être spacieux, modulable et sûr. Nous vérifions la hauteur sous plafond pour les portiques et les poulies, choisissons des sols antidérapants et amortissants, et concevons des cabines individuelles à cloisons acoustiques. Si vous prévoyez une balnéothérapie, l’étanchéité, la déshumidification et le traitement de l’eau sont étudiés dès le départ.",
+    "contraintes": [
+      "Plateau technique spacieux, hauteur sous plafond suffisante pour portiques et poulies",
+      "Sols antidérapants et amortissants",
+      "Cabines individuelles",
+      "Balnéothérapie : étanchéité, déshumidification",
+      "Accessibilité renforcée"
+    ],
+    "offre": [
+      "Plateau modulable",
+      "Cabines à cloisons acoustiques",
+      "Vestiaires et sanitaires adaptés",
+      "Bassin avec traitement de l’eau et de l’air",
+      "Rangements pour le matériel"
+    ],
+    "aValider": ["Charges au sol", "Normes d’accessibilité", "Qualité de l’eau des bassins"],
+    "motsCles": ["aménagement centre de kinésithérapie", "aménagement salle de rééducation"],
+    "servicesLies": ["etude-faisabilite-programmation-medicale", "travaux-amenagement-cabinet-clinique", "design-interieur-experience-patient", "reseaux-techniques-fluides-medicaux"],
+    "cta": "Aménager mon centre de rééducation",
+    "faq": [
+      { "q": "Mon local peut-il accueillir un bassin ?", "a": "Il faut vérifier la charge admissible du plancher, l’étanchéité possible et la place pour le traitement de l’eau et de l’air. L’étude de faisabilité répond à ces questions avant tout engagement." },
+      { "q": "Quel sol choisir pour un plateau technique ?", "a": "Un revêtement antidérapant, amortissant et facile à désinfecter, adapté aux appareils posés au sol et aux exercices au sol." },
+      { "q": "Comment préserver la confidentialité dans les cabines ?", "a": "Par des cloisons acoustiques montant jusqu’au plafond, des portes pleines et une ventilation qui ne transmet pas les sons d’une cabine à l’autre." }
+    ]
+  },
+  {
+    "id": "gastro-enterologie-endoscopie",
+    "order": 10,
+    "short": "Gastro-entérologie",
+    "title": "Aménagement de salle d’endoscopie",
+    "description": "Salle d’endoscopie, salle de réveil, désinfection des endoscopes et fluides médicaux : un cabinet de gastro-entérologie aux circuits sûrs et maîtrisés.",
+    "h1": "Aménagement de cabinets de gastro-entérologie et de salles d’endoscopie",
+    "intro": "L’endoscopie impose deux circuits rigoureux : celui du patient, de la préparation à la sortie en passant par le réveil, et celui des endoscopes, du sale vers le propre sans croisement. Nous concevons la salle d’examen avec aspiration et oxygène, la salle de réveil, le local de désinfection équipé d’un laveur-désinfecteur et d’armoires de stockage, ainsi qu’une alimentation électrique sécurisée.",
+    "contraintes": [
+      "Salle d’endoscopie avec aspiration et oxygène",
+      "Salle de réveil",
+      "Local de désinfection : laveur-désinfecteur, stockage en armoire",
+      "Sanitaires proches et accès brancard"
+    ],
+    "offre": [
+      "Circuit du patient : préparation, examen, réveil, sortie",
+      "Circuit des endoscopes du sale vers le propre, sans croisement",
+      "Fluides médicaux et alimentation électrique sécurisée",
+      "Ventilation adaptée"
+    ],
+    "aValider": ["Procédure de retraitement des endoscopes", "Gaz médicaux"],
+    "motsCles": ["aménagement salle d’endoscopie", "aménagement cabinet de gastro-entérologie"],
+    "servicesLies": ["hygiene-sterilisation-dechets-medicaux", "reseaux-techniques-fluides-medicaux", "conception-amenagement-cabinet-medical", "travaux-amenagement-cabinet-clinique"],
+    "cta": "Aménager ma salle d’endoscopie",
+    "faq": [
+      { "q": "Combien de salles faut-il pour une activité d’endoscopie ?", "a": "Au minimum une salle d’examen, une salle de réveil et un local de désinfection. Le nombre exact dépend du volume d’examens et du type d’anesthésie pratiquée." },
+      { "q": "Quels fluides médicaux prévoir ?", "a": "Généralement l’aspiration et l’oxygène en salle d’examen et en salle de réveil. Les besoins précis et la source (centrale ou bouteilles) se définissent avec vous." },
+      { "q": "Où placer le local de désinfection ?", "a": "À proximité de la salle d’examen, avec une entrée côté sale et une sortie côté propre, pour que les endoscopes ne croisent jamais leur propre trajet." }
+    ]
+  },
+  {
+    "id": "laboratoire-analyses-medicales",
+    "order": 11,
+    "short": "Laboratoire d’analyses",
+    "title": "Aménagement de laboratoire d’analyses médicales",
+    "description": "Zonage, paillasses, hottes, eau purifiée, chaîne du froid et câblage des analyseurs : un laboratoire d’analyses fiable, du prélèvement à l’archivage.",
+    "h1": "Aménagement de laboratoires d’analyses médicales",
+    "intro": "Un laboratoire se conçoit comme une chaîne : prélèvement, pré-analytique, analytique, archivage. Chaque maillon a ses exigences de surface, de ventilation, d’énergie et de propreté. Nous organisons le zonage et les circuits, choisissons paillasses et sols résistants aux produits chimiques, sécurisons les groupes froids avec supervision et préparons le câblage des analyseurs et du système informatique.",
+    "contraintes": [
+      "Flux : prélèvements, pré-analytique, analytique, archivage",
+      "Paillasses résistantes aux produits chimiques",
+      "Hottes et postes de sécurité microbiologique selon l’activité",
+      "Eau purifiée et chaîne du froid",
+      "Déchets de soins et système informatique du laboratoire"
+    ],
+    "offre": [
+      "Zonage et circuits",
+      "Paillasses et sols adaptés",
+      "Salle de prélèvement confidentielle",
+      "Ventilation et pression de salle",
+      "Groupes froids sécurisés avec supervision",
+      "Local déchets et câblage des analyseurs"
+    ],
+    "aValider": [
+      "Exigences de biosécurité selon les analyses réalisées",
+      "Autorisation d’ouverture du laboratoire"
+    ],
+    "motsCles": ["aménagement laboratoire d’analyses médicales", "installation paillasse de laboratoire"],
+    "servicesLies": ["etude-faisabilite-programmation-medicale", "reseaux-techniques-fluides-medicaux", "hygiene-sterilisation-dechets-medicaux", "travaux-amenagement-cabinet-clinique"],
+    "cta": "Aménager mon laboratoire",
+    "faq": [
+      { "q": "Faut-il un poste de sécurité microbiologique ?", "a": "Cela dépend des analyses réalisées. Le niveau de biosécurité requis détermine l’équipement et la ventilation de la salle ; nous le définissons avec vous en amont." },
+      { "q": "Comment sécuriser la chaîne du froid ?", "a": "Par des circuits électriques dédiés, une alimentation secourue pour les enceintes critiques et une supervision des températures avec alertes." },
+      { "q": "Pouvez-vous rénover un laboratoire en activité ?", "a": "Oui, par phases, en maintenant les zones analytiques en fonctionnement. Voir notre méthode de rénovation en site occupé." }
+    ]
+  },
+  {
+    "id": "cliniques-blocs-operatoires",
+    "order": 12,
+    "short": "Cliniques et blocs",
+    "title": "Aménagement de clinique et de bloc opératoire",
+    "description": "Zonage, traitement d’air, gaz médicaux, énergie secourue et sécurité incendie : construction et rénovation de cliniques et de blocs opératoires au Maroc.",
+    "h1": "Aménagement de cliniques, de polycliniques et de blocs opératoires",
+    "intro": "Une clinique est un assemblage de services aux exigences très différentes, reliés par des circuits de brancards, des ascenseurs et des réseaux critiques. Nous programmons les services, établissons le plan de zonage, concevons le traitement d’air (filtration, surpression), la distribution des gaz médicaux et l’énergie secourue, puis conduisons les travaux, y compris par phases en site occupé, jusqu’aux contrôles de réception.",
+    "contraintes": [
+      "Zones à risque et classes de propreté de l’air",
+      "Gaz médicaux : oxygène, vide, air médical",
+      "Réseaux électriques normal, secours et alimentation sécurisée au bloc",
+      "Sécurité incendie et désenfumage",
+      "Circuits des brancards et ascenseurs"
+    ],
+    "offre": [
+      "Programmation par services",
+      "Plan de zonage",
+      "Traitement d’air : filtration, surpression",
+      "Distribution des gaz médicaux",
+      "Groupe électrogène et onduleurs",
+      "Rénovation par phases en site occupé et accompagnement jusqu’aux contrôles de réception"
+    ],
+    "aValider": [
+      "Références usuelles (ISO 14644, NF S 90-351, ISO 7396-1, NF C 15-211) à confirmer avec le bureau d’études et l’organisme de contrôle",
+      "Autorisation d’ouverture"
+    ],
+    "motsCles": ["aménagement bloc opératoire", "construction clinique privée", "rénovation clinique"],
+    "servicesLies": ["etude-faisabilite-programmation-medicale", "reseaux-techniques-fluides-medicaux", "renovation-cabinet-clinique-site-occupe", "travaux-amenagement-cabinet-clinique", "salles-imagerie-radioprotection"],
+    "cta": "Parler de mon projet de clinique",
+    "faq": [
+      { "q": "Pouvez-vous mettre aux normes une clinique installée dans une villa ?", "a": "Oui. Le diagnostic de l’existant identifie les écarts (circuits, sécurité incendie, traitement d’air, accessibilité) et aboutit à un plan de travaux phasé, compatible avec la poursuite de l’activité." },
+      { "q": "Quelles normes s’appliquent à un bloc opératoire ?", "a": "Les références usuelles portent sur la propreté de l’air, les gaz médicaux et l’électricité. Elles sont confirmées pour chaque projet avec le bureau d’études et l’organisme de contrôle." },
+      { "q": "Travaillez-vous avec un organisme de contrôle ?", "a": "Oui. Nous l’associons au projet pour que les contrôles de réception se déroulent sans surprise." }
+    ]
+  },
+  {
+    "id": "medecine-generale-cabinets-de-groupe",
+    "order": 13,
+    "short": "Médecine générale et groupe",
+    "title": "Aménagement de cabinet médical de groupe",
+    "description": "Salles modulables, accueil mutualisé, soins infirmiers, téléconsultation et confidentialité : un cabinet de groupe ou une maison de santé bien partagés.",
+    "h1": "Aménagement de cabinets de médecine générale, de groupe et de maisons de santé",
+    "intro": "Partager un cabinet, c’est partager des espaces, des équipements et des charges. Nous concevons des salles polyvalentes et modulables, un accueil et une attente mutualisés, une salle de soins infirmiers et un espace de téléconsultation insonorisé. La répartition des espaces entre praticiens est claire dès le plan, et l’extension est anticipée pour accueillir un nouvel associé.",
+    "contraintes": [
+      "Salles polyvalentes et modulables",
+      "Accueil et attente mutualisés",
+      "Salle de soins infirmiers",
+      "Confidentialité acoustique",
+      "Téléconsultation et archivage"
+    ],
+    "offre": [
+      "Plan modulable avec cloisons démontables",
+      "Équipements partagés",
+      "Répartition claire des espaces et des charges entre praticiens",
+      "Espace de téléconsultation insonorisé",
+      "Extension anticipée"
+    ],
+    "aValider": ["Statut juridique de l’association", "Règles de l’ordre professionnel"],
+    "motsCles": ["aménagement cabinet médical de groupe", "aménagement cabinet de médecine générale"],
+    "servicesLies": ["conception-amenagement-cabinet-medical", "travaux-amenagement-cabinet-clinique", "financement-lancement-suivi-projet-medical", "design-interieur-experience-patient"],
+    "cta": "Aménager mon cabinet de groupe",
+    "faq": [
+      { "q": "Comment répartir les charges entre associés ?", "a": "Le plan distingue les espaces privatifs et les espaces partagés, avec leurs surfaces. Cette base objective facilite la répartition, qui reste à fixer entre associés." },
+      { "q": "Une salle peut-elle servir à plusieurs spécialités ?", "a": "Oui, si elle est conçue polyvalente : dimensions standard, points d’eau, prises et rangements permettant d’adapter l’équipement." },
+      { "q": "Faut-il une salle dédiée à la téléconsultation ?", "a": "Un petit espace insonorisé, bien éclairé et câblé améliore nettement la qualité des échanges et la confidentialité." }
+    ]
+  },
+  {
+    "id": "psychiatrie-psychologie",
+    "order": 14,
+    "short": "Santé mentale",
+    "title": "Aménagement de cabinet de psychologie et psychiatrie",
+    "description": "Isolation phonique renforcée, ambiance chaleureuse, sortie discrète et salle de groupe : un cabinet de psychiatrie ou de psychologie sûr et rassurant.",
+    "h1": "Aménagement de cabinets de psychiatrie, de psychologie et de santé mentale",
+    "intro": "En santé mentale, le lieu participe à la relation thérapeutique. Il doit être chaleureux, rassurant et parfaitement confidentiel. Nous renforçons l’isolation phonique des portes et des cloisons, prévoyons une attente séparée et une sortie discrète, une salle de thérapie de groupe si besoin, et choisissons un mobilier sans élément dangereux, adapté au public reçu.",
+    "contraintes": [
+      "Confidentialité acoustique renforcée",
+      "Ambiance chaleureuse",
+      "Attente séparée et sortie discrète",
+      "Salle de groupe",
+      "Sécurité du mobilier et alarme discrète si nécessaire"
+    ],
+    "offre": [
+      "Portes et cloisons à forte isolation phonique",
+      "Double porte ou sas",
+      "Éclairage chaud et variable",
+      "Mobilier sans élément dangereux",
+      "Salle de thérapie de groupe et signalétique rassurante"
+    ],
+    "aValider": ["Niveau de sécurité requis selon le public reçu"],
+    "motsCles": ["aménagement cabinet de psychologie", "aménagement cabinet de psychiatrie"],
+    "servicesLies": ["design-interieur-experience-patient", "conception-amenagement-cabinet-medical", "travaux-amenagement-cabinet-clinique"],
+    "cta": "Aménager mon cabinet",
+    "faq": [
+      { "q": "Comment isoler phoniquement un cabinet de consultation ?", "a": "Par des cloisons montant jusqu’à la dalle, des portes pleines à joints, une double porte ou un sas, et une ventilation qui ne transmet pas la voix." },
+      { "q": "Pourquoi une sortie séparée ?", "a": "Pour que le patient qui sort ne croise pas celui qui attend. C’est un gage de discrétion apprécié en santé mentale." },
+      { "q": "Quel mobilier choisir ?", "a": "Un mobilier confortable, stable, sans arêtes vives ni élément détachable dangereux, adapté au public reçu." }
+    ]
+  }
+]

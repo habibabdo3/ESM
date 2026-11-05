@@ -1,0 +1,38 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PageHero from '@/components/PageHero.astro';
+import RealisationCard from '@/components/RealisationCard.astro';
+import CtaBand from '@/components/CtaBand.astro';
+import { getRealisations } from '@/lib/content';
+import { breadcrumb } from '@/lib/schema';
+
+const realisations = await getRealisations();
+const base = Astro.site!;
+const crumbs = [{ name: 'Accueil', path: '/' }, { name: 'Réalisations', path: '/realisations/' }];
+---
+<BaseLayout
+  title="Réalisations : cabinets et cliniques aménagés"
+  description="Avant, après : découvrez les cabinets, cliniques et centres médicaux aménagés ou rénovés par Euro Space Medical, par spécialité et par ville du Maroc."
+  noindex={realisations.length === 0}
+  jsonld={[breadcrumb(base, crumbs)]}
+  context="Réalisations"
+>
+  <PageHero eyebrow="Portfolio" h1="Nos réalisations" intro="Chaque projet est présenté avec sa spécialité, sa ville, sa surface, sa durée, les lots réalisés, la difficulté rencontrée et la solution apportée." crumbs={crumbs} variant="dermatologie-medecine-esthetique" />
+  <section class="py-20 lg:py-28">
+    <div class="container-lux">
+      {realisations.length > 0 ? (
+        <div class="grid gap-x-8 gap-y-16 md:grid-cols-2 lg:grid-cols-3">
+          {realisations.map((r, i) => <RealisationCard entry={r} i={i} />)}
+        </div>
+      ) : (
+        <div class="mx-auto max-w-2xl text-center">
+          <span class="gold-rule mx-auto"></span>
+          <h2 class="mt-8">Études de cas en cours de publication</h2>
+          <p class="mt-6 text-[var(--color-stone-ink)]">Nos premières réalisations détaillées, avec photos avant et après, seront publiées ici très prochainement. En attendant, nous pouvons vous présenter des projets comparables au vôtre lors d’un rendez-vous.</p>
+          <a href="/contact/" class="btn btn-gold mt-10">Prendre rendez-vous</a>
+        </div>
+      )}
+    </div>
+  </section>
+  <CtaBand context="Réalisations" />
+</BaseLayout>

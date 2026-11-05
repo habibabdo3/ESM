@@ -1,0 +1,45 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PageHero from '@/components/PageHero.astro';
+import QuoteForm from '@/components/QuoteForm.astro';
+import Todo from '@/components/Todo.astro';
+import Icon from '@/components/Icon.astro';
+import { site, whatsappLink } from '@/config/site';
+import { breadcrumb } from '@/lib/schema';
+
+const base = Astro.site!;
+const crumbs = [{ name: 'Accueil', path: '/' }, { name: 'Contact et devis', path: '/contact/' }];
+const wa = whatsappLink('Bonjour Euro Space Medical, je souhaite un devis pour mon projet.');
+---
+<BaseLayout
+  title="Demande de devis et contact"
+  description="Décrivez votre projet de cabinet, de clinique ou de centre médical : nous revenons vers vous avec une première approche et les prochaines étapes."
+  jsonld={[breadcrumb(base, crumbs)]}
+  context="Contact"
+>
+  <PageHero eyebrow="Devis gratuit" h1="Parlons de votre projet" intro="Quelques informations suffisent pour une première approche. Plus vous êtes précis, plus notre réponse le sera." crumbs={crumbs} variant="cabinet-dentaire-orthodontie" />
+  <section class="py-20 lg:py-28">
+    <div class="container-lux grid gap-16 lg:grid-cols-12">
+      <div class="lg:col-span-8"><QuoteForm /></div>
+      <aside class="space-y-8 lg:col-span-4">
+        <div class="bg-[var(--color-night)] p-8 text-[var(--color-ivory)]">
+          <p class="caption text-[var(--color-gold)]">Contact direct</p>
+          <ul class="mt-6 space-y-4 text-[0.98rem]">
+            <li class="flex items-start gap-3"><Icon name="whatsapp" class="mt-1 text-[var(--color-gold)]" />{wa ? <a href={wa} target="_blank" rel="noopener" class="link-lux">WhatsApp</a> : <Todo label="numéro WhatsApp" />}</li>
+            <li class="flex items-start gap-3"><Icon name="phone" class="mt-1 text-[var(--color-gold)]" />{site.phone ? <a href={`tel:${site.phone.replace(/\s/g, '')}`} class="link-lux">{site.phone}</a> : <Todo label="téléphone" />}</li>
+            <li class="flex items-start gap-3"><Icon name="mail" class="mt-1 text-[var(--color-gold)]" />{site.email ? <a href={`mailto:${site.email}`} class="link-lux">{site.email}</a> : <Todo label="e-mail" />}</li>
+            <li class="flex items-start gap-3"><Icon name="pin" class="mt-1 text-[var(--color-gold)]" /><span>{site.address ?? <Todo label="adresse" />}, {site.hq}</span></li>
+          </ul>
+        </div>
+        <div class="border border-[var(--color-line)] p-8">
+          <p class="caption text-[var(--color-gold-deep)]">Et ensuite ?</p>
+          <ol class="mt-5 space-y-4 text-[0.95rem]">
+            <li class="flex gap-3"><span class="num text-2xl leading-none">01</span>Nous étudions votre demande.</li>
+            <li class="flex gap-3"><span class="num text-2xl leading-none">02</span>Nous vous appelons pour préciser le besoin.</li>
+            <li class="flex gap-3"><span class="num text-2xl leading-none">03</span>Nous planifions une visite technique.</li>
+          </ol>
+        </div>
+      </aside>
+    </div>
+  </section>
+</BaseLayout>

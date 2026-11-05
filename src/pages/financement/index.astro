@@ -1,0 +1,84 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PageHero from '@/components/PageHero.astro';
+import Faq from '@/components/Faq.astro';
+import CtaBand from '@/components/CtaBand.astro';
+import { partners, etapesProjetFinance } from '@/data/financement';
+import { BANK_DISCLAIMER } from '@/config/site';
+import { breadcrumb, faqPage } from '@/lib/schema';
+import { pad } from '@/lib/content';
+
+const base = Astro.site!;
+const crumbs = [{ name: 'Accueil', path: '/' }, { name: 'Financement', path: '/financement/' }];
+const formules = [
+  { t: 'Crédit professionnel', p: 'Pour l’investissement, l’aménagement et l’équipement du cabinet.' },
+  { t: 'Intelaka', p: 'Crédit à taux bonifié avec garantie publique, pour les jeunes diplômés, TPE et porteurs de projet. Conditions vérifiées à la date du dossier.' },
+  { t: 'Mourabaha', p: 'Financement participatif d’équipements et d’aménagement, avec une marge fixe connue dès la signature.' },
+  { t: 'Ijara et leasing', p: 'Location avec option d’achat pour les équipements médicaux, en version participative ou classique.' },
+  { t: 'Crédit d’investissement', p: 'Pour les cliniques, centres d’imagerie et projets de plus grande taille.' },
+];
+const faq = [
+  { q: 'Pouvez-vous garantir l’accord de la banque ?', a: `Non. Nous préparons un dossier complet et cohérent (devis, plans, business plan) et nous le suivons, mais la décision appartient à la banque. ${BANK_DISCLAIMER}` },
+  { q: 'Le fonds de roulement peut-il être financé ?', a: 'Nous l’intégrons systématiquement au budget global. Son financement dépend de la formule retenue et de la politique de la banque.' },
+  { q: 'Les fonds peuvent-ils être débloqués selon l’avancement du chantier ?', a: 'C’est l’organisation que nous recherchons : démarrage des travaux après accord, puis décaissement par tranches selon l’avancement, quand la banque le permet.' },
+];
+---
+<BaseLayout
+  title="Financement de cabinet médical et de clinique"
+  description="Crédit professionnel, Intelaka, Mourabaha, Ijara ou leasing : nous chiffrons votre projet médical, montons le dossier et le suivons jusqu’à la décision."
+  jsonld={[breadcrumb(base, crumbs), faqPage(faq)]}
+  context="Financement"
+>
+  <PageHero eyebrow="Projet financé" h1="Votre structure conçue, aménagée, équipée et financée" intro="Euro Space Medical conçoit, aménage et équipe votre structure, et vous accompagne jusqu’au financement avec nos banques partenaires." crumbs={crumbs} variant="medecine-generale-cabinets-de-groupe" ctaLabel="Simuler le financement de mon projet">
+    <p class="mt-6 text-[0.85rem] italic text-[var(--color-ivory)]/65">{BANK_DISCLAIMER}</p>
+  </PageHero>
+
+  <section class="py-20 lg:py-28">
+    <div class="container-lux">
+      <p class="eyebrow text-[var(--color-gold-deep)]">Formules</p>
+      <h2 class="mt-6 max-w-3xl">Cinq façons de financer votre projet</h2>
+      <div class="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-5">
+        {formules.map((f, i) => (
+          <div class="border border-[var(--color-line)] bg-white/40 p-7" data-reveal style={`--i:${i}`}>
+            <span class="num text-3xl">{pad(i + 1)}</span>
+            <h3 class="mt-5 text-[1.45rem]">{f.t}</h3>
+            <p class="mt-3 text-[0.9rem] text-[var(--color-stone-ink)]">{f.p}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-[var(--color-night)] py-20 text-[var(--color-ivory)] lg:py-28">
+    <div class="container-lux">
+      <p class="eyebrow text-[var(--color-gold)]">Partenaires</p>
+      <h2 class="mt-6 max-w-3xl">Deux banques partenaires, deux approches</h2>
+      <div class="mt-14 grid gap-px overflow-hidden bg-[var(--color-night-3)] md:grid-cols-2">
+        {partners.map((p, i) => (
+          <a href={p.path} class="card-lux group block bg-[var(--color-night)] p-10 no-underline" data-reveal style={`--i:${i}`}>
+            <p class="caption text-[var(--color-gold)]">{p.short}</p>
+            <h3 class="mt-4 text-[2rem]">{p.h1}</h3>
+            <span class="card-rule mt-5 block h-px w-16 bg-[var(--color-gold)]"></span>
+            <p class="mt-5 text-[var(--color-ivory)]/75">{p.accroche}</p>
+            <span class="card-more mt-6 inline-flex items-center gap-2 text-[0.75rem] font-semibold uppercase tracking-[0.16em] text-[var(--color-gold)]">Découvrir <span aria-hidden="true">→</span></span>
+          </a>
+        ))}
+      </div>
+      <p class="mt-8 text-[0.85rem] italic text-[var(--color-ivory)]/60">{BANK_DISCLAIMER}</p>
+    </div>
+  </section>
+
+  <section class="py-20 lg:py-28">
+    <div class="container-lux">
+      <h2 class="max-w-3xl">L’offre « Projet financé » en cinq étapes</h2>
+      <ol class="mt-12 grid gap-px overflow-hidden bg-[var(--color-line)] md:grid-cols-5">
+        {etapesProjetFinance.map((e, i) => (
+          <li class="bg-[var(--color-ivory)] p-6" data-reveal style={`--i:${i}`}><span class="num text-4xl">{pad(i + 1)}</span><h3 class="mt-4 text-[1.35rem]">{e.t}</h3><p class="mt-3 text-[0.9rem] text-[var(--color-stone-ink)]">{e.p}</p></li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <Faq items={faq} tone="sand" />
+  <CtaBand context="Financement" title="Simuler le financement de mon projet" cta="Demander une simulation" />
+</BaseLayout>

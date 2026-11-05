@@ -1,0 +1,125 @@
+---
+import Logo from './Logo.astro';
+import Icon from './Icon.astro';
+import { getServices, getSpecialites, servicePath, specialitePath, pad } from '@/lib/content';
+
+interface Props { overlay?: boolean }
+const { overlay = false } = Astro.props;
+const services = await getServices();
+const specialites = await getSpecialites();
+const path = Astro.url.pathname;
+const isActive = (p: string) => path.startsWith(p);
+
+const simple = [
+  { href: '/renovation-cabinet-clinique/', label: 'Rénovation' },
+  { href: '/financement/', label: 'Financement' },
+  { href: '/realisations/', label: 'Réalisations' },
+  { href: '/zones-intervention/', label: 'Zones' },
+];
+---
+
+<header
+  class:list={[
+    'site-header z-40 w-full',
+    overlay ? 'absolute inset-x-0 top-0 text-[var(--color-ivory)]' : 'sticky top-0 bg-[var(--color-ivory)]/95 backdrop-blur border-b border-[var(--color-line)] text-[var(--color-ink)]',
+  ]}
+>
+  <a href="#contenu" class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:bg-[var(--color-gold)] focus:px-4 focus:py-2 focus:text-[var(--color-night)]">
+    Aller au contenu
+  </a>
+  <div class="container-lux flex h-20 items-center justify-between gap-6 lg:h-24">
+    <a href="/" class="shrink-0 no-underline" title="Accueil">
+      <Logo tone={overlay ? 'light' : 'dark'} />
+    </a>
+
+    <nav aria-label="Navigation principale" class="hidden xl:block">
+      <ul class="flex items-center gap-8 text-[0.8rem] font-semibold uppercase tracking-[0.14em]">
+        <li class="group relative">
+          <a href="/services/" class:list={['link-lux py-8', isActive('/services/') && 'text-[var(--color-gold)]']}>Services</a>
+          <div class="invisible absolute left-1/2 top-full w-[34rem] -translate-x-1/2 translate-y-2 opacity-0 transition duration-300 ease-[var(--ease-lux)] group-hover:visible group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100">
+            <ul class="grid grid-cols-2 gap-x-6 gap-y-1 border border-[var(--color-night-3)] bg-[var(--color-night)] p-6 text-[var(--color-ivory)] shadow-2xl normal-case tracking-normal">
+              {services.map((s) => (
+                <li>
+                  <a href={servicePath(s.id)} class="flex gap-3 py-2 text-[0.92rem] font-medium no-underline hover:text-[var(--color-gold-soft)]">
+                    <span class="num text-sm">{pad(s.data.order)}</span>{s.data.short}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </li>
+        <li class="group relative">
+          <a href="/specialites/" class:list={['link-lux py-8', isActive('/specialites/') && 'text-[var(--color-gold)]']}>Spécialités</a>
+          <div class="invisible absolute left-1/2 top-full w-[42rem] -translate-x-1/2 translate-y-2 opacity-0 transition duration-300 ease-[var(--ease-lux)] group-hover:visible group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100">
+            <ul class="grid grid-cols-3 gap-x-6 gap-y-1 border border-[var(--color-night-3)] bg-[var(--color-night)] p-6 text-[var(--color-ivory)] shadow-2xl normal-case tracking-normal">
+              {specialites.map((s) => (
+                <li>
+                  <a href={specialitePath(s.id)} class="block py-2 text-[0.9rem] font-medium no-underline hover:text-[var(--color-gold-soft)]">{s.data.short}</a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </li>
+        {simple.map((l) => (
+          <li><a href={l.href} class:list={['link-lux', isActive(l.href) && 'text-[var(--color-gold)]']}>{l.label}</a></li>
+        ))}
+      </ul>
+    </nav>
+
+    <div class="flex items-center gap-3">
+      <a href="/contact/" class="btn btn-gold hidden sm:inline-flex">Demander un devis</a>
+      <button
+        type="button"
+        class="menu-toggle inline-flex h-12 w-12 items-center justify-center xl:hidden"
+        aria-expanded="false"
+        aria-controls="menu-mobile"
+        aria-label="Ouvrir le menu"
+      >
+        <Icon name="menu" size={26} />
+      </button>
+    </div>
+  </div>
+
+  <div id="menu-mobile" class="mobile-menu fixed inset-0 z-50 hidden overflow-y-auto bg-[var(--color-night)] text-[var(--color-ivory)]">
+    <div class="container-lux flex h-20 items-center justify-between">
+      <Logo tone="light" />
+      <button type="button" class="menu-close inline-flex h-12 w-12 items-center justify-center" aria-label="Fermer le menu">
+        <Icon name="close" size={26} />
+      </button>
+    </div>
+    <nav aria-label="Navigation mobile" class="container-lux pb-32 pt-6">
+      <ul class="space-y-1 font-[family-name:var(--font-display)] text-4xl">
+        <li><a class="block py-2 no-underline" href="/">Accueil</a></li>
+        <li><a class="block py-2 no-underline" href="/services/">Services</a></li>
+        <li><a class="block py-2 no-underline" href="/specialites/">Spécialités</a></li>
+        {simple.map((l) => <li><a class="block py-2 no-underline" href={l.href}>{l.label}</a></li>)}
+        <li><a class="block py-2 no-underline" href="/a-propos/">À propos</a></li>
+        <li><a class="block py-2 no-underline" href="/contact/">Contact</a></li>
+      </ul>
+      <span class="gold-rule my-8"></span>
+      <p class="eyebrow text-[var(--color-gold)]">Spécialités</p>
+      <ul class="mt-4 grid grid-cols-2 gap-x-4 gap-y-2 text-[0.95rem]">
+        {specialites.map((s) => <li><a class="no-underline opacity-80 hover:opacity-100" href={specialitePath(s.id)}>{s.data.short}</a></li>)}
+      </ul>
+      <a href="/contact/" class="btn btn-gold mt-10 w-full">Demander un devis</a>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const toggle = document.querySelector<HTMLButtonElement>('.menu-toggle');
+  const menu = document.getElementById('menu-mobile');
+  const close = menu?.querySelector<HTMLButtonElement>('.menu-close');
+  const setOpen = (open: boolean) => {
+    if (!menu || !toggle) return;
+    menu.classList.toggle('hidden', !open);
+    toggle.setAttribute('aria-expanded', String(open));
+    document.documentElement.style.overflow = open ? 'hidden' : '';
+    (open ? close : toggle)?.focus();
+  };
+  toggle?.addEventListener('click', () => setOpen(true));
+  close?.addEventListener('click', () => setOpen(false));
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && toggle?.getAttribute('aria-expanded') === 'true') setOpen(false);
+  });
+</script>

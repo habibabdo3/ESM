@@ -1,0 +1,17 @@
+---
+interface Props { tone?: 'light' | 'dark'; class?: string }
+const { tone = 'dark', class: cls = '' } = Astro.props;
+const ink = tone === 'light' ? 'var(--color-ivory)' : 'var(--color-ink)';
+---
+<span class={`inline-flex items-center gap-3 ${cls}`}>
+  <svg width="40" height="40" viewBox="0 0 40 40" aria-hidden="true">
+    <rect x="1" y="1" width="38" height="38" fill="none" stroke="var(--color-gold)" stroke-width="1" />
+    <path d="M11 33V18a9 9 0 0118 0v15" fill="none" stroke={ink} stroke-width="1.2" />
+    <path d="M20 19v8M16 23h8" stroke="var(--color-gold)" stroke-width="1.2" stroke-linecap="square" />
+    <path d="M6 33h28" stroke={ink} stroke-width="1" />
+  </svg>
+  <span class="flex flex-col leading-none" style={`color:${ink}`}>
+    <span class="text-[0.7rem] font-semibold tracking-[0.32em] uppercase">Euro Space</span>
+    <span class="font-[family-name:var(--font-display)] text-[1.35rem] italic tracking-wide -mt-0.5">Medical</span>
+  </span>
+</span>

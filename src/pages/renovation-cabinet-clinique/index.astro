@@ -1,0 +1,108 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PageHero from '@/components/PageHero.astro';
+import PlanArt from '@/components/PlanArt.astro';
+import Faq from '@/components/Faq.astro';
+import CtaBand from '@/components/CtaBand.astro';
+import RelatedLinks from '@/components/RelatedLinks.astro';
+import { getEntry } from 'astro:content';
+import { servicePath, specialitePath, pad } from '@/lib/content';
+import { breadcrumb, faqPage, service as serviceLd } from '@/lib/schema';
+
+const svc = (await getEntry('services', 'renovation-cabinet-clinique-site-occupe'))!;
+const d = svc.data;
+const base = Astro.site!;
+const path = '/renovation-cabinet-clinique/';
+const crumbs = [{ name: 'Accueil', path: '/' }, { name: 'Rénovation de cabinet et de clinique', path }];
+const phases = [
+  { t: 'Diagnostic de l’existant', p: 'Hygiène, accessibilité, réseaux, sécurité incendie, électricité : nous mesurons l’écart entre l’état actuel et les besoins de votre activité, puis nous hiérarchisons les travaux.' },
+  { t: 'Plan de phasage', p: 'Les travaux sont découpés en zones et en séquences. Pour chaque phase, nous définissons les salles qui restent ouvertes, les circulations provisoires et les créneaux réservés aux interventions bruyantes.' },
+  { t: 'Protocole de chantier', p: 'Cloisons provisoires étanches, aspiration à la source, protection des sols et des circulations, nettoyage quotidien : un protocole écrit, validé avec vous avant le premier jour.' },
+  { t: 'Continuité des fluides critiques', p: 'Aspiration, air médical, oxygène, électricité secourue, informatique : les coupures nécessaires sont planifiées hors des heures d’activité et préparées à l’avance.' },
+  { t: 'Réception par phase', p: 'Chaque zone livrée est contrôlée et réceptionnée avant d’être rendue à l’activité. Vous retrouvez vos salles rénovées au fil du chantier, sans attendre la fin de l’ensemble.' },
+];
+const faq = [
+  ...d.faq,
+  { q: 'Rénovez-vous aussi les cliniques installées dans des villas ?', a: 'Oui. Ces structures présentent souvent des écarts de circuits, de sécurité incendie et d’accessibilité. Le diagnostic aboutit à un plan de mise aux normes phasé, compatible avec la poursuite de l’activité.' },
+];
+---
+<BaseLayout
+  title="Rénovation de cabinet médical et de clinique"
+  description="Rénovation de cabinet médical et de clinique en site occupé : diagnostic, phasage, cloisons étanches, maîtrise des poussières et réception par phase."
+  ogImage="/og/renovation.png"
+  jsonld={[breadcrumb(base, crumbs), serviceLd(base, { name: 'Rénovation de cabinets et de cliniques en site occupé', description: d.description, path }), faqPage(faq)]}
+  context="Rénovation de cabinet et de clinique"
+>
+  <PageHero eyebrow="Rénovation · Site occupé" h1="Rénovation de cabinet médical et de clinique, sans fermer" intro="La rénovation d’un cabinet médical ou d’une clinique en activité demande une méthode à part : phasage, protection des zones de soins, continuité des fluides critiques et réception par étape. Vous continuez à recevoir vos patients pendant que votre structure se transforme." crumbs={crumbs} variant="laboratoire-analyses-medicales" ctaLabel={d.cta} />
+
+  <section class="py-20 lg:py-28">
+    <div class="container-lux grid gap-16 lg:grid-cols-12">
+      <div class="prose-lux text-[1.06rem] leading-relaxed lg:col-span-7">
+        <h2>Pourquoi rénover, et pourquoi maintenant</h2>
+        <p>Les structures médicales vieillissent plus vite que les autres : surfaces soumises aux désinfectants, réseaux sollicités en continu, équipements qui évoluent, exigences réglementaires qui se renforcent. À cela s’ajoutent les projets de croissance : une nouvelle salle, un associé, une nouvelle spécialité, un appareil d’imagerie.</p>
+        <p>Rénover permet de remettre la structure aux normes d’hygiène, d’accessibilité, de sécurité incendie et d’électricité, de moderniser l’expérience des patients et de préparer l’extension. La difficulté est de le faire sans perdre de chiffre d’affaires ni dégrader la qualité des soins pendant les travaux.</p>
+
+        <h2>Rénovation, extension et mise aux normes</h2>
+        <ul>
+          <li><strong>Rénovation</strong> : revêtements médicaux, cloisons hydrofuges, éclairage, mobilier, accueil et salle d’attente.</li>
+          <li><strong>Extension</strong> : nouvelles salles, nouvelle spécialité, agrandissement des locaux, ajout d’un fauteuil ou d’un appareil.</li>
+          <li><strong>Mise aux normes</strong> : hygiène, accessibilité, sécurité incendie et électricité, selon un plan hiérarchisé.</li>
+        </ul>
+        <p>Pour les contraintes propres à votre discipline, consultez nos pages <a href={specialitePath('cliniques-blocs-operatoires')}>cliniques et blocs opératoires</a>, <a href={specialitePath('cabinet-dentaire-orthodontie')}>cabinets dentaires</a> ou <a href={specialitePath('laboratoire-analyses-medicales')}>laboratoires d’analyses</a>.</p>
+      </div>
+      <div class="lg:col-span-5">
+        <div class="aspect-[4/5] overflow-hidden rounded-[var(--radius-photo)]" data-reveal-img>
+          <div class="parallax h-full w-full"><PlanArt variant="cliniques-blocs-operatoires" class="h-full w-full" label="Illustration : plan d’une clinique découpé en phases de travaux" /></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-[var(--color-night)] py-20 text-[var(--color-ivory)] lg:py-28">
+    <div class="container-lux">
+      <p class="eyebrow text-[var(--color-gold)]">Méthode</p>
+      <h2 class="mt-6 max-w-3xl">Cinq garanties pour rénover en site occupé</h2>
+      <ol class="mt-14 space-y-px overflow-hidden bg-[var(--color-night-3)]">
+        {phases.map((p, i) => (
+          <li class="grid gap-4 bg-[var(--color-night)] py-8 md:grid-cols-12 md:gap-8" data-reveal>
+            <span class="num text-5xl md:col-span-2">{pad(i + 1)}</span>
+            <h3 class="text-[1.7rem] md:col-span-4">{p.t}</h3>
+            <p class="text-[var(--color-ivory)]/75 md:col-span-6">{p.p}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section class="py-20 lg:py-28">
+    <div class="container-lux grid gap-16 lg:grid-cols-12">
+      <div class="lg:col-span-5">
+        <p class="eyebrow text-[var(--color-gold-deep)]">Livrables</p>
+        <h2 class="mt-6">Ce que vous recevez</h2>
+      </div>
+      <ol class="divide-y divide-[var(--color-line)] border-y border-[var(--color-line)] lg:col-span-7">
+        {d.livrables.map((l, i) => <li class="flex gap-6 py-5" data-reveal style={`--i:${i}`}><span class="num w-10 text-3xl leading-none">{pad(i + 1)}</span>{l}</li>)}
+      </ol>
+    </div>
+  </section>
+
+  <Faq items={faq} tone="sand" />
+
+  <section class="py-20 lg:py-28">
+    <div class="container-lux grid gap-16 lg:grid-cols-2">
+      <RelatedLinks title="Services complémentaires" links={[
+        { href: servicePath('renovation-cabinet-clinique-site-occupe'), label: 'Rénovation, extension et mise aux normes', meta: 'Service 05' },
+        { href: servicePath('etude-faisabilite-programmation-medicale'), label: 'Étude de faisabilité', meta: 'Service 01' },
+        { href: servicePath('reseaux-techniques-fluides-medicaux'), label: 'Réseaux techniques et fluides', meta: 'Service 03' },
+        { href: servicePath('hygiene-sterilisation-dechets-medicaux'), label: 'Hygiène et stérilisation', meta: 'Service 09' },
+      ]} />
+      <RelatedLinks title="Aller plus loin" links={[
+        { href: '/amenagement-cabinet-medical/', label: 'Aménagement de cabinet médical', meta: 'Guide' },
+        { href: '/financement/', label: 'Financer vos travaux', meta: 'Financement' },
+        { href: '/zones-intervention/', label: 'Nos zones d’intervention', meta: 'Maroc' },
+      ]} />
+    </div>
+  </section>
+
+  <CtaBand context="Rénovation" title={d.cta} />
+</BaseLayout>

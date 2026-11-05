@@ -1,0 +1,26 @@
+---
+import ProseLayout from '@/layouts/ProseLayout.astro';
+import Todo from '@/components/Todo.astro';
+import { site } from '@/config/site';
+---
+<ProseLayout title="Politique de confidentialité" description="Comment Euro Space Medical collecte, utilise et protège vos données personnelles, conformément à la loi 09-08, et comment exercer vos droits." h1="Politique de confidentialité" eyebrow="Données personnelles" path="/confidentialite/">
+  <p><Todo label="texte à valider par l’entreprise et, le cas échéant, déclaration ou autorisation auprès de la CNDP" /></p>
+  <h2>Responsable du traitement</h2>
+  <p>{site.name}, {site.address ?? <Todo label="adresse" />}, {site.hq}. Contact : {site.email ?? <Todo label="e-mail" />}.</p>
+  <h2>Données collectées</h2>
+  <p>Via le formulaire de devis : nom, téléphone, e-mail, ville, type de structure, nature du projet, surface, calendrier, souhait de financement et message. Via WhatsApp : les informations que vous choisissez de nous transmettre.</p>
+  <h2>Finalités</h2>
+  <ul>
+    <li>Répondre à votre demande de devis et vous recontacter ;</li>
+    <li>préparer, le cas échéant, un dossier de financement à votre demande ;</li>
+    <li>mesurer l’audience du site et la performance de nos campagnes, uniquement avec votre consentement.</li>
+  </ul>
+  <h2>Base légale et durée de conservation</h2>
+  <p>Vos données sont traitées sur la base de votre consentement, recueilli dans le formulaire. Elles sont conservées pendant <Todo label="durée de conservation" />, puis supprimées.</p>
+  <h2>Destinataires</h2>
+  <p>Vos données sont destinées à {site.name}. Elles peuvent être transmises à une banque partenaire uniquement si vous nous le demandez, dans le cadre d’un dossier de financement. Nos prestataires techniques (hébergement, envoi d’e-mails) les traitent pour notre compte.</p>
+  <h2>Vos droits</h2>
+  <p>Conformément à la loi 09-08 relative à la protection des personnes physiques à l’égard du traitement des données à caractère personnel, vous disposez d’un droit d’accès, de rectification et d’opposition. Pour l’exercer : {site.email ?? <Todo label="e-mail" />}.</p>
+  <h2>Cookies</h2>
+  <p>Voir notre <a href="/cookies/">politique de cookies</a>.</p>
+</ProseLayout>

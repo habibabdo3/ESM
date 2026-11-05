@@ -1,0 +1,64 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PageHero from '@/components/PageHero.astro';
+import CtaBand from '@/components/CtaBand.astro';
+import RelatedLinks from '@/components/RelatedLinks.astro';
+import { partners, etapesProjetFinance } from '@/data/financement';
+import { bankClaimsApproved, BANK_DISCLAIMER } from '@/config/site';
+import { breadcrumb } from '@/lib/schema';
+import { pad } from '@/lib/content';
+
+interface Props { id: (typeof partners)[number]['id'] }
+const p = partners.find((x) => x.id === Astro.props.id)!;
+const other = partners.find((x) => x.id !== p.id)!;
+const base = Astro.site!;
+const crumbs = [{ name: 'Accueil', path: '/' }, { name: 'Financement', path: '/financement/' }, { name: p.short, path: p.path }];
+---
+<BaseLayout title={p.title} description={p.description} noindex={!bankClaimsApproved} jsonld={[breadcrumb(base, crumbs)]} context={`Financement ${p.short}`}>
+  <PageHero eyebrow="Financement" h1={p.h1} intro={p.accroche} crumbs={crumbs} variant="medecine-generale-cabinets-de-groupe" ctaLabel="Simuler le financement de mon projet">
+    <p class="mt-6 text-[0.85rem] italic text-[var(--color-ivory)]/65">{BANK_DISCLAIMER}</p>
+  </PageHero>
+
+  <section class="py-20 lg:py-28">
+    <div class="container-lux grid gap-16 lg:grid-cols-12">
+      <div class="lg:col-span-5" data-reveal>
+        <p class="eyebrow text-[var(--color-gold-deep)]">Solutions</p>
+        <h2 class="mt-6">Les produits proposés</h2>
+        <p class="mt-6 text-[var(--color-stone-ink)]">{p.contexte}</p>
+      </div>
+      <div class="grid gap-6 sm:grid-cols-2 lg:col-span-7">
+        {p.produits.map((x, i) => (
+          <div class="border border-[var(--color-line)] bg-white/40 p-8" data-reveal style={`--i:${i}`}>
+            <span class="gold-rule"></span>
+            <h3 class="mt-6">{x.t}</h3>
+            <p class="mt-4 text-[0.95rem] text-[var(--color-stone-ink)]">{x.p}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-[var(--color-sand)] py-20 lg:py-28">
+    <div class="container-lux">
+      <h2 class="max-w-3xl">Notre accompagnement « Projet financé »</h2>
+      <ol class="mt-12 grid gap-px overflow-hidden bg-[var(--color-line)] md:grid-cols-5">
+        {etapesProjetFinance.map((e, i) => (
+          <li class="bg-[var(--color-sand)] p-6" data-reveal style={`--i:${i}`}><span class="num text-4xl">{pad(i + 1)}</span><h3 class="mt-4 text-[1.35rem]">{e.t}</h3><p class="mt-3 text-[0.9rem] text-[var(--color-stone-ink)]">{e.p}</p></li>
+        ))}
+      </ol>
+      <p class="mt-8 text-[0.85rem] italic text-[var(--color-stone-ink)]">{BANK_DISCLAIMER} Aucun taux d’acceptation n’est garanti. Les conditions des dispositifs publics sont vérifiées à la date du dossier.</p>
+    </div>
+  </section>
+
+  <section class="py-20 lg:py-28">
+    <div class="container-lux">
+      <RelatedLinks title="Voir aussi" links={[
+        { href: other.path, label: other.h1, meta: 'Financement' },
+        { href: '/financement/', label: 'Toutes nos solutions de financement', meta: 'Financement' },
+        { href: '/services/financement-lancement-suivi-projet-medical/', label: 'Financement, lancement et suivi', meta: 'Service 10' },
+      ]} />
+    </div>
+  </section>
+
+  <CtaBand context={`Financement ${p.short}`} title="Simuler le financement de mon projet" cta="Demander une simulation" />
+</BaseLayout>

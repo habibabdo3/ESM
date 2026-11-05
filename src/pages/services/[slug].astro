@@ -1,0 +1,75 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PageHero from '@/components/PageHero.astro';
+import Faq from '@/components/Faq.astro';
+import CtaBand from '@/components/CtaBand.astro';
+import RelatedLinks from '@/components/RelatedLinks.astro';
+import { getServices, getSpecialites, servicePath, specialitePath, pad, type Service } from '@/lib/content';
+import { breadcrumb, faqPage, service as serviceLd } from '@/lib/schema';
+import { whatsappLink } from '@/config/site';
+
+export async function getStaticPaths() {
+  const services = await getServices();
+  return services.map((s) => ({ params: { slug: s.id }, props: { entry: s } }));
+}
+const { entry } = Astro.props as { entry: Service };
+const d = entry.data;
+const base = Astro.site!;
+const path = servicePath(entry.id);
+const crumbs = [{ name: 'Accueil', path: '/' }, { name: 'Services', path: '/services/' }, { name: d.short, path }];
+
+const allServices = await getServices();
+const specialites = await getSpecialites();
+const linkedSpecs = specialites.filter((s) => d.specialitesLiees.includes(s.id) || s.data.servicesLies.includes(entry.id));
+const related = Array.from({ length: 4 }, (_, k) => allServices[(d.order + k) % allServices.length]!);
+const wa = whatsappLink(`Bonjour, je suis intéressé(e) par votre service « ${d.short} ».`);
+---
+<BaseLayout
+  title={d.title}
+  description={d.description}
+  context={d.short}
+  jsonld={[breadcrumb(base, crumbs), serviceLd(base, { name: d.h1, description: d.description, path, type: d.short }), ...(d.faq.length ? [faqPage(d.faq)] : [])]}
+>
+  <PageHero eyebrow={`Service ${pad(d.order)}`} h1={d.h1} intro={d.intro} crumbs={crumbs} variant={d.specialitesLiees[0] ?? entry.id} ctaLabel={d.cta} />
+
+  <section class="py-20 lg:py-28">
+    <div class="container-lux grid gap-16 lg:grid-cols-12">
+      <div class="lg:col-span-7">
+        <p class="eyebrow text-[var(--color-gold-deep)]">Livrables</p>
+        <h2 class="mt-6">Ce que vous recevez</h2>
+        <ol class="mt-12 divide-y divide-[var(--color-line)] border-y border-[var(--color-line)]">
+          {d.livrables.map((l, i) => (
+            <li class="flex gap-6 py-6" data-reveal style={`--i:${i}`}>
+              <span class="num w-10 shrink-0 text-3xl leading-none">{pad(i + 1)}</span>
+              <span class="text-[1.05rem]">{l}</span>
+            </li>
+          ))}
+        </ol>
+        {d.note && <p class="mt-8 border-l-2 border-[var(--color-gold)] pl-5 text-[0.95rem] italic text-[var(--color-stone-ink)]">{d.note}</p>}
+      </div>
+
+      <aside class="lg:col-span-5">
+        <div class="sticky top-32 border border-[var(--color-line)] bg-white/50 p-8 lg:p-10">
+          <p class="caption text-[var(--color-gold-deep)]">Votre projet</p>
+          <p class="display mt-3 text-[2rem] leading-tight">{d.cta}</p>
+          <p class="mt-4 text-[0.95rem] text-[var(--color-stone-ink)]">Décrivez votre structure et votre calendrier : nous revenons vers vous avec une première approche et les prochaines étapes.</p>
+          <div class="mt-8 flex flex-col gap-3">
+            <a href="/contact/" class="btn btn-gold">{d.cta}</a>
+            {wa && <a href={wa} target="_blank" rel="noopener" class="btn btn-ghost-dark">Écrire sur WhatsApp</a>}
+          </div>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <Faq items={d.faq} tone="sand" />
+
+  <section class="py-20 lg:py-28">
+    <div class="container-lux grid gap-16 lg:grid-cols-2">
+      <RelatedLinks title="Spécialités concernées" links={linkedSpecs.map((s) => ({ href: specialitePath(s.id), label: s.data.short, meta: 'Spécialité' }))} />
+      <RelatedLinks title="Services associés" links={related.map((s) => ({ href: servicePath(s.id), label: s.data.short, meta: `Service ${pad(s.data.order)}` }))} />
+    </div>
+  </section>
+
+  <CtaBand context={d.short} title={d.cta} />
+</BaseLayout>

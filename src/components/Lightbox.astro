@@ -1,0 +1,67 @@
+---
+/**
+ * Visionneuse plein écran : fondu + léger zoom, clavier (←, →, Échap) et balayage.
+ * Usage : liens <a data-lightbox="groupe" href="image-grande" data-caption="…"><img …></a>
+ */
+---
+<dialog id="lightbox" class="lightbox m-0 h-full max-h-none w-full max-w-none bg-transparent p-0 backdrop:bg-[rgba(10,26,47,0.95)]" aria-label="Visionneuse d’images">
+  <div class="flex h-full w-full flex-col items-center justify-center p-4 md:p-12">
+    <img class="lb-img max-h-[80vh] max-w-full rounded-[var(--radius-photo)] object-contain" alt="" />
+    <div class="mt-6 flex w-full max-w-5xl items-center justify-between text-[var(--color-ivory)]">
+      <p class="lb-count num text-2xl" aria-live="polite"></p>
+      <p class="lb-caption caption text-[var(--color-ivory)]/75"></p>
+      <div class="flex gap-2">
+        <button type="button" class="lb-prev btn btn-ghost-light px-4" aria-label="Image précédente">←</button>
+        <button type="button" class="lb-next btn btn-ghost-light px-4" aria-label="Image suivante">→</button>
+        <button type="button" class="lb-close btn btn-ghost-light px-4" aria-label="Fermer">✕</button>
+      </div>
+    </div>
+  </div>
+</dialog>
+
+<style>
+  .lightbox[open] .lb-img { animation: lb-in 700ms var(--ease-lux) both; }
+  @keyframes lb-in { from { opacity: 0; transform: scale(0.96); } to { opacity: 1; transform: none; } }
+</style>
+
+<script>
+  const dlg = document.getElementById('lightbox') as HTMLDialogElement | null;
+  if (dlg) {
+    const img = dlg.querySelector<HTMLImageElement>('.lb-img')!;
+    const count = dlg.querySelector<HTMLElement>('.lb-count')!;
+    const cap = dlg.querySelector<HTMLElement>('.lb-caption')!;
+    let items: HTMLAnchorElement[] = [];
+    let idx = 0;
+    const pad = (n: number) => String(n).padStart(2, '0');
+    const show = (i: number) => {
+      idx = (i + items.length) % items.length;
+      const a = items[idx]!;
+      img.style.animation = 'none'; void img.offsetWidth; img.style.animation = '';
+      img.src = a.href;
+      img.alt = a.querySelector('img')?.alt ?? '';
+      cap.textContent = a.dataset.caption ?? '';
+      count.textContent = `${pad(idx + 1)} / ${pad(items.length)}`;
+    };
+    document.addEventListener('click', (e) => {
+      const a = (e.target as HTMLElement).closest<HTMLAnchorElement>('a[data-lightbox]');
+      if (!a) return;
+      e.preventDefault();
+      items = [...document.querySelectorAll<HTMLAnchorElement>(`a[data-lightbox="${a.dataset.lightbox}"]`)];
+      show(items.indexOf(a));
+      dlg.showModal();
+    });
+    dlg.querySelector('.lb-prev')?.addEventListener('click', () => show(idx - 1));
+    dlg.querySelector('.lb-next')?.addEventListener('click', () => show(idx + 1));
+    dlg.querySelector('.lb-close')?.addEventListener('click', () => dlg.close());
+    dlg.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft') show(idx - 1);
+      if (e.key === 'ArrowRight') show(idx + 1);
+    });
+    let x0 = 0;
+    dlg.addEventListener('touchstart', (e) => { x0 = e.touches[0]!.clientX; }, { passive: true });
+    dlg.addEventListener('touchend', (e) => {
+      const dx = e.changedTouches[0]!.clientX - x0;
+      if (Math.abs(dx) > 50) show(idx + (dx < 0 ? 1 : -1));
+    });
+  }
+</script>

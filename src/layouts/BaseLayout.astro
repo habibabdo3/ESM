@@ -1,0 +1,49 @@
+---
+import '@/styles/global.css';
+import Seo from '@/components/Seo.astro';
+import Header from '@/components/Header.astro';
+import Footer from '@/components/Footer.astro';
+import StickyCta from '@/components/StickyCta.astro';
+import CookieBanner from '@/components/CookieBanner.astro';
+import displayFont from '@fontsource/cormorant-garamond/files/cormorant-garamond-latin-500-normal.woff2?url';
+import textFont from '@fontsource-variable/manrope/files/manrope-latin-wght-normal.woff2?url';
+
+interface Props {
+  title: string;
+  description: string;
+  noindex?: boolean;
+  ogImage?: string;
+  ogType?: 'website' | 'article';
+  jsonld?: Record<string, unknown>[];
+  overlayHeader?: boolean;
+  context?: string;
+}
+const { overlayHeader = false, context, ...seo } = Astro.props;
+---
+
+<!doctype html>
+<html lang="fr" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0a1a2f" />
+    <meta name="format-detection" content="telephone=no" />
+    <link rel="preload" href={displayFont} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={textFont} as="font" type="font/woff2" crossorigin />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <script is:inline>document.documentElement.classList.add('js')</script>
+    <Seo {...seo} />
+  </head>
+  <body>
+    <Header overlay={overlayHeader} />
+    <main id="contenu">
+      <slot />
+    </main>
+    <Footer />
+    <StickyCta context={context ?? seo.title} />
+    <CookieBanner />
+    <script>import '@/scripts/motion';</script>
+  </body>
+</html>

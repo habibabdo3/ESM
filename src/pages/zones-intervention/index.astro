@@ -1,0 +1,54 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PageHero from '@/components/PageHero.astro';
+import MoroccoMap from '@/components/MoroccoMap.astro';
+import CtaBand from '@/components/CtaBand.astro';
+import { getRegions, regionPath } from '@/lib/content';
+import { breadcrumb } from '@/lib/schema';
+import { site } from '@/config/site';
+
+const regions = await getRegions();
+const base = Astro.site!;
+const crumbs = [{ name: 'Accueil', path: '/' }, { name: 'Zones d’intervention', path: '/zones-intervention/' }];
+---
+<BaseLayout
+  title="Zones d’intervention au Maroc"
+  description="Euro Space Medical intervient dans les douze régions du Maroc : conception au siège de Casablanca, chantiers suivis sur place avec la même méthode."
+  jsonld={[breadcrumb(base, crumbs)]}
+  context="Zones d’intervention"
+>
+  <PageHero eyebrow="Couverture nationale" h1="Partout au Maroc, la même méthode" intro={`Le siège de ${site.hq} conçoit, achète, contrôle et accompagne le financement. Les chantiers sont suivis localement par un conducteur de travaux et un réseau d’artisans formés à notre méthode.`} crumbs={crumbs} variant="default" />
+
+  <section class="bg-[var(--color-night)] pb-20 text-[var(--color-ivory)] lg:pb-28">
+    <div class="container-lux grid items-start gap-14 lg:grid-cols-12">
+      <div class="lg:col-span-6">
+        <MoroccoMap class="w-full" />
+        <p class="caption mt-4 text-[var(--color-ivory)]/60">Carte schématique · points pleins : villes de l’axe principal · cercles : villes des nouvelles facultés et du Sud</p>
+      </div>
+      <ul class="grid gap-px overflow-hidden bg-[var(--color-night-3)] sm:grid-cols-2 lg:col-span-6">
+        {regions.map((r, i) => (
+          <li class="bg-[var(--color-night)]" data-reveal style={`--i:${i % 2}`}>
+            <a href={regionPath(r.id)} class="group block p-6 no-underline">
+              <span class="font-[family-name:var(--font-display)] text-[1.5rem] leading-tight transition-colors group-hover:text-[var(--color-gold-soft)]">{r.data.name}</span>
+              <span class="mt-2 block text-[0.85rem] text-[var(--color-ivory)]/60">{r.data.villes.slice(0, 3).join(' · ')}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="py-20 lg:py-28">
+    <div class="container-lux grid gap-12 md:grid-cols-3">
+      {[
+        { t: 'Siège à ' + site.hq, p: 'Direction de projets, bureau d’études et conception 2D et 3D, achats et logistique, relation bancaire, service client.' },
+        { t: 'Suivi local', p: 'Un conducteur de travaux par chantier et un réseau d’artisans sélectionnés, formés à notre méthode et évalués après chaque projet.' },
+        { t: 'Preuves à chaque étape', p: 'Planning, comptes rendus photo hebdomadaires, procès-verbaux et dossier des ouvrages exécutés, quelle que soit la ville.' },
+      ].map((b, i) => (
+        <div data-reveal style={`--i:${i}`}><span class="gold-rule"></span><h2 class="mt-6 text-[1.9rem]">{b.t}</h2><p class="mt-4 text-[var(--color-stone-ink)]">{b.p}</p></div>
+      ))}
+    </div>
+  </section>
+
+  <CtaBand context="Zones d’intervention" />
+</BaseLayout>

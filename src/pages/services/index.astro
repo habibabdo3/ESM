@@ -1,0 +1,35 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PageHero from '@/components/PageHero.astro';
+import ServiceCard from '@/components/ServiceCard.astro';
+import ProcessSteps from '@/components/ProcessSteps.astro';
+import CtaBand from '@/components/CtaBand.astro';
+import { getServices } from '@/lib/content';
+import { breadcrumb } from '@/lib/schema';
+
+const services = await getServices();
+const base = Astro.site!;
+const crumbs = [{ name: 'Accueil', path: '/' }, { name: 'Services', path: '/services/' }];
+---
+<BaseLayout
+  title="Services d’aménagement de structures médicales"
+  description="Faisabilité, conception 2D et 3D, réseaux, travaux, rénovation, imagerie, équipement, design, hygiène et financement : dix services pour votre projet."
+  jsonld={[breadcrumb(base, crumbs)]}
+  context="Services"
+>
+  <PageHero eyebrow="Services" h1="Dix services, un seul interlocuteur" intro="Chaque service peut être commandé seul ou s’intégrer dans un accompagnement complet, de l’étude de faisabilité au suivi après livraison." crumbs={crumbs} variant="medecine-generale-cabinets-de-groupe" />
+  <section class="py-20 lg:py-28">
+    <h2 class="sr-only">Nos dix services</h2>
+    <div class="container-lux grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {services.map((s, i) => <ServiceCard id={s.id} order={s.data.order} short={s.data.short} h1={s.data.h1} intro={s.data.intro} description={s.data.description} i={i} />)}
+    </div>
+  </section>
+  <section class="bg-[var(--color-night)] py-20 text-[var(--color-ivory)] lg:py-28">
+    <div class="container-lux">
+      <p class="eyebrow text-[var(--color-gold)]">Méthode</p>
+      <h2 class="mt-6 max-w-3xl">Comment s’enchaînent nos services</h2>
+      <div class="mt-14"><ProcessSteps tone="night" /></div>
+    </div>
+  </section>
+  <CtaBand context="Services" />
+</BaseLayout>

@@ -1,0 +1,91 @@
+---
+import { Image } from 'astro:assets';
+import { render } from 'astro:content';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import BeforeAfter from '@/components/BeforeAfter.astro';
+import Lightbox from '@/components/Lightbox.astro';
+import CtaBand from '@/components/CtaBand.astro';
+import RelatedLinks from '@/components/RelatedLinks.astro';
+import { getRealisations, getSpecialites, realisationPath, specialitePath } from '@/lib/content';
+import { breadcrumb } from '@/lib/schema';
+import type { CollectionEntry } from 'astro:content';
+
+export async function getStaticPaths() {
+  const items = await getRealisations();
+  return items.map((r) => ({ params: { slug: r.id }, props: { entry: r } }));
+}
+const { entry } = Astro.props as { entry: CollectionEntry<'realisations'> };
+const d = entry.data;
+const { Content } = await render(entry);
+const spec = (await getSpecialites()).find((s) => s.id === d.specialite);
+const base = Astro.site!;
+const path = realisationPath(entry.id);
+const crumbs = [{ name: 'Accueil', path: '/' }, { name: 'Réalisations', path: '/realisations/' }, { name: d.title, path }];
+---
+<BaseLayout title={d.title} description={d.description} ogImage={d.apres.src} jsonld={[breadcrumb(base, crumbs)]} context={d.title}>
+  <section class="bg-[var(--color-night)] text-[var(--color-ivory)]">
+    <div class="container-lux pb-12 pt-14">
+      <Breadcrumbs items={crumbs} />
+      <p class="caption mt-10 text-[var(--color-gold)]">{d.ville} · {spec?.data.short ?? d.specialite}</p>
+      <h1 class="mt-4 max-w-4xl"><span class="line-mask"><span>{d.title}</span></span></h1>
+    </div>
+    <div class="container-lux pb-16">
+      <Image src={d.apres} alt={`${d.title} — après travaux`} widths={[800, 1200, 1800]} sizes="100vw" loading="eager" fetchpriority="high" class="aspect-[16/9] w-full rounded-[var(--radius-photo)] object-cover" style={`view-transition-name:real-${entry.id}`} />
+    </div>
+  </section>
+
+  <section class="py-16">
+    <dl class="container-lux grid grid-cols-2 gap-8 md:grid-cols-4">
+      <div><dt class="caption text-[var(--color-stone-ink)]">Surface</dt><dd class="num mt-2 text-4xl">{d.surface} m²</dd></div>
+      <div><dt class="caption text-[var(--color-stone-ink)]">Durée</dt><dd class="display mt-2 text-3xl">{d.duree}</dd></div>
+      <div class="col-span-2"><dt class="caption text-[var(--color-stone-ink)]">Lots réalisés</dt><dd class="mt-3 text-[0.95rem]">{d.lots.join(' · ')}</dd></div>
+    </dl>
+  </section>
+
+  <section class="pb-20">
+    <div class="container-lux grid gap-16 lg:grid-cols-2">
+      <div><h2 class="text-[2.2rem]">Le défi</h2><p class="mt-5 text-[var(--color-stone-ink)]">{d.defi}</p></div>
+      <div><h2 class="text-[2.2rem]">La solution</h2><p class="mt-5 text-[var(--color-stone-ink)]">{d.solution}</p></div>
+    </div>
+  </section>
+
+  <section class="bg-[var(--color-sand)] py-20">
+    <div class="container-lux">
+      <h2 class="text-[2.2rem]">Avant, après</h2>
+      <div class="mt-10">
+        <BeforeAfter>
+          <Image slot="before" src={d.avant} alt={`${d.title} — avant travaux`} widths={[800, 1400]} sizes="100vw" class="h-full w-full object-cover" />
+          <Image slot="after" src={d.apres} alt={`${d.title} — après travaux`} widths={[800, 1400]} sizes="100vw" class="h-full w-full object-cover" />
+        </BeforeAfter>
+      </div>
+      {d.galerie.length > 0 && (
+        <ul class="mt-10 grid grid-cols-2 gap-4 md:grid-cols-4">
+          {d.galerie.map((g) => (
+            <li><a href={g.src.src} data-lightbox={entry.id} data-caption={`${d.ville} · ${spec?.data.short ?? ''}`}><Image src={g.src} alt={g.alt} widths={[400, 800]} sizes="25vw" class="aspect-square w-full rounded-[var(--radius-photo)] object-cover" /></a></li>
+          ))}
+        </ul>
+      )}
+    </div>
+  </section>
+
+  <article class="prose-lux container-lux max-w-3xl py-20"><Content /></article>
+
+  {d.temoignage && (
+    <section class="bg-[var(--color-night)] py-20 text-[var(--color-ivory)]">
+      <figure class="container-lux max-w-3xl">
+        <blockquote class="display text-[2rem] leading-snug">« {d.temoignage.texte} »</blockquote>
+        <figcaption class="caption mt-6 text-[var(--color-gold)]">{d.temoignage.auteur}</figcaption>
+      </figure>
+    </section>
+  )}
+
+  <section class="py-20"><div class="container-lux">
+    <RelatedLinks title="Pour aller plus loin" links={[
+      ...(spec ? [{ href: specialitePath(spec.id), label: spec.data.h1, meta: 'Spécialité' }] : []),
+      { href: '/realisations/', label: 'Toutes nos réalisations', meta: 'Portfolio' },
+    ]} />
+  </div></section>
+  <Lightbox />
+  <CtaBand context={d.title} title="Un projet comparable ?" />
+</BaseLayout>

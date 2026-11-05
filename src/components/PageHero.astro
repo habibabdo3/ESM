@@ -1,0 +1,36 @@
+---
+import Breadcrumbs from './Breadcrumbs.astro';
+import PlanArt from './PlanArt.astro';
+
+interface Props {
+  eyebrow: string;
+  h1: string;
+  intro?: string;
+  crumbs: { name: string; path: string }[];
+  variant?: string;
+  ctaLabel?: string;
+  ctaHref?: string;
+  vtName?: string;
+}
+const { eyebrow, h1, intro, crumbs, variant = 'default', ctaLabel, ctaHref = '/contact/', vtName } = Astro.props;
+---
+<section class="relative isolate overflow-hidden bg-[var(--color-night)] text-[var(--color-ivory)]">
+  <div class="absolute inset-0 -z-10 opacity-55" aria-hidden="true">
+    <div class="hero-media h-full w-full" style={vtName ? `view-transition-name:${vtName}` : undefined}>
+      <PlanArt variant={variant} class="h-full w-full" label="" />
+    </div>
+  </div>
+  <div class="absolute inset-0 -z-10 bg-gradient-to-r from-[var(--color-night)] via-[var(--color-night)]/90 to-[var(--color-night)]/40" aria-hidden="true"></div>
+  <div class="container-lux pb-20 pt-14 lg:pb-28 lg:pt-20">
+    <Breadcrumbs items={crumbs} />
+    <p class="eyebrow mt-10 text-[var(--color-gold)] fade-up">{eyebrow}</p>
+    <h1 class="mt-6 max-w-4xl"><span class="line-mask"><span>{h1}</span></span></h1>
+    {intro && <p class="fade-up mt-8 max-w-2xl text-lg leading-relaxed text-[var(--color-ivory)]/80" style="--i:2">{intro}</p>}
+    {ctaLabel && (
+      <div class="fade-up mt-10 flex flex-wrap gap-4" style="--i:3">
+        <a href={ctaHref} class="btn btn-gold">{ctaLabel} <span class="arrow" aria-hidden="true">→</span></a>
+      </div>
+    )}
+    <slot />
+  </div>
+</section>

@@ -1,0 +1,33 @@
+---
+/** Carte schématique : points placés selon les coordonnées réelles des villes (aucun tracé de frontière). */
+interface Props { class?: string; tone?: 'night' | 'light' }
+const { class: cls = '', tone = 'night' } = Astro.props;
+const cities: [string, number, number, 1 | 2, boolean?][] = [
+  ['Tanger', 35.77, -5.8, 1, true], ['Tétouan', 35.57, -5.37, 1], ['Al Hoceïma', 35.25, -3.93, 1], ['Nador', 35.17, -2.93, 2],
+  ['Oujda', 34.68, -1.91, 2, true], ['Kénitra', 34.26, -6.58, 1], ['Rabat', 34.02, -6.84, 1], ['Fès', 34.03, -5.0, 1, true],
+  ['Meknès', 33.89, -5.55, 1], ['Casablanca', 33.57, -7.59, 1, true], ['El Jadida', 33.25, -8.5, 1], ['Khouribga', 32.88, -6.91, 2],
+  ['Béni Mellal', 32.34, -6.35, 2, true], ['Safi', 32.3, -9.24, 1], ['Marrakech', 31.63, -8.01, 1, true], ['Essaouira', 31.51, -9.77, 1],
+  ['Errachidia', 31.93, -4.42, 2, true], ['Ouarzazate', 30.92, -6.89, 2], ['Agadir', 30.43, -9.6, 1, true], ['Tiznit', 29.7, -9.73, 1],
+  ['Guelmim', 28.99, -10.06, 2, true], ['Tan-Tan', 28.44, -11.1, 2], ['Laâyoune', 27.15, -13.2, 2, true], ['Smara', 26.74, -11.67, 2],
+  ['Boujdour', 26.13, -14.48, 2], ['Dakhla', 23.68, -15.96, 2, true],
+];
+const P = (lat: number, lon: number) => ({ x: (lon + 17) * 10, y: (36.4 - lat) * 10 });
+const casa = P(33.57, -7.59);
+const night = tone === 'night';
+const txt = night ? 'rgba(247,243,236,0.75)' : 'rgba(18,29,43,0.75)';
+const line = night ? 'rgba(247,243,236,0.12)' : 'rgba(18,29,43,0.12)';
+---
+<svg viewBox="0 0 175 135" class={cls} role="img" aria-label="Carte schématique des villes desservies au Maroc, avec le siège à Casablanca">
+  {cities.map(([, lat, lon]) => { const p = P(lat, lon); return <line x1={casa.x} y1={casa.y} x2={p.x} y2={p.y} stroke={line} stroke-width="0.3" />; })}
+  {cities.map(([name, lat, lon, phase, major]) => {
+    const p = P(lat, lon);
+    return (
+      <g>
+        <circle cx={p.x} cy={p.y} r={major ? 1.4 : 0.9} fill={phase === 1 ? 'var(--color-gold)' : 'none'} stroke="var(--color-gold)" stroke-width="0.4" />
+        {major && <text x={p.x + 2.6} y={p.y + 1.1} font-size="3.1" font-family="Manrope Variable, Manrope, sans-serif" letter-spacing="0.3" fill={txt}>{name}</text>}
+      </g>
+    );
+  })}
+  <circle cx={casa.x} cy={casa.y} r="3.4" fill="none" stroke="var(--color-gold)" stroke-width="0.4" />
+  <circle cx={casa.x} cy={casa.y} r="5.6" fill="none" stroke="var(--color-gold)" stroke-width="0.25" opacity="0.6" />
+</svg>

@@ -1,0 +1,442 @@
+@import 'tailwindcss';
+@import '@fontsource-variable/manrope';
+@import '@fontsource/cormorant-garamond/400.css';
+@import '@fontsource/cormorant-garamond/500.css';
+@import '@fontsource/cormorant-garamond/400-italic.css';
+
+/* ==========================================================================
+   DESIGN TOKENS — Euro Space Medical
+   Toute modification doit être reportée dans docs/DESIGN.md et CLAUDE.md
+   ========================================================================== */
+@theme {
+  /* Couleurs */
+  --color-night: #0a1a2f; /* bleu nuit profond : sections premium */
+  --color-night-2: #10263f; /* bleu nuit relevé : cartes sur fond nuit */
+  --color-night-3: #1b3654; /* filets sur fond nuit */
+  --color-teal: #1d5a60; /* bleu-vert profond : liens, icônes */
+  --color-ivory: #f7f3ec; /* blanc cassé chaud : fond principal */
+  --color-sand: #eee8dc; /* fond alterné */
+  --color-line: #ddd5c6; /* filets sur fond clair */
+  --color-stone: #8a857b; /* gris pierre décoratif */
+  --color-stone-ink: #5b564d; /* gris pierre texte (AA sur ivory) */
+  --color-ink: #121d2b; /* texte principal */
+  --color-gold: #c9a96b; /* or champagne : filets, chiffres, survols, CTA */
+  --color-gold-soft: #e4d2a6;
+  --color-gold-deep: #755a24; /* or lisible sur fond clair (AA : 5,8 sur ivory, 5,3 sur sand) */
+
+  /* Typographie */
+  --font-display: 'Cormorant Garamond', 'Cormorant', Georgia, 'Times New Roman', serif;
+  --font-sans: 'Manrope Variable', 'Manrope', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  /* Mouvement */
+  --ease-lux: cubic-bezier(0.22, 1, 0.36, 1);
+  --duration-hover: 300ms;
+  --duration-in: 800ms;
+  --duration-reveal: 1200ms;
+  --duration-hero: 22s;
+  --stagger: 100ms;
+
+  --radius-photo: 4px;
+}
+
+/* ==========================================================================
+   BASE
+   ========================================================================== */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+  }
+  body {
+    background: var(--color-ivory);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: 1.0625rem;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1,
+  h2,
+  h3,
+  .display {
+    font-family: var(--font-display);
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    line-height: 1.08;
+    text-wrap: balance;
+  }
+  h1 {
+    font-size: clamp(2.5rem, 1.6rem + 3.8vw, 5rem);
+  }
+  h2 {
+    font-size: clamp(2rem, 1.4rem + 2.4vw, 3.4rem);
+  }
+  h3 {
+    font-size: clamp(1.45rem, 1.2rem + 0.9vw, 1.9rem);
+  }
+  p {
+    text-wrap: pretty;
+  }
+  a {
+    color: inherit;
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-gold);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+  ::selection {
+    background: var(--color-gold-soft);
+    color: var(--color-night);
+  }
+}
+
+/* ==========================================================================
+   COMPOSANTS UTILITAIRES
+   ========================================================================== */
+@layer components {
+  .container-lux {
+    width: 100%;
+    max-width: 82rem;
+    margin-inline: auto;
+    padding-inline: 1rem;
+  }
+  @media (min-width: 640px) {
+    .container-lux {
+      padding-inline: 2rem;
+    }
+  }
+  @media (min-width: 1024px) {
+    .container-lux {
+      padding-inline: 3rem;
+    }
+  }
+
+  .eyebrow {
+    font-family: var(--font-sans);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.85rem;
+  }
+  .eyebrow::before {
+    content: '';
+    width: 2.25rem;
+    height: 1px;
+    background: currentColor;
+    opacity: 0.6;
+  }
+  .caption {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-variant: small-caps;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    min-height: 3rem;
+    padding: 0.8rem 1.6rem;
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: 1px solid transparent;
+    border-radius: 2px;
+    transition:
+      background-color var(--duration-hover) var(--ease-lux),
+      color var(--duration-hover) var(--ease-lux),
+      border-color var(--duration-hover) var(--ease-lux),
+      transform var(--duration-hover) var(--ease-lux);
+  }
+  .btn-gold {
+    background: var(--color-gold);
+    color: var(--color-night);
+  }
+  .btn-gold:hover {
+    background: var(--color-gold-soft);
+  }
+  .btn-ghost-light {
+    border-color: color-mix(in oklab, var(--color-ivory) 45%, transparent);
+    color: var(--color-ivory);
+  }
+  .btn-ghost-light:hover {
+    border-color: var(--color-gold);
+    color: var(--color-gold-soft);
+  }
+  .btn-ghost-dark {
+    border-color: var(--color-ink);
+    color: var(--color-ink);
+  }
+  .btn-ghost-dark:hover {
+    background: var(--color-night);
+    color: var(--color-ivory);
+  }
+  .btn .arrow {
+    transition: transform var(--duration-hover) var(--ease-lux);
+  }
+  .btn:hover .arrow {
+    transform: translateX(4px);
+  }
+
+  .link-lux {
+    text-decoration: none;
+    background-image: linear-gradient(currentColor, currentColor);
+    background-size: 0% 1px;
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    transition: background-size var(--duration-hover) var(--ease-lux);
+  }
+  .link-lux:hover {
+    background-size: 100% 1px;
+  }
+
+  .gold-rule {
+    display: block;
+    width: 3.5rem;
+    height: 1px;
+    background: var(--color-gold);
+  }
+
+  .prose-lux > * + * {
+    margin-top: 1.1em;
+  }
+  .prose-lux h2 {
+    margin-top: 2em;
+    font-size: clamp(1.7rem, 1.3rem + 1.4vw, 2.4rem);
+  }
+  .prose-lux h3 {
+    margin-top: 1.6em;
+  }
+  .prose-lux ul {
+    list-style: none;
+    padding: 0;
+  }
+  .prose-lux ul li {
+    position: relative;
+    padding-left: 1.6rem;
+  }
+  .prose-lux ul li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.85em;
+    width: 0.8rem;
+    height: 1px;
+    background: var(--color-gold-deep);
+  }
+  .prose-lux a {
+    color: var(--color-teal);
+    text-underline-offset: 3px;
+  }
+
+  .todo {
+    display: inline-block;
+    padding: 0 0.35em;
+    background: #fff3c4;
+    color: #5a4300;
+    border: 1px dashed #b38a00;
+    font-family: var(--font-sans);
+    font-size: 0.85em;
+    font-weight: 600;
+    letter-spacing: 0;
+    text-transform: none;
+  }
+
+  /* Liste numérotée élégante */
+  /* Chiffres serif : or profond sur fond clair (AA), or champagne sur fond nuit */
+  .num {
+    font-family: var(--font-display);
+    font-feature-settings: 'lnum';
+    color: var(--color-gold-deep);
+  }
+  [class*='bg-[var(--color-night'] .num,
+  .on-night .num {
+    color: var(--color-gold);
+  }
+}
+
+/* ==========================================================================
+   ANIMATIONS — voir /styleguide/
+   N'animer que transform, opacity, clip-path.
+   ========================================================================== */
+
+/* 1. Héros : zoom lent, l'image est visible immédiatement (pas de fondu). */
+.hero-media {
+  transform: scale(1.08);
+  animation: hero-zoom var(--duration-hero) var(--ease-lux) forwards;
+  transform-origin: 60% 40%;
+}
+@keyframes hero-zoom {
+  to {
+    transform: scale(1);
+  }
+}
+
+/* Titre ligne par ligne */
+.line-mask {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.08em;
+}
+.line-mask > span {
+  display: block;
+  animation: line-up 900ms var(--ease-lux) both;
+  animation-delay: calc(var(--i, 0) * 120ms + 150ms);
+}
+@keyframes line-up {
+  from {
+    transform: translateY(105%);
+    opacity: 0;
+  }
+  to {
+    transform: none;
+    opacity: 1;
+  }
+}
+.fade-up {
+  animation: fade-up 900ms var(--ease-lux) both;
+  animation-delay: calc(var(--i, 0) * 120ms + 150ms);
+}
+@keyframes fade-up {
+  from {
+    transform: translateY(18px);
+    opacity: 0;
+  }
+  to {
+    transform: none;
+    opacity: 1;
+  }
+}
+
+/* 2. Révélation au défilement (activée seulement si JS présent) */
+.js [data-reveal] {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity var(--duration-in) var(--ease-lux),
+    transform var(--duration-in) var(--ease-lux);
+  transition-delay: calc(var(--i, 0) * var(--stagger));
+}
+.js [data-reveal].is-in {
+  opacity: 1;
+  transform: none;
+}
+.js [data-reveal-img] {
+  clip-path: inset(100% 0 0 0);
+  transition: clip-path var(--duration-reveal) var(--ease-lux);
+  transition-delay: calc(var(--i, 0) * var(--stagger));
+}
+.js [data-reveal-img] > * {
+  transform: scale(1.15);
+  transition: transform var(--duration-reveal) var(--ease-lux);
+  transition-delay: calc(var(--i, 0) * var(--stagger));
+}
+.js [data-reveal-img].is-in {
+  clip-path: inset(0 0 0 0);
+}
+.js [data-reveal-img].is-in > * {
+  transform: scale(1);
+}
+
+/* 3. Survol des cartes (souris uniquement) */
+.card-lux .card-media > * {
+  transition: transform 900ms var(--ease-lux);
+}
+.card-lux .card-veil {
+  transition: opacity var(--duration-hover) var(--ease-lux);
+  opacity: 0;
+}
+.card-lux .card-rule {
+  transform: scaleX(0.25);
+  transform-origin: left;
+  transition: transform 600ms var(--ease-lux);
+}
+.card-lux .card-more {
+  transition:
+    transform var(--duration-hover) var(--ease-lux),
+    opacity var(--duration-hover) var(--ease-lux);
+}
+@media (hover: hover) and (pointer: fine) {
+  .card-lux .card-more {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  .card-lux:hover .card-media > *,
+  .card-lux:focus-within .card-media > * {
+    transform: scale(1.05);
+  }
+  .card-lux:hover .card-veil,
+  .card-lux:focus-within .card-veil {
+    opacity: 1;
+  }
+  .card-lux:hover .card-rule,
+  .card-lux:focus-within .card-rule {
+    transform: scaleX(1);
+  }
+  .card-lux:hover .card-more,
+  .card-lux:focus-within .card-more {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* 5. Parallaxe légère (desktop) : JS règle --py */
+.parallax > * {
+  transform: translate3d(0, var(--py, 0), 0) scale(1.1);
+  will-change: transform;
+}
+
+/* 7. Transitions entre pages (View Transitions natives, sans JS) */
+@view-transition {
+  navigation: auto;
+}
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 500ms;
+  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+}
+::view-transition-group(*) {
+  animation-duration: 700ms;
+  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Réduction des animations */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 1ms !important;
+    animation-delay: 0ms !important;
+    transition-duration: 150ms !important;
+    transition-delay: 0ms !important;
+  }
+  .hero-media {
+    animation: none;
+    transform: none;
+  }
+  .js [data-reveal],
+  .js [data-reveal-img],
+  .js [data-reveal-img] > * {
+    transform: none;
+    clip-path: none;
+  }
+  .parallax > * {
+    transform: none;
+  }
+  @view-transition {
+    navigation: none;
+  }
+}

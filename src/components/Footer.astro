@@ -1,0 +1,72 @@
+---
+import Logo from './Logo.astro';
+import Todo from './Todo.astro';
+import { site } from '@/config/site';
+import { getServices, getSpecialites, servicePath, specialitePath } from '@/lib/content';
+
+const services = await getServices();
+const specialites = await getSpecialites();
+const year = new Date().getFullYear();
+---
+
+<footer class="bg-[var(--color-night)] text-[var(--color-ivory)]">
+  <div class="container-lux grid gap-14 py-20 lg:grid-cols-12">
+    <div class="lg:col-span-4">
+      <Logo tone="light" />
+      <p class="mt-6 max-w-sm text-[0.95rem] leading-relaxed text-[var(--color-ivory)]/75">{site.promise}</p>
+      <dl class="mt-8 space-y-2 text-[0.92rem]">
+        <div class="flex gap-3"><dt class="w-20 shrink-0 text-[var(--color-gold)]">Siège</dt><dd>{site.address ?? <Todo label="adresse" />}, {site.hq}</dd></div>
+        <div class="flex gap-3"><dt class="w-20 shrink-0 text-[var(--color-gold)]">Tél.</dt><dd>{site.phone ? <a href={`tel:${site.phone.replace(/\s/g, '')}`} class="link-lux">{site.phone}</a> : <Todo label="téléphone" />}</dd></div>
+        <div class="flex gap-3"><dt class="w-20 shrink-0 text-[var(--color-gold)]">E-mail</dt><dd>{site.email ? <a href={`mailto:${site.email}`} class="link-lux">{site.email}</a> : <Todo label="e-mail" />}</dd></div>
+      </dl>
+      {(site.instagram || site.facebook) && (
+        <ul class="mt-6 flex gap-5 text-[0.8rem] font-semibold uppercase tracking-[0.14em]">
+          {site.instagram && <li><a href={site.instagram} rel="noopener" target="_blank" class="link-lux">Instagram</a></li>}
+          {site.facebook && <li><a href={site.facebook} rel="noopener" target="_blank" class="link-lux">Facebook</a></li>}
+        </ul>
+      )}
+    </div>
+
+    <nav aria-label="Services" class="lg:col-span-3">
+      <p class="eyebrow text-[var(--color-gold)]">Services</p>
+      <ul class="mt-5 space-y-2 text-[0.92rem] text-[var(--color-ivory)]/80">
+        {services.map((s) => <li><a href={servicePath(s.id)} class="link-lux">{s.data.short}</a></li>)}
+      </ul>
+    </nav>
+
+    <nav aria-label="Spécialités" class="lg:col-span-3">
+      <p class="eyebrow text-[var(--color-gold)]">Spécialités</p>
+      <ul class="mt-5 grid grid-cols-1 gap-y-2 text-[0.92rem] text-[var(--color-ivory)]/80">
+        {specialites.map((s) => <li><a href={specialitePath(s.id)} class="link-lux">{s.data.short}</a></li>)}
+      </ul>
+    </nav>
+
+    <nav aria-label="Entreprise" class="lg:col-span-2">
+      <p class="eyebrow text-[var(--color-gold)]">Euro Space</p>
+      <ul class="mt-5 space-y-2 text-[0.92rem] text-[var(--color-ivory)]/80">
+        <li><a href="/amenagement-cabinet-medical/" class="link-lux">Aménagement</a></li>
+        <li><a href="/renovation-cabinet-clinique/" class="link-lux">Rénovation</a></li>
+        <li><a href="/financement/" class="link-lux">Financement</a></li>
+        <li><a href="/realisations/" class="link-lux">Réalisations</a></li>
+        <li><a href="/zones-intervention/" class="link-lux">Zones d’intervention</a></li>
+        <li><a href="/blog/" class="link-lux">Guides</a></li>
+        <li><a href="/faq/" class="link-lux">FAQ</a></li>
+        <li><a href="/a-propos/" class="link-lux">À propos</a></li>
+        <li><a href="/contact/" class="link-lux">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+
+  <div class="border-t border-[var(--color-night-3)]">
+    <div class="container-lux flex flex-col gap-4 py-6 pb-28 text-[0.8rem] text-[var(--color-ivory)]/60 md:flex-row md:items-center md:justify-between md:pb-6">
+      <p>© {year} {site.name}. Tous droits réservés.</p>
+      <ul class="flex flex-wrap gap-x-6 gap-y-2">
+        <li><a href="/mentions-legales/" class="link-lux">Mentions légales</a></li>
+        <li><a href="/confidentialite/" class="link-lux">Confidentialité</a></li>
+        <li><a href="/cookies/" class="link-lux">Cookies</a></li>
+        <li><a href="/plan-du-site/" class="link-lux">Plan du site</a></li>
+        <li><button type="button" data-cookie-open class="link-lux cursor-pointer">Gérer les cookies</button></li>
+      </ul>
+    </div>
+  </div>
+</footer>

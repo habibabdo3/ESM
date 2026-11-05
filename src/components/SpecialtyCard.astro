@@ -1,0 +1,19 @@
+---
+import PlanArt from './PlanArt.astro';
+import { specialitePath } from '@/lib/content';
+interface Props { id: string; short: string; contrainte?: string; i?: number }
+const { id, short, contrainte, i = 0 } = Astro.props;
+---
+<article class="card-lux group relative" data-reveal style={`--i:${i % 4}`}>
+  <div class="card-media relative aspect-[4/3] overflow-hidden rounded-[var(--radius-photo)] bg-[var(--color-night)]">
+    <PlanArt variant={id} class="h-full w-full" detail="simple" label={`Illustration : plan schématique — ${short}`} />
+    <div class="card-veil absolute inset-0 bg-[var(--color-night)]/35"></div>
+  </div>
+  <p class="caption mt-5 text-[var(--color-stone-ink)]">Spécialité</p>
+  <h3 class="mt-1 text-[1.6rem]">
+    <a href={specialitePath(id)} class="no-underline after:absolute after:inset-0">{short}</a>
+  </h3>
+  <span class="card-rule mt-3 block h-px w-16 bg-[var(--color-gold)]"></span>
+  {contrainte && <p class="mt-4 text-[0.92rem] leading-relaxed text-[var(--color-stone-ink)]">{contrainte}</p>}
+  <span class="card-more mt-4 inline-flex items-center gap-2 text-[0.75rem] font-semibold uppercase tracking-[0.16em] text-[var(--color-gold-deep)]" aria-hidden="true">Découvrir <span>→</span></span>
+</article>

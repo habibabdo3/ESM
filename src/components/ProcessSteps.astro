@@ -1,0 +1,23 @@
+---
+import { pad } from '@/lib/content';
+interface Props { tone?: 'light' | 'night' }
+const { tone = 'light' } = Astro.props;
+const steps = [
+  { t: 'Étude de faisabilité', d: 'Visite technique, relevé du local, programme fonctionnel et avis écrit.' },
+  { t: 'Conception', d: 'Plans 2D, rendus 3D, matériaux et plans techniques par lot.' },
+  { t: 'Budget et financement', d: 'Estimation par lot, business plan et dossier bancaire.' },
+  { t: 'Travaux coordonnés', d: 'Un maître d’œuvre, une réunion par semaine, un compte rendu photo.' },
+  { t: 'Équipement', d: 'Sélection comparée, installation, mise en service et formation.' },
+  { t: 'Réception et suivi', d: 'Contrôle par lot, procès-verbal, dossier des ouvrages et maintenance.' },
+];
+const night = tone === 'night';
+---
+<ol class="grid gap-px overflow-hidden sm:grid-cols-2 lg:grid-cols-3" style={`background:${night ? 'var(--color-night-3)' : 'var(--color-line)'}`}>
+  {steps.map((s, i) => (
+    <li class:list={['p-8 lg:p-10', night ? 'bg-[var(--color-night)]' : 'bg-[var(--color-ivory)]']} data-reveal style={`--i:${i % 3}`}>
+      <span class="num text-5xl">{pad(i + 1)}</span>
+      <h3 class:list={['mt-6 text-[1.6rem]', night && 'text-[var(--color-ivory)]']}>{s.t}</h3>
+      <p class:list={['mt-3 text-[0.95rem] leading-relaxed', night ? 'text-[var(--color-ivory)]/70' : 'text-[var(--color-stone-ink)]']}>{s.d}</p>
+    </li>
+  ))}
+</ol>

@@ -1,0 +1,22 @@
+---
+interface Props { title: string; links: { href: string; label: string; meta?: string }[] }
+const { title, links } = Astro.props;
+---
+{links.length > 0 && (
+  <nav aria-label={title} class="border-t border-[var(--color-line)] pt-10">
+    <h2 class="text-[2rem]">{title}</h2>
+    <ul class="mt-6 divide-y divide-[var(--color-line)]">
+      {links.map((l) => (
+        <li>
+          <a href={l.href} class="group flex items-center justify-between gap-6 py-5 no-underline">
+            <span>
+              {l.meta && <span class="caption block text-[var(--color-stone-ink)]">{l.meta}</span>}
+              <span class="font-[family-name:var(--font-display)] text-[1.45rem] leading-tight transition-colors group-hover:text-[var(--color-teal)]">{l.label}</span>
+            </span>
+            <span class="text-[var(--color-gold-deep)] transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true">→</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </nav>
+)}

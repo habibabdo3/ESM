@@ -1,0 +1,218 @@
+[
+  {
+    "id": "casablanca-settat",
+    "order": 1,
+    "name": "Casablanca-Settat",
+    "title": "Aménagement de cabinet médical à Casablanca-Settat",
+    "description": "Conception, rénovation et équipement de cabinets et de cliniques à Casablanca, Mohammedia, El Jadida, Settat et Berrechid, au plus près du siège.",
+    "h1": "Aménagement de cabinets et de cliniques dans la région Casablanca-Settat",
+    "villes": ["Casablanca", "Mohammedia", "El Jadida", "Settat", "Berrechid"],
+    "phase": "1",
+    "intro": "Notre siège est à Casablanca. C’est ici que se trouvent la direction de projets, le bureau d’études et la conception 2D et 3D, les achats et la relation bancaire. Pour les praticiens de la région, cela signifie des visites techniques rapides, des réunions de chantier en présentiel et un accès direct aux équipes qui dessinent votre projet.",
+    "contexte": "La région concentre une grande partie de l’offre de soins privée du pays, avec un parc important de cabinets installés depuis longtemps et de cliniques aménagées dans des immeubles ou des villas. La demande porte autant sur la création que sur la rénovation et la mise aux normes de structures existantes, souvent en activité.",
+    "priorites": [
+      "Rénovation et mise aux normes de cabinets et de cliniques en site occupé",
+      "Centres d’imagerie et laboratoires d’analyses en immeuble",
+      "Cabinets de groupe et centres pluridisciplinaires",
+      "Premières installations de jeunes praticiens"
+    ]
+  },
+  {
+    "id": "rabat-sale-kenitra",
+    "order": 2,
+    "name": "Rabat-Salé-Kénitra",
+    "title": "Aménagement de cabinet médical à Rabat-Salé-Kénitra",
+    "description": "Cabinets, cliniques, laboratoires et centres de rééducation à Rabat, Salé, Témara et Kénitra : conception, travaux et équipement par une équipe unique.",
+    "h1": "Aménagement de structures médicales dans la région Rabat-Salé-Kénitra",
+    "villes": ["Rabat", "Salé", "Témara", "Kénitra", "Khémisset"],
+    "phase": "1",
+    "intro": "De Rabat à Kénitra, nous accompagnons les praticiens et les établissements qui créent, déplacent ou rénovent leur structure. La conception est réalisée par notre bureau d’études, le chantier est suivi localement par un conducteur de travaux, avec la même méthode, les mêmes livrables et les mêmes contrôles qu’à Casablanca.",
+    "contexte": "La capitale administrative réunit des structures hospitalo-universitaires, des cliniques privées et un tissu dense de cabinets de spécialistes. À Kénitra, l’ouverture d’une faculté de médecine à l’Université Ibn Tofaïl va attirer enseignants, spécialistes et services de santé de proximité dans les prochaines années.",
+    "priorites": [
+      "Cabinets de spécialistes et centres d’explorations",
+      "Laboratoires et centres de radiologie de ville",
+      "Écosystème de santé autour de la nouvelle faculté de Kénitra",
+      "Rénovation de cliniques existantes"
+    ]
+  },
+  {
+    "id": "tanger-tetouan-al-hoceima",
+    "order": 3,
+    "name": "Tanger-Tétouan-Al Hoceïma",
+    "title": "Aménagement de cabinet médical à Tanger-Tétouan",
+    "description": "Création et rénovation de cabinets, cliniques et centres médicaux à Tanger, Tétouan, Al Hoceïma et Larache, avec un suivi de chantier assuré sur place.",
+    "h1": "Aménagement de cabinets et de cliniques dans la région Tanger-Tétouan-Al Hoceïma",
+    "villes": ["Tanger", "Tétouan", "Al Hoceïma", "Larache", "Chefchaouen"],
+    "phase": "1",
+    "intro": "Dans le Nord, nous intervenons pour les praticiens et les investisseurs qui ouvrent ou modernisent une structure médicale. Le projet est conçu à notre siège, puis réalisé par un réseau d’artisans formés à notre méthode et encadrés par un conducteur de travaux, avec des comptes rendus photo chaque semaine.",
+    "contexte": "La croissance de Tanger et de son agglomération entraîne une demande soutenue en soins de proximité, en imagerie et en analyses. Tétouan et les villes côtières complètent un territoire où beaucoup de structures sont installées dans des bâtiments anciens, ce qui rend l’étude de faisabilité particulièrement utile.",
+    "priorites": [
+      "Cabinets dentaires et de médecine générale dans les nouveaux quartiers",
+      "Centres d’imagerie et laboratoires",
+      "Mise aux normes de locaux anciens",
+      "Projets de cliniques portés par des investisseurs"
+    ]
+  },
+  {
+    "id": "fes-meknes",
+    "order": 4,
+    "name": "Fès-Meknès",
+    "title": "Aménagement de cabinet médical à Fès-Meknès",
+    "description": "Conception, travaux et équipement de cabinets, cliniques et laboratoires à Fès, Meknès, Taza et Ifrane, selon la même méthode et avec les mêmes contrôles.",
+    "h1": "Aménagement de structures médicales dans la région Fès-Meknès",
+    "villes": ["Fès", "Meknès", "Taza", "Ifrane", "Sefrou"],
+    "phase": "1",
+    "intro": "À Fès, à Meknès et dans les villes voisines, nous concevons et réalisons des cabinets, des centres et des cliniques adaptés à chaque spécialité. Vous disposez d’un interlocuteur unique, d’un planning détaillé et d’un procès-verbal de réception, quel que soit l’éloignement de notre siège.",
+    "contexte": "Pôle universitaire et hospitalier historique, la région forme chaque année de nombreux médecins et dentistes, dont une partie s’installe localement. Le bâti mêle immeubles récents et constructions anciennes, avec des contraintes fréquentes de hauteur, de réseaux et d’accessibilité.",
+    "priorites": [
+      "Premières installations de jeunes praticiens",
+      "Cabinets dentaires et d’orthodontie",
+      "Rénovation et extension de cliniques",
+      "Laboratoires d’analyses"
+    ]
+  },
+  {
+    "id": "marrakech-safi",
+    "order": 5,
+    "name": "Marrakech-Safi",
+    "title": "Aménagement de cabinet médical à Marrakech-Safi",
+    "description": "Cabinets, cliniques esthétiques, centres d’imagerie et de rééducation à Marrakech, Safi et Essaouira : conception, travaux et équipement clés en main.",
+    "h1": "Aménagement de cabinets et de cliniques dans la région Marrakech-Safi",
+    "villes": ["Marrakech", "Safi", "Essaouira", "El Kelâa des Sraghna", "Benguérir"],
+    "phase": "1",
+    "intro": "À Marrakech et dans sa région, nous accompagnons des projets très variés, du cabinet de ville à la clinique privée. Nous attachons un soin particulier au design d’intérieur et à l’expérience patient, sans rien céder sur les circuits, les réseaux et la conformité sanitaire.",
+    "contexte": "Marrakech combine une population locale en croissance, une offre hospitalo-universitaire et une patientèle internationale qui attend un niveau de confort élevé. La demande en médecine esthétique, en dermatologie et en rééducation y côtoie celle des spécialités courantes.",
+    "priorites": [
+      "Cliniques esthétiques et cabinets de dermatologie",
+      "Centres de kinésithérapie et de rééducation",
+      "Cliniques et centres d’imagerie",
+      "Cabinets de spécialistes"
+    ]
+  },
+  {
+    "id": "souss-massa",
+    "order": 6,
+    "name": "Souss-Massa",
+    "title": "Aménagement de cabinet médical à Agadir et Souss-Massa",
+    "description": "Conception et rénovation de cabinets, cliniques et centres médicaux à Agadir, Inezgane, Taroudant et Tiznit, avec une méthode identique et contrôlée.",
+    "h1": "Aménagement de structures médicales dans la région Souss-Massa",
+    "villes": ["Agadir", "Inezgane", "Aït Melloul", "Taroudant", "Tiznit"],
+    "phase": "1",
+    "intro": "Depuis Agadir, nous suivons les projets de la région : création de cabinets, rénovation de cliniques, centres d’imagerie et laboratoires. Les plans, les achats et le contrôle qualité sont centralisés, l’exécution est confiée à des artisans agréés et encadrés localement.",
+    "contexte": "L’agglomération d’Agadir et son arrière-pays connaissent une forte croissance démographique et un développement de l’offre de soins privée. Les projets y portent autant sur des cabinets de ville que sur des structures plus importantes destinées à desservir un large bassin.",
+    "priorites": [
+      "Cabinets de médecine générale et de groupe",
+      "Cabinets dentaires",
+      "Centres d’imagerie et laboratoires",
+      "Extension de cliniques existantes"
+    ]
+  },
+  {
+    "id": "beni-mellal-khenifra",
+    "order": 7,
+    "name": "Béni Mellal-Khénifra",
+    "title": "Aménagement de cabinet médical à Béni Mellal",
+    "description": "Nouvelle faculté, nouveau CHU : cabinets, laboratoires, centres de radiologie et de rééducation à Béni Mellal, Khouribga et Khénifra, conçus sur mesure.",
+    "h1": "Aménagement de structures médicales dans la région Béni Mellal-Khénifra",
+    "villes": ["Béni Mellal", "Khouribga", "Khénifra", "Fquih Ben Salah", "Azilal"],
+    "phase": "2",
+    "intro": "Béni Mellal fait partie des villes que nous couvrons en priorité. Nous y accompagnons les spécialistes, les laboratoires et les investisseurs qui préparent l’arrivée d’un nouvel écosystème de santé, avec une conception centralisée et un suivi de chantier régulier sur place.",
+    "contexte": "La création d’une faculté de médecine publique associée à un nouveau CHU, ainsi que l’implantation d’une faculté privée, change la dynamique de la région. Enseignants, spécialistes et services de soins de ville vont s’installer progressivement autour de ces pôles.",
+    "priorites": [
+      "Cabinets de spécialistes autour du futur CHU",
+      "Centres de radiologie et laboratoires de ville",
+      "Centres de kinésithérapie",
+      "Salles de travaux pratiques et de simulation pour l’enseignement privé"
+    ]
+  },
+  {
+    "id": "draa-tafilalet",
+    "order": 8,
+    "name": "Drâa-Tafilalet",
+    "title": "Aménagement de cabinet médical à Errachidia",
+    "description": "Cabinets, laboratoires et centres médicaux à Errachidia, Ouarzazate, Tinghir et Midelt : des projets pensés pour le climat et la logistique locale.",
+    "h1": "Aménagement de structures médicales dans la région Drâa-Tafilalet",
+    "villes": ["Errachidia", "Ouarzazate", "Tinghir", "Zagora", "Midelt"],
+    "phase": "2",
+    "intro": "Dans le Drâa-Tafilalet, la distance et le climat pèsent sur chaque projet. Nous anticipons l’approvisionnement des matériaux et des équipements depuis notre siège, dimensionnons la climatisation et la protection des appareils sensibles, et planifions le chantier pour limiter les allers-retours.",
+    "contexte": "L’ouverture d’une faculté de médecine à Errachidia, associée à un nouveau CHU, crée un besoin nouveau en structures de soins de ville dans une région longtemps sous-dotée. Les premiers projets privés serviront de référence pour tout le territoire.",
+    "priorites": [
+      "Cabinets de médecine générale et de spécialistes",
+      "Laboratoires d’analyses",
+      "Centres de radiologie",
+      "Logistique et climatisation adaptées aux fortes chaleurs"
+    ]
+  },
+  {
+    "id": "oriental",
+    "order": 9,
+    "name": "Oriental",
+    "title": "Aménagement de cabinet médical à Oujda et dans l’Oriental",
+    "description": "Conception, travaux et équipement de cabinets, cliniques et laboratoires à Oujda, Nador et Berkane, avec un interlocuteur unique du plan à la réception.",
+    "h1": "Aménagement de structures médicales dans la région de l’Oriental",
+    "villes": ["Oujda", "Nador", "Berkane", "Taourirt", "Guercif"],
+    "phase": "2",
+    "intro": "À Oujda, à Nador et dans toute la région de l’Oriental, nous proposons le même accompagnement qu’au siège : étude de faisabilité, conception 2D et 3D, travaux coordonnés, équipement et réception contrôlée. Le chantier est piloté localement et documenté chaque semaine.",
+    "contexte": "Oujda dispose d’un pôle hospitalo-universitaire qui forme des praticiens chaque année, tandis que Nador et Berkane développent leur offre de soins privée. Les besoins portent sur des premières installations comme sur la modernisation de structures existantes.",
+    "priorites": [
+      "Premières installations de jeunes praticiens",
+      "Cabinets dentaires et de spécialistes",
+      "Rénovation de cliniques",
+      "Centres d’imagerie"
+    ]
+  },
+  {
+    "id": "guelmim-oued-noun",
+    "order": 10,
+    "name": "Guelmim-Oued Noun",
+    "title": "Aménagement de cabinet médical à Guelmim",
+    "description": "Cabinets, laboratoires et centres de soins à Guelmim, Tan-Tan et Sidi Ifni : un accompagnement complet pour accompagner l’essor du nouveau pôle de santé.",
+    "h1": "Aménagement de structures médicales dans la région Guelmim-Oued Noun",
+    "villes": ["Guelmim", "Tan-Tan", "Sidi Ifni", "Assa"],
+    "phase": "2",
+    "intro": "Guelmim fait partie des villes où un nouvel écosystème de santé se met en place. Nous y accompagnons les praticiens et les investisseurs qui veulent s’installer tôt, avec des plans types éprouvés, adaptés à chaque local, et une organisation de chantier pensée pour l’éloignement.",
+    "contexte": "La création d’une faculté de médecine et d’un CHU à Guelmim va renforcer l’offre hospitalière et attirer des spécialistes. Les structures de ville (cabinets, laboratoires, radiologie, rééducation) restent à construire pour une grande partie du territoire.",
+    "priorites": [
+      "Cabinets de médecine générale et de groupe",
+      "Laboratoires et centres de radiologie",
+      "Cabinets dentaires",
+      "Centres de rééducation"
+    ]
+  },
+  {
+    "id": "laayoune-sakia-el-hamra",
+    "order": 11,
+    "name": "Laâyoune-Sakia El Hamra",
+    "title": "Aménagement de cabinet médical à Laâyoune",
+    "description": "Conception et réalisation de cabinets, cliniques et laboratoires à Laâyoune, Boujdour et Smara, avec des achats et une logistique pilotés depuis le siège.",
+    "h1": "Aménagement de structures médicales dans la région Laâyoune-Sakia El Hamra",
+    "villes": ["Laâyoune", "Boujdour", "Smara", "Tarfaya"],
+    "phase": "2",
+    "intro": "À Laâyoune, nous accompagnons les projets de cabinets, de centres et de cliniques avec une logistique organisée depuis notre siège : commandes groupées, livraison planifiée des équipements et coordination des corps d’état sur place.",
+    "contexte": "L’ouverture d’une faculté de médecine publique à Laâyoune s’inscrit dans le développement de l’offre de santé dans les provinces du Sud. L’installation de praticiens et de services de soins de ville devrait suivre ce mouvement.",
+    "priorites": [
+      "Cabinets de spécialistes",
+      "Laboratoires d’analyses",
+      "Centres d’imagerie",
+      "Cliniques de proximité"
+    ]
+  },
+  {
+    "id": "dakhla-oued-ed-dahab",
+    "order": 12,
+    "name": "Dakhla-Oued Ed-Dahab",
+    "title": "Aménagement de cabinet médical à Dakhla",
+    "description": "Création de cabinets, laboratoires et centres de soins à Dakhla : une conception centralisée, une logistique anticipée et une réception contrôlée.",
+    "h1": "Aménagement de structures médicales dans la région Dakhla-Oued Ed-Dahab",
+    "villes": ["Dakhla", "Aousserd"],
+    "phase": "2",
+    "intro": "Pour un projet à Dakhla, la préparation fait la différence. Nous fixons le programme et les plans en amont, regroupons les approvisionnements et organisons le chantier en séquences courtes, pour livrer une structure complète sans multiplier les délais d’acheminement.",
+    "contexte": "Dakhla connaît un développement économique et démographique rapide, qui s’accompagne d’un besoin croissant en soins de proximité. Les projets privés y restent peu nombreux, ce qui rend chaque nouvelle structure d’autant plus utile à la population.",
+    "priorites": [
+      "Cabinets de médecine générale et dentaires",
+      "Laboratoires d’analyses",
+      "Centres de soins pluridisciplinaires",
+      "Climatisation et protection contre l’air salin"
+    ]
+  }
+]

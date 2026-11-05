@@ -1,0 +1,16 @@
+---
+import { servicePath, pad } from '@/lib/content';
+interface Props { id: string; order: number; short: string; h1: string; intro: string; description?: string; i?: number; tone?: 'light' | 'night' }
+const { id, order, short, intro, i = 0, tone = 'light' } = Astro.props;
+const night = tone === 'night';
+const excerpt = Astro.props.description ?? intro.split('. ')[0] + '.';
+---
+<article class:list={['card-lux group relative flex h-full flex-col border p-8 transition-colors duration-300', night ? 'border-[var(--color-night-3)] bg-[var(--color-night-2)] text-[var(--color-ivory)] hover:border-[var(--color-gold)]/60' : 'border-[var(--color-line)] bg-white/40 hover:border-[var(--color-gold)]']} data-reveal style={`--i:${i % 4}`}>
+  <span class="num text-4xl">{pad(order)}</span>
+  <h3 class="mt-6 text-[1.7rem]">
+    <a href={servicePath(id)} class="no-underline after:absolute after:inset-0">{short}</a>
+  </h3>
+  <span class="card-rule mt-4 block h-px w-16 bg-[var(--color-gold)]"></span>
+  <p class:list={['mt-5 flex-1 text-[0.95rem] leading-relaxed', night ? 'text-[var(--color-ivory)]/70' : 'text-[var(--color-stone-ink)]']}>{excerpt}</p>
+  <span class:list={['card-more mt-6 inline-flex items-center gap-2 text-[0.75rem] font-semibold uppercase tracking-[0.16em]', night ? 'text-[var(--color-gold)]' : 'text-[var(--color-gold-deep)]']} aria-hidden="true">Découvrir <span>→</span></span>
+</article>
