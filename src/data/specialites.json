@@ -55,31 +55,31 @@
     "lexique": [
       {
         "terme": "Unit dentaire",
-        "definition": "Ensemble fauteuil, scialytique, tablette praticien et crachoir. On parle d’« unit » ou de « fauteuil » pour compter les postes de soins d’un cabinet."
+        "definition": "Nous implantons chaque unit à partir de votre façon de travailler : position du fauteuil, arrivées d’eau, d’air et d’aspiration réservées dans la chape au bon emplacement, prises dédiées et rangements sur-mesure dans la zone de l’assistante."
       },
       {
         "terme": "Autoclave classe B",
-        "definition": "Stérilisateur à vide fractionné, référence pour les instruments creux et emballés (contre-angles, turbines). Il impose une arrivée d’eau, une évacuation et une ventilation adaptées."
+        "definition": "Nous dimensionnons la salle de stérilisation autour de votre autoclave : arrivée d’eau traitée, évacuation, prise électrique dédiée et extraction de la chaleur, dans un plan de travail sur-mesure organisé en marche en avant."
       },
       {
         "terme": "Cone beam (CBCT)",
-        "definition": "Imagerie 3D dentaire utilisée en implantologie et en endodontie. Elle demande une salle dédiée, un blindage calculé et une autorisation de l’AMSSNuR."
+        "definition": "Nous préparons la salle de votre cone beam : blindage plombé calculé par le physicien, renfort ou ancrage selon le modèle, câblage vers votre poste de lecture et pièces techniques du dossier AMSSNuR."
       },
       {
         "terme": "Panoramique (OPT)",
-        "definition": "Radiographie panoramique des arcades. Souvent combinée avec le céphalométrique (« télé-crâne ») en orthodontie."
+        "definition": "Nous réservons l’emplacement de votre panoramique dès le plan : cloisons ou cabine plombées, fixation murale adaptée au poids de l’appareil, circuit électrique dédié et signalisation « rayons X »."
       },
       {
         "terme": "Séparateur d’amalgame",
-        "definition": "Dispositif placé sur l’évacuation de l’aspiration pour retenir les particules de mercure avant le réseau d’eaux usées."
+        "definition": "Nous raccordons le séparateur d’amalgame sur le réseau d’aspiration, dans le local technique, avec l’accès nécessaire pour la vidange et la maintenance, conformément aux exigences de gestion des déchets."
       },
       {
         "terme": "Aspiration chirurgicale humide / sèche",
-        "definition": "Deux technologies d’aspiration centrale : le choix détermine le diamètre des gaines, la pente des canalisations et l’emplacement du moteur."
+        "definition": "Nous dessinons le réseau d’aspiration selon la technologie choisie : diamètre et pente des canalisations, regards de visite, moteur dans un local technique insonorisé et ventilé, attentes pour un fauteuil supplémentaire."
       },
       {
         "terme": "Travail à quatre mains",
-        "definition": "Organisation praticien + assistante autour du fauteuil, qui fixe la position du fauteuil, des tablettes et des rangements (zones 9 h–12 h–3 h)."
+        "definition": "Nous organisons la salle de soins pour le travail à quatre mains : dégagements autour du fauteuil, meubles mobiles et fixes à la bonne hauteur, éclairage et prises positionnés dans la zone de l’assistante."
       }
     ]
   },
@@ -139,31 +139,31 @@
     "lexique": [
       {
         "terme": "Équivalent plomb (mm Pb)",
-        "definition": "Épaisseur de plomb équivalente exigée pour un mur, une porte ou un verre plombé, calculée par le physicien selon l’appareil et la charge de travail."
+        "definition": "Nous traduisons le calcul du physicien en ouvrages concrets : panneaux plombés, plâtre baryté ou maçonnerie, portes et huisseries plombées, traitement des traversées de gaines, sans aucune discontinuité de protection."
       },
       {
         "terme": "Zonage radiologique",
-        "definition": "Délimitation des zones surveillées et contrôlées, avec signalisation lumineuse « rayons X » à l’entrée de la salle."
+        "definition": "Nous matérialisons le zonage dans le plan : séparation des zones surveillées et contrôlées, signalisation lumineuse asservie à l’appareil, portes et circulations pensées pour le patient et le manipulateur."
       },
       {
         "terme": "Cage de Faraday",
-        "definition": "Blindage radiofréquence de la salle IRM (cuivre ou aluminium), indispensable à la qualité des images."
+        "definition": "Nous coordonnons la pose de la cage de Faraday de votre IRM avec le constructeur : préparation des parois et du sol, porte et vitrage blindés, filtres pour les fluides et l’électricité, contrôles avant mise en service."
       },
       {
         "terme": "Ligne de quench",
-        "definition": "Conduit d’évacuation de l’hélium vers l’extérieur en cas de perte de supraconductivité de l’aimant IRM."
+        "definition": "Nous réalisons le tracé de la ligne de quench jusqu’à l’extérieur du bâtiment, avec les percements, supports et protections requis par le constructeur de l’aimant, en lien avec la copropriété."
       },
       {
         "terme": "PACS / RIS",
-        "definition": "Archivage et communication des images (PACS) et système d’information radiologique (RIS) : ils fixent le câblage, le serveur et l’onduleur."
+        "definition": "Nous câblons votre centre pour le PACS et le RIS : baie informatique ventilée, serveur sur onduleur, prises réseau à chaque modalité, au pupitre et dans les salles de lecture."
       },
       {
         "terme": "Pupitre de commande",
-        "definition": "Poste du manipulateur, derrière un verre plombé, d’où il voit le patient pendant l’examen."
+        "definition": "Nous concevons le poste de commande derrière une paroi et un verre plombés : vue directe sur le patient, mobilier sur-mesure pour les écrans, câblage et climatisation adaptés à la chaleur dégagée."
       },
       {
         "terme": "Mammographe, scanner, os-poumon",
-        "definition": "Les modalités courantes d’un cabinet de radiologie marocain, chacune avec ses exigences de surface, de charge et de climatisation."
+        "definition": "Nous adaptons chaque salle à sa modalité : renfort de dalle et salle technique pour le scanner, cabines de déshabillage et blindage pour la salle os-poumon, intimité et ergonomie pour la mammographie."
       }
     ]
   },
@@ -222,27 +222,27 @@
     "lexique": [
       {
         "terme": "Unit d’ophtalmologie",
-        "definition": "Combiné fauteuil, colonne réfracteur et lampe à fente, qui structure la salle d’examen."
+        "definition": "Nous positionnons l’unit d’ophtalmologie au centre de la salle d’examen : alimentation électrique au sol ou par goulotte, éclairage gradable jusqu’à la pénombre, rangements sur-mesure pour les verres d’essai."
       },
       {
         "terme": "Réfracteur automatique et projecteur de tests",
-        "definition": "Équipements de mesure de la vue ; la distance de lecture conditionne la longueur de la salle ou l’usage d’un miroir."
+        "definition": "Nous calculons la longueur de la salle de réfraction selon la distance de lecture, ou intégrons un dispositif à miroir quand la surface manque, avec des prises et un éclairage dédiés."
       },
       {
         "terme": "OCT",
-        "definition": "Tomographie en cohérence optique : imagerie de la rétine, installée dans une salle en pénombre."
+        "definition": "Nous aménageons le poste d’imagerie OCT en zone de pénombre maîtrisée : mobilier à hauteur réglable, alimentation protégée par onduleur et prise réseau vers votre logiciel de consultation."
       },
       {
         "terme": "Laser YAG / Argon",
-        "definition": "Lasers de traitement ambulatoire, avec consignes de sécurité (porte, signalisation, protection oculaire)."
+        "definition": "Nous préparons la salle laser selon les consignes du fabricant : occultation des vitrages, surfaces non réfléchissantes, voyant d’émission et verrouillage de porte, circuit électrique dédié."
       },
       {
         "terme": "Phaco (phacoémulsification)",
-        "definition": "Technique de chirurgie de la cataracte, réalisée au bloc avec traitement d’air filtré."
+        "definition": "Nous concevons le bloc ambulatoire de chirurgie de la cataracte : traitement d’air filtré, circuits séparés patients et matériel, revêtements lessivables, prises et fluides au bon emplacement autour de la table."
       },
       {
         "terme": "Champ visuel",
-        "definition": "Examen du périmètre visuel (périmétrie), réalisé dans un espace calme et obscurci."
+        "definition": "Nous aménageons l’espace de périmétrie au calme et dans l’obscurité : implantation loin des circulations, isolation phonique, éclairage réglable et occultation adaptée."
       }
     ]
   },
@@ -298,23 +298,23 @@
     "lexique": [
       {
         "terme": "Cabine audiométrique",
-        "definition": "Cabine insonorisée pour les tests auditifs (audiométrie tonale et vocale), posée sur une dalle désolidarisée."
+        "definition": "Nous implantons la cabine audiométrique sur une dalle désolidarisée, loin des sources de bruit, avec une ventilation silencieuse et des passages de câbles traités, pour atteindre le niveau exigé par le fabricant."
       },
       {
         "terme": "Unit ORL",
-        "definition": "Poste d’examen combinant fauteuil, aspiration, air et éclairage, avec support des instruments."
+        "definition": "Nous raccordons votre unit ORL : aspiration, air comprimé, alimentation électrique et éclairage, avec un mobilier sur-mesure pour les instruments et les consommables à portée de main."
       },
       {
         "terme": "Nasofibroscope",
-        "definition": "Endoscope souple utilisé en consultation ORL, désinfecté après chaque patient selon une procédure tracée."
+        "definition": "Nous créons le local de désinfection des nasofibroscopes en marche en avant : paillasse sur-mesure avec bacs, point d’eau, extraction des vapeurs et armoire de stockage raccordée."
       },
       {
         "terme": "Impédancemétrie / tympanométrie",
-        "definition": "Examens de l’oreille moyenne, réalisés en salle calme."
+        "definition": "Nous aménageons une salle d’explorations calme et bien isolée, avec des prises dédiées et un mobilier qui garde les appareils à portée du praticien et du patient."
       },
       {
         "terme": "VNG (vidéonystagmographie)",
-        "definition": "Exploration de l’équilibre, qui demande une salle obscurcie et un fauteuil rotatoire selon l’équipement."
+        "definition": "Nous préparons la salle de VNG : occultation complète, éclairage gradable, ancrage au sol et alimentation pour le fauteuil rotatoire lorsque votre équipement l’exige."
       }
     ]
   },
@@ -372,27 +372,27 @@
     "lexique": [
       {
         "terme": "Table gynécologique",
-        "definition": "Table d’examen à étriers, positionnée pour préserver l’intimité dès l’ouverture de la porte."
+        "definition": "Nous orientons la table gynécologique pour préserver l’intimité dès l’ouverture de la porte, avec une cabine de déshabillage, un point d’eau et un sanitaire attenant intégrés au plan."
       },
       {
         "terme": "Échographe 3D/4D",
-        "definition": "Échographe de suivi de grossesse, utilisé en salle semi-obscure avec un écran déporté pour la patiente."
+        "definition": "Nous aménageons la salle d’échographie en pénombre maîtrisée : éclairage gradable, écran déporté fixé au mur pour la patiente, prises protégées et câblage réseau pour l’archivage des images."
       },
       {
         "terme": "Colposcope",
-        "definition": "Appareil d’examen du col, installé dans la salle d’examen gynécologique."
+        "definition": "Nous prévoyons l’emplacement du colposcope près de la table d’examen, avec une prise dédiée, un éclairage complémentaire et des rangements fermés pour les consommables."
       },
       {
         "terme": "FIV / ICSI",
-        "definition": "Techniques de procréation médicalement assistée réalisées au laboratoire ; elles imposent une qualité d’air contrôlée et une énergie sécurisée."
+        "definition": "Nous concevons le laboratoire de FIV : traitement d’air filtré en surpression, matériaux à faible émission, énergie secourue et onduleur pour les incubateurs, paillasses anti-vibrations sur-mesure."
       },
       {
         "terme": "Cuves d’azote (cryoconservation)",
-        "definition": "Stockage des gamètes et embryons à très basse température, dans un local ventilé et surveillé."
+        "definition": "Nous aménageons le local de cryoconservation avec une ventilation dimensionnée, une détection de manque d’oxygène, un sol résistant au froid et un accès facile pour la livraison de l’azote."
       },
       {
         "terme": "Ponction ovocytaire",
-        "definition": "Acte de prélèvement réalisé dans une salle proche du laboratoire, souvent sous anesthésie légère."
+        "definition": "Nous plaçons la salle de ponction au contact du laboratoire, avec un passe-plat, les fluides médicaux nécessaires, un éclairage opératoire et des revêtements lessivables."
       }
     ]
   },
@@ -448,23 +448,23 @@
     "lexique": [
       {
         "terme": "Pèse-bébé et toise",
-        "definition": "Équipements de suivi de croissance à prévoir dans chaque salle de consultation pédiatrique."
+        "definition": "Nous intégrons pèse-bébé et toise dans un plan de change sur-mesure à hauteur ergonomique, avec point d’eau à proximité et rangements pour le linge et les consommables."
       },
       {
         "terme": "Chaîne du froid vaccinale",
-        "definition": "Conservation des vaccins entre +2 et +8 °C dans un réfrigérateur médical avec relevé de température."
+        "definition": "Nous réservons pour le réfrigérateur médical une prise secourue, une ventilation suffisante autour de l’appareil et le câblage d’une alarme de température."
       },
       {
         "terme": "Table à langer",
-        "definition": "Plan de change sécurisé, avec point d’eau à proximité."
+        "definition": "Nous fabriquons un plan de change sécurisé, aux angles arrondis et à hauteur de travail, avec point d’eau, rangements fermés et revêtements faciles à désinfecter."
       },
       {
         "terme": "Circuit fébrile",
-        "definition": "Parcours séparé pour les enfants malades, distinct du suivi des nourrissons et des visites de vaccination."
+        "definition": "Nous dessinons deux attentes et, si le local le permet, deux accès distincts, pour que les enfants malades ne croisent pas les nourrissons venus pour un suivi ou une vaccination."
       },
       {
         "terme": "Coin allaitement",
-        "definition": "Espace calme et discret pour les mamans, apprécié dans les cabinets à forte fréquentation."
+        "definition": "Nous créons un espace d’allaitement isolé visuellement et acoustiquement, avec un fauteuil confortable, un éclairage doux et une prise pour un chauffe-biberon."
       }
     ]
   },
@@ -523,23 +523,23 @@
     "lexique": [
       {
         "terme": "Dermatoscope",
-        "definition": "Appareil d’examen des lésions cutanées, utilisé sous un éclairage à fort rendu des couleurs."
+        "definition": "Nous équipons la salle d’examen d’un éclairage à haut indice de rendu des couleurs et prévoyons prise et rangement pour le dermatoscope et la caméra de suivi des lésions."
       },
       {
         "terme": "Laser vasculaire, pigmentaire, CO2 fractionné",
-        "definition": "Les grandes familles de lasers de cabinet ; chacune a ses consignes de sécurité et d’extraction des fumées."
+        "definition": "Nous adaptons la salle à chaque laser : alimentation électrique dédiée, extraction des fumées, surfaces non réfléchissantes, occultation, voyant d’émission et verrouillage de porte."
       },
       {
         "terme": "IRC (indice de rendu des couleurs)",
-        "definition": "Qualité de la lumière qui conditionne la fidélité des couleurs de la peau ; on vise un IRC élevé en salle d’examen."
+        "definition": "Nous choisissons des luminaires à IRC élevé et une température de couleur constante dans les salles d’examen et la cabine photo, pour que le diagnostic et le suivi photographique restent fiables."
       },
       {
         "terme": "Cryothérapie",
-        "definition": "Traitement par le froid, qui demande un rangement sécurisé des bonbonnes."
+        "definition": "Nous prévoyons un rangement ventilé et sécurisé pour les bonbonnes d’azote ou de gaz, à distance des sources de chaleur et facile d’accès pour les remplacements."
       },
       {
         "terme": "Bloc ambulatoire",
-        "definition": "Salle d’intervention pour la chirurgie esthétique ou dermatologique, avec traitement d’air adapté."
+        "definition": "Nous construisons votre bloc ambulatoire : traitement d’air filtré, sol PVC à lés soudés avec remontée en plinthe, prises de fluides médicaux et circuits séparés patients et matériel."
       }
     ]
   },
@@ -595,23 +595,23 @@
     "lexique": [
       {
         "terme": "ECG d’effort",
-        "definition": "Épreuve d’effort sur tapis ou ergocycle, avec chariot d’urgence et défibrillateur à proximité."
+        "definition": "Nous dimensionnons la salle d’épreuve d’effort autour du tapis ou de l’ergocycle : dégagements pour intervenir, climatisation renforcée, ancrage au sol et circuit électrique dédié."
       },
       {
         "terme": "ETT / ETO",
-        "definition": "Échocardiographie transthoracique et transœsophagienne, réalisées en salle semi-obscure."
+        "definition": "Nous aménageons la salle d’échocardiographie en pénombre, avec un lit d’examen accessible des deux côtés, des prises protégées et un point d’eau pour les examens transœsophagiens."
       },
       {
         "terme": "Holter ECG et MAPA",
-        "definition": "Enregistrements sur 24 h du rythme cardiaque et de la tension, posés dans un poste dédié."
+        "definition": "Nous créons un poste de pose et de lecture Holter avec mobilier sur-mesure, prises pour la recharge des boîtiers et rangements pour câbles et électrodes."
       },
       {
         "terme": "Défibrillateur (DAE)",
-        "definition": "Défibrillateur automatisé externe, à placer visiblement et à moins de quelques pas de la salle d’effort."
+        "definition": "Nous positionnons le défibrillateur et le chariot d’urgence à quelques pas de la salle d’effort, avec un accès brancard dégagé jusqu’à la sortie du cabinet."
       },
       {
         "terme": "Doppler vasculaire",
-        "definition": "Exploration des artères et des veines, souvent réalisée dans la même salle que l’échographie cardiaque."
+        "definition": "Nous prévoyons une salle d’explorations vasculaires avec lit à hauteur variable, prises protégées et éclairage gradable, mutualisable avec l’échographie cardiaque."
       }
     ]
   },
@@ -670,23 +670,23 @@
     "lexique": [
       {
         "terme": "Plateau technique",
-        "definition": "Grande salle de rééducation collective équipée d’espaliers, de barres parallèles, de tapis et d’appareils."
+        "definition": "Nous concevons un plateau technique modulable : vérification de la hauteur sous plafond, renforts muraux pour espaliers et barres parallèles, sol amortissant antidérapant et prises au sol pour les appareils."
       },
       {
         "terme": "Box individuels",
-        "definition": "Cabines de soins fermées pour la kinésithérapie manuelle et l’électrothérapie."
+        "definition": "Nous montons des box en cloisons acoustiques jusqu’à la dalle, avec portes pleines, prises dédiées pour l’électrothérapie et rangements intégrés, pour des soins en toute confidentialité."
       },
       {
         "terme": "Balnéothérapie",
-        "definition": "Rééducation en bassin, qui impose étanchéité, traitement de l’eau et déshumidification de l’air."
+        "definition": "Nous réalisons la balnéothérapie : vérification de la charge du plancher, étanchéité du bassin et des plages, traitement de l’eau, déshumidification de l’air et sols antidérapants."
       },
       {
         "terme": "Électrothérapie, ondes de choc, pressothérapie",
-        "definition": "Appareils courants en cabinet, qui demandent des prises dédiées et des rangements."
+        "definition": "Nous prévoyons dans chaque box les prises nécessaires à vos appareils, des supports muraux ou chariots sur-mesure et des passages de câbles qui laissent le sol dégagé."
       },
       {
         "terme": "Cage de Rocher",
-        "definition": "Structure métallique fixée au mur pour les exercices avec poulies et suspensions ; elle impose une fixation et une hauteur adaptées."
+        "definition": "Nous fixons la cage de Rocher sur une paroi renforcée, avec les ancrages adaptés aux efforts des poulies et des suspensions et les dégagements nécessaires autour du patient."
       }
     ]
   },
@@ -742,23 +742,23 @@
     "lexique": [
       {
         "terme": "Colonne d’endoscopie",
-        "definition": "Ensemble processeur, source de lumière, écran et insufflateur, placé sur un chariot ou un bras."
+        "definition": "Nous positionnons la colonne d’endoscopie sur bras plafonnier ou chariot, avec alimentation électrique sécurisée, prises d’aspiration et d’oxygène à portée, et écrans à hauteur du regard."
       },
       {
         "terme": "FOGD / coloscopie",
-        "definition": "Fibroscopie œso-gastro-duodénale et coloscopie, les deux examens les plus fréquents en cabinet."
+        "definition": "Nous organisons le parcours du patient pour la FOGD et la coloscopie : préparation, salle d’examen, salle de réveil et sanitaires proches, avec un accès brancard continu."
       },
       {
         "terme": "Laveur-désinfecteur d’endoscopes (LDE)",
-        "definition": "Machine de désinfection automatique des endoscopes, avec traçabilité de chaque cycle."
+        "definition": "Nous raccordons le LDE dans un local organisé en marche en avant : arrivée d’eau traitée, évacuation adaptée, extraction des vapeurs, circuit électrique dédié et prise réseau pour la traçabilité."
       },
       {
         "terme": "Armoire de stockage ventilée",
-        "definition": "Armoire qui conserve les endoscopes désinfectés au sec, à l’abri de la recontamination."
+        "definition": "Nous intégrons l’armoire de stockage ventilée dans une menuiserie sur-mesure, côté propre du local, avec les raccordements électriques et l’extraction d’air nécessaires au maintien des endoscopes au sec, selon les prescriptions du fabricant."
       },
       {
         "terme": "Salle de réveil",
-        "definition": "Espace de surveillance après sédation, avec oxygène, aspiration et monitorage."
+        "definition": "Nous équipons la salle de réveil de prises d’oxygène et d’aspiration à chaque poste, de rideaux ou parois entre les patients et d’une vue directe depuis le poste infirmier."
       }
     ]
   },
@@ -817,27 +817,27 @@
     "lexique": [
       {
         "terme": "Phase pré-analytique",
-        "definition": "Réception, enregistrement, centrifugation et répartition des échantillons avant analyse."
+        "definition": "Nous aménageons la zone pré-analytique au contact de la réception des tubes : paillasses sur-mesure, prises pour centrifugeuses, postes informatiques et circulation fluide vers les automates."
       },
       {
         "terme": "Automates",
-        "definition": "Analyseurs de biochimie, d’hématologie ou d’immunologie, qui demandent une alimentation protégée, de l’eau purifiée et un câblage réseau."
+        "definition": "Nous préparons l’arrivée de vos automates : circuits électriques dédiés sur onduleur, eau osmosée, évacuations, câblage réseau, paillasses dimensionnées et climatisation calculée sur la chaleur dégagée."
       },
       {
         "terme": "PSM (poste de sécurité microbiologique)",
-        "definition": "Hotte à flux d’air filtré pour les manipulations en bactériologie."
+        "definition": "Nous installons le PSM dans une zone sans courant d’air, loin des portes et des bouches de soufflage, avec l’alimentation et, selon le modèle, le raccordement à l’extraction."
       },
       {
         "terme": "SIL (système informatique du laboratoire)",
-        "definition": "Logiciel de gestion des demandes et des résultats, connecté aux automates."
+        "definition": "Nous câblons le laboratoire pour votre SIL : baie informatique, prise réseau à chaque automate, poste de validation et alimentation protégée du serveur."
       },
       {
         "terme": "Eau osmosée",
-        "definition": "Eau purifiée par osmose inverse, nécessaire au fonctionnement de nombreux automates."
+        "definition": "Nous plaçons l’osmoseur au plus près des automates, avec arrivée d’eau, évacuation, prise dédiée et un réseau de distribution court, accessible pour la maintenance."
       },
       {
         "terme": "Box de prélèvement",
-        "definition": "Cabine de prélèvement sanguin, confidentielle et équipée d’un fauteuil de prélèvement."
+        "definition": "Nous construisons des box de prélèvement confidentiels : fauteuil de prélèvement, lave-mains, plan de travail sur-mesure, collecteur de déchets intégré et isolation phonique."
       }
     ]
   },
@@ -898,31 +898,31 @@
     "lexique": [
       {
         "terme": "CTA (centrale de traitement d’air)",
-        "definition": "Installation qui filtre, traite et met en surpression l’air des blocs et des zones à risque."
+        "definition": "Nous dimensionnons et installons la CTA avec notre bureau d’études : filtration adaptée à chaque zone, mise en surpression des blocs, réseaux de gaines en faux plafond et local technique accessible."
       },
       {
         "terme": "Flux laminaire / plafond soufflant",
-        "definition": "Diffusion d’air filtré au-dessus de la table d’opération pour réduire le risque infectieux."
+        "definition": "Nous intégrons le plafond soufflant au-dessus de la table d’opération, coordonné avec le scialytique et les bras plafonniers, et faisons réaliser les mesures de qualification avant la réception."
       },
       {
         "terme": "Classe ISO 7, ISO 5",
-        "definition": "Classes de propreté de l’air selon l’ISO 14644, à confirmer avec le bureau d’études selon le type de chirurgie."
+        "definition": "Nous concevons les blocs pour atteindre la classe de propreté retenue avec votre bureau d’études : étanchéité des parois et plafonds, traitement d’air, sas et contrôles avant la mise en service."
       },
       {
         "terme": "SSPI",
-        "definition": "Salle de surveillance post-interventionnelle, où le patient est surveillé après l’anesthésie."
+        "definition": "Nous aménageons la SSPI à proximité immédiate des blocs : postes équipés en oxygène, vide et air médical, monitorage, éclairage adapté et poste de surveillance avec vue sur tous les patients."
       },
       {
         "terme": "Bras plafonniers et scialytique",
-        "definition": "Bras porteurs de fluides et d’équipements et éclairage opératoire, fixés à une structure dans le plafond."
+        "definition": "Nous préparons la structure du plafond pour supporter bras plafonniers et scialytique, et y amenons les gaz médicaux, l’électricité et le réseau, en coordination avec le fournisseur."
       },
       {
         "terme": "Gaz médicaux et centrale de vide",
-        "definition": "Oxygène, air médical et vide distribués par un réseau de prises normalisées depuis une centrale."
+        "definition": "Nous réalisons le réseau de gaz médicaux depuis la centrale jusqu’aux prises normalisées, avec vannes de sectionnement, alarmes et essais de pression avant la réception."
       },
       {
         "terme": "TGBT, inverseur de source et groupe électrogène",
-        "definition": "Tableau général basse tension et basculement automatique sur le secours en cas de coupure du réseau."
+        "definition": "Nous concevons l’architecture électrique de la clinique : TGBT, inverseur automatique vers le groupe électrogène, onduleurs pour les zones critiques et tableaux repérés pour la maintenance."
       }
     ]
   },
@@ -980,23 +980,23 @@
     "lexique": [
       {
         "terme": "Divan d’examen",
-        "definition": "Table d’examen à hauteur variable, positionnée pour l’accès des deux côtés."
+        "definition": "Nous plaçons le divan d’examen pour qu’il soit accessible des deux côtés, avec un éclairage d’examen, un point d’eau et des rangements à portée de main."
       },
       {
         "terme": "Salle de soins",
-        "definition": "Espace pour les pansements, injections et petits actes, avec point d’eau et rangements."
+        "definition": "Nous aménageons une salle de soins lessivable : sol PVC à lés soudés, plan de travail sur-mesure, point d’eau, rangements fermés et prises en hauteur hors des zones de projection."
       },
       {
         "terme": "Charges communes",
-        "definition": "Dépenses partagées entre associés (accueil, secrétariat, loyer des espaces communs), réparties selon une clé définie."
+        "definition": "Nous établissons un plan qui distingue clairement les surfaces privatives et partagées, base objective pour répartir les charges communes entre associés."
       },
       {
         "terme": "SCM (société civile de moyens)",
-        "definition": "Forme d’association courante pour partager locaux et équipements entre praticiens, à valider avec votre conseil."
+        "definition": "Nous concevons des espaces et des équipements mutualisables adaptés à une SCM : accueil commun, salle de soins partagée, salles polyvalentes et local technique dimensionné pour tous."
       },
       {
         "terme": "Téléconsultation",
-        "definition": "Consultation à distance, qui demande un espace calme, bien éclairé et câblé."
+        "definition": "Nous créons un espace de téléconsultation insonorisé, avec éclairage de visage, fond neutre, prise réseau filaire et alimentation dédiée pour l’écran et la caméra."
       }
     ]
   },
@@ -1052,23 +1052,23 @@
     "lexique": [
       {
         "terme": "Affaiblissement acoustique",
-        "definition": "Capacité d’une cloison ou d’une porte à arrêter la voix, exprimée en décibels ; elle se renforce par des cloisons jusqu’à la dalle."
+        "definition": "Nous montons les cloisons jusqu’à la dalle avec double parement et isolant, décalons les boîtiers électriques et traitons les gaines de ventilation pour que la voix ne passe pas d’une salle à l’autre."
       },
       {
         "terme": "Sas acoustique",
-        "definition": "Double porte qui protège la confidentialité de l’entretien."
+        "definition": "Nous créons un sas à double porte pleine avec joints périphériques et plinthes automatiques, pour une confidentialité totale de l’entretien."
       },
       {
         "terme": "Salle de thérapie de groupe",
-        "definition": "Grande salle modulable pour les séances collectives et la psychoéducation."
+        "definition": "Nous aménageons une salle de groupe modulable : traitement acoustique des parois et du plafond, éclairage variable, mobilier déplaçable et rangements intégrés."
       },
       {
         "terme": "Bouton d’alerte",
-        "definition": "Dispositif d’appel discret, prévu selon le public reçu."
+        "definition": "Nous intégrons un bouton d’appel discret au bureau du praticien, câblé vers l’accueil ou un poste de sécurité, selon le niveau de sécurité adapté au public reçu."
       },
       {
         "terme": "Accueil différencié",
-        "definition": "Organisation qui évite que le patient sortant croise celui qui attend."
+        "definition": "Nous dessinons une sortie distincte de la salle d’attente lorsque le local le permet, pour que le patient qui sort ne croise pas celui qui attend."
       }
     ]
   }

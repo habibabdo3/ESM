@@ -62,7 +62,7 @@
 src/
   config/site.ts          coordonnées (env), BANK_DISCLAIMER, bankClaimsApproved, whatsappLink()
   content.config.ts       schémas Zod : services, specialites, regions, realisations, blog
-  data/services.json      10 services (title ≤60, description 140–155, h1, intro, livrables, faq…)
+  data/services.json      10 services (title ≤60, description 140–155, h1, intro, livrables, termes, savoirFaire, faq…)
   data/specialites.json   14 spécialités (contraintes, offre, aValider, motsCles, servicesLies ≥3, lexique, faq)
   data/regions.json       12 régions du Maroc, texte propre à chacune
   data/financement.ts     banques partenaires (pourQui, produits, piecesDossier) + étapes « Projet financé »
@@ -136,6 +136,13 @@ Sans `SITE_URL`, le canonical utilise `VERCEL_PROJECT_PRODUCTION_URL`.
 - **Crédibilité métier** : employer le vocabulaire réel des praticiens et fournisseurs au Maroc (unit, autoclave
   classe B, cone beam, équivalent plomb, CTA, SSPI, BPDE, PV de réception, Mourabaha…). Tout nouveau terme technique
   va dans `lexique` (spécialité) ou `src/data/glossaire.ts` (général).
+- **Style des définitions (lexique + glossaire)** : jamais une définition de dictionnaire. Voix active, « Nous… », ton
+  « solution de construction » : dire comment nous adaptons le cabinet à l'équipement (réseaux et fluides, électricité
+  dédiée, menuiserie sur-mesure, ventilation, ergonomie, gestion de l'espace, normes). Exemple : « Armoire de stockage
+  ventilée : Nous intégrons l'armoire dans une menuiserie sur-mesure, côté propre du local, avec les raccordements
+  électriques et l'extraction d'air nécessaires… ». Pas de superlatif invérifiable (« stérilité parfaite »).
+- **Services** : `intro` riche en termes techniques ; `termes` (4 étiquettes affichées sur les cartes de `/services/`)
+  et `savoirFaire` (3 points, section « Notre savoir-faire technique » sur chaque page service).
 
 ## 9. État actuel et prochaines étapes
 

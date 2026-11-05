@@ -63,6 +63,32 @@ const wa = whatsappLink(`Bonjour, je suis intéressé(e) par votre service « ${
     </div>
   </section>
 
+  {d.savoirFaire.length > 0 && (
+    <section class="bg-[var(--color-night)] py-20 text-[var(--color-ivory)] lg:py-28" aria-labelledby="savoir-faire-title">
+      <div class="container-lux grid gap-14 lg:grid-cols-12">
+        <div class="lg:col-span-4" data-reveal>
+          <p class="eyebrow text-[var(--color-gold)]">Expertise</p>
+          <h2 id="savoir-faire-title" class="mt-6">Notre savoir-faire technique</h2>
+          {d.termes.length > 0 && (
+            <ul class="mt-8 flex flex-wrap gap-2" aria-label="Termes techniques maîtrisés">
+              {d.termes.map((t) => <li class="border border-[var(--color-night-3)] px-3 py-1.5 text-[0.8rem] text-[var(--color-gold-soft)]">{t}</li>)}
+            </ul>
+          )}
+          <a href="/glossaire/" class="btn btn-ghost-light mt-8">Glossaire technique</a>
+        </div>
+        <ol class="grid gap-px overflow-hidden bg-[var(--color-night-3)] lg:col-span-8">
+          {d.savoirFaire.map((x, i) => (
+            <li class="grid gap-3 bg-[var(--color-night)] p-7 md:grid-cols-12 md:gap-8" data-reveal style={`--i:${i}`}>
+              <span class="num text-4xl md:col-span-2">{pad(i + 1)}</span>
+              <h3 class="text-[1.5rem] md:col-span-4">{x.t}</h3>
+              <p class="text-[0.95rem] leading-relaxed text-[var(--color-ivory)]/75 md:col-span-6">{x.p}</p>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+  )}
+
   <Faq items={d.faq} tone="sand" />
 
   <section class="py-20 lg:py-28">

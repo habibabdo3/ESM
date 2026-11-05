@@ -24,6 +24,8 @@ const services = defineCollection({
     livrables: z.array(z.string()).min(3),
     cta: z.string(),
     specialitesLiees: z.array(z.string()).default([]),
+    termes: z.array(z.string()).default([]),
+    savoirFaire: z.array(z.object({ t: z.string(), p: z.string() })).default([]),
     faq,
     note: z.string().optional(),
   }),
