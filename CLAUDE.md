@@ -38,6 +38,12 @@
 7. Références réglementaires validées : AMSSNuR (loi 142-12) pour la radiologie, y compris dentaire ; déchets médicaux :
    loi 28-00 + décret 2-09-139. Normes ISO/NF : « à confirmer avec le bureau d'études et l'organisme de contrôle ».
 8. Pas de page par ville sans contenu unique (pages satellites) : 12 pages **régionales** uniquement.
+9. **Sécurité** : site statique, aucune base de données, aucun compte, aucun admin, aucun paiement. Seul point d'entrée :
+   `api/devis.js` (POST JSON, origine vérifiée, 20 ko max, liste blanche de champs, longueurs et listes fermées,
+   champ piège, limitation de débit, échappement HTML, réponses génériques). Les clés (`RESEND_API_KEY`…) restent
+   côté serveur, jamais préfixées `PUBLIC_`, jamais dans le dépôt. Si l'on ajoute un jour base de données, espace
+   client, admin ou paiement : RLS activée, contrôle du propriétaire de chaque enregistrement, admin derrière
+   authentification, limites à l'inscription, webhooks vérifiés par signature.
 
 ## 3. Stack et commandes
 

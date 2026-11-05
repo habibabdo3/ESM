@@ -2,6 +2,17 @@
 
 > Ajouter chaque modification **en haut**, datée, avec : ce qui a changé, pourquoi, fichiers clés, et l'état des vérifications.
 
+## 2026-11-05 — v0.3.1 · Sécurité du formulaire de devis
+
+**Fait**
+- Audit : aucun secret dans le code ni dans l'historique Git ; `RESEND_API_KEY` absente du build.
+- `api/devis.js` renforcée : Content-Type JSON obligatoire, corps ≤ 20 ko, vérification de l'origine, liste blanche
+  de champs tronqués, validation (e-mail, téléphone, nature, calendrier, spécialité, surface), objet d'e-mail sur
+  une ligne, `Cache-Control: no-store`, erreurs génériques.
+- Règle n° 9 (sécurité) ajoutée à CLAUDE.md.
+
+**Vérifications** : 14 scénarios testés (méthode, origine, type, champs, piège, débit) · `npm run verify` OK.
+
 ## 2026-11-05 — v0.3.0 · Vocabulaire orienté savoir-faire, services experts
 
 **Fait**
