@@ -159,6 +159,6 @@ Sans `SITE_URL`, le canonical utilise `VERCEL_PROJECT_PRODUCTION_URL`.
 
 ## 9. État actuel et prochaines étapes
 
-Voir `docs/CHANGELOG.md` (journal) et **`docs/BESOINS.md`** (liste complète des informations à fournir + benchmark
+Voir `docs/CHANGELOG.md` (journal), **`docs/MEDIAS.md`** (brief photo/vidéo) et **`docs/BESOINS.md`** (liste complète des informations à fournir + benchmark
 international + ajouts recommandés). En bref, il manque : coordonnées, identifiants légaux, équipe et assurances,
 les 5 réalisations, logos et textes validés des banques, domaine, clés Resend/Plausible/Meta.

@@ -2,6 +2,11 @@
 
 > Ajouter chaque modification **en haut**, datée, avec : ce qui a changé, pourquoi, fichiers clés, et l'état des vérifications.
 
+## 2026-11-06 — v0.4.1 · Brief médias
+
+- Ajout de `docs/MEDIAS.md` : liste priorisée des photos et vidéos, emplacement sur le site, formats, règles de prise
+  de vue, livraison des fichiers. Lien depuis CLAUDE.md et BESOINS.md.
+
 ## 2026-11-06 — v0.4.0 · Conformité légale (checklist 20 points)
 
 **Fait**

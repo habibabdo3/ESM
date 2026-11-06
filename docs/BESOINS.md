@@ -63,7 +63,7 @@
 - [ ] Délais types par type de projet, basés sur vos chantiers réels
 - [ ] Villes où vous disposez d’une équipe ou d’un partenaire local (pour enrichir les pages régionales)
 
-## F. Visuels et médias (P2)
+## F. Visuels et médias (P2) — brief détaillé : [MEDIAS.md](MEDIAS.md)
 
 - [ ] Photos de chantier en cours (avec accord des clients) et de l’équipe au travail
 - [ ] Rendus 3D et plans de projets réels (anonymisés si besoin) : ils remplaceront les plans schématiques
