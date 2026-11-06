@@ -1,49 +1,72 @@
 ---
+/**
+ * Consentement granulaire (loi 09-08) : mesure d'audience et publicité, décochées par défaut.
+ * « Tout refuser » a le même poids visuel que « Tout accepter » (pas de dark pattern).
+ * Choix stocké dans localStorage « esm-consent-v2 » : { v: 2, mesure, pub, date }.
+ */
 import { site } from '@/config/site';
 const cfg = { plausible: site.plausibleDomain, pixel: site.metaPixelId };
+const btn = 'btn btn-ghost-light min-h-10 flex-1 py-2';
 ---
 
 <div id="cookie-banner" role="dialog" aria-modal="false" aria-labelledby="cookie-title" class="fixed inset-x-3 bottom-[4.5rem] z-40 hidden max-w-md border border-[var(--color-night-3)] bg-[var(--color-night)] p-5 text-[var(--color-ivory)] shadow-2xl md:bottom-8 md:left-8 md:right-auto">
   <p id="cookie-title" class="font-[family-name:var(--font-display)] text-xl">Vos préférences de cookies</p>
   <p class="mt-2 text-[0.82rem] leading-relaxed text-[var(--color-ivory)]/80">
-    Nous utilisons des cookies de mesure d’audience et de publicité uniquement avec votre accord, conformément à la loi 09-08.
+    Avec votre accord, nous mesurons l’audience du site et la performance de nos publicités. Rien n’est activé sans votre choix.
     <a href="/cookies/" class="underline underline-offset-2">En savoir plus</a>
   </p>
-  <div class="mt-4 flex flex-wrap gap-3 [&_.btn]:min-h-10 [&_.btn]:py-2">
-    <button type="button" data-consent="accept" class="btn btn-gold">Accepter</button>
-    <button type="button" data-consent="refuse" class="btn btn-ghost-light">Refuser</button>
+  <fieldset class="mt-4 space-y-2 text-[0.85rem]">
+    <legend class="sr-only">Catégories de cookies</legend>
+    <label class="flex items-start gap-3"><input type="checkbox" checked disabled class="mt-1 h-4 w-4" /> <span><strong>Nécessaires</strong> — mémorisation de votre choix (toujours actif)</span></label>
+    <label class="flex items-start gap-3"><input type="checkbox" data-cat="mesure" class="mt-1 h-4 w-4 accent-[var(--color-gold)]" /> <span><strong>Mesure d’audience</strong> — statistiques de visite</span></label>
+    <label class="flex items-start gap-3"><input type="checkbox" data-cat="pub" class="mt-1 h-4 w-4 accent-[var(--color-gold)]" /> <span><strong>Publicité</strong> — pixel Meta (Instagram, Facebook)</span></label>
+  </fieldset>
+  <div class="mt-4 flex flex-wrap gap-2">
+    <button type="button" data-consent="refuse" class={btn}>Tout refuser</button>
+    <button type="button" data-consent="save" class={btn}>Enregistrer</button>
+    <button type="button" data-consent="accept" class={btn}>Tout accepter</button>
   </div>
 </div>
 
 <script is:inline define:vars={{ cfg }}>
   (function () {
-    var KEY = 'esm-consent-v1';
+    var KEY = 'esm-consent-v2';
     var banner = document.getElementById('cookie-banner');
-    function get() { try { return localStorage.getItem(KEY); } catch (e) { return null; } }
-    function set(v) { try { localStorage.setItem(KEY, v); } catch (e) {} }
-    function load() {
-      if (window.__esmLoaded) return; window.__esmLoaded = true;
-      if (cfg.plausible) {
+    var boxes = banner ? banner.querySelectorAll('[data-cat]') : [];
+    function get() { try { return JSON.parse(localStorage.getItem(KEY) || 'null'); } catch (e) { return null; } }
+    function set(v) { try { localStorage.setItem(KEY, JSON.stringify(v)); } catch (e) {} }
+    function load(c) {
+      if (c.mesure && cfg.plausible && !window.__esmPlausible) {
+        window.__esmPlausible = true;
         var s = document.createElement('script');
         s.defer = true; s.src = 'https://plausible.io/js/script.js';
         s.setAttribute('data-domain', cfg.plausible);
         document.head.appendChild(s);
       }
-      if (cfg.pixel) {
+      if (c.pub && cfg.pixel && !window.fbq) {
         !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
         window.fbq('init', cfg.pixel); window.fbq('track', 'PageView');
       }
     }
+    function open() {
+      var c = get() || {};
+      boxes.forEach(function (b) { b.checked = !!c[b.getAttribute('data-cat')]; });
+      banner && banner.classList.remove('hidden');
+    }
     var state = get();
-    if (state === 'accept') load();
-    else if (!state && banner) banner.classList.remove('hidden');
+    if (state) load(state); else open();
     document.addEventListener('click', function (e) {
       var t = e.target.closest && e.target.closest('[data-consent],[data-cookie-open]');
       if (!t) return;
-      if (t.hasAttribute('data-cookie-open')) { banner && banner.classList.remove('hidden'); return; }
-      var v = t.getAttribute('data-consent');
-      set(v); banner && banner.classList.add('hidden');
-      if (v === 'accept') load();
+      if (t.hasAttribute('data-cookie-open')) { open(); return; }
+      var a = t.getAttribute('data-consent');
+      var c = { v: 2, mesure: false, pub: false, date: new Date().toISOString() };
+      if (a === 'accept') { c.mesure = true; c.pub = true; }
+      if (a === 'save') boxes.forEach(function (b) { c[b.getAttribute('data-cat')] = b.checked; });
+      var before = get();
+      set(c); banner && banner.classList.add('hidden');
+      if (before && ((before.mesure && !c.mesure) || (before.pub && !c.pub))) location.reload();
+      else load(c);
     });
   })();
 </script>

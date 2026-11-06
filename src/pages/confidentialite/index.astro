@@ -2,25 +2,69 @@
 import ProseLayout from '@/layouts/ProseLayout.astro';
 import Todo from '@/components/Todo.astro';
 import { site } from '@/config/site';
+
+const mail = (subject: string) => (site.email ? `mailto:${site.email}?subject=${encodeURIComponent(subject)}` : null);
+const deleteHref = mail('Demande de suppression de mes données');
+const accessHref = mail('Demande d’accès à mes données');
 ---
-<ProseLayout title="Politique de confidentialité" description="Comment Euro Space Medical collecte, utilise et protège vos données personnelles, conformément à la loi 09-08, et comment exercer vos droits." h1="Politique de confidentialité" eyebrow="Données personnelles" path="/confidentialite/">
-  <p><Todo label="texte à valider par l’entreprise et, le cas échéant, déclaration ou autorisation auprès de la CNDP" /></p>
+<ProseLayout title="Politique de confidentialité" description="Comment Euro Space Medical collecte, utilise et protège vos données, conformément à la loi 09-08, et comment demander leur accès ou leur suppression." h1="Politique de confidentialité" eyebrow="Données personnelles" path="/confidentialite/" intro="Nous collectons le minimum de données nécessaire pour répondre à votre demande de devis, et vous pouvez en demander la suppression à tout moment.">
+  <p>Dernière mise à jour : 6 novembre 2026.</p>
+
   <h2>Responsable du traitement</h2>
-  <p>{site.name}, {site.address ?? <Todo label="adresse" />}, {site.hq}. Contact : {site.email ?? <Todo label="e-mail" />}.</p>
-  <h2>Données collectées</h2>
-  <p>Via le formulaire de devis : nom, téléphone, e-mail, ville, type de structure, nature du projet, surface, calendrier, souhait de financement et message. Via WhatsApp : les informations que vous choisissez de nous transmettre.</p>
-  <h2>Finalités</h2>
+  <p>{site.name}, {site.address ?? <Todo label="adresse" />}, {site.hq}, Maroc. Contact : {site.email ?? <Todo label="e-mail" />}.</p>
+  <p>Déclaration auprès de la CNDP : <Todo label="numéro de récépissé ou d’autorisation de la CNDP" />.</p>
+
+  <h2>Les données que nous collectons</h2>
   <ul>
-    <li>Répondre à votre demande de devis et vous recontacter ;</li>
-    <li>préparer, le cas échéant, un dossier de financement à votre demande ;</li>
-    <li>mesurer l’audience du site et la performance de nos campagnes, uniquement avec votre consentement.</li>
+    <li><strong>Formulaire de devis</strong> : nom, téléphone, e-mail, ville, type de structure, nature du projet, et, si vous les indiquez, surface, calendrier, souhait de financement et message. Nous enregistrons aussi la page d’où vous écrivez, pour comprendre votre besoin.</li>
+    <li><strong>WhatsApp</strong> : les informations que vous choisissez de nous écrire, traitées dans WhatsApp Business.</li>
+    <li><strong>Mesure d’audience et publicité</strong> : uniquement si vous l’acceptez dans le bandeau de cookies (voir la <a href="/cookies/">politique de cookies</a>).</li>
   </ul>
+  <p>Nous ne demandons aucune donnée de santé, aucune donnée concernant vos patients et aucune pièce d’identité sur ce site. Ne nous transmettez pas d’informations médicales dans le message.</p>
+
+  <h2>Pourquoi nous les utilisons</h2>
+  <ul>
+    <li>Répondre à votre demande de devis, vous rappeler et préparer une visite technique.</li>
+    <li>Préparer, uniquement à votre demande, un dossier de financement avec une banque partenaire.</li>
+    <li>Mesurer l’audience du site et la performance de nos campagnes, uniquement avec votre accord.</li>
+  </ul>
+  <p>Nous ne vendons pas vos données et ne vous envoyons pas de prospection commerciale par e-mail sans votre accord préalable. Si nous vous adressons un jour une lettre d’information, chaque envoi comportera un lien de désinscription.</p>
+
   <h2>Base légale et durée de conservation</h2>
-  <p>Vos données sont traitées sur la base de votre consentement, recueilli dans le formulaire. Elles sont conservées pendant <Todo label="durée de conservation" />, puis supprimées.</p>
-  <h2>Destinataires</h2>
-  <p>Vos données sont destinées à {site.name}. Elles peuvent être transmises à une banque partenaire uniquement si vous nous le demandez, dans le cadre d’un dossier de financement. Nos prestataires techniques (hébergement, envoi d’e-mails) les traitent pour notre compte.</p>
+  <p>Vos données sont traitées sur la base de votre consentement, recueilli par la case à cocher du formulaire. Les demandes qui n’aboutissent pas à un projet sont conservées pendant <Todo label="durée de conservation (ex. 12 mois)" />, puis supprimées. Les données d’un projet signé sont conservées pendant la durée nécessaire à son exécution et aux obligations légales et comptables.</p>
+
+  <h2>Qui reçoit vos données</h2>
+  <p>Vos données sont destinées aux équipes d’{site.name}. Elles ne sont transmises à une banque partenaire (Al Barid Bank ou Bank Al Yousr) que si vous nous le demandez, pour votre dossier de financement. Nos prestataires techniques les traitent pour notre compte :</p>
+  <ul>
+    <li><strong>Vercel Inc.</strong> (États-Unis) : hébergement du site et traitement du formulaire.</li>
+    <li><strong>Resend</strong> (États-Unis) : acheminement par e-mail des demandes de devis.</li>
+    <li><strong>Plausible Analytics</strong> (Union européenne) : mesure d’audience sans cookie publicitaire, seulement avec votre accord.</li>
+    <li><strong>Meta Platforms</strong> (Irlande / États-Unis) : pixel publicitaire, seulement avec votre accord ; WhatsApp, si vous choisissez de nous écrire par ce canal.</li>
+  </ul>
+  <p>Certains de ces prestataires sont situés hors du Maroc. Ces transferts sont réalisés dans le cadre prévu par la loi 09-08 : <Todo label="autorisation ou déclaration de transfert auprès de la CNDP" />.</p>
+  <p>Les polices de caractères sont hébergées sur notre propre serveur : aucune donnée n’est envoyée à un service de polices tiers.</p>
+
   <h2>Vos droits</h2>
-  <p>Conformément à la loi 09-08 relative à la protection des personnes physiques à l’égard du traitement des données à caractère personnel, vous disposez d’un droit d’accès, de rectification et d’opposition. Pour l’exercer : {site.email ?? <Todo label="e-mail" />}.</p>
+  <p>Conformément à la loi 09-08 relative à la protection des personnes physiques à l’égard du traitement des données à caractère personnel, vous disposez d’un droit d’<strong>accès</strong>, de <strong>rectification</strong>, d’<strong>opposition</strong> et de <strong>suppression</strong> de vos données.</p>
+
+  <h2 id="suppression">Demander la suppression de vos données</h2>
+  <ol>
+    <li>Écrivez-nous depuis l’adresse e-mail utilisée dans le formulaire, avec l’objet « Demande de suppression de mes données ».</li>
+    <li>Nous vérifions votre identité si nécessaire, pour éviter qu’un tiers ne demande la suppression à votre place.</li>
+    <li>Nous supprimons vos données de nos outils (e-mails, fichiers de suivi) et vous le confirmons par écrit dans un délai de <Todo label="délai de traitement (ex. 30 jours)" />.</li>
+  </ol>
+  <p>
+    {deleteHref ? <a href={deleteHref}>Demander la suppression de mes données</a> : <Todo label="e-mail pour les demandes de suppression" />}
+    {accessHref && <> · <a href={accessHref}>Demander l’accès à mes données</a></>}
+  </p>
+  <p>Si vous estimez que vos droits ne sont pas respectés, vous pouvez saisir la Commission nationale de contrôle de la protection des données à caractère personnel (CNDP).</p>
+
+  <h2>Mineurs</h2>
+  <p>Ce site s’adresse aux professionnels de santé et aux porteurs de projets médicaux. Il n’est pas destiné aux mineurs et nous ne collectons pas sciemment de données les concernant.</p>
+
+  <h2>Sécurité</h2>
+  <p>Le site est servi en HTTPS, le formulaire n’accepte que les envois depuis notre propre site, et les clés techniques ne sont jamais exposées dans le navigateur. Aucune base de données publique ne stocke vos demandes.</p>
+
   <h2>Cookies</h2>
-  <p>Voir notre <a href="/cookies/">politique de cookies</a>.</p>
+  <p>Voir notre <a href="/cookies/">politique de cookies</a>. Voir aussi nos <a href="/conditions-utilisation/">conditions d’utilisation</a>.</p>
 </ProseLayout>

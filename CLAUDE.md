@@ -44,6 +44,13 @@
    côté serveur, jamais préfixées `PUBLIC_`, jamais dans le dépôt. Si l'on ajoute un jour base de données, espace
    client, admin ou paiement : RLS activée, contrôle du propriétaire de chaque enregistrement, admin derrière
    authentification, limites à l'inscription, webhooks vérifiés par signature.
+10. **Conformité légale (checklist 20 points, revue le 2026-11-06)** : confidentialité (sous-traitants, transferts,
+   procédure de suppression `#suppression`), CGU `/conditions-utilisation/` (pas de vente en ligne → pas de politique
+   de remboursement ; conditions financières dans le devis signé), cookies granulaires décochés par défaut avec
+   « Tout refuser » aussi visible que « Tout accepter », retrait = rechargement. Pas de dark pattern : aucune case ni
+   option pré-cochée dans le formulaire. Pas de « gratuit » ni d'affirmation sur l'organisation (bureau d'études
+   intégré, artisans formés, antennes) tant que l'entreprise ne l'a pas confirmé. Polices sous licence OFL,
+   illustrations originales, photos clients avec accord écrit.
 
 ## 3. Stack et commandes
 
@@ -90,12 +97,12 @@ api/devis.js              fonction serverless Vercel (Resend), champ piège + li
 scripts/audit-seo.mjs     audit SEO ; scripts/generate-og.mjs ; scripts/check-lengths.mjs (longueurs JSON)
 ```
 
-## 5. Pages (70 générées) — détail dans `docs/ARCHITECTURE.md`
+## 5. Pages (71 générées) — détail dans `docs/ARCHITECTURE.md`
 
 `/` · `/services/` + 10 · `/specialites/` + 14 · `/amenagement-cabinet-medical/` (pilier) + 12 régions ·
 `/renovation-cabinet-clinique/` (pilier) · `/premiere-installation/` · `/zones-intervention/` · `/financement/` +
 `/al-barid-bank/` + `/bank-al-yousr/` · `/realisations/` (noindex tant que vide) + `[slug]` · `/blog/` + 12 guides publiés ·
-`/glossaire/` (121 termes, DefinedTermSet) · `/faq/` · `/a-propos/` · `/contact/` · `/mentions-legales/` · `/confidentialite/` · `/cookies/` ·
+`/glossaire/` (121 termes, DefinedTermSet) · `/faq/` · `/a-propos/` · `/contact/` · `/mentions-legales/` · `/conditions-utilisation/` · `/confidentialite/` · `/cookies/` ·
 `/plan-du-site/` · `/styleguide/` (noindex) · `404` · `robots.txt` · `sitemap-index.xml` (exclut les noindex, liste dans `astro.config.mjs`).
 
 Maillage : chaque spécialité → ≥ 3 services ; chaque service → spécialités liées + 4 services suivants ;

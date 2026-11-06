@@ -1,0 +1,44 @@
+---
+import ProseLayout from '@/layouts/ProseLayout.astro';
+import Todo from '@/components/Todo.astro';
+import { site, BANK_DISCLAIMER } from '@/config/site';
+---
+<ProseLayout title="Conditions d’utilisation du site" description="Conditions d’utilisation du site Euro Space Medical : accès, devis sans engagement, absence de vente en ligne, propriété intellectuelle, droit marocain." h1="Conditions d’utilisation" eyebrow="Informations légales" path="/conditions-utilisation/">
+  <p>Dernière mise à jour : 6 novembre 2026.</p>
+
+  <h2>Objet</h2>
+  <p>Ces conditions encadrent l’utilisation du site de {site.name}, société d’aménagement, de rénovation et d’équipement de structures médicales. En naviguant sur le site, vous les acceptez.</p>
+
+  <h2>Accès au site</h2>
+  <p>Le site est accessible gratuitement, sans création de compte. Nous pouvons l’interrompre pour maintenance ou le faire évoluer à tout moment.</p>
+
+  <h2>Demandes de devis</h2>
+  <p>Le formulaire et WhatsApp permettent de nous présenter votre projet. Une demande ne vous engage à rien et ne constitue pas une commande. Un engagement n’existe qu’après la signature d’un devis ou d’un contrat écrit, qui précise le périmètre des travaux, le prix de chaque lot, le calendrier, les modalités de paiement, d’acompte et, le cas échéant, d’annulation.</p>
+
+  <h2>Pas de vente ni de paiement en ligne</h2>
+  <p>Aucun produit ni service n’est vendu ou payé sur ce site. Il n’existe donc pas de politique de remboursement en ligne : les conditions financières de chaque projet figurent dans le devis ou le contrat signé.</p>
+
+  <h2>Informations indicatives</h2>
+  <ul>
+    <li>Les plans affichés sont des illustrations schématiques, non contractuelles.</li>
+    <li>Les surfaces, références techniques et exigences réglementaires citées sont des repères généraux, confirmées pour chaque projet avec le bureau d’études, l’organisme de contrôle et les autorités compétentes.</li>
+    <li>Les guides et le glossaire informent ; ils ne remplacent pas une étude de votre local.</li>
+    <li>Les offres de financement présentées dépendent de l’instruction de votre dossier par la banque. {BANK_DISCLAIMER}</li>
+    <li>Le site présente des services d’aménagement : il ne donne aucun avis médical.</li>
+  </ul>
+
+  <h2>Propriété intellectuelle</h2>
+  <p>Les textes, plans, illustrations et le logo du site appartiennent à {site.name}. Les noms Al Barid Bank et Bank Al Yousr sont utilisés dans le cadre de nos partenariats et restent la propriété de leurs titulaires. Toute reproduction sans autorisation écrite est interdite.</p>
+
+  <h2>Liens externes</h2>
+  <p>Le site renvoie vers des services tiers (WhatsApp, Instagram, Facebook, sites des banques). Leur utilisation relève de leurs propres conditions et politiques de confidentialité.</p>
+
+  <h2>Responsabilité</h2>
+  <p>Nous veillons à l’exactitude des informations publiées sans pouvoir garantir l’absence d’erreur. Signalez-nous toute erreur à {site.email ?? <Todo label="e-mail" />}.</p>
+
+  <h2>Données personnelles</h2>
+  <p>Voir la <a href="/confidentialite/">politique de confidentialité</a> et la <a href="/cookies/">politique de cookies</a>.</p>
+
+  <h2>Droit applicable</h2>
+  <p>Ces conditions sont régies par le droit marocain. Tout litige relève des tribunaux compétents de <Todo label="ville du tribunal compétent" />.</p>
+</ProseLayout>

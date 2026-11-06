@@ -21,6 +21,14 @@
 - [ ] Durée de conservation des demandes de devis ; déclaration CNDP (numéro de récépissé si effectuée)
 - [ ] Assurances : responsabilité civile professionnelle, garantie des ouvrages / décennale (assureur, n° de police)
 
+### B bis. Conformité (pages légales)
+
+- [ ] Numéro de déclaration ou d'autorisation CNDP, et autorisation des transferts hors Maroc (Vercel, Resend, Meta)
+- [ ] Délai de traitement des demandes de suppression (ex. 30 jours)
+- [ ] Ville du tribunal compétent (conditions d'utilisation)
+- [ ] Confirmer : la demande de devis / l'étude de faisabilité est-elle gratuite ? (le site n'affiche plus « gratuit »)
+- [ ] Confirmer l'organisation : bureau d'études intégré ou partenaire ? entreprises sous-traitantes ? antennes régionales ?
+
 ## C. Banques partenaires — partenariats signés (P1)
 
 - [ ] Logos officiels d’**Al Barid Bank** et de **Bank Al Yousr** (fichiers SVG/PNG) + règles d’usage de la marque

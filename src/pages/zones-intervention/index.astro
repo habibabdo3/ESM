@@ -17,7 +17,7 @@ const crumbs = [{ name: 'Accueil', path: '/' }, { name: 'Zones d’intervention'
   jsonld={[breadcrumb(base, crumbs)]}
   context="Zones d’intervention"
 >
-  <PageHero eyebrow="Couverture nationale" h1="Partout au Maroc, la même méthode" intro={`Le siège de ${site.hq} conçoit, achète, contrôle et accompagne le financement. Les chantiers sont suivis localement par un conducteur de travaux et un réseau d’artisans formés à notre méthode.`} crumbs={crumbs} variant="default" />
+  <PageHero eyebrow="Couverture nationale" h1="Partout au Maroc, la même méthode" intro={`Le siège de ${site.hq} conçoit, achète, contrôle et accompagne le financement. Les chantiers sont suivis localement par un conducteur de travaux et des entreprises qualifiées qui appliquent notre méthode.`} crumbs={crumbs} variant="default" />
 
   <section class="bg-[var(--color-night)] pb-20 text-[var(--color-ivory)] lg:pb-28">
     <div class="container-lux grid items-start gap-14 lg:grid-cols-12">
@@ -42,7 +42,7 @@ const crumbs = [{ name: 'Accueil', path: '/' }, { name: 'Zones d’intervention'
     <div class="container-lux grid gap-12 md:grid-cols-3">
       {[
         { t: 'Siège à ' + site.hq, p: 'Direction de projets, bureau d’études et conception 2D et 3D, achats et logistique, relation bancaire, service client.' },
-        { t: 'Suivi local', p: 'Un conducteur de travaux par chantier et un réseau d’artisans sélectionnés, formés à notre méthode et évalués après chaque projet.' },
+        { t: 'Suivi local', p: 'Un conducteur de travaux par chantier et des entreprises qualifiées, sélectionnées pour chaque lot et tenues à notre méthode.' },
         { t: 'Preuves à chaque étape', p: 'Planning, comptes rendus photo hebdomadaires, procès-verbaux et dossier des ouvrages exécutés, quelle que soit la ville.' },
       ].map((b, i) => (
         <div data-reveal style={`--i:${i}`}><span class="gold-rule"></span><h2 class="mt-6 text-[1.9rem]">{b.t}</h2><p class="mt-4 text-[var(--color-stone-ink)]">{b.p}</p></div>

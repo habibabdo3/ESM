@@ -2,14 +2,17 @@
 import ProseLayout from '@/layouts/ProseLayout.astro';
 ---
 <ProseLayout title="Politique de cookies" description="Les cookies utilisés sur le site Euro Space Medical, leur finalité et comment accepter, refuser ou modifier votre choix à tout moment (loi 09-08)." h1="Politique de cookies" eyebrow="Cookies" path="/cookies/">
+  <p>Dernière mise à jour : 6 novembre 2026.</p>
   <h2>Ce que nous utilisons</h2>
   <ul>
-    <li><strong>Stockage technique</strong> : votre choix de consentement est enregistré dans votre navigateur (clé « esm-consent-v1 »). Il ne contient aucune donnée personnelle.</li>
-    <li><strong>Mesure d’audience</strong> (si activée) : outil de statistiques chargé uniquement après votre accord.</li>
-    <li><strong>Publicité</strong> (si activée) : pixel Meta, chargé uniquement après votre accord, pour mesurer et recibler nos campagnes Instagram et Facebook.</li>
+    <li><strong>Nécessaire</strong> : votre choix est enregistré dans votre navigateur (clé « esm-consent-v2 », sans donnée personnelle). Toujours actif, car il sert à respecter votre décision.</li>
+    <li><strong>Mesure d’audience</strong> : Plausible Analytics, statistiques de visite sans profilage publicitaire. Désactivé par défaut.</li>
+    <li><strong>Publicité</strong> : pixel Meta, pour mesurer et recibler nos campagnes Instagram et Facebook. Désactivé par défaut.</li>
   </ul>
+  <p>Les polices sont hébergées sur notre serveur et le site n’intègre aucune vidéo, carte ou bouton de réseau social tiers qui déposerait des cookies.</p>
   <h2>Votre choix</h2>
-  <p>Aucun cookie de mesure ou de publicité n’est déposé avant votre accord. Vous pouvez modifier votre choix à tout moment :</p>
+  <p>Aucun outil de mesure ou de publicité n’est chargé avant votre accord. « Tout refuser » est aussi simple que « Tout accepter », et vous pouvez choisir catégorie par catégorie. Votre choix se modifie à tout moment :</p>
   <p><button type="button" data-cookie-open class="btn btn-ghost-dark">Gérer mes préférences</button></p>
-  <p>Après un refus, rechargez la page pour que les outils déjà chargés cessent de fonctionner.</p>
+  <p>Si vous retirez un consentement, la page se recharge pour désactiver immédiatement les outils concernés.</p>
+  <p>Voir aussi la <a href="/confidentialite/">politique de confidentialité</a>.</p>
 </ProseLayout>

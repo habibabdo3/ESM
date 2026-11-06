@@ -58,7 +58,7 @@
 ├── /faq/                           FAQ générale + services + spécialités
 ├── /a-propos/                      Piliers, équipe*, assurances*, partenaires*
 ├── /contact/                       Formulaire de devis + contact direct
-├── /mentions-legales/ · /confidentialite/ · /cookies/ · /plan-du-site/
+├── /mentions-legales/ · /conditions-utilisation/ · /confidentialite/ · /cookies/ · /plan-du-site/
 ├── /styleguide/                    Interne (noindex) : tokens et animations
 └── 404 · robots.txt · sitemap-index.xml
 ```

@@ -2,6 +2,23 @@
 
 > Ajouter chaque modification **en haut**, datée, avec : ce qui a changé, pourquoi, fichiers clés, et l'état des vérifications.
 
+## 2026-11-06 — v0.4.0 · Conformité légale (checklist 20 points)
+
+**Fait**
+- Politique de confidentialité complète : données collectées et non collectées, finalités, durée, sous-traitants
+  (Vercel, Resend, Plausible, Meta/WhatsApp), transferts hors Maroc, droits, procédure de suppression (`#suppression`)
+  avec lien e-mail prérempli, mineurs, absence de prospection sans accord, sécurité.
+- Nouvelle page `/conditions-utilisation/` (devis sans engagement, pas de vente ni de paiement en ligne, informations
+  indicatives, propriété intellectuelle, liens externes, droit marocain).
+- Bandeau de cookies granulaire (mesure / publicité décochées), boutons de même poids, retrait = rechargement ; clé
+  `esm-consent-v2`. Politique de cookies mise à jour.
+- Formulaire : plus d'option de financement présélectionnée ; mention du droit de suppression.
+- « Devis gratuit » retiré (non confirmé) ; affirmations non confirmées sur l'organisation adoucies.
+- Mentions légales : crédits et licences (polices OFL, illustrations originales).
+
+**Vérifications** : `npm run verify` OK (71 pages) · axe-core OK (bandeau ouvert + 4 pages légales) · navigation
+clavier testée (lien d'évitement, méga-menus) · consentement testé (défaut décoché, refus enregistré).
+
 ## 2026-11-05 — v0.3.1 · Sécurité du formulaire de devis
 
 **Fait**

@@ -4,7 +4,7 @@ export const glossaireGeneral: { categorie: string; termes: { terme: string; def
     categorie: 'Chantier et marché de travaux',
     termes: [
       { terme: 'Maître d’ouvrage / maître d’œuvre', definition: 'Vous êtes le maître d’ouvrage ; nous assurons la maîtrise d’œuvre : nous concevons, consultons les entreprises, dirigeons le chantier et vous rendons compte chaque semaine.' },
-      { terme: 'BET (bureau d’études techniques)', definition: 'Nous faisons calculer par notre bureau d’études les lots structure, électricité, climatisation, fluides et sécurité incendie, puis nous intégrons ces calculs aux plans d’exécution.' },
+      { terme: 'BET (bureau d’études techniques)', definition: 'Nous faisons calculer par le bureau d’études les lots structure, électricité, climatisation, fluides et sécurité incendie, puis nous intégrons ces calculs aux plans d’exécution.' },
       { terme: 'Bureau de contrôle', definition: 'Nous associons le bureau de contrôle dès la conception de votre clinique, pour que ses avis soient intégrés aux plans et que la réception se déroule sans surprise.' },
       { terme: 'Corps d’état / lots', definition: 'Nous coordonnons tous les corps d’état (gros œuvre, cloisons, plomberie, électricité, climatisation, menuiserie, revêtements) avec un planning commun et un seul responsable.' },
       { terme: 'CPS', definition: 'Nous rédigeons un cahier des prescriptions spéciales qui fixe pour chaque lot les matériaux, les exigences d’hygiène et les délais, afin que chaque entreprise sache exactement ce qu’elle doit livrer.' },
