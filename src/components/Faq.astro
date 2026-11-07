@@ -4,10 +4,10 @@ const { items, title = 'Questions fréquentes', tone = 'light' } = Astro.props;
 const hid = 'faq-' + title.normalize('NFD').replace(/[^\w]+/g, '-').toLowerCase();
 ---
 {items.length > 0 && (
-  <section class:list={['py-20 lg:py-28', tone === 'sand' ? 'bg-[var(--color-sand)]' : '']} aria-labelledby={hid}>
+  <section class:list={['py-20 lg:py-28', tone === 'sand' ? 'bg-[var(--color-mist)]' : '']} aria-labelledby={hid}>
     <div class="container-lux grid gap-12 lg:grid-cols-12">
       <div class="lg:col-span-4">
-        <p class="eyebrow text-[var(--color-gold-deep)]">FAQ</p>
+        <p class="eyebrow text-[var(--color-teal-ink)]">FAQ</p>
         <h2 id={hid} class="mt-5">{title}</h2>
       </div>
       <div class="lg:col-span-8">
@@ -15,11 +15,11 @@ const hid = 'faq-' + title.normalize('NFD').replace(/[^\w]+/g, '-').toLowerCase(
           <details class="group border-b border-[var(--color-line)] py-6" data-reveal style={`--i:${i}`}>
             <summary class="flex cursor-pointer list-none items-start justify-between gap-6 text-[1.08rem] font-semibold [&::-webkit-details-marker]:hidden">
               <span>{f.q}</span>
-              <span class="mt-1 inline-block h-4 w-4 shrink-0 text-[var(--color-gold-deep)] transition-transform duration-300 group-open:rotate-45" aria-hidden="true">
+              <span class="mt-1 inline-block h-4 w-4 shrink-0 text-[var(--color-teal-ink)] transition-transform duration-300 group-open:rotate-45" aria-hidden="true">
                 <svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M8 2v12M2 8h12" /></svg>
               </span>
             </summary>
-            <p class="mt-4 max-w-3xl text-[var(--color-stone-ink)]">{f.a}</p>
+            <p class="mt-4 max-w-3xl text-[var(--color-muted)]">{f.a}</p>
           </details>
         ))}
       </div>

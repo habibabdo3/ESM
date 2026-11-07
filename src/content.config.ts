@@ -77,6 +77,7 @@ const realisations = defineCollection({
       description: seoDescription,
       specialite: z.string(),
       ville: z.string(),
+      categorie: z.enum(['Création', 'Rénovation', 'Extension']).optional(),
       surface: z.number().positive(),
       duree: z.string(),
       lots: z.array(z.string()).min(1),

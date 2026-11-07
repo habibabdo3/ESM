@@ -1,23 +1,25 @@
 ---
-import { pad } from '@/lib/content';
+/** Processus ESM en 4 étapes, horizontal sur desktop, vertical sur mobile. */
 interface Props { tone?: 'light' | 'night' }
 const { tone = 'light' } = Astro.props;
 const steps = [
-  { t: 'Étude de faisabilité', d: 'Visite technique, relevé du local, programme fonctionnel et avis écrit.' },
-  { t: 'Conception', d: 'Plans 2D, rendus 3D, matériaux et plans techniques par lot.' },
-  { t: 'Budget et financement', d: 'Estimation par lot, business plan et dossier bancaire.' },
-  { t: 'Travaux coordonnés', d: 'Un maître d’œuvre, une réunion par semaine, un compte rendu photo.' },
-  { t: 'Équipement', d: 'Sélection comparée, installation, mise en service et formation.' },
-  { t: 'Réception et suivi', d: 'Contrôle par lot, procès-verbal, dossier des ouvrages et maintenance.' },
+  { n: '01', t: 'Discover', d: 'Nous comprenons votre pratique, votre local et vos contraintes.' },
+  { n: '02', t: 'Design', d: 'Nous concevons le plan, les réseaux et le budget par lot.' },
+  { n: '03', t: 'Build', d: 'Nous coordonnons les travaux et l’installation des équipements.' },
+  { n: '04', t: 'Deliver', d: 'Nous réceptionnons et préparons votre structure à ouvrir.' },
 ];
 const night = tone === 'night';
 ---
-<ol class="grid gap-px overflow-hidden sm:grid-cols-2 lg:grid-cols-3" style={`background:${night ? 'var(--color-night-3)' : 'var(--color-line)'}`}>
+<div class="relative">
+  <span aria-hidden="true" class:list={['absolute left-0 right-0 top-0 hidden h-px md:block', night ? 'bg-white/15' : 'bg-[var(--color-line)]']}></span>
+<ol class="grid gap-10 md:grid-cols-4 md:gap-8">
   {steps.map((s, i) => (
-    <li class:list={['p-8 lg:p-10', night ? 'bg-[var(--color-night)]' : 'bg-[var(--color-ivory)]']} data-reveal style={`--i:${i % 3}`}>
-      <span class="num text-5xl">{pad(i + 1)}</span>
-      <h3 class:list={['mt-6 text-[1.6rem]', night && 'text-[var(--color-ivory)]']}>{s.t}</h3>
-      <p class:list={['mt-3 text-[0.95rem] leading-relaxed', night ? 'text-[var(--color-ivory)]/70' : 'text-[var(--color-stone-ink)]']}>{s.d}</p>
+    <li class="relative md:pt-7" data-reveal style={`--i:${i}`}>
+      <span aria-hidden="true" class:list={['absolute left-0 top-[-1px] hidden h-[3px] w-10 md:block', night ? 'bg-[var(--color-gold)]' : 'bg-[var(--color-teal)]']}></span>
+      <span class:list={['font-[family-name:var(--font-display)] text-[0.95rem] font-bold', night ? 'text-[var(--color-gold)]' : 'text-[var(--color-teal-ink)]']}>{s.n}</span>
+      <h3 lang="en" class:list={['mt-5 text-[1.5rem]', night ? 'text-white' : 'text-[var(--color-navy)]']}>{s.t}</h3>
+      <p class:list={['mt-2 max-w-xs text-[0.98rem] leading-relaxed', night ? 'text-white/75' : 'text-[var(--color-muted)]']}>{s.d}</p>
     </li>
   ))}
 </ol>
+</div>

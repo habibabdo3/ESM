@@ -2,6 +2,28 @@
 
 > Ajouter chaque modification **en haut**, datée, avec : ce qui a changé, pourquoi, fichiers clés, et l'état des vérifications.
 
+## 2026-11-07 — v1.0.0 · Refonte complète de l'identité et du site
+
+**Fait**
+- Nouvelle identité : logo vectoriel (symbole plan + monogramme E·S·M + ligne de cote), 4 variantes de couleur,
+  versions horizontale, verticale et symbole (`public/brand/`), favicon, icônes, images de partage avec photo.
+- Palette officielle (navy, teal, or, warm white, soft grey) et typographies Manrope + Inter ; Cormorant supprimée.
+- Animations ramenées à 200–400 ms ; zoom continu et parallaxe supprimés.
+- En-tête blanc collant (Accueil, Expertises, Réalisations, À propos, Contact + « Parler de mon projet »),
+  menu mobile blanc, footer navy (coordonnées affichées seulement si renseignées).
+- Accueil reconstruit : héros éditorial + grande photo, 4 expertises, processus en 4 étapes, réalisations
+  (état vide élégant), « Pourquoi ESM », appel final sur photo.
+- Nouvelle page `/expertises/` regroupant les 10 services en 4 expertises + spécialités + méthode.
+- Pages internes : en-tête clair avec photo par service et par spécialité, introductions longues déplacées dans le
+  corps et découpées en paragraphes courts, cartes allégées, plans schématiques en version claire.
+- 17 photos d'illustration sous licence Unsplash (`src/lib/photos.ts`), créditées, jamais présentées comme des
+  réalisations ESM. Carte de réalisation : nom, spécialité, catégorie, ville, « View project ».
+- Styleguide réécrit (logos, couleurs, typographie, composants, mouvement). DESIGN.md réécrit.
+
+**Vérifications** : `npm run verify` OK (72 pages) · axe-core OK sur 19 pages · aucune erreur console ·
+aucun débordement horizontal (390 px et 1 440 px) · menu mobile (ouverture, focus, Échap) · Lighthouse mobile :
+accueil 99/100/100/100 (LCP 2,0 s, CLS 0), page service 100/100/100/100.
+
 ## 2026-11-06 — v0.4.1 · Brief médias
 
 - Ajout de `docs/MEDIAS.md` : liste priorisée des photos et vidéos, emplacement sur le site, formats, règles de prise

@@ -20,7 +20,7 @@ const crumbs = [{ name: 'Accueil', path: '/' }, { name: 'FAQ', path: '/faq/' }];
   jsonld={[breadcrumb(base, crumbs), faqPage([...faqGeneral, ...svcFaq, ...specFaq])]}
   context="FAQ"
 >
-  <PageHero eyebrow="FAQ" h1="Questions fréquentes" intro="Les questions que nous posent le plus souvent les praticiens, les cliniques et les investisseurs." crumbs={crumbs} variant="psychiatrie-psychologie" />
+  <PageHero eyebrow="FAQ" h1="Questions fréquentes" intro="Les questions que nous posent le plus souvent les praticiens, les cliniques et les investisseurs." crumbs={crumbs} />
   <Faq items={faqGeneral} title="Euro Space Medical" />
   <Faq items={svcFaq} title="Nos services" tone="sand" />
   <Faq items={specFaq} title="Par spécialité" />

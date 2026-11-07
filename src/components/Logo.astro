@@ -1,17 +1,55 @@
 ---
-interface Props { tone?: 'light' | 'dark'; class?: string }
-const { tone = 'dark', class: cls = '' } = Astro.props;
-const ink = tone === 'light' ? 'var(--color-ivory)' : 'var(--color-ink)';
+/**
+ * Identité Euro Space Medical.
+ * Symbole : plan d'architecte (cadre ouvert = entrée), monogramme géométrique E·S·M (le M en toiture = bâtiment),
+ * ligne de cote teal (précision d'ingénierie). Pas de croix, de dent ni de stéthoscope.
+ * Variantes : layout horizontal | vertical | symbol ; tone color | white | navy | mono.
+ * Fichiers vectoriels autonomes (texte vectorisé) : public/brand/ — générés par `npm run brand`.
+ */
+interface Props {
+  layout?: 'horizontal' | 'vertical' | 'symbol';
+  tone?: 'color' | 'white' | 'navy' | 'mono';
+  tagline?: boolean;
+  class?: string;
+  size?: number;
+}
+const { layout = 'horizontal', tone = 'color', tagline = true, class: cls = '', size = 40 } = Astro.props;
+
+const palette = {
+  color: { ink: 'var(--color-navy)', accent: 'var(--color-teal)', sub: 'var(--color-muted)' },
+  navy: { ink: 'var(--color-navy)', accent: 'var(--color-navy)', sub: 'var(--color-navy)' },
+  white: { ink: '#ffffff', accent: 'var(--color-gold)', sub: 'rgb(255 255 255 / 0.72)' },
+  mono: { ink: 'currentColor', accent: 'currentColor', sub: 'currentColor' },
+}[tone];
 ---
-<span class={`inline-flex items-center gap-3 ${cls}`}>
-  <svg width="40" height="40" viewBox="0 0 40 40" aria-hidden="true">
-    <rect x="1" y="1" width="38" height="38" fill="none" stroke="var(--color-gold)" stroke-width="1" />
-    <path d="M11 33V18a9 9 0 0118 0v15" fill="none" stroke={ink} stroke-width="1.2" />
-    <path d="M20 19v8M16 23h8" stroke="var(--color-gold)" stroke-width="1.2" stroke-linecap="square" />
-    <path d="M6 33h28" stroke={ink} stroke-width="1" />
+
+<span
+  class:list={[
+    'inline-flex',
+    layout === 'vertical' ? 'flex-col items-center gap-3 text-center' : 'items-center gap-3',
+    cls,
+  ]}
+>
+  <svg width={size} height={size} viewBox="0 0 48 48" aria-hidden="true" focusable="false" class="shrink-0">
+    <path d="M46.9 30V1.1H1.1v45.8h45.8v-9" fill="none" stroke={palette.ink} stroke-width="2.2" />
+    <path
+      d="M16 12H8v20h8M8 22h6M28 12h-8v10h8v10h-8M32 32V12l4 6.5 4-6.5v20"
+      fill="none"
+      stroke={palette.ink}
+      stroke-width="2.4"
+      stroke-linecap="square"
+      stroke-linejoin="miter"
+    />
+    <path d="M8 39h32M8 36.5v5M40 36.5v5" fill="none" stroke={palette.accent} stroke-width="1.6" stroke-linecap="square" />
   </svg>
-  <span class="flex flex-col leading-none" style={`color:${ink}`}>
-    <span class="text-[0.7rem] font-semibold tracking-[0.32em] uppercase">Euro Space</span>
-    <span class="font-[family-name:var(--font-display)] text-[1.35rem] italic tracking-wide -mt-0.5">Medical</span>
-  </span>
+  {layout !== 'symbol' && (
+    <span class="flex flex-col leading-none" style={`color:${palette.ink}`}>
+      <span class="font-[family-name:var(--font-display)] text-[0.95rem] font-bold tracking-[0.16em] whitespace-nowrap">EURO SPACE MEDICAL</span>
+      {tagline && (
+        <span lang="en" class="mt-1.5 text-[0.62rem] font-semibold tracking-[0.2em] whitespace-nowrap" style={`color:${palette.sub}`}>
+          DESIGNING MEDICAL SPACES.
+        </span>
+      )}
+    </span>
+  )}
 </span>

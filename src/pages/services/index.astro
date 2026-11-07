@@ -17,14 +17,14 @@ const crumbs = [{ name: 'Accueil', path: '/' }, { name: 'Services', path: '/serv
   jsonld={[breadcrumb(base, crumbs)]}
   context="Services"
 >
-  <PageHero eyebrow="Services" h1="Dix services, un seul interlocuteur" intro="Chaque service peut être commandé seul ou s’intégrer dans un accompagnement complet, de l’étude de faisabilité au suivi après livraison." crumbs={crumbs} variant="medecine-generale-cabinets-de-groupe" />
+  <PageHero eyebrow="Services" h1="Dix services, un seul interlocuteur" intro="Chaque service peut être commandé seul ou s’intégrer dans un accompagnement complet, de l’étude de faisabilité au suivi après livraison." crumbs={crumbs} photo="plansConception" />
   <section class="pt-20 lg:pt-28">
     <div class="container-lux grid gap-10 lg:grid-cols-12">
       <div class="lg:col-span-5" data-reveal>
-        <p class="eyebrow text-[var(--color-gold-deep)]">Notre expertise</p>
+        <p class="eyebrow text-[var(--color-teal-ink)]">Notre expertise</p>
         <h2 class="mt-6">Le langage du chantier médical, maîtrisé de bout en bout</h2>
       </div>
-      <div class="space-y-5 text-[1.05rem] leading-relaxed text-[var(--color-stone-ink)] lg:col-span-7" data-reveal style="--i:1">
+      <div class="space-y-5 text-[1.05rem] leading-relaxed text-[var(--color-muted)] lg:col-span-7" data-reveal style="--i:1">
         <p>Du programme fonctionnel au procès-verbal de réception, nous pilotons chaque étape avec les outils des professionnels : relevé technique, plans 2D et rendus 3D, CPS et BPDE pour consulter les entreprises, ordres de service, situations de travaux vérifiées et DOE remis à la livraison.</p>
         <p>Nous intégrons les exigences propres au soin : marche en avant en stérilisation, autoclave classe B, aspiration chirurgicale et air médical à chaque unit, équivalent plomb et dossier AMSSNuR pour l’imagerie, CTA et gaz médicaux pour les blocs, sol PVC à lés soudés et cloisons BA13 hydrofuges dans les zones de soins.</p>
       </div>
@@ -36,7 +36,7 @@ const crumbs = [{ name: 'Accueil', path: '/' }, { name: 'Services', path: '/serv
       {services.map((s, i) => <ServiceCard id={s.id} order={s.data.order} short={s.data.short} h1={s.data.h1} intro={s.data.intro} description={s.data.description} termes={s.data.termes} i={i} />)}
     </div>
   </section>
-  <section class="bg-[var(--color-night)] py-20 text-[var(--color-ivory)] lg:py-28">
+  <section class="bg-[var(--color-navy)] py-20 text-[var(--color-warm)] lg:py-28">
     <div class="container-lux">
       <p class="eyebrow text-[var(--color-gold)]">Méthode</p>
       <h2 class="mt-6 max-w-3xl">Comment s’enchaînent nos services</h2>

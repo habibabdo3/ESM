@@ -1,0 +1,28 @@
+---
+/** Photo optimisée (AVIF + WebP, tailles adaptées). `eager` uniquement pour l'image principale de la page. */
+import { Picture } from 'astro:assets';
+import { photos, type PhotoKey } from '@/lib/photos';
+
+interface Props {
+  name: PhotoKey;
+  sizes?: string;
+  widths?: number[];
+  class?: string;
+  eager?: boolean;
+  alt?: string;
+}
+const { name, sizes = '100vw', widths = [480, 800, 1200, 1600, 2000], class: cls = '', eager = false, alt } = Astro.props;
+const p = photos[name];
+const w = widths.filter((x) => x <= p.src.width);
+---
+<Picture
+  src={p.src}
+  alt={alt ?? p.alt}
+  formats={['avif', 'webp']}
+  widths={w.length ? w : [p.src.width]}
+  sizes={sizes}
+  class={cls}
+  loading={eager ? 'eager' : 'lazy'}
+  fetchpriority={eager ? 'high' : 'auto'}
+  decoding={eager ? 'sync' : 'async'}
+/>

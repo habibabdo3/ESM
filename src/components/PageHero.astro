@@ -1,36 +1,39 @@
 ---
 import Breadcrumbs from './Breadcrumbs.astro';
-import PlanArt from './PlanArt.astro';
+import Photo from './Photo.astro';
+import type { PhotoKey } from '@/lib/photos';
 
 interface Props {
   eyebrow: string;
   h1: string;
   intro?: string;
   crumbs: { name: string; path: string }[];
-  variant?: string;
+  photo?: PhotoKey;
   ctaLabel?: string;
   ctaHref?: string;
-  vtName?: string;
 }
-const { eyebrow, h1, intro, crumbs, variant = 'default', ctaLabel, ctaHref = '/contact/', vtName } = Astro.props;
+const { eyebrow, h1, intro, crumbs, photo, ctaLabel, ctaHref = '/contact/' } = Astro.props;
 ---
-<section class="relative isolate overflow-hidden bg-[var(--color-night)] text-[var(--color-ivory)]">
-  <div class="absolute inset-0 -z-10 opacity-55" aria-hidden="true">
-    <div class="hero-media h-full w-full" style={vtName ? `view-transition-name:${vtName}` : undefined}>
-      <PlanArt variant={variant} class="h-full w-full" label="" />
+<section class="border-b border-[var(--color-line)] bg-[var(--color-warm)]">
+  <div class:list={['container-lux grid items-center gap-10 pb-14 pt-10 lg:pb-20 lg:pt-14', photo && 'lg:grid-cols-12 lg:gap-16']}>
+    <div class:list={[photo ? 'lg:col-span-6' : 'max-w-4xl']}>
+      <Breadcrumbs items={crumbs} tone="dark" />
+      <p class="eyebrow fade-up mt-10 text-[var(--color-teal-ink)]">{eyebrow}</p>
+      <h1 class="mt-5 text-[var(--color-navy)]"><span class="line-mask"><span>{h1}</span></span></h1>
+      {intro && <p class="fade-up mt-6 max-w-2xl text-[1.12rem] leading-relaxed text-[var(--color-muted)]" style="--i:2">{intro}</p>}
+      {ctaLabel && (
+        <div class="fade-up mt-9 flex flex-wrap gap-3" style="--i:3">
+          <a href={ctaHref} class="btn btn-primary">{ctaLabel} <span class="arrow" aria-hidden="true">→</span></a>
+        </div>
+      )}
+      <slot />
     </div>
-  </div>
-  <div class="absolute inset-0 -z-10 bg-gradient-to-r from-[var(--color-night)] via-[var(--color-night)]/90 to-[var(--color-night)]/40" aria-hidden="true"></div>
-  <div class="container-lux pb-20 pt-14 lg:pb-28 lg:pt-20">
-    <Breadcrumbs items={crumbs} />
-    <p class="eyebrow mt-10 text-[var(--color-gold)] fade-up">{eyebrow}</p>
-    <h1 class="mt-6 max-w-4xl"><span class="line-mask"><span>{h1}</span></span></h1>
-    {intro && <p class="fade-up mt-8 max-w-2xl text-lg leading-relaxed text-[var(--color-ivory)]/80" style="--i:2">{intro}</p>}
-    {ctaLabel && (
-      <div class="fade-up mt-10 flex flex-wrap gap-4" style="--i:3">
-        <a href={ctaHref} class="btn btn-gold">{ctaLabel} <span class="arrow" aria-hidden="true">→</span></a>
+    {photo && (
+      <div class="lg:col-span-6">
+        <div class="aspect-[4/3] overflow-hidden rounded-[var(--radius-photo)] bg-[var(--color-mist)]">
+          <Photo name={photo} eager sizes="(min-width:1024px) 45vw, 100vw" widths={[480, 800, 1200]} class="h-full w-full object-cover" />
+        </div>
       </div>
     )}
-    <slot />
   </div>
 </section>

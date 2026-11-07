@@ -1,13 +1,13 @@
 ---
 interface Props { items: { name: string; path: string }[]; tone?: 'light' | 'dark' }
-const { items, tone = 'light' } = Astro.props;
+const { items, tone = 'dark' } = Astro.props;
 ---
-<nav aria-label="Fil d’Ariane" class:list={['text-[0.75rem] font-medium uppercase tracking-[0.14em]', tone === 'light' ? 'text-[var(--color-ivory)]/70' : 'text-[var(--color-stone-ink)]']}>
-  <ol class="flex flex-wrap items-center gap-x-3 gap-y-1">
+<nav aria-label="Fil d’Ariane" class:list={['text-[0.82rem] font-medium', tone === 'light' ? 'text-white/75' : 'text-[var(--color-muted)]']}>
+  <ol class="flex flex-wrap items-center gap-x-2.5 gap-y-1">
     {items.map((it, i) => (
-      <li class="flex items-center gap-3">
-        {i > 0 && <span aria-hidden="true" class="text-[var(--color-gold)]">/</span>}
-        {i < items.length - 1 ? <a href={it.path} class="link-lux">{it.name}</a> : <span aria-current="page">{it.name}</span>}
+      <li class="flex items-center gap-2.5">
+        {i > 0 && <span aria-hidden="true" class="text-[var(--color-slate)]">/</span>}
+        {i < items.length - 1 ? <a href={it.path} class="link-lux hover:text-[var(--color-navy)]">{it.name}</a> : <span aria-current="page" class="text-[var(--color-ink)]">{it.name}</span>}
       </li>
     ))}
   </ol>

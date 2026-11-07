@@ -29,42 +29,42 @@ const faq = [
   jsonld={[breadcrumb(base, crumbs), faqPage(faq)]}
   context="Financement"
 >
-  <PageHero eyebrow="Projet financé" h1="Votre structure conçue, aménagée, équipée et financée" intro="Euro Space Medical conçoit, aménage et équipe votre structure, et vous accompagne jusqu’au financement avec nos banques partenaires." crumbs={crumbs} variant="medecine-generale-cabinets-de-groupe" ctaLabel="Simuler le financement de mon projet">
-    <p class="mt-6 text-[0.85rem] italic text-[var(--color-ivory)]/65">{BANK_DISCLAIMER}</p>
+  <PageHero eyebrow="Projet financé" h1="Votre structure conçue, aménagée, équipée et financée" intro="Euro Space Medical conçoit, aménage et équipe votre structure, et vous accompagne jusqu’au financement avec nos banques partenaires." crumbs={crumbs} photo="accueilClinique" ctaLabel="Simuler le financement de mon projet">
+    <p class="mt-6 text-[0.88rem] italic text-[var(--color-muted)]">{BANK_DISCLAIMER}</p>
   </PageHero>
 
   <section class="py-20 lg:py-28">
     <div class="container-lux">
-      <p class="eyebrow text-[var(--color-gold-deep)]">Formules</p>
+      <p class="eyebrow text-[var(--color-teal-ink)]">Formules</p>
       <h2 class="mt-6 max-w-3xl">Cinq façons de financer votre projet</h2>
       <div class="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-5">
         {formules.map((f, i) => (
           <div class="border border-[var(--color-line)] bg-white/40 p-7" data-reveal style={`--i:${i}`}>
             <span class="num text-3xl">{pad(i + 1)}</span>
             <h3 class="mt-5 text-[1.45rem]">{f.t}</h3>
-            <p class="mt-3 text-[0.9rem] text-[var(--color-stone-ink)]">{f.p}</p>
+            <p class="mt-3 text-[0.9rem] text-[var(--color-muted)]">{f.p}</p>
           </div>
         ))}
       </div>
     </div>
   </section>
 
-  <section class="bg-[var(--color-night)] py-20 text-[var(--color-ivory)] lg:py-28">
+  <section class="bg-[var(--color-navy)] py-20 text-[var(--color-warm)] lg:py-28">
     <div class="container-lux">
       <p class="eyebrow text-[var(--color-gold)]">Partenaires</p>
       <h2 class="mt-6 max-w-3xl">Deux banques partenaires, deux approches</h2>
-      <div class="mt-14 grid gap-px overflow-hidden bg-[var(--color-night-3)] md:grid-cols-2">
+      <div class="mt-14 grid gap-px overflow-hidden bg-[var(--color-navy-3)] md:grid-cols-2">
         {partners.map((p, i) => (
-          <a href={p.path} class="card-lux group block bg-[var(--color-night)] p-10 no-underline" data-reveal style={`--i:${i}`}>
+          <a href={p.path} class="card-lux group block bg-[var(--color-navy)] p-10 no-underline" data-reveal style={`--i:${i}`}>
             <p class="caption text-[var(--color-gold)]">{p.short}</p>
             <h3 class="mt-4 text-[2rem]">{p.h1}</h3>
             <span class="card-rule mt-5 block h-px w-16 bg-[var(--color-gold)]"></span>
-            <p class="mt-5 text-[var(--color-ivory)]/75">{p.accroche}</p>
+            <p class="mt-5 text-[var(--color-warm)]/75">{p.accroche}</p>
             <span class="card-more mt-6 inline-flex items-center gap-2 text-[0.75rem] font-semibold uppercase tracking-[0.16em] text-[var(--color-gold)]">Découvrir <span aria-hidden="true">→</span></span>
           </a>
         ))}
       </div>
-      <p class="mt-8 text-[0.85rem] italic text-[var(--color-ivory)]/60">{BANK_DISCLAIMER}</p>
+      <p class="mt-8 text-[0.85rem] italic text-[var(--color-warm)]/60">{BANK_DISCLAIMER}</p>
     </div>
   </section>
 
@@ -73,7 +73,7 @@ const faq = [
       <h2 class="max-w-3xl">L’offre « Projet financé » en cinq étapes</h2>
       <ol class="mt-12 grid gap-px overflow-hidden bg-[var(--color-line)] md:grid-cols-5">
         {etapesProjetFinance.map((e, i) => (
-          <li class="bg-[var(--color-ivory)] p-6" data-reveal style={`--i:${i}`}><span class="num text-4xl">{pad(i + 1)}</span><h3 class="mt-4 text-[1.35rem]">{e.t}</h3><p class="mt-3 text-[0.9rem] text-[var(--color-stone-ink)]">{e.p}</p></li>
+          <li class="bg-[var(--color-warm)] p-6" data-reveal style={`--i:${i}`}><span class="num text-4xl">{pad(i + 1)}</span><h3 class="mt-4 text-[1.35rem]">{e.t}</h3><p class="mt-3 text-[0.9rem] text-[var(--color-muted)]">{e.p}</p></li>
         ))}
       </ol>
     </div>

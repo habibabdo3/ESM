@@ -17,7 +17,7 @@ const crumbs = [{ name: 'Accueil', path: '/' }, { name: 'Réalisations', path: '
   jsonld={[breadcrumb(base, crumbs)]}
   context="Réalisations"
 >
-  <PageHero eyebrow="Portfolio" h1="Nos réalisations" intro="Chaque projet est présenté avec sa spécialité, sa ville, sa surface, sa durée, les lots réalisés, la difficulté rencontrée et la solution apportée." crumbs={crumbs} variant="dermatologie-medecine-esthetique" />
+  <PageHero eyebrow="Portfolio" h1="Nos réalisations" intro="Chaque projet est présenté avec sa spécialité, sa ville, sa surface, sa durée, les lots réalisés, la difficulté rencontrée et la solution apportée." crumbs={crumbs} />
   <section class="py-20 lg:py-28">
     <div class="container-lux">
       {realisations.length > 0 ? (
@@ -28,8 +28,8 @@ const crumbs = [{ name: 'Accueil', path: '/' }, { name: 'Réalisations', path: '
         <div class="mx-auto max-w-2xl text-center">
           <span class="gold-rule mx-auto"></span>
           <h2 class="mt-8">Études de cas en cours de publication</h2>
-          <p class="mt-6 text-[var(--color-stone-ink)]">Nos premières réalisations détaillées, avec photos avant et après, seront publiées ici très prochainement. En attendant, nous pouvons vous présenter des projets comparables au vôtre lors d’un rendez-vous.</p>
-          <a href="/contact/" class="btn btn-gold mt-10">Prendre rendez-vous</a>
+          <p class="mt-6 text-[var(--color-muted)]">Nos premières réalisations détaillées, avec photos avant et après, seront publiées ici très prochainement. En attendant, nous pouvons vous présenter des projets comparables au vôtre lors d’un rendez-vous.</p>
+          <a href="/contact/" class="btn btn-primary mt-10">Prendre rendez-vous</a>
         </div>
       )}
     </div>

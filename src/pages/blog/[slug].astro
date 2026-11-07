@@ -20,7 +20,7 @@ const path = postPath(entry.id);
 const crumbs = [{ name: 'Accueil', path: '/' }, { name: 'Guides', path: '/blog/' }, { name: d.title, path }];
 ---
 <BaseLayout title={d.title} description={d.description} ogType="article" noindex={d.draft} jsonld={[breadcrumb(base, crumbs), article(base, { title: d.h1, description: d.description, path, date: d.date })]} context={d.title}>
-  <PageHero eyebrow="Guide" h1={d.h1} intro={d.description} crumbs={crumbs} variant={entry.id} />
+  <PageHero eyebrow="Guide" h1={d.h1} intro={d.description} crumbs={crumbs} />
   <article class="prose-lux container-lux max-w-3xl py-20 text-[1.06rem] leading-relaxed"><Content /></article>
   <section class="pb-20"><div class="container-lux max-w-3xl">
     <RelatedLinks title="Services liés" links={services.map((s) => ({ href: servicePath(s.id), label: s.data.short, meta: `Service ${pad(s.data.order)}` }))} />

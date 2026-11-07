@@ -5,9 +5,11 @@
 ## 1. Arborescence des pages (silos SEO)
 
 ```
-/                                   Accueil : promesse, 3 piliers, chiffres de l’offre, services, spécialités,
-│                                   rénovation, méthode, réalisations*, financement + banques, zones, guides, FAQ
+/                                   Accueil : héros éditorial + photo, 4 expertises, processus en 4 étapes,
+│                                   réalisations*, « Pourquoi ESM », appel final
 │
+├── /expertises/                    4 expertises (étude & conception, construction & rénovation, équipement,
+│                                   accompagnement global) → services liés, spécialités, méthode
 ├── /services/                      Index des 10 services
 │   ├── etude-faisabilite-programmation-medicale/
 │   ├── conception-amenagement-cabinet-medical/
@@ -68,8 +70,8 @@
 
 | Depuis | Vers |
 |---|---|
-| En-tête | Services (méga-menu 10), Spécialités (méga-menu 14), Rénovation, Financement, Réalisations, Zones, Devis |
-| Pied de page | Tous les services, toutes les spécialités, piliers, première installation, guides, glossaire, légal |
+| En-tête | Accueil, Expertises, Réalisations, À propos, Contact + « Parler de mon projet » (menu mobile : + services, spécialités, financement, zones, guides) |
+| Pied de page | 4 expertises, toutes les spécialités, réalisations, financement, première installation, aménagement, zones, guides, glossaire, FAQ, légal |
 | Service | Spécialités concernées, 4 services suivants, guides liés |
 | Spécialité | ≥ 3 services liés, 2 spécialités voisines, rénovation, glossaire, réalisations de la spécialité |
 | Région | 4 services clés, autres régions, zones d’intervention |

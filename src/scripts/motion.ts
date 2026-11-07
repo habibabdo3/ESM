@@ -1,7 +1,6 @@
 /**
  * Animations au défilement — CSS + IntersectionObserver, sans bibliothèque.
  * - [data-reveal] / [data-reveal-img] : déclenchement unique à 20 % de visibilité
- * - .parallax : déplacement vertical ≤ 6 %, desktop uniquement
  * - [data-count] : compteur animé une fois (chiffres réels uniquement)
  */
 const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -32,21 +31,4 @@ function countUp(el: HTMLElement) {
     if (p < 1) requestAnimationFrame(step);
   };
   requestAnimationFrame(step);
-}
-
-const parallax = [...document.querySelectorAll<HTMLElement>('.parallax')];
-if (parallax.length && !reduce && window.matchMedia('(min-width: 768px)').matches) {
-  let ticking = false;
-  const update = () => {
-    const vh = window.innerHeight;
-    for (const el of parallax) {
-      const r = el.getBoundingClientRect();
-      if (r.bottom < 0 || r.top > vh) continue;
-      const progress = (r.top + r.height / 2 - vh / 2) / vh; // -1 … 1
-      el.style.setProperty('--py', `${(-progress * 6).toFixed(2)}%`);
-    }
-    ticking = false;
-  };
-  window.addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
-  update();
 }

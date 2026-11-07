@@ -28,7 +28,7 @@ const faq = [
   jsonld={[breadcrumb(base, crumbs), serviceLd(base, { name: 'Aménagement de cabinet médical', description: 'Conception, travaux et équipement de cabinets, cliniques et centres médicaux au Maroc.', path }), faqPage(faq)]}
   context="Aménagement de cabinet médical"
 >
-  <PageHero eyebrow="Aménagement médical" h1="Aménagement de cabinet médical, de l’étude à la réception" intro="L’aménagement d’un cabinet médical réussi commence par l’acte de soin : qui circule, où, avec quel matériel, et sous quelles contraintes réglementaires. Nous partons de votre pratique pour concevoir, construire et équiper un lieu qui fonctionne dès le premier jour, partout au Maroc." crumbs={crumbs} variant="cabinet-dentaire-orthodontie" ctaLabel="Demander un devis" />
+  <PageHero eyebrow="Aménagement médical" h1="Aménagement de cabinet médical, de l’étude à la réception" intro="L’aménagement d’un cabinet médical commence par l’acte de soin. Nous concevons, construisons et équipons un lieu qui fonctionne dès le premier jour." crumbs={crumbs} photo="cabinetDentaire2" ctaLabel="Demander un devis" />
 
   <article class="py-20 lg:py-28">
     <div class="container-lux grid gap-16 lg:grid-cols-12">
@@ -62,7 +62,7 @@ const faq = [
             <div class="h-full w-full"><PlanArt variant="medecine-generale-cabinets-de-groupe" class="h-full w-full" label="Illustration : plan schématique d’un cabinet de groupe avec circuit patient" /></div>
           </div>
           <nav aria-label="Nos services d’aménagement">
-            <p class="caption text-[var(--color-gold-deep)]">Nos services</p>
+            <p class="caption text-[var(--color-teal-ink)]">Nos services</p>
             <ul class="mt-4 divide-y divide-[var(--color-line)] border-y border-[var(--color-line)]">
               {services.map((s) => (
                 <li><a href={servicePath(s.id)} class="flex gap-4 py-3 no-underline hover:text-[var(--color-teal)]"><span class="num">{pad(s.data.order)}</span>{s.data.short}</a></li>
@@ -74,7 +74,7 @@ const faq = [
     </div>
   </article>
 
-  <section class="bg-[var(--color-sand)] py-20 lg:py-28">
+  <section class="bg-[var(--color-mist)] py-20 lg:py-28">
     <div class="container-lux">
       <h2 class="max-w-3xl">Notre méthode en six étapes</h2>
       <div class="mt-14"><ProcessSteps /></div>

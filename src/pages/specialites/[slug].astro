@@ -6,7 +6,8 @@ import Faq from '@/components/Faq.astro';
 import CtaBand from '@/components/CtaBand.astro';
 import RelatedLinks from '@/components/RelatedLinks.astro';
 import RealisationCard from '@/components/RealisationCard.astro';
-import { getServices, getSpecialites, getRealisations, servicePath, specialitePath, pad, type Specialite } from '@/lib/content';
+import { getServices, getSpecialites, getRealisations, servicePath, specialitePath, pad, paragraphs, type Specialite } from '@/lib/content';
+import { specialitePhoto } from '@/lib/photos';
 import { breadcrumb, faqPage, service as serviceLd } from '@/lib/schema';
 
 export async function getStaticPaths() {
@@ -30,40 +31,43 @@ const realisations = (await getRealisations()).filter((r) => r.data.specialite =
   context={d.short}
   jsonld={[breadcrumb(base, crumbs), serviceLd(base, { name: d.h1, description: d.description, path, type: `Aménagement — ${d.short}` }), ...(d.faq.length ? [faqPage(d.faq)] : [])]}
 >
-  <PageHero eyebrow={`Spécialité ${pad(d.order)} · ${d.short}`} h1={d.h1} intro={d.intro} crumbs={crumbs} variant={entry.id} ctaLabel={d.cta} ctaHref={`/contact/?specialite=${entry.id}`} />
+  <PageHero eyebrow={`Spécialité ${pad(d.order)} · ${d.short}`} h1={d.h1} intro={d.description} crumbs={crumbs} photo={specialitePhoto[entry.id]} ctaLabel={d.cta} ctaHref={`/contact/?specialite=${entry.id}`} />
 
   <section class="py-20 lg:py-28">
     <div class="container-lux grid gap-16 lg:grid-cols-12">
       <div class="lg:col-span-6" data-reveal>
-        <p class="eyebrow text-[var(--color-gold-deep)]">Contraintes</p>
+        <div class="mb-14 space-y-4 text-[1.06rem] leading-relaxed text-[var(--color-ink)]">
+          {paragraphs(d.intro).map((t) => <p>{t}</p>)}
+        </div>
+        <p class="eyebrow text-[var(--color-teal-ink)]">Contraintes</p>
         <h2 class="mt-6">Contraintes d’aménagement</h2>
         <ul class="mt-10 space-y-5">
           {d.contraintes.map((c) => (
-            <li class="flex gap-4 border-b border-[var(--color-line)] pb-5"><span class="mt-3 block h-px w-6 shrink-0 bg-[var(--color-gold-deep)]"></span><span>{c}</span></li>
+            <li class="flex gap-4 border-b border-[var(--color-line)] pb-5"><span class="mt-3 block h-px w-6 shrink-0 bg-[var(--color-teal-ink)]"></span><span>{c}</span></li>
           ))}
         </ul>
       </div>
       <div class="lg:col-span-6">
         <div class="aspect-[4/3] overflow-hidden rounded-[var(--radius-photo)]" data-reveal-img>
-          <div class="h-full w-full"><PlanArt variant={entry.id} class="h-full w-full" label={`Illustration : plan schématique type — ${d.short}`} /></div>
+          <div class="h-full w-full"><PlanArt variant={entry.id} tone="light" class="h-full w-full" label={`Illustration : plan schématique type — ${d.short}`} /></div>
         </div>
-        <p class="caption mt-3 text-[var(--color-stone-ink)]">Plan schématique · {d.short} · illustration non contractuelle</p>
+        <p class="caption mt-3 text-[var(--color-muted)]">Plan schématique · {d.short} · illustration non contractuelle</p>
       </div>
     </div>
   </section>
 
-  <section class="bg-[var(--color-night)] py-20 text-[var(--color-ivory)] lg:py-28">
+  <section class="bg-[var(--color-navy)] py-20 text-[var(--color-warm)] lg:py-28">
     <div class="container-lux grid gap-16 lg:grid-cols-12">
       <div class="lg:col-span-4" data-reveal>
         <p class="eyebrow text-[var(--color-gold)]">Ce que nous proposons</p>
         <h2 class="mt-6">Notre offre</h2>
-        <p class="mt-6 text-[var(--color-ivory)]/70">Les surfaces et références techniques sont des repères, confirmés sur plan avec le bureau d’études.</p>
+        <p class="mt-6 text-[var(--color-warm)]/70">Les surfaces et références techniques sont des repères, confirmés sur plan avec le bureau d’études.</p>
       </div>
-      <ol class="grid gap-px overflow-hidden bg-[var(--color-night-3)] sm:grid-cols-2 lg:col-span-8">
+      <ol class="grid gap-px overflow-hidden bg-[var(--color-navy-3)] sm:grid-cols-2 lg:col-span-8">
         {d.offre.map((o, i) => (
-          <li class="bg-[var(--color-night)] p-7" data-reveal style={`--i:${i % 2}`}>
+          <li class="bg-[var(--color-navy)] p-7" data-reveal style={`--i:${i % 2}`}>
             <span class="num text-3xl">{pad(i + 1)}</span>
-            <p class="mt-4 text-[1.02rem] text-[var(--color-ivory)]/90">{o}</p>
+            <p class="mt-4 text-[1.02rem] text-[var(--color-warm)]/90">{o}</p>
           </li>
         ))}
       </ol>
@@ -73,34 +77,34 @@ const realisations = (await getRealisations()).filter((r) => r.data.specialite =
   <section class="py-20 lg:py-28">
     <div class="container-lux grid gap-12 lg:grid-cols-12">
       <div class="lg:col-span-4" data-reveal>
-        <p class="eyebrow text-[var(--color-gold-deep)]">Réglementation</p>
+        <p class="eyebrow text-[var(--color-teal-ink)]">Réglementation</p>
         <h2 class="mt-6">Autorisations et points à valider</h2>
       </div>
       <div class="lg:col-span-8" data-reveal style="--i:1">
         <ul class="space-y-4">
           {d.aValider.map((a) => (
-            <li class="flex gap-4 border border-[var(--color-line)] bg-white/40 p-5"><span class="text-[var(--color-gold-deep)]" aria-hidden="true">◆</span><span>{a}</span></li>
+            <li class="flex gap-4 border border-[var(--color-line)] bg-white/40 p-5"><span class="text-[var(--color-teal-ink)]" aria-hidden="true">◆</span><span>{a}</span></li>
           ))}
         </ul>
-        <p class="mt-6 text-[0.88rem] text-[var(--color-stone-ink)]">Ces points sont validés pour chaque projet avec les autorités compétentes, votre bureau d’études et l’organisme de contrôle.</p>
+        <p class="mt-6 text-[0.88rem] text-[var(--color-muted)]">Ces points sont validés pour chaque projet avec les autorités compétentes, votre bureau d’études et l’organisme de contrôle.</p>
       </div>
     </div>
   </section>
 
   {d.lexique.length > 0 && (
-    <section class="bg-[var(--color-night)] py-20 text-[var(--color-ivory)] lg:py-28" aria-labelledby="lexique-title">
+    <section class="bg-[var(--color-navy)] py-20 text-[var(--color-warm)] lg:py-28" aria-labelledby="lexique-title">
       <div class="container-lux grid gap-14 lg:grid-cols-12">
         <div class="lg:col-span-4" data-reveal>
           <p class="eyebrow text-[var(--color-gold)]">Notre langage commun</p>
           <h2 id="lexique-title" class="mt-6">Le vocabulaire de votre spécialité</h2>
-          <p class="mt-6 text-[var(--color-ivory)]/70">Nous parlons le langage de votre pratique : chaque équipement, chaque examen, chaque exigence technique est pris en compte dès le premier plan.</p>
+          <p class="mt-6 text-[var(--color-warm)]/70">Nous parlons le langage de votre pratique : chaque équipement, chaque examen, chaque exigence technique est pris en compte dès le premier plan.</p>
           <a href="/glossaire/" class="btn btn-ghost-light mt-8">Tout le glossaire</a>
         </div>
-        <dl class="grid gap-px overflow-hidden bg-[var(--color-night-3)] sm:grid-cols-2 lg:col-span-8">
+        <dl class="grid gap-px overflow-hidden bg-[var(--color-navy-3)] sm:grid-cols-2 lg:col-span-8">
           {d.lexique.map((t, i) => (
-            <div class="bg-[var(--color-night)] p-7" data-reveal style={`--i:${i % 2}`}>
+            <div class="bg-[var(--color-navy)] p-7" data-reveal style={`--i:${i % 2}`}>
               <dt class="display text-[1.5rem] text-[var(--color-gold-soft)]">{t.terme}</dt>
-              <dd class="mt-3 text-[0.95rem] leading-relaxed text-[var(--color-ivory)]/75">{t.definition}</dd>
+              <dd class="mt-3 text-[0.95rem] leading-relaxed text-[var(--color-warm)]/75">{t.definition}</dd>
             </div>
           ))}
         </dl>
@@ -109,7 +113,7 @@ const realisations = (await getRealisations()).filter((r) => r.data.specialite =
   )}
 
   {realisations.length > 0 && (
-    <section class="bg-[var(--color-sand)] py-20 lg:py-28">
+    <section class="bg-[var(--color-mist)] py-20 lg:py-28">
       <div class="container-lux">
         <h2>Réalisations — {d.short}</h2>
         <div class="mt-12 grid gap-10 md:grid-cols-3">{realisations.map((r, i) => <RealisationCard entry={r} i={i} />)}</div>

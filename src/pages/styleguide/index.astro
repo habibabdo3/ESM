@@ -1,112 +1,99 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
+import Logo from '@/components/Logo.astro';
+import Photo from '@/components/Photo.astro';
 import PlanArt from '@/components/PlanArt.astro';
 import ServiceCard from '@/components/ServiceCard.astro';
 import SpecialtyCard from '@/components/SpecialtyCard.astro';
+import ProcessSteps from '@/components/ProcessSteps.astro';
 import BeforeAfter from '@/components/BeforeAfter.astro';
 import Lightbox from '@/components/Lightbox.astro';
-import MoroccoMap from '@/components/MoroccoMap.astro';
 import Faq from '@/components/Faq.astro';
 
 const colors = [
-  ['night', '#0a1a2f', 'Bleu nuit — sections premium'], ['night-2', '#10263f', 'Cartes sur fond nuit'], ['night-3', '#1b3654', 'Filets sur nuit'],
-  ['teal', '#1d5a60', 'Bleu-vert — liens'], ['ivory', '#f7f3ec', 'Blanc cassé chaud — fond'], ['sand', '#eee8dc', 'Fond alterné'],
-  ['line', '#ddd5c6', 'Filets clairs'], ['stone', '#8a857b', 'Gris pierre décoratif'], ['stone-ink', '#5b564d', 'Gris pierre texte'],
-  ['ink', '#121d2b', 'Texte'], ['gold', '#c9a96b', 'Or champagne — filets, chiffres, CTA'], ['gold-deep', '#755a24', 'Or lisible sur clair (AA)'],
+  ['Deep Navy', '#142C43', '20 % · titres, navigation, boutons, footer'],
+  ['Medical Teal', '#168C91', '4 % · accents, états actifs, filets'],
+  ['Teal texte', '#0F6E72', 'petits textes et liens en teal (AA)'],
+  ['Champagne Gold', '#C6A66B', '1 % · détails premium uniquement'],
+  ['Warm White', '#F7F8F7', '65 % · fond principal (avec le blanc)'],
+  ['Soft Grey', '#E9EEF0', '10 % · fond alterné'],
+  ['Primary Text', '#263746', 'texte courant'],
+  ['Secondary Text', '#697782', 'grands textes secondaires, icônes'],
+  ['Secondary Text AA', '#5E6C77', 'petits textes secondaires'],
 ];
-const demo = Array.from({ length: 6 }, (_, i) => ({ v: ['cabinet-dentaire-orthodontie', 'radiologie-imagerie-medicale', 'ophtalmologie', 'pediatrie', 'cliniques-blocs-operatoires', 'laboratoire-analyses-medicales'][i]! }));
+const files = ['esm-logo-horizontal', 'esm-logo-horizontal-navy', 'esm-logo-horizontal-white', 'esm-logo-horizontal-mono', 'esm-logo-vertical', 'esm-logo-vertical-white', 'esm-logo-vertical-mono', 'esm-symbol', 'esm-symbol-navy', 'esm-symbol-white', 'esm-symbol-mono'];
 ---
-<BaseLayout title="Styleguide interne" description="Page interne de validation des design tokens, des composants et des animations du site Euro Space Medical, non indexée par les moteurs de recherche." noindex context="Styleguide">
-  <section class="relative isolate flex min-h-[70vh] items-end overflow-hidden bg-[var(--color-night)] text-[var(--color-ivory)]">
-    <div class="absolute inset-0 -z-20" aria-hidden="true"><div class="hero-media h-full w-full"><PlanArt variant="radiologie-imagerie-medicale" class="h-full w-full" label="" /></div></div>
-    <div class="absolute inset-0 -z-10 bg-gradient-to-r from-[var(--color-night)] to-[var(--color-night)]/30" aria-hidden="true"></div>
-    <div class="container-lux pb-16 pt-32">
-      <p class="eyebrow fade-up text-[var(--color-gold)]">1 · Héros — zoom 1,08 → 1 en 22 s, titre ligne par ligne</p>
-      <h1 class="mt-6 max-w-4xl">
-        <span class="line-mask"><span style="--i:0">Styleguide</span></span>
-        <span class="line-mask"><span style="--i:1"><em class="text-[var(--color-gold-soft)]">Euro Space Medical</em></span></span>
-      </h1>
-      <button type="button" class="btn btn-ghost-light mt-8" onclick="location.reload()">Rejouer</button>
-    </div>
-  </section>
-
-  <section class="container-lux py-20">
-    <h2>Couleurs</h2>
-    <ul class="mt-10 grid grid-cols-2 gap-6 md:grid-cols-4 lg:grid-cols-6">
-      {colors.map(([n, hex, use]) => (
-        <li><span class="block aspect-square border border-[var(--color-line)]" style={`background:${hex}`}></span><p class="mt-3 text-[0.85rem] font-semibold">--color-{n}</p><p class="text-[0.8rem] text-[var(--color-stone-ink)]">{hex} · {use}</p></li>
-      ))}
-    </ul>
-    <h2 class="mt-20">Typographie</h2>
-    <div class="mt-8 space-y-4">
-      <p class="display text-6xl">Cormorant Garamond — titres</p>
-      <p class="text-lg">Manrope — texte courant. Phrases courtes, vouvoiement, apostrophes typographiques.</p>
-      <p class="eyebrow text-[var(--color-gold-deep)]">Eyebrow · petites capitales</p>
-      <p class="caption text-[var(--color-stone-ink)]">Légende · Casablanca · Dentaire</p>
-      <p><span class="num text-6xl">01</span> <span class="num text-6xl">14</span></p>
-    </div>
-    <h2 class="mt-20">Boutons</h2>
-    <div class="mt-8 flex flex-wrap gap-4"><a href="#" class="btn btn-gold">Demander un devis <span class="arrow">→</span></a><a href="#" class="btn btn-ghost-dark">Secondaire</a></div>
-    <div class="mt-4 flex flex-wrap gap-4 bg-[var(--color-night)] p-6"><a href="#" class="btn btn-gold">Primaire</a><a href="#" class="btn btn-ghost-light">Secondaire sur nuit</a></div>
-  </section>
-
-  <section class="bg-[var(--color-sand)] py-20">
+<BaseLayout title="Styleguide interne" description="Page interne de validation de l’identité Euro Space Medical : logos, couleurs, typographie, composants et animations, non indexée par les moteurs de recherche." noindex context="Styleguide">
+  <section class="border-b border-[var(--color-line)] py-16">
     <div class="container-lux">
-      <h2>2 · Révélation au défilement (clip-path + échelle 1,15 → 1, 1 200 ms, décalage 100 ms)</h2>
-      <div class="mt-12 grid gap-6 md:grid-cols-3">
-        {demo.slice(0, 3).map((d, i) => <div class="aspect-[4/5] overflow-hidden rounded-[var(--radius-photo)]" data-reveal-img style={`--i:${i}`}><div class="h-full w-full"><PlanArt variant={d.v} class="h-full w-full" /></div></div>)}
+      <p class="eyebrow text-[var(--color-teal-ink)]">Identité</p>
+      <h1 class="mt-5">Euro Space Medical — styleguide</h1>
+      <p class="mt-4 max-w-2xl text-[var(--color-muted)]"><span lang="en">Designing medical spaces.</span> · Votre projet médical, de A à Z.</p>
+    </div>
+  </section>
+
+  <section class="container-lux py-16">
+    <h2>Logo</h2>
+    <div class="mt-10 grid gap-6 md:grid-cols-2">
+      <div class="flex min-h-40 items-center justify-center border border-[var(--color-line)] bg-white p-8"><Logo /></div>
+      <div class="flex min-h-40 items-center justify-center bg-[var(--color-navy)] p-8"><Logo tone="white" /></div>
+      <div class="flex min-h-40 items-center justify-center border border-[var(--color-line)] bg-white p-8"><Logo layout="vertical" size={72} /></div>
+      <div class="flex min-h-40 items-center justify-center gap-10 border border-[var(--color-line)] bg-white p-8">
+        <Logo layout="symbol" size={64} /><Logo layout="symbol" tone="navy" size={64} />
+        <span class="text-black"><Logo layout="symbol" tone="mono" size={64} /></span>
       </div>
     </div>
+    <p class="mt-6 text-[0.95rem] text-[var(--color-muted)]">Fichiers vectoriels (texte vectorisé) : {files.map((f, i) => <>{i > 0 && ' · '}<a class="underline" href={`/brand/${f}.svg`}>{f}.svg</a></>)}</p>
+    <p class="mt-2 text-[0.95rem] text-[var(--color-muted)]">Concept : cadre-plan ouvert (l’entrée du bâtiment), monogramme géométrique E·S·M, ligne de cote (précision d’ingénierie). Zone de protection : la hauteur du E autour du logo. Taille minimale : 24 px pour le symbole.</p>
   </section>
 
-  <section class="container-lux py-20">
-    <h2>3 · Survol des cartes (zoom 1,05, voile, filet or, « Découvrir »)</h2>
-    <div class="mt-12 grid gap-8 md:grid-cols-3">
-      <SpecialtyCard id="cabinet-dentaire-orthodontie" short="Dentaire et orthodontie" contrainte="Travail à quatre mains, réseaux dédiés." />
-      <SpecialtyCard id="ophtalmologie" short="Ophtalmologie" contrainte="Éclairage gradué jusqu’à la pénombre." />
-      <ServiceCard id="conception-amenagement-cabinet-medical" order={2} short="Conception 2D et 3D" h1="" intro="Un plan médical se construit autour de l’acte de soin. Suite." />
-    </div>
-  </section>
-
-  <section class="bg-[var(--color-sand)] py-20">
+  <section class="bg-white py-16">
     <div class="container-lux">
-      <h2>4 · Comparateur avant/après (souris, doigt, flèches du clavier)</h2>
-      <div class="mt-12">
-        <BeforeAfter>
-          <div slot="before" class="h-full w-full grayscale"><PlanArt variant="default" tone="light" class="h-full w-full" circuit={false} label="Avant (illustration)" /></div>
-          <div slot="after" class="h-full w-full"><PlanArt variant="cabinet-dentaire-orthodontie" class="h-full w-full" label="Après (illustration)" /></div>
-        </BeforeAfter>
-      </div>
-    </div>
-  </section>
-
-  <section class="container-lux py-20">
-    <h2>5 · Parallaxe légère (≤ 6 %, desktop uniquement)</h2>
-    <div class="mt-12 aspect-[21/9] overflow-hidden rounded-[var(--radius-photo)]"><div class="parallax h-full w-full"><PlanArt variant="kinesitherapie-reeducation" class="h-full w-full" /></div></div>
-  </section>
-
-  <section class="bg-[var(--color-night)] py-20 text-[var(--color-ivory)]">
-    <div class="container-lux">
-      <h2>6 · Visionneuse (fondu + zoom, clavier, balayage, compteur serif)</h2>
-      <ul class="mt-12 grid grid-cols-2 gap-4 md:grid-cols-3">
-        {['default', 'amenagement', 'renovation'].map((n, i) => (
-          <li><a href={`/og/${n}.png`} data-lightbox="sg" data-caption={`Casablanca · Démo ${i + 1}`}><img src={`/og/${n}.png`} alt={`Image de démonstration ${i + 1}`} width="1200" height="630" loading="lazy" class="w-full rounded-[var(--radius-photo)]" /></a></li>
+      <h2>Couleurs</h2>
+      <ul class="mt-10 grid grid-cols-2 gap-6 md:grid-cols-3 lg:grid-cols-5">
+        {colors.map(([n, hex, use]) => (
+          <li><span class="block aspect-[4/3] border border-[var(--color-line)]" style={`background:${hex}`}></span><p class="mt-3 text-[0.9rem] font-semibold">{n} · {hex}</p><p class="text-[0.85rem] text-[var(--color-muted)]">{use}</p></li>
         ))}
       </ul>
-      <h2 class="mt-20">8 · Chiffres clés (compteur unique, or champagne)</h2>
-      <div class="mt-8 flex gap-16"><p class="num text-7xl" data-count="14">14</p><p class="num text-7xl" data-count="12">12</p><p class="num text-7xl" data-count="10">10</p></div>
-      <h2 class="mt-20">Carte schématique</h2>
-      <MoroccoMap class="mt-8 w-full max-w-lg" />
+      <h2 class="mt-20">Typographie</h2>
+      <div class="mt-8 space-y-5">
+        <p class="font-[family-name:var(--font-display)] text-[4rem] font-bold leading-none tracking-[-0.035em] text-[var(--color-navy)]">Manrope · héros 56–72 px</p>
+        <p class="font-[family-name:var(--font-display)] text-[2.5rem] font-semibold tracking-[-0.025em] text-[var(--color-navy)]">Manrope · titres de section 36–44 px</p>
+        <p class="font-[family-name:var(--font-display)] text-[1.375rem] font-semibold text-[var(--color-navy)]">Manrope · titres de carte 21–24 px</p>
+        <p class="text-[1.06rem]">Inter · texte courant 16–18 px. Phrases courtes, vouvoiement, apostrophes typographiques.</p>
+        <p class="eyebrow text-[var(--color-teal-ink)]">Libellé · 12–13 px</p>
+      </div>
+      <h2 class="mt-20">Boutons et liens</h2>
+      <div class="mt-8 flex flex-wrap items-center gap-4"><a href="#" class="btn btn-primary">Parler de mon projet <span class="arrow">→</span></a><a href="#" class="btn btn-ghost-dark">Secondaire</a><a href="#" class="link-more">Découvrir <span>→</span></a></div>
+      <div class="mt-4 flex flex-wrap gap-4 bg-[var(--color-navy)] p-6"><a href="#" class="btn btn-primary">Principal sur navy</a><a href="#" class="btn btn-ghost-light">Secondaire sur navy</a></div>
     </div>
   </section>
 
-  <section class="container-lux py-20">
-    <h2>7 · Transitions entre pages</h2>
-    <p class="mt-6 max-w-2xl text-[var(--color-stone-ink)]">View Transitions natives (CSS <code>@view-transition</code>), sans JavaScript. Les images de réalisation partagent un <code>view-transition-name</code> entre la carte et la page détail (morphing). Testez en naviguant vers <a class="underline" href="/specialites/">les spécialités</a>.</p>
-    <h2 class="mt-16">9 · Défilement</h2>
-    <p class="mt-6 text-[var(--color-stone-ink)]">Défilement doux natif (<code>scroll-behavior: smooth</code>), aucune bibliothèque. Avec <code>prefers-reduced-motion</code>, toutes les animations sont réduites à un fondu court.</p>
+  <section class="container-lux py-16">
+    <h2>Composants</h2>
+    <div class="mt-10 grid gap-10 md:grid-cols-3">
+      <ServiceCard id="conception-amenagement-cabinet-medical" order={2} short="Conception 2D et 3D" h1="" intro="" description="Plans 2D, rendus 3D et dossier technique." termes={['Marche en avant', 'Rendus 3D']} />
+      <SpecialtyCard id="cabinet-dentaire-orthodontie" short="Dentaire et orthodontie" contrainte="Travail à quatre mains, réseaux dédiés." />
+      <div><div class="aspect-[4/3] overflow-hidden"><Photo name="hallClinique" sizes="33vw" widths={[480, 800]} class="h-full w-full object-cover" /></div><p class="mt-3 text-[0.85rem] text-[var(--color-muted)]">Photo d’illustration (Unsplash), AVIF/WebP</p></div>
+    </div>
+    <h3 class="mt-16">Processus</h3>
+    <div class="mt-8"><ProcessSteps /></div>
+    <h3 class="mt-16">Comparateur avant/après (souris, doigt, clavier)</h3>
+    <div class="mt-8">
+      <BeforeAfter>
+        <div slot="before" class="h-full w-full grayscale"><PlanArt variant="default" tone="light" class="h-full w-full" circuit={false} label="Avant (illustration)" /></div>
+        <div slot="after" class="h-full w-full"><PlanArt variant="cabinet-dentaire-orthodontie" tone="light" class="h-full w-full" label="Après (illustration)" /></div>
+      </BeforeAfter>
+    </div>
+    <h3 class="mt-16">Visionneuse</h3>
+    <ul class="mt-8 grid grid-cols-3 gap-4">
+      {['default', 'amenagement', 'renovation'].map((n, i) => (
+        <li><a href={`/og/${n}.png`} data-lightbox="sg" data-caption={`Image de partage ${i + 1}`}><img src={`/og/${n}.png`} alt={`Image de partage ${n}`} width="1200" height="630" loading="lazy" class="w-full" /></a></li>
+      ))}
+    </ul>
+    <h3 class="mt-16">Mouvement</h3>
+    <p class="mt-4 max-w-2xl text-[var(--color-muted)]">200–400 ms, courbe sobre. Révélations courtes au défilement, léger zoom (1,03) au survol des cartes, transitions de page natives. Aucun effet continu, aucune parallaxe. Avec <code>prefers-reduced-motion</code>, tout est désactivé.</p>
   </section>
-
   <Faq items={[{ q: 'Exemple de question ?', a: 'Exemple de réponse dans un élément details.' }]} title="FAQ (details)" tone="sand" />
   <Lightbox />
 </BaseLayout>

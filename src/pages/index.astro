@@ -1,265 +1,148 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
-import PlanArt from '@/components/PlanArt.astro';
-import SpecialtyCard from '@/components/SpecialtyCard.astro';
+import Photo from '@/components/Photo.astro';
 import ProcessSteps from '@/components/ProcessSteps.astro';
-import Faq from '@/components/Faq.astro';
 import CtaBand from '@/components/CtaBand.astro';
-import MoroccoMap from '@/components/MoroccoMap.astro';
 import RealisationCard from '@/components/RealisationCard.astro';
-import { site, bankClaimsApproved, BANK_DISCLAIMER } from '@/config/site';
-import { getServices, getSpecialites, getRegions, getRealisations, getPosts, specialitePath, regionPath, servicePath, postPath, pad } from '@/lib/content';
-import { partners } from '@/data/financement';
-import { faqGeneral } from '@/data/faq-general';
-import { faqPage } from '@/lib/schema';
+import { site } from '@/config/site';
+import { getRealisations } from '@/lib/content';
+import { expertises } from '@/lib/photos';
 
-const services = await getServices();
-const specialites = await getSpecialites();
-const regions = await getRegions();
 const realisations = await getRealisations();
-const posts = (await getPosts()).slice(0, 3);
-const featured = specialites.slice(0, 6);
-const others = specialites.slice(6);
-const faq = faqGeneral.slice(0, 4);
+const why = [
+  { t: 'Medical expertise', d: 'Des espaces conçus autour des praticiens et de leurs contraintes de soin.' },
+  { t: 'One project partner', d: 'Un seul interlocuteur, de la première esquisse à l’installation des équipements.' },
+  { t: 'Global vision', d: 'Architecture, ingénierie, travaux et équipement réunis dans une même vision.' },
+];
 ---
 
 <BaseLayout
   title={site.name}
-  description="Conception, rénovation, équipement et financement de cabinets, cliniques, centres d’imagerie et laboratoires, partout au Maroc, sans interrompre vos soins."
-  overlayHeader
+  description="Conception, construction, rénovation et équipement de cabinets, cliniques, centres d’imagerie et laboratoires, partout au Maroc, de l’étude à la livraison."
   context="Accueil"
-  jsonld={[faqPage(faq)]}
 >
   <!-- HÉROS -->
-  <section class="relative isolate flex min-h-[100svh] items-end overflow-hidden bg-[var(--color-night)] text-[var(--color-ivory)]">
-    <div class="absolute inset-0 -z-20" aria-hidden="true">
-      <div class="hero-media h-full w-full">
-        <PlanArt variant="cliniques-blocs-operatoires" class="h-full w-full" label="" />
+  <section class="bg-[var(--color-warm)]">
+    <div class="container-lux grid gap-10 pb-12 pt-14 lg:grid-cols-12 lg:items-end lg:gap-16 lg:pb-16 lg:pt-24">
+      <div class="lg:col-span-7">
+        <p class="eyebrow fade-up text-[var(--color-teal-ink)]">Votre projet médical, de A à Z.</p>
+        <h1 lang="en" class="mt-6 text-[clamp(2.6rem,1.4rem+4.6vw,4.5rem)] font-bold leading-[1.04] tracking-[-0.035em] text-[var(--color-navy)]">
+          <span class="line-mask"><span style="--i:0">Designing spaces</span></span>
+          <span class="line-mask"><span style="--i:1">for better healthcare.</span></span>
+        </h1>
+      </div>
+      <div class="lg:col-span-5">
+        <p class="fade-up text-[1.15rem] leading-relaxed text-[var(--color-muted)]" style="--i:2">
+          De l’étude à la réalisation, nous donnons vie à vos projets médicaux.
+        </p>
+        <div class="fade-up mt-8 flex flex-wrap gap-3" style="--i:3">
+          <a href="/contact/" class="btn btn-primary">Démarrer mon projet <span class="arrow" aria-hidden="true">→</span></a>
+          <a href="/expertises/" class="btn btn-ghost-dark">Découvrir nos expertises</a>
+        </div>
       </div>
     </div>
-    <div class="absolute inset-0 -z-10 bg-[linear-gradient(100deg,var(--color-night)_18%,rgba(10,26,47,0.82)_50%,rgba(10,26,47,0.35)_100%)]" aria-hidden="true"></div>
-    <div class="absolute inset-x-0 bottom-0 -z-10 h-2/5 bg-gradient-to-t from-[var(--color-night)] to-transparent" aria-hidden="true"></div>
-
-    <div class="container-lux w-full pb-16 pt-36 lg:pb-24">
-      <p class="eyebrow fade-up text-[var(--color-gold)]">Aménagement médical · Partout au Maroc</p>
-      <h1 class="mt-8 max-w-5xl text-[clamp(2.9rem,1.5rem+5.4vw,6.4rem)] leading-[1.02]">
-        <span class="line-mask"><span style="--i:0">Votre cabinet ou votre clinique,</span></span>
-        <span class="line-mask"><span style="--i:1">conçu, aménagé, <em class="text-[var(--color-gold-soft)]">équipé</em></span></span>
-        <span class="line-mask"><span style="--i:2">et financé.</span></span>
-      </h1>
-      <p class="fade-up mt-8 max-w-2xl text-lg leading-relaxed text-[var(--color-ivory)]/80" style="--i:4">{site.promise}</p>
-      <div class="fade-up mt-10 flex flex-wrap gap-4" style="--i:5">
-        <a href="/contact/" class="btn btn-gold">Demander un devis <span class="arrow" aria-hidden="true">→</span></a>
-        <a href="/specialites/" class="btn btn-ghost-light">Nos spécialités</a>
+    <figure class="container-lux pb-20 lg:pb-28">
+      <div class="aspect-[4/3] overflow-hidden rounded-[var(--radius-photo)] bg-[var(--color-mist)] sm:aspect-[16/9] lg:aspect-[21/9]">
+        <Photo name="hallClinique" eager sizes="(min-width:1280px) 1184px, 100vw" widths={[640, 960, 1280, 1600, 2000, 2400]} class="h-full w-full object-cover" />
       </div>
+      <figcaption class="mt-3 text-[0.8rem] text-[var(--color-muted)]">Image d’illustration</figcaption>
+    </figure>
+  </section>
 
-      <ul class="fade-up mt-16 grid gap-px overflow-hidden border-t border-[var(--color-night-3)] pt-8 sm:grid-cols-3" style="--i:6">
-        <li class="pr-8"><p class="caption text-[var(--color-gold)]">01 · Interlocuteur unique</p><p class="mt-2 text-[0.95rem] text-[var(--color-ivory)]/75">Du programme à la réception, un seul responsable.</p></li>
-        <li class="pr-8 pt-6 sm:pt-0"><p class="caption text-[var(--color-gold)]">02 · Spécialité d’abord</p><p class="mt-2 text-[0.95rem] text-[var(--color-ivory)]/75">Le plan part de l’acte médical, pas du mètre carré.</p></li>
-        <li class="pt-6 sm:pt-0"><p class="caption text-[var(--color-gold)]">03 · Zéro surprise</p><p class="mt-2 text-[0.95rem] text-[var(--color-ivory)]/75">Budget par lot, planning, essais et procès-verbal.</p></li>
+  <!-- EXPERTISES -->
+  <section class="bg-white py-24 lg:py-32" aria-labelledby="expertises-title">
+    <div class="container-lux">
+      <div class="flex flex-col justify-between gap-6 md:flex-row md:items-end">
+        <div data-reveal>
+          <p class="eyebrow text-[var(--color-teal-ink)]">Expertises</p>
+          <h2 id="expertises-title" class="mt-5 max-w-xl text-[var(--color-navy)]">Quatre expertises, un seul partenaire.</h2>
+        </div>
+        <a href="/expertises/" class="link-more self-start md:self-auto">Toutes nos expertises <span>→</span></a>
+      </div>
+      <ul class="mt-14 grid gap-x-8 gap-y-14 sm:grid-cols-2 lg:grid-cols-4">
+        {expertises.map((e, i) => (
+          <li class="card-lux group relative" data-reveal style={`--i:${i}`}>
+            <div class="card-media aspect-[4/3] overflow-hidden sm:aspect-[4/5] rounded-[var(--radius-photo)] bg-[var(--color-mist)]">
+              <Photo name={e.photo} sizes="(min-width:1024px) 22vw, (min-width:640px) 45vw, 100vw" widths={[400, 600, 800]} class="h-full w-full object-cover" />
+            </div>
+            <p class="num mt-6 text-[0.9rem]">{e.num}</p>
+            <h3 class="mt-2 text-[1.375rem] text-[var(--color-navy)]">
+              <a href={`/expertises/#${e.id}`} class="no-underline after:absolute after:inset-0">{e.title}</a>
+            </h3>
+            <p class="mt-2 text-[0.98rem] leading-relaxed text-[var(--color-muted)]">{e.text}</p>
+            <span class="link-more mt-4" aria-hidden="true">Découvrir <span>→</span></span>
+          </li>
+        ))}
       </ul>
     </div>
   </section>
 
-  <!-- MANIFESTE + CHIFFRES DE L'OFFRE -->
-  <section class="py-24 lg:py-36">
-    <div class="container-lux grid gap-16 lg:grid-cols-12">
-      <div class="lg:col-span-7" data-reveal>
-        <p class="eyebrow text-[var(--color-gold-deep)]">Notre approche</p>
-        <h2 class="mt-6">Un plan médical se construit autour de l’acte de soin.</h2>
-        <p class="mt-8 max-w-2xl text-lg leading-relaxed text-[var(--color-stone-ink)]">
-          Radioprotection, salles propres, fluides, acoustique, étanchéité : chaque spécialité impose ses règles. Nous les intégrons dès la première esquisse, puis nous tenons le même niveau d’exigence jusqu’au procès-verbal de réception, que vous ouvriez, déménagiez, rénoviez ou agrandissiez votre structure.
-        </p>
-        <a href="/amenagement-cabinet-medical/" class="btn btn-ghost-dark mt-10">Notre méthode d’aménagement <span class="arrow" aria-hidden="true">→</span></a>
-      </div>
-      <dl class="grid grid-cols-3 gap-6 self-end lg:col-span-5 lg:grid-cols-1 lg:gap-10 lg:border-l lg:border-[var(--color-line)] lg:pl-12">
-        <div data-reveal style="--i:1"><dt class="caption text-[var(--color-stone-ink)]">Spécialités couvertes</dt><dd class="num mt-1 text-6xl lg:text-7xl" data-count={specialites.length}>{specialites.length}</dd></div>
-        <div data-reveal style="--i:2"><dt class="caption text-[var(--color-stone-ink)]">Services intégrés</dt><dd class="num mt-1 text-6xl lg:text-7xl" data-count={services.length}>{services.length}</dd></div>
-        <div data-reveal style="--i:3"><dt class="caption text-[var(--color-stone-ink)]">Régions desservies</dt><dd class="num mt-1 text-6xl lg:text-7xl" data-count={regions.length}>{regions.length}</dd></div>
-      </dl>
-    </div>
-  </section>
-
-  <!-- SERVICES -->
-  <section class="bg-[var(--color-sand)] py-24 lg:py-32" aria-labelledby="services-title">
-    <div class="container-lux">
-      <div class="flex flex-col justify-between gap-8 md:flex-row md:items-end">
-        <div data-reveal>
-          <p class="eyebrow text-[var(--color-gold-deep)]">Services</p>
-          <h2 id="services-title" class="mt-6 max-w-2xl">De l’étude de faisabilité au suivi après livraison.</h2>
-        </div>
-        <a href="/services/" class="btn btn-ghost-dark self-start md:self-auto">Tous les services</a>
-      </div>
-      <ol class="mt-16 grid border-t border-[var(--color-line)] md:grid-cols-2 md:gap-x-16">
-        {services.map((s, i) => (
-          <li class="card-lux group relative border-b border-[var(--color-line)]" data-reveal style={`--i:${i % 2}`}>
-            <div class="flex gap-6 py-8">
-              <span class="num w-12 shrink-0 text-4xl leading-none">{pad(s.data.order)}</span>
-              <div class="flex-1">
-                <h3 class="text-[1.7rem]"><a href={servicePath(s.id)} class="no-underline after:absolute after:inset-0">{s.data.short}</a></h3>
-                <span class="card-rule mt-3 block h-px w-16 bg-[var(--color-gold)]"></span>
-                <p class="mt-4 text-[0.95rem] leading-relaxed text-[var(--color-stone-ink)]">{s.data.description}</p>
-              </div>
-              <span class="mt-2 text-xl text-[var(--color-gold-deep)] transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true">→</span>
-            </div>
-          </li>
-        ))}
-      </ol>
-    </div>
-  </section>
-
-  <!-- SPÉCIALITÉS -->
-  <section class="py-24 lg:py-32" aria-labelledby="spec-title">
-    <div class="container-lux">
-      <div class="max-w-3xl" data-reveal>
-        <p class="eyebrow text-[var(--color-gold-deep)]">Spécialités</p>
-        <h2 id="spec-title" class="mt-6">Chaque discipline a ses contraintes. Nous les connaissons.</h2>
-      </div>
-      <div class="mt-16 grid gap-x-8 gap-y-16 sm:grid-cols-2 lg:grid-cols-3">
-        {featured.map((s, i) => <SpecialtyCard id={s.id} short={s.data.short} contrainte={s.data.contraintes[0]} i={i} />)}
-      </div>
-      <div class="mt-16 border-t border-[var(--color-line)] pt-10" data-reveal>
-        <p class="caption text-[var(--color-stone-ink)]">Et aussi</p>
-        <ul class="mt-4 flex flex-wrap gap-3">
-          {others.map((s) => (
-            <li><a href={specialitePath(s.id)} class="inline-block border border-[var(--color-line)] px-4 py-2 text-[0.92rem] no-underline transition-colors duration-300 hover:border-[var(--color-gold-deep)] hover:text-[var(--color-teal)]">{s.data.short}</a></li>
-          ))}
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <!-- RÉNOVATION EN SITE OCCUPÉ -->
-  <section class="relative overflow-hidden bg-[var(--color-night)] text-[var(--color-ivory)]" aria-labelledby="reno-title">
-    <div class="container-lux grid items-center gap-14 py-24 lg:grid-cols-2 lg:py-32">
-      <div class="relative aspect-[4/3] overflow-hidden rounded-[var(--radius-photo)]" data-reveal-img>
-        <div class="parallax h-full w-full"><PlanArt variant="laboratoire-analyses-medicales" class="h-full w-full" label="Illustration : plan de phasage d’une rénovation en site occupé" /></div>
-      </div>
-      <div data-reveal>
-        <p class="eyebrow text-[var(--color-gold)]">Rénovation en site occupé</p>
-        <h2 id="reno-title" class="mt-6">Rénover sans interrompre vos soins.</h2>
-        <p class="mt-8 text-lg leading-relaxed text-[var(--color-ivory)]/75">
-          Phasage des travaux, cloisons provisoires étanches, maîtrise des poussières, du bruit et des vibrations, maintien des accès et des fluides critiques : votre activité continue pendant que votre structure se transforme.
-        </p>
-        <ul class="mt-8 space-y-3 text-[0.98rem] text-[var(--color-ivory)]/85">
-          <li class="flex gap-3"><span class="text-[var(--color-gold)]">—</span> Diagnostic de l’existant et plan de mise aux normes</li>
-          <li class="flex gap-3"><span class="text-[var(--color-gold)]">—</span> Plan de phasage et de continuité d’activité</li>
-          <li class="flex gap-3"><span class="text-[var(--color-gold)]">—</span> Réception partielle à chaque phase</li>
-        </ul>
-        <a href="/renovation-cabinet-clinique/" class="btn btn-gold mt-10">Découvrir la méthode <span class="arrow" aria-hidden="true">→</span></a>
-      </div>
-    </div>
-  </section>
-
-  <!-- PROCESSUS -->
+  <!-- PROCESS -->
   <section class="py-24 lg:py-32" aria-labelledby="process-title">
     <div class="container-lux">
-      <div class="max-w-3xl" data-reveal>
-        <p class="eyebrow text-[var(--color-gold-deep)]">Méthode</p>
-        <h2 id="process-title" class="mt-6">Six étapes, les mêmes partout au Maroc.</h2>
-        <p class="mt-6 text-lg text-[var(--color-stone-ink)]">Mêmes livrables, mêmes contrôles, quelle que soit la ville : la fiabilité vient de la méthode.</p>
+      <div data-reveal>
+        <p class="eyebrow text-[var(--color-teal-ink)]">Notre méthode</p>
+        <h2 id="process-title" class="mt-5 max-w-2xl text-[var(--color-navy)]">Un processus clair, du premier rendez-vous à l’ouverture.</h2>
       </div>
       <div class="mt-16"><ProcessSteps /></div>
     </div>
   </section>
 
-  <!-- RÉALISATIONS (affichées dès la première publication) -->
-  {realisations.length > 0 && (
-    <section class="bg-[var(--color-sand)] py-24 lg:py-32" aria-labelledby="real-title">
-      <div class="container-lux">
-        <div class="flex flex-col justify-between gap-8 md:flex-row md:items-end">
-          <div data-reveal>
-            <p class="eyebrow text-[var(--color-gold-deep)]">Réalisations</p>
-            <h2 id="real-title" class="mt-6">Avant, après : nos projets livrés.</h2>
-          </div>
-          <a href="/realisations/" class="btn btn-ghost-dark self-start md:self-auto">Toutes les réalisations</a>
+  <!-- RÉALISATIONS -->
+  <section class="bg-[var(--color-mist)] py-24 lg:py-32" aria-labelledby="real-title">
+    <div class="container-lux">
+      <div class="flex flex-col justify-between gap-6 md:flex-row md:items-end">
+        <div data-reveal>
+          <p class="eyebrow text-[var(--color-teal-ink)]">Réalisations</p>
+          <h2 id="real-title" class="mt-5 max-w-xl text-[var(--color-navy)]">Des espaces pensés pour soigner.</h2>
         </div>
-        <div class="mt-16 grid gap-10 md:grid-cols-2 lg:grid-cols-3">
+        {realisations.length > 0 && <a href="/realisations/" class="link-more self-start md:self-auto">Toutes les réalisations <span>→</span></a>}
+      </div>
+      {realisations.length > 0 ? (
+        <div class="mt-14 grid gap-x-8 gap-y-14 md:grid-cols-2 lg:grid-cols-3">
           {realisations.slice(0, 3).map((r, i) => <RealisationCard entry={r} i={i} />)}
         </div>
-      </div>
-    </section>
-  )}
-
-  <!-- FINANCEMENT -->
-  <section class="border-y border-[var(--color-line)] py-24 lg:py-32" aria-labelledby="fin-title">
-    <div class="container-lux grid gap-14 lg:grid-cols-12">
-      <div class="lg:col-span-5" data-reveal>
-        <p class="eyebrow text-[var(--color-gold-deep)]">Projet financé</p>
-        <h2 id="fin-title" class="mt-6">De l’estimation jusqu’à l’accord de la banque.</h2>
-      </div>
-      <div class="lg:col-span-7" data-reveal style="--i:1">
-        <p class="text-lg leading-relaxed text-[var(--color-stone-ink)]">
-          {`Nous chiffrons votre projet (travaux, équipements, fonds de roulement), choisissons avec vous la formule adaptée${bankClaimsApproved ? ' avec nos banques partenaires, Al Barid Bank et Bank Al Yousr' : ''} — crédit professionnel, Intelaka, financement participatif (Mourabaha, Ijara) ou leasing — puis nous montons et suivons le dossier.`}
-        </p>
-        <ol class="mt-10 grid gap-6 sm:grid-cols-2">
-          {['Diagnostic et estimation budgétaire', 'Choix de la formule de financement', 'Montage du dossier : devis, plans, business plan', 'Suivi jusqu’à l’accord, puis travaux par tranches'].map((t, i) => (
-            <li class="flex gap-4"><span class="num text-3xl leading-none">{String(i + 1).padStart(2, '0')}</span><span class="text-[0.98rem]">{t}</span></li>
-          ))}
-        </ol>
-        {bankClaimsApproved && (
-          <div class="mt-10 border-t border-[var(--color-line)] pt-8">
-            <p class="caption text-[var(--color-stone-ink)]">Nos banques partenaires</p>
-            <ul class="mt-4 grid gap-4 sm:grid-cols-2">
-              {partners.map((pt) => (
-                <li><a href={pt.path} class="group flex items-center justify-between border border-[var(--color-line)] bg-white/50 px-6 py-5 no-underline transition-colors hover:border-[var(--color-gold-deep)]">
-                  <span><span class="display block text-[1.6rem] leading-tight">{pt.name}</span><span class="text-[0.85rem] text-[var(--color-stone-ink)]">{pt.id === 'al-barid-bank' ? 'Crédit professionnel · Intelaka' : 'Mourabaha · Ijara'}</span></span>
-                  <span class="text-[var(--color-gold-deep)] transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true">→</span>
-                </a></li>
-              ))}
-            </ul>
+      ) : (
+        <div class="mt-14 grid items-center gap-10 lg:grid-cols-12 lg:gap-16">
+          <figure class="lg:col-span-7" data-reveal>
+            <div class="aspect-[16/10] overflow-hidden rounded-[var(--radius-photo)] bg-white">
+              <Photo name="cabinetDentaire" sizes="(min-width:1024px) 55vw, 100vw" widths={[640, 960, 1280]} class="h-full w-full object-cover" />
+            </div>
+            <figcaption class="mt-3 text-[0.8rem] text-[var(--color-muted)]">Image d’illustration, ne représente pas un projet Euro Space Medical</figcaption>
+          </figure>
+          <div class="lg:col-span-5" data-reveal style="--i:1">
+            <h3 class="text-[1.5rem] text-[var(--color-navy)]">Nos études de cas arrivent.</h3>
+            <p class="mt-4 text-[1.02rem] leading-relaxed text-[var(--color-muted)]">Chaque projet sera présenté avec sa spécialité, sa ville et ses photos avant et après. Nous vous présentons des projets comparables au vôtre en rendez-vous.</p>
+            <a href="/contact/" class="btn btn-primary mt-8">Parler de mon projet <span class="arrow" aria-hidden="true">→</span></a>
           </div>
-        )}
-        <p class="mt-8 text-[0.85rem] italic text-[var(--color-stone-ink)]">{BANK_DISCLAIMER}</p>
-        <a href="/financement/" class="btn btn-ghost-dark mt-8">Financer mon projet <span class="arrow" aria-hidden="true">→</span></a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ZONES -->
-  <section class="relative overflow-hidden bg-[var(--color-night)] text-[var(--color-ivory)]" aria-labelledby="zones-title">
-    <div class="container-lux grid items-center gap-14 py-24 lg:grid-cols-12 lg:py-32">
-      <div class="lg:col-span-5" data-reveal>
-        <p class="eyebrow text-[var(--color-gold)]">Zones d’intervention</p>
-        <h2 id="zones-title" class="mt-6">Un siège qui conçoit, des équipes qui exécutent.</h2>
-        <p class="mt-8 text-lg leading-relaxed text-[var(--color-ivory)]/75">
-          Conception, achats, contrôle qualité et financement sont centralisés à {site.hq}. Les chantiers sont suivis localement, de Tanger à Dakhla.
-        </p>
-        <ul class="mt-8 grid grid-cols-2 gap-x-6 gap-y-2 text-[0.92rem]">
-          {regions.map((r) => <li><a href={regionPath(r.id)} class="link-lux text-[var(--color-ivory)]/85">{r.data.name}</a></li>)}
-        </ul>
-      </div>
-      <div class="lg:col-span-7" data-reveal style="--i:1">
-        <MoroccoMap class="mx-auto w-full max-w-xl" />
-        <p class="caption mt-4 text-center text-[var(--color-ivory)]/55">Carte schématique · Siège à {site.hq}</p>
-      </div>
-    </div>
-  </section>
-
-  {posts.length > 0 && (
-    <section class="py-24 lg:py-32" aria-labelledby="guides-title">
-      <div class="container-lux">
-        <div class="flex flex-col justify-between gap-8 md:flex-row md:items-end">
-          <div data-reveal>
-            <p class="eyebrow text-[var(--color-gold-deep)]">Guides</p>
-            <h2 id="guides-title" class="mt-6 max-w-2xl">Ce qu’il faut savoir avant d’aménager.</h2>
-          </div>
-          <a href="/blog/" class="btn btn-ghost-dark self-start md:self-auto">Tous les guides</a>
         </div>
-        <ul class="mt-16 grid gap-x-10 gap-y-12 md:grid-cols-3">
-          {posts.map((pt, i) => (
-            <li class="card-lux group relative border-t border-[var(--color-line)] pt-8" data-reveal style={`--i:${i}`}>
-              <span class="num text-3xl">{pad(i + 1)}</span>
-              <h3 class="mt-4 text-[1.6rem]"><a href={postPath(pt.id)} class="no-underline after:absolute after:inset-0">{pt.data.h1}</a></h3>
-              <span class="card-rule mt-4 block h-px w-16 bg-[var(--color-gold)]"></span>
-              <p class="mt-4 text-[0.93rem] text-[var(--color-stone-ink)]">{pt.data.description}</p>
-            </li>
-          ))}
-        </ul>
-      </div>
-    </section>
-  )}
+      )}
+    </div>
+  </section>
 
-  <Faq items={faq} tone="sand" />
-  <CtaBand context="Accueil" />
+  <!-- POURQUOI ESM -->
+  <section class="bg-white py-24 lg:py-32" aria-labelledby="why-title">
+    <div class="container-lux">
+      <div data-reveal>
+        <p class="eyebrow text-[var(--color-teal-ink)]">Pourquoi ESM</p>
+        <h2 id="why-title" class="mt-5 max-w-2xl text-[var(--color-navy)]">Le regard d’un architecte, la rigueur d’un ingénieur.</h2>
+      </div>
+      <ul class="mt-14 grid gap-12 md:grid-cols-3 md:gap-10">
+        {why.map((w, i) => (
+          <li class="border-t-2 border-[var(--color-navy)] pt-7" data-reveal style={`--i:${i}`}>
+            <h3 lang="en" class="text-[1.375rem] text-[var(--color-navy)]">{w.t}</h3>
+            <p class="mt-3 max-w-sm text-[1rem] leading-relaxed text-[var(--color-muted)]">{w.d}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <CtaBand
+    context="Accueil"
+    title="Let’s build your next medical space."
+    titleLang="en"
+    text="Vous avez un projet de cabinet, de clinique ou de centre médical ?"
+    photo="cabinetDentaire3"
+  />
 </BaseLayout>

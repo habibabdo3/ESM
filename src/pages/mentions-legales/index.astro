@@ -2,6 +2,7 @@
 import ProseLayout from '@/layouts/ProseLayout.astro';
 import Todo from '@/components/Todo.astro';
 import { site } from '@/config/site';
+import { photos } from '@/lib/photos';
 ---
 <ProseLayout title="Mentions légales" description="Mentions légales du site Euro Space Medical : éditeur, siège social, identifiants de l’entreprise, hébergement, propriété intellectuelle et responsabilité." h1="Mentions légales" eyebrow="Informations légales" path="/mentions-legales/">
   <h2>Éditeur du site</h2>
@@ -18,8 +19,9 @@ import { site } from '@/config/site';
   <p>L’ensemble des contenus de ce site (textes, plans, illustrations, logo) est la propriété de {site.name}, sauf mention contraire. Toute reproduction sans autorisation écrite préalable est interdite.</p>
   <h2>Crédits et licences</h2>
   <ul>
-    <li>Polices <strong>Cormorant Garamond</strong> et <strong>Manrope</strong> : licence SIL Open Font License 1.1, hébergées sur notre serveur.</li>
-    <li>Plans, illustrations, carte et images de partage : créations originales d’{site.name}. Aucune image de banque d’images n’est utilisée.</li>
+    <li>Polices <strong>Manrope</strong> et <strong>Inter</strong> : licence SIL Open Font License 1.1, hébergées sur notre serveur.</li>
+    <li>Logo, plans schématiques, carte et images de partage : créations originales d’{site.name}.</li>
+    <li>Photographies d’illustration : <a href="https://unsplash.com/license" rel="noopener">licence Unsplash</a>. Elles illustrent des espaces de soin et <strong>ne représentent pas des réalisations d’{site.name}</strong>. Sources : {Object.values(photos).map((p, i) => <>{i > 0 && ', '}<a href={p.unsplash} rel="noopener">photo {i + 1}</a></>)}.</li>
     <li>Photos de réalisations : publiées avec l’accord écrit de chaque client.</li>
   </ul>
   <h2>Illustrations</h2>

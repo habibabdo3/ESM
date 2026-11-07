@@ -33,7 +33,7 @@ const faq = [
   jsonld={[breadcrumb(base, crumbs), serviceLd(base, { name: 'Rénovation de cabinets et de cliniques en site occupé', description: d.description, path }), faqPage(faq)]}
   context="Rénovation de cabinet et de clinique"
 >
-  <PageHero eyebrow="Rénovation · Site occupé" h1="Rénovation de cabinet médical et de clinique, sans fermer" intro="La rénovation d’un cabinet médical ou d’une clinique en activité demande une méthode à part : phasage, protection des zones de soins, continuité des fluides critiques et réception par étape. Vous continuez à recevoir vos patients pendant que votre structure se transforme." crumbs={crumbs} variant="laboratoire-analyses-medicales" ctaLabel={d.cta} />
+  <PageHero eyebrow="Rénovation · Site occupé" h1="Rénovation de cabinet médical et de clinique, sans fermer" intro="Phasage, protection des zones de soins et réception par étape : vous continuez à recevoir vos patients pendant les travaux." crumbs={crumbs} photo="salleIntervention" ctaLabel={d.cta} />
 
   <section class="py-20 lg:py-28">
     <div class="container-lux grid gap-16 lg:grid-cols-12">
@@ -58,16 +58,16 @@ const faq = [
     </div>
   </section>
 
-  <section class="bg-[var(--color-night)] py-20 text-[var(--color-ivory)] lg:py-28">
+  <section class="bg-[var(--color-navy)] py-20 text-[var(--color-warm)] lg:py-28">
     <div class="container-lux">
       <p class="eyebrow text-[var(--color-gold)]">Méthode</p>
       <h2 class="mt-6 max-w-3xl">Cinq garanties pour rénover en site occupé</h2>
-      <ol class="mt-14 space-y-px overflow-hidden bg-[var(--color-night-3)]">
+      <ol class="mt-14 space-y-px overflow-hidden bg-[var(--color-navy-3)]">
         {phases.map((p, i) => (
-          <li class="grid gap-4 bg-[var(--color-night)] py-8 md:grid-cols-12 md:gap-8" data-reveal>
+          <li class="grid gap-4 bg-[var(--color-navy)] py-8 md:grid-cols-12 md:gap-8" data-reveal>
             <span class="num text-5xl md:col-span-2">{pad(i + 1)}</span>
             <h3 class="text-[1.7rem] md:col-span-4">{p.t}</h3>
-            <p class="text-[var(--color-ivory)]/75 md:col-span-6">{p.p}</p>
+            <p class="text-[var(--color-warm)]/75 md:col-span-6">{p.p}</p>
           </li>
         ))}
       </ol>
@@ -77,7 +77,7 @@ const faq = [
   <section class="py-20 lg:py-28">
     <div class="container-lux grid gap-16 lg:grid-cols-12">
       <div class="lg:col-span-5">
-        <p class="eyebrow text-[var(--color-gold-deep)]">Livrables</p>
+        <p class="eyebrow text-[var(--color-teal-ink)]">Livrables</p>
         <h2 class="mt-6">Ce que vous recevez</h2>
       </div>
       <ol class="divide-y divide-[var(--color-line)] border-y border-[var(--color-line)] lg:col-span-7">

@@ -1,25 +1,33 @@
 ---
+import Photo from './Photo.astro';
 import { whatsappLink } from '@/config/site';
-interface Props { title?: string; text?: string; cta?: string; context?: string }
+import type { PhotoKey } from '@/lib/photos';
+
+interface Props { title?: string; text?: string; cta?: string; context?: string; photo?: PhotoKey; titleLang?: string }
 const {
-  title = 'Parlons de votre projet',
-  text = 'Une visite technique, un programme, un budget par lot : nous vous aidons à décider en connaissance de cause.',
-  cta = 'Demander un devis',
+  title = 'Parlons de votre projet.',
+  text = 'Vous avez un projet de cabinet, de clinique ou de centre médical ?',
+  cta = 'Parler de mon projet',
   context = 'site',
+  photo,
+  titleLang,
 } = Astro.props;
 const wa = whatsappLink(`Bonjour, je souhaite parler de mon projet (${context}).`);
 ---
-<section class="relative overflow-hidden bg-[var(--color-night)] text-[var(--color-ivory)]">
-  <div class="container-lux relative py-20 lg:py-28">
-    <div class="absolute right-0 top-0 h-full w-1/2 opacity-[0.07]" aria-hidden="true">
-      <svg viewBox="0 0 200 200" class="h-full w-full"><circle cx="160" cy="40" r="140" fill="none" stroke="var(--color-gold)" stroke-width="0.6" /><circle cx="160" cy="40" r="100" fill="none" stroke="var(--color-gold)" stroke-width="0.6" /><circle cx="160" cy="40" r="60" fill="none" stroke="var(--color-gold)" stroke-width="0.6" /></svg>
+<section class="relative isolate overflow-hidden bg-[var(--color-navy)] text-white">
+  {photo && (
+    <div class="absolute inset-0 -z-10" aria-hidden="true">
+      <Photo name={photo} alt="" sizes="100vw" widths={[800, 1200, 1600, 2000]} class="h-full w-full object-cover" />
+      <div class="absolute inset-0 bg-[linear-gradient(90deg,rgb(20_44_67/0.94)_0%,rgb(20_44_67/0.82)_55%,rgb(20_44_67/0.55)_100%)]"></div>
     </div>
-    <div class="relative max-w-3xl" data-reveal>
+  )}
+  <div class:list={['container-lux relative', photo ? 'py-28 lg:py-40' : 'py-20 lg:py-28']}>
+    <div class="max-w-3xl" data-reveal>
       <span class="gold-rule"></span>
-      <h2 class="mt-8">{title}</h2>
-      <p class="mt-6 max-w-2xl text-lg text-[var(--color-ivory)]/75">{text}</p>
-      <div class="mt-10 flex flex-wrap gap-4">
-        <a href="/contact/" class="btn btn-gold">{cta} <span class="arrow" aria-hidden="true">→</span></a>
+      <h2 class="mt-8 text-white" lang={titleLang}>{title}</h2>
+      <p class="mt-5 max-w-xl text-[1.12rem] text-white/80">{text}</p>
+      <div class="mt-10 flex flex-wrap gap-3">
+        <a href="/contact/" class="btn btn-primary">{cta} <span class="arrow" aria-hidden="true">→</span></a>
         {wa && <a href={wa} target="_blank" rel="noopener" class="btn btn-ghost-light">WhatsApp</a>}
       </div>
     </div>

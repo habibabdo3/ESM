@@ -57,11 +57,11 @@ const rects = templates[tpl]!.slice(0, labels.length).map(([x, y, w, hh], i) => 
 }));
 
 const night = tone === 'night';
-const bg = night ? 'var(--color-night)' : 'var(--color-sand)';
-const wall = night ? 'rgba(247,243,236,0.78)' : 'rgba(18,29,43,0.78)';
-const thin = night ? 'rgba(247,243,236,0.22)' : 'rgba(18,29,43,0.18)';
-const text = night ? 'rgba(247,243,236,0.62)' : 'rgba(18,29,43,0.6)';
-const gold = 'var(--color-gold)';
+const bg = night ? 'var(--color-navy)' : 'var(--color-mist)';
+const wall = night ? 'rgba(255,255,255,0.75)' : 'rgba(20,44,67,0.72)';
+const thin = night ? 'rgba(255,255,255,0.2)' : 'rgba(20,44,67,0.16)';
+const text = night ? 'rgba(255,255,255,0.6)' : 'rgba(20,44,67,0.62)';
+const gold = night ? 'var(--color-gold)' : 'var(--color-teal)';
 
 const circuitPath = rects
   .slice(0, Math.min(5, rects.length))
@@ -93,7 +93,7 @@ const id = `g${h.toString(36)}`;
           <line x1={r.x + 8} y1={r.y + r.h} x2={r.x + 8} y2={r.y + r.h - 14} stroke={wall} stroke-width="0.8" />
         </>
       )}
-      <text x={r.cx} y={r.cy} text-anchor="middle" font-family="Manrope Variable, Manrope, sans-serif" font-size="7.2" letter-spacing="1.4" fill={text}>
+      <text x={r.cx} y={r.cy} text-anchor="middle" font-family="Inter Variable, Inter, sans-serif" font-size="7.2" letter-spacing="1.4" fill={text}>
         {r.label.toUpperCase()}
       </text>
     </g>
@@ -123,7 +123,7 @@ const id = `g${h.toString(36)}`;
     </g>
   )}
   {detail === 'full' && (
-    <text x="20" y="280" font-family="Manrope Variable, Manrope, sans-serif" font-size="6.5" letter-spacing="2" fill={text}>
+    <text x="20" y="280" font-family="Inter Variable, Inter, sans-serif" font-size="6.5" letter-spacing="2" fill={text}>
       PLAN SCHÉMATIQUE · ILLUSTRATION
     </text>
   )}

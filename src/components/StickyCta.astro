@@ -9,16 +9,16 @@ const waHref = wa ?? '/contact/';
 ---
 
 <!-- Mobile : barre fixe en bas de l'écran sur toutes les pages -->
-<div class="fixed inset-x-0 bottom-0 z-30 grid grid-cols-2 border-t border-[var(--color-night-3)] bg-[var(--color-night)] md:hidden" style="padding-bottom: env(safe-area-inset-bottom)">
-  <a href={waHref} {...(wa ? { target: '_blank', rel: 'noopener' } : {})} class="flex h-14 items-center justify-center gap-2 text-[0.78rem] font-semibold uppercase tracking-[0.14em] text-[var(--color-ivory)] no-underline" data-track="whatsapp">
-    <Icon name="whatsapp" size={20} class="text-[var(--color-gold)]" /> WhatsApp
+<div class="fixed inset-x-0 bottom-0 z-30 grid grid-cols-2 border-t border-[var(--color-navy-3)] bg-[var(--color-navy)] md:hidden" style="padding-bottom: env(safe-area-inset-bottom)">
+  <a href={waHref} {...(wa ? { target: '_blank', rel: 'noopener' } : {})} class="flex h-14 items-center justify-center gap-2 text-[0.78rem] font-semibold uppercase tracking-[0.08em] text-white no-underline" data-track="whatsapp">
+    <Icon name="whatsapp" size={20} class="text-white" /> WhatsApp
   </a>
-  <a href="/contact/" class="flex h-14 items-center justify-center gap-2 bg-[var(--color-gold)] text-[0.78rem] font-semibold uppercase tracking-[0.14em] text-[var(--color-night)] no-underline">
+  <a href="/contact/" class="flex h-14 items-center justify-center gap-2 bg-white text-[0.78rem] font-bold uppercase tracking-[0.08em] text-[var(--color-navy)] no-underline">
     Demander un devis
   </a>
 </div>
 
 <!-- Desktop : bouton WhatsApp flottant -->
-<a href={waHref} {...(wa ? { target: '_blank', rel: 'noopener' } : {})} aria-label="Nous écrire sur WhatsApp" class="fixed bottom-8 right-8 z-30 hidden h-14 w-14 items-center justify-center rounded-full border border-[var(--color-gold)] bg-[var(--color-night)] text-[var(--color-gold)] shadow-xl transition duration-300 ease-[var(--ease-lux)] hover:-translate-y-1 md:inline-flex" data-track="whatsapp">
+<a href={waHref} {...(wa ? { target: '_blank', rel: 'noopener' } : {})} aria-label="Nous écrire sur WhatsApp" class="fixed bottom-8 right-8 z-30 hidden h-14 w-14 items-center justify-center rounded-full bg-[var(--color-navy)] text-white shadow-lg transition-colors duration-200 hover:bg-[var(--color-teal-ink)] md:inline-flex" data-track="whatsapp">
   <Icon name="whatsapp" size={24} />
 </a>

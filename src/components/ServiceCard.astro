@@ -1,21 +1,19 @@
 ---
 import { servicePath, pad } from '@/lib/content';
 interface Props { id: string; order: number; short: string; h1: string; intro: string; description?: string; termes?: string[]; i?: number; tone?: 'light' | 'night' }
-const { id, order, short, intro, termes = [], i = 0, tone = 'light' } = Astro.props;
-const night = tone === 'night';
+const { id, order, short, intro, termes = [], i = 0 } = Astro.props;
 const excerpt = Astro.props.description ?? intro.split('. ')[0] + '.';
 ---
-<article class:list={['card-lux group relative flex h-full flex-col border p-8 transition-colors duration-300', night ? 'border-[var(--color-night-3)] bg-[var(--color-night-2)] text-[var(--color-ivory)] hover:border-[var(--color-gold)]/60' : 'border-[var(--color-line)] bg-white/40 hover:border-[var(--color-gold)]']} data-reveal style={`--i:${i % 4}`}>
-  <span class="num text-4xl">{pad(order)}</span>
-  <h3 class="mt-6 text-[1.7rem]">
+<article class="card-lux group relative flex h-full flex-col border-t border-[var(--color-line)] pt-7" data-reveal style={`--i:${i % 3}`}>
+  <span class="num text-[0.95rem]">{pad(order)}</span>
+  <h3 class="mt-3 text-[1.375rem] text-[var(--color-navy)]">
     <a href={servicePath(id)} class="no-underline after:absolute after:inset-0">{short}</a>
   </h3>
-  <span class="card-rule mt-4 block h-px w-16 bg-[var(--color-gold)]"></span>
-  <p class:list={['mt-5 flex-1 text-[0.95rem] leading-relaxed', night ? 'text-[var(--color-ivory)]/70' : 'text-[var(--color-stone-ink)]']}>{excerpt}</p>
+  <p class="mt-3 flex-1 text-[0.98rem] leading-relaxed text-[var(--color-muted)]">{excerpt}</p>
   {termes.length > 0 && (
     <ul class="mt-5 flex flex-wrap gap-1.5" aria-label="Termes techniques">
-      {termes.map((t) => <li class:list={['px-2 py-1 text-[0.72rem] font-medium', night ? 'bg-[var(--color-night-3)] text-[var(--color-gold-soft)]' : 'bg-[var(--color-sand)] text-[var(--color-stone-ink)]']}>{t}</li>)}
+      {termes.map((t) => <li class="bg-[var(--color-mist)] px-2.5 py-1 text-[0.78rem] font-medium text-[var(--color-ink)]">{t}</li>)}
     </ul>
   )}
-  <span class:list={['card-more mt-6 inline-flex items-center gap-2 text-[0.75rem] font-semibold uppercase tracking-[0.16em]', night ? 'text-[var(--color-gold)]' : 'text-[var(--color-gold-deep)]']} aria-hidden="true">Découvrir <span>→</span></span>
+  <span class="link-more mt-6" aria-hidden="true">Découvrir <span>→</span></span>
 </article>

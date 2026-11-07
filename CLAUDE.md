@@ -23,7 +23,8 @@
 ## 2. Règles non négociables
 
 1. **Aucune donnée inventée** : pas de chiffres commerciaux, clients, avis, certifications, photos de projets, délais
-   ou taux. Info manquante → composant `<Todo label="…" />` (marqueur visible `[À COMPLÉTER : …]`).
+   ou taux. Info manquante → composant `<Todo label="…" />` (marqueur visible `[À COMPLÉTER : …]`) sur les pages
+   contact, légales et à-propos ; le footer et l'en-tête n'affichent que les coordonnées renseignées.
    `npm run audit:strict` échoue s'il en reste (à exécuter avant la mise en production définitive).
 2. Pas de `Review`/`AggregateRating` sans vrais avis. Pas de promesse médicale (on vend de l'aménagement).
 3. Aucun texte repris de lynemedical.ma ou d'un autre site.
@@ -50,13 +51,13 @@
    « Tout refuser » aussi visible que « Tout accepter », retrait = rechargement. Pas de dark pattern : aucune case ni
    option pré-cochée dans le formulaire. Pas de « gratuit » ni d'affirmation sur l'organisation (bureau d'études
    intégré, artisans formés, antennes) tant que l'entreprise ne l'a pas confirmé. Polices sous licence OFL,
-   illustrations originales, photos clients avec accord écrit.
+   logo et plans originaux, photos d'illustration sous licence Unsplash (créditées), photos clients avec accord écrit.
 
 ## 3. Stack et commandes
 
 - **Astro 7.4** (statique, `trailingSlash: 'always'`), TypeScript strict, **Tailwind CSS 4** (`@tailwindcss/vite`,
   tokens dans `@theme`), content collections + **Zod 4** (`astro/zod`, loaders `file()`/`glob()` de `astro/loaders`).
-- Polices auto-hébergées : `@fontsource/cormorant-garamond` (titres) + `@fontsource-variable/manrope` (texte).
+- Polices auto-hébergées : `@fontsource-variable/manrope` (titres) + `@fontsource-variable/inter` (texte).
 - Déploiement : **Vercel** (`vercel.json` : en-têtes de sécurité, CSP, redirections 301, fonction `api/devis.js`).
 
 | Commande | Rôle |
@@ -67,7 +68,7 @@
 | `npm run audit:seo` | audit du build : title ≤ 60, description 140–155, 1 H1, hiérarchie, canonical, alt, liens cassés, orphelines, JSON-LD, doublons |
 | `npm run audit:strict` | idem + échoue s'il reste un `[À COMPLÉTER` |
 | `npm run verify` | check + build + audit (**avant chaque push**) |
-| `npm run og` | régénère `public/og/*.png` et `public/icons/*.png` (sharp) |
+| `npm run brand` | régénère logos `public/brand/`, favicon, icônes et images OG (sharp + opentype.js) |
 
 ## 4. Arborescence
 
@@ -87,19 +88,21 @@ src/
   lib/schema.ts           JSON-LD : Organization, WebSite, LocalBusiness (HomeAndConstructionBusiness), Service, BreadcrumbList, FAQPage, Article
   layouts/BaseLayout.astro  <head> + Seo + Header + Footer + StickyCta + CookieBanner + motion.ts
   layouts/ProseLayout.astro pages texte (légal, plan du site)
-  components/             Seo, Header (méga-menus), Footer, PageHero, PlanArt (plans SVG), ServiceCard, SpecialtyCard,
+  components/             Seo, Header, Footer, PageHero, Photo, PlanArt (plans SVG), ServiceCard, SpecialtyCard,
                           ProcessSteps, Faq (<details>), CtaBand, QuoteForm, RelatedLinks, Breadcrumbs, MoroccoMap,
                           RealisationCard, BeforeAfter, Lightbox, StickyCta (WhatsApp mobile fixe), CookieBanner, Todo, Logo, Icon
   scripts/motion.ts       IntersectionObserver (révélations, compteurs) + parallaxe desktop
   styles/global.css       design tokens + composants + animations
   pages/                  voir §5
 api/devis.js              fonction serverless Vercel (Resend), champ piège + limitation de débit
-scripts/audit-seo.mjs     audit SEO ; scripts/generate-og.mjs ; scripts/check-lengths.mjs (longueurs JSON)
+scripts/audit-seo.mjs     audit SEO ; scripts/generate-brand.mjs (logos, favicon, OG) ; scripts/check-lengths.mjs
+src/lib/photos.ts         registre des photos (alt, source Unsplash), photo par spécialité/service, 4 expertises
+src/assets/photos/        photos d'illustration (optimisées au build en AVIF/WebP)
 ```
 
-## 5. Pages (71 générées) — détail dans `docs/ARCHITECTURE.md`
+## 5. Pages (72 générées) — détail dans `docs/ARCHITECTURE.md`
 
-`/` · `/services/` + 10 · `/specialites/` + 14 · `/amenagement-cabinet-medical/` (pilier) + 12 régions ·
+`/` · `/expertises/` (4 expertises) · `/services/` + 10 · `/specialites/` + 14 · `/amenagement-cabinet-medical/` (pilier) + 12 régions ·
 `/renovation-cabinet-clinique/` (pilier) · `/premiere-installation/` · `/zones-intervention/` · `/financement/` +
 `/al-barid-bank/` + `/bank-al-yousr/` · `/realisations/` (noindex tant que vide) + `[slug]` · `/blog/` + 12 guides publiés ·
 `/glossaire/` (121 termes, DefinedTermSet) · `/faq/` · `/a-propos/` · `/contact/` · `/mentions-legales/` · `/conditions-utilisation/` · `/confidentialite/` · `/cookies/` ·
@@ -108,25 +111,26 @@ scripts/audit-seo.mjs     audit SEO ; scripts/generate-og.mjs ; scripts/check-le
 Maillage : chaque spécialité → ≥ 3 services ; chaque service → spécialités liées + 4 services suivants ;
 header/footer → tous les services et spécialités ; fil d'Ariane partout.
 
-## 6. Design (résumé — détail dans `docs/DESIGN.md`, démo dans `/styleguide/`)
+## 6. Identité et design (refonte du 2026-11-07 — détail dans `docs/DESIGN.md`, démo dans `/styleguide/`)
 
-- **Direction** : moderne, professionnel, **luxe par la retenue**. Mouvements lents, jamais de rebond/rotation/gadget.
-- **Palette** (tokens `--color-*` dans `global.css`) : `night #0a1a2f` (sections premium) · `night-2 #10263f` ·
-  `night-3 #1b3654` (filets) · `teal #1d5a60` (liens) · `ivory #f7f3ec` (fond) · `sand #eee8dc` (fond alterné) ·
-  `line #ddd5c6` · `stone-ink #5b564d` (texte secondaire) · `ink #121d2b` (texte) · **`gold #c9a96b`** (or champagne :
-  filets, chiffres, survols, CTA — **jamais de grandes surfaces**, uniquement sur fond nuit pour le texte) ·
-  `gold-deep #755a24` (or lisible sur fond clair, AA).
-- `.num` (chiffres serif) = gold-deep sur clair, gold automatiquement dans un conteneur `bg-[var(--color-night…)]`.
-- **Typo** : Cormorant Garamond 400/500/italique (titres, chiffres) + Manrope variable (texte). `.eyebrow` et `.caption`
-  en petites capitales espacées. Coins photo 4 px.
-- **Visuels** : pas de photos de banque d'images. En attendant les vraies photos : `PlanArt` (plans d'architecte SVG
-  déterministes par spécialité, filet or en pointillé = circuit patient), `MoroccoMap` (points aux vraies coordonnées).
-- **Boutons** : `.btn-gold` (CTA principal), `.btn-ghost-light` (sur nuit), `.btn-ghost-dark` (sur clair).
-- **Mouvement** : courbe `--ease-lux: cubic-bezier(0.22,1,0.36,1)` ; survol 300 ms ; apparitions 800 ms ; révélations
-  d'image 1 200 ms ; zoom héros 22 s (1,08 → 1, image visible immédiatement) ; décalage 100 ms (`--i`).
-  N'animer que `transform`, `opacity`, `clip-path`. `prefers-reduced-motion` respecté. View Transitions natives (CSS).
-- Attributs : `data-reveal` (fondu montant), `data-reveal-img` (masque bas→haut + échelle 1,15→1), `.parallax`,
-  `data-count="N"` (compteur), `.card-lux` + `.card-media/.card-veil/.card-rule/.card-more` (survol des cartes).
+- **Marque** : EURO SPACE MEDICAL (ESM) · signature *Designing medical spaces.* · « Votre projet médical, de A à Z. »
+  Direction : studio d'architecture premium + ingénierie médicale. **Moins de texte, plus d'impact visuel.**
+- **Logo** : `Logo.astro` (horizontal / vertical / symbol × color / navy / white / mono) ; fichiers `public/brand/*.svg`
+  (texte vectorisé) régénérés par `npm run brand` (`scripts/generate-brand.mjs`, qui produit aussi favicon, icônes, OG).
+  Symbole : cadre-plan ouvert + monogramme E·S·M + ligne de cote teal. Jamais de croix, dent, stéthoscope.
+- **Couleurs** (65 % blanc/warm, 20 % navy, 10 % mist, 4 % teal, 1 % or) : `navy #142C43` · `teal #168C91`
+  (`teal-ink #0F6E72` pour petits textes) · `gold #C6A66B` (filets, numéros sur navy, jamais en fond) ·
+  `warm #F7F8F7` · `mist #E9EEF0` · `ink #263746` · `slate #697782` (≥ 24 px) / `muted #5E6C77` (petit texte, AA).
+- **Typo** : Manrope (titres, boutons) + Inter (texte), `@fontsource-variable`. Héros 56–72 px, sections 36–44 px,
+  cartes 21–24 px, texte 16–18 px. Paragraphes ≤ 3 lignes (`paragraphs()` dans `lib/content.ts`).
+- **Composants** : `PageHero` (fond warm + photo 4:3), `Photo` (AVIF/WebP), `ProcessSteps` (Discover · Design · Build ·
+  Deliver), `CtaBand` (navy + photo optionnelle), cartes à filet supérieur, `.link-more` « Découvrir → »,
+  `.btn-primary` (navy ; blanc automatiquement sur fond navy), `.btn-ghost-dark` / `.btn-ghost-light`.
+- **Photos** : licence Unsplash, registre `src/lib/photos.ts` (alt + source), crédits en mentions légales, légende
+  « Image d'illustration ». Ce ne sont **pas** des réalisations ESM : jamais dans le portfolio.
+- **Mouvement** : 200–400 ms, `transform`/`opacity` uniquement, `data-reveal`, zoom 1,03 au survol. Pas de parallaxe,
+  pas d'effet continu. `prefers-reduced-motion` respecté.
+- **Navigation** : Accueil · Expertises (`/expertises/`) · Réalisations · À propos · Contact + « Parler de mon projet ».
 
 ## 7. Variables d'environnement (Vercel → Settings → Environment Variables)
 
@@ -144,7 +148,8 @@ Sans `SITE_URL`, le canonical utilise `VERCEL_PROJECT_PRODUCTION_URL`.
 - Publier un **article** : compléter le `.md` et passer `draft: false`.
 - URLs : minuscules, sans accents, slash final, un sujet = une URL. Toute URL modifiée → redirection 301 dans `vercel.json`.
 - Un seul H1 par page, pas de saut de niveau (utiliser `<h2 class="sr-only">` si une grille de cartes h3 suit le héros).
-- Accessibilité WCAG 2.2 AA (vérifiée axe-core) ; Lighthouse mobile accueil : 100/100/100/100 au 2026-11-05.
+- Accessibilité WCAG 2.2 AA (vérifiée axe-core sur 19 pages) ; Lighthouse mobile au 2026-11-07 : accueil 99/100/100/100,
+  page service 100/100/100/100.
 
 - **Crédibilité métier** : employer le vocabulaire réel des praticiens et fournisseurs au Maroc (unit, autoclave
   classe B, cone beam, équivalent plomb, CTA, SSPI, BPDE, PV de réception, Mourabaha…). Tout nouveau terme technique

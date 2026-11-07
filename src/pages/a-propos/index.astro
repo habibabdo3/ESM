@@ -20,19 +20,19 @@ const piliers = [
   jsonld={[breadcrumb(base, crumbs)]}
   context="À propos"
 >
-  <PageHero eyebrow="À propos" h1="Concevoir des lieux de soin qui fonctionnent" intro={site.promise} crumbs={crumbs} variant="ophtalmologie" />
+  <PageHero eyebrow="À propos" h1="Concevoir des lieux de soin qui fonctionnent" intro={site.promise} crumbs={crumbs} photo="architectureFacade" />
   <section class="py-20 lg:py-28">
     <div class="container-lux grid gap-12 md:grid-cols-3">
       {piliers.map((p, i) => (
-        <div data-reveal style={`--i:${i}`}><span class="num text-5xl">0{i + 1}</span><h2 class="mt-6 text-[2rem]">{p.t}</h2><p class="mt-4 text-[var(--color-stone-ink)]">{p.p}</p></div>
+        <div data-reveal style={`--i:${i}`}><span class="num text-5xl">0{i + 1}</span><h2 class="mt-6 text-[2rem]">{p.t}</h2><p class="mt-4 text-[var(--color-muted)]">{p.p}</p></div>
       ))}
     </div>
   </section>
-  <section class="bg-[var(--color-sand)] py-20 lg:py-28">
+  <section class="bg-[var(--color-mist)] py-20 lg:py-28">
     <div class="container-lux grid gap-12 lg:grid-cols-12">
-      <div class="lg:col-span-4"><p class="eyebrow text-[var(--color-gold-deep)]">Équipe</p><h2 class="mt-6">Les personnes derrière vos projets</h2></div>
+      <div class="lg:col-span-4"><p class="eyebrow text-[var(--color-teal-ink)]">Équipe</p><h2 class="mt-6">Les personnes derrière vos projets</h2></div>
       <div class="space-y-6 lg:col-span-8">
-        <p class="text-[var(--color-stone-ink)]">Architectes, ingénieurs, conducteurs de travaux : présentez ici l’équipe nommée, ses qualifications et ses partenaires techniques (physicien pour la radioprotection, bureau de contrôle, prestataire de déchets médicaux).</p>
+        <p class="text-[var(--color-muted)]">Architectes, ingénieurs, conducteurs de travaux : présentez ici l’équipe nommée, ses qualifications et ses partenaires techniques (physicien pour la radioprotection, bureau de contrôle, prestataire de déchets médicaux).</p>
         <p><Todo label="équipe nommée, qualifications, photos" /></p>
         <p><Todo label="assurances (responsabilité civile professionnelle, garantie des ouvrages)" /></p>
         <p><Todo label="partenaires techniques et fabricants" /></p>

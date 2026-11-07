@@ -38,3 +38,11 @@ export const realisationPath = (id: string) => `/realisations/${id}/`;
 export const postPath = (id: string) => `/blog/${id}/`;
 
 export const pad = (n: number) => String(n).padStart(2, '0');
+
+/** Découpe un texte en paragraphes courts (n phrases max) pour la lisibilité. */
+export function paragraphs(text: string, n = 2): string[] {
+  const sentences = text.match(/[^.!?]+[.!?]+(\s|$)/g)?.map((s) => s.trim()) ?? [text];
+  const out: string[] = [];
+  for (let i = 0; i < sentences.length; i += n) out.push(sentences.slice(i, i + n).join(' '));
+  return out;
+}

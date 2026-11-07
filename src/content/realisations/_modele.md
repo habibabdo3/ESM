@@ -5,6 +5,7 @@ title: "Cabinet dentaire 3 fauteuils à Casablanca"          # 60 caractères ma
 description: "…"                                             # 140 à 155 caractères
 specialite: "cabinet-dentaire-orthodontie"                   # identifiant d'une spécialité (src/data/specialites.json)
 ville: "Casablanca"
+categorie: "Création"                                        # Création | Rénovation | Extension
 surface: 110                                                 # m²
 duree: "12 semaines"
 lots: ["Cloisons", "Plomberie", "Électricité", "Fluides dentaires"]

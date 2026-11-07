@@ -29,13 +29,13 @@ const ld = {
   jsonld={[breadcrumb(base, crumbs), ld]}
   context="Glossaire"
 >
-  <PageHero eyebrow="Glossaire" h1="Le vocabulaire de l’aménagement médical" intro={`${all.length} termes employés par les praticiens, les fournisseurs, les bureaux d’études et les banques au Maroc, et la façon concrète dont nous les intégrons à votre aménagement.`} crumbs={crumbs} variant="radiologie-imagerie-medicale" />
+  <PageHero eyebrow="Glossaire" h1="Le vocabulaire de l’aménagement médical" intro={`${all.length} termes employés par les praticiens, les fournisseurs, les bureaux d’études et les banques au Maroc, et la façon concrète dont nous les intégrons à votre aménagement.`} crumbs={crumbs} />
 
   <section class="py-20 lg:py-28">
     <div class="container-lux grid gap-16 lg:grid-cols-12">
       <nav aria-label="Rubriques du glossaire" class="lg:col-span-3">
         <ul class="sticky top-32 space-y-2 text-[0.92rem]">
-          {groups.map((g) => <li><a href={`#${g.id}`} class="link-lux text-[var(--color-stone-ink)] hover:text-[var(--color-teal)]">{g.titre}</a></li>)}
+          {groups.map((g) => <li><a href={`#${g.id}`} class="link-lux text-[var(--color-muted)] hover:text-[var(--color-teal)]">{g.titre}</a></li>)}
         </ul>
       </nav>
       <div class="space-y-20 lg:col-span-9">
@@ -43,13 +43,13 @@ const ld = {
           <section id={g.id} aria-labelledby={`${g.id}-t`} class="scroll-mt-32">
             <div class="flex flex-wrap items-end justify-between gap-4 border-b border-[var(--color-line)] pb-5">
               <h2 id={`${g.id}-t`} class="text-[2.2rem]">{g.titre}</h2>
-              {g.lien && <a href={g.lien} class="text-[0.78rem] font-semibold uppercase tracking-[0.14em] text-[var(--color-gold-deep)] no-underline">Voir la spécialité →</a>}
+              {g.lien && <a href={g.lien} class="text-[0.78rem] font-semibold uppercase tracking-[0.14em] text-[var(--color-teal-ink)] no-underline">Voir la spécialité →</a>}
             </div>
             <dl class="mt-6 grid gap-x-10 md:grid-cols-2">
               {g.termes.map((t) => (
                 <div class="border-b border-[var(--color-line)] py-5">
                   <dt class="display text-[1.4rem]">{t.terme}</dt>
-                  <dd class="mt-2 text-[0.95rem] leading-relaxed text-[var(--color-stone-ink)]">{t.definition}</dd>
+                  <dd class="mt-2 text-[0.95rem] leading-relaxed text-[var(--color-muted)]">{t.definition}</dd>
                 </div>
               ))}
             </dl>

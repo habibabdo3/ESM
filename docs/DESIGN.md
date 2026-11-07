@@ -1,52 +1,78 @@
-# Direction artistique — Euro Space Medical
+# Identité et direction artistique — Euro Space Medical
 
-Démo vivante : `/styleguide/` (noindex). Tokens : `src/styles/global.css` (`@theme`).
+> Refonte du 2026-11-07 : identité premium « architecture + ingénierie médicale ».
+> Démo vivante : `/styleguide/` (noindex). Tokens : `src/styles/global.css` (`@theme`). Logos : `public/brand/`.
 
-## Principe
-Le luxe vient de la retenue : beaucoup d'espace, peu de couleurs, des mouvements lents et rares. Chaque animation
-met le contenu en valeur, jamais elle-même. Univers médical, sobre, rassurant.
+## Marque
 
-## Couleurs
+- **Nom** : EURO SPACE MEDICAL · **Abréviation** : ESM
+- **Signature** : *Designing medical spaces.* · **Signature française** : Votre projet médical, de A à Z.
+- **Positionnement** : architecture, ingénierie, construction et équipement de structures médicales.
+- **Ton visuel** : studio d’architecture premium + ingénierie médicale + identité corporate internationale.
+  Moins de texte, plus d’impact visuel, beaucoup d’espace, hiérarchie nette.
+
+## Logo
+
+- **Symbole** (48 × 48) : cadre de plan ouvert sur la droite (l’entrée du bâtiment), monogramme géométrique
+  **E·S·M** tracé au trait, ligne de cote en teal (précision d’ingénierie). Aucune croix, dent ou stéthoscope.
+- **Composant** : `src/components/Logo.astro` — `layout` = `horizontal | vertical | symbol`,
+  `tone` = `color | navy | white | mono`, `tagline` (signature sous le nom).
+- **Fichiers vectoriels** (texte vectorisé, aucune police requise) : `public/brand/esm-logo-horizontal(-navy|-white|-mono).svg`,
+  `esm-logo-vertical(-white|-mono).svg`, `esm-symbol(-navy|-white|-mono).svg`. Régénérer : `npm run brand`.
+- Favicon et icônes : symbole blanc et or sur carré navy.
+- Taille minimale : 24 px (symbole). Zone de protection : la hauteur du E.
+
+## Couleurs (répartition 65 / 20 / 10 / 4 / 1)
+
 | Token | Hex | Usage |
 |---|---|---|
-| `night` | #0a1a2f | Sections premium (héros, CTA, footer, rénovation, zones) |
-| `night-2` | #10263f | Cartes sur fond nuit |
-| `night-3` | #1b3654 | Filets / séparateurs sur nuit |
-| `teal` | #1d5a60 | Liens et survols de texte sur clair |
-| `ivory` | #f7f3ec | Fond principal |
-| `sand` | #eee8dc | Fond alterné (services, FAQ) |
-| `line` | #ddd5c6 | Filets sur clair |
-| `stone` | #8a857b | Décor uniquement (contraste insuffisant pour du texte) |
-| `stone-ink` | #5b564d | Texte secondaire (6,6:1 sur ivory) |
-| `ink` | #121d2b | Texte principal |
-| `gold` | #c9a96b | Or champagne : filets, chiffres, CTA, survols — texte **seulement sur nuit** (7,8:1) |
-| `gold-soft` | #e4d2a6 | Survol du CTA, italiques du héros |
-| `gold-deep` | #755a24 | Or lisible sur clair (5,8:1 ivory, 5,3:1 sand) : eyebrows, chiffres |
+| `warm` + blanc | #F7F8F7 / #FFFFFF | 65 % : fonds |
+| `navy` | #142C43 | 20 % : titres, navigation, boutons principaux, footer, sections fortes |
+| `mist` | #E9EEF0 | 10 % : fonds alternés |
+| `teal` | #168C91 | 4 % : accents, états actifs, filets, soulignement de navigation |
+| `teal-ink` | #0F6E72 | teal pour petits textes et liens (5,6:1 sur warm) |
+| `gold` | #C6A66B | 1 % : filets courts, numéros et libellés sur navy. **Jamais en fond.** |
+| `ink` | #263746 | texte principal |
+| `slate` | #697782 | texte secondaire officiel : ≥ 24 px, icônes, bordures (4,3:1 sur warm) |
+| `muted` | #5E6C77 | texte secondaire en petite taille (5,1:1 sur warm, AA) |
+| `line` | #DBE2E5 | bordures subtiles |
 
-Règle : l'or ne couvre jamais de grande surface (boutons et filets uniquement).
+Règles automatiques : dans un conteneur `bg-[var(--color-navy…)]`, les titres passent en blanc, `.num` en or et
+`.btn-primary` devient blanc à texte navy.
 
 ## Typographie
-- Titres : **Cormorant Garamond** 500 (et 400 italique pour un mot accentué). `h1` clamp 2,5 → 5 rem (héros jusqu'à 6,4 rem).
-- Texte : **Manrope** variable, 17 px, interligne 1,7.
-- `.eyebrow` : 0,72 rem, 600, capitales espacées 0,22 em, précédé d'un filet.
-- `.caption` : légendes en petites capitales (ville · spécialité).
-- `.num` : chiffres serif (numérotation 01, 02…, compteurs).
+
+- **Manrope** (titres, boutons, navigation) · **Inter** (texte), auto-hébergées (`@fontsource-variable`), préchargées.
+- Héros 56–72 px (bold, interlettrage −0,035 em) · titres de section 36–44 px · cartes 21–24 px · texte 16–18 px ·
+  libellés 12–14 px (capitales espacées uniquement pour les libellés et les boutons).
+- Pas de paragraphe en gras, pas de texte justifié, paragraphes ≤ 3 lignes (`paragraphs()` découpe les textes longs).
 
 ## Composition
-- Conteneur `.container-lux` : 82 rem max, gouttières 16 / 32 / 48 px.
-- Sections : `py-20 lg:py-28` (ou 24/32-36 sur l'accueil). Alternance ivory → sand → night.
-- Grilles de cartes séparées par des filets d'1 px (`gap-px` sur fond `line`/`night-3`).
-- Coins : droits (boutons 2 px), images 4 px.
 
-## Mouvement (tokens)
-- Courbe : `cubic-bezier(0.22, 1, 0.36, 1)` (`--ease-lux`).
-- Durées : survol 300 ms · apparition 800 ms · révélation d'image 1 200 ms · zoom héros 22 s · décalage 100 ms.
-- Uniquement `transform`, `opacity`, `clip-path`. Aucun décalage de mise en page (CLS 0).
-- `prefers-reduced-motion` : animations ramenées à ~0, transitions 150 ms, parallaxe et masques désactivés.
-- JavaScript d'animation : `src/scripts/motion.ts` (< 2 ko), sans bibliothèque.
+- Conteneur `.container-lux` (80 rem), gouttières 20 / 32 / 48 px. Sections `py-20 lg:py-28` (accueil : 24 / 32).
+- Alternance blanc → warm → soft grey → navy. Grilles alignées, filets d’1 px, coins 2 px, ombres très rares.
+- Une idée par section, un titre par section, deux phrases maximum par carte.
+- En-tête des pages internes (`PageHero`) : fond warm, fil d’Ariane, libellé teal, H1 navy, une phrase, photo 4:3.
 
-## Visuels
-- Pas de photos de banque d'images avec visages.
-- `PlanArt` : plan schématique déterministe par spécialité (pièces nommées, portes, cotes, rose des vents,
-  circuit patient en pointillé or). Signalé « illustration ».
-- Photos réelles (réalisations) : `astro:assets` → AVIF/WebP, srcset, dimensions déclarées, lazy sauf héros.
+## Photographie
+
+- Photos d’illustration **licence Unsplash**, sans visage de patient ni « médecin souriant » : espaces de soin,
+  plans, chantier. Registre : `src/lib/photos.ts` (texte alternatif, source). Crédits : `/mentions-legales/`.
+- **Elles ne représentent pas des réalisations ESM** : légende « Image d’illustration » quand le contexte peut prêter à
+  confusion ; jamais dans le portfolio. À remplacer par les photos des projets ESM (docs/MEDIAS.md).
+- Composant `Photo` : AVIF + WebP, `srcset`, chargement différé sauf image principale.
+- Illustrations : `PlanArt` (plans schématiques) en version claire pour les cartes spécialités et les plans types.
+
+## Mouvement
+
+- 200–400 ms, courbe `cubic-bezier(0.25, 0.1, 0.25, 1)`. Uniquement `transform` et `opacity`.
+- Révélation courte au défilement (`data-reveal`, 12 px + fondu), titres en fondu court, zoom 1,03 au survol des cartes,
+  soulignement teal de la navigation, transitions de page natives (250 ms).
+- Supprimés : zoom continu du héros, parallaxe, révélations longues. `prefers-reduced-motion` : tout désactivé.
+
+## Navigation
+
+- En-tête blanc translucide, collant, filet bas : Accueil · Expertises · Réalisations · À propos · Contact +
+  bouton **Parler de mon projet**. Menu mobile plein écran blanc. Contact en deux clics maximum depuis toute page.
+- Footer navy : logo blanc, description, expertises, spécialités, ressources, légal. Coordonnées affichées uniquement
+  si renseignées (sinon lien vers le formulaire).

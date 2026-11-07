@@ -17,12 +17,12 @@ const wa = whatsappLink('Bonjour Euro Space Medical, je souhaite un devis pour m
   jsonld={[breadcrumb(base, crumbs)]}
   context="Contact"
 >
-  <PageHero eyebrow="Demande de devis" h1="Parlons de votre projet" intro="Quelques informations suffisent pour une première approche. Plus vous êtes précis, plus notre réponse le sera." crumbs={crumbs} variant="cabinet-dentaire-orthodontie" />
+  <PageHero eyebrow="Demande de devis" h1="Parlons de votre projet" intro="Quelques informations suffisent pour une première approche. Plus vous êtes précis, plus notre réponse le sera." crumbs={crumbs} />
   <section class="py-20 lg:py-28">
     <div class="container-lux grid gap-16 lg:grid-cols-12">
       <div class="lg:col-span-8"><QuoteForm /></div>
       <aside class="space-y-8 lg:col-span-4">
-        <div class="bg-[var(--color-night)] p-8 text-[var(--color-ivory)]">
+        <div class="bg-[var(--color-navy)] p-8 text-[var(--color-warm)]">
           <p class="caption text-[var(--color-gold)]">Contact direct</p>
           <ul class="mt-6 space-y-4 text-[0.98rem]">
             <li class="flex items-start gap-3"><Icon name="whatsapp" class="mt-1 text-[var(--color-gold)]" />{wa ? <a href={wa} target="_blank" rel="noopener" class="link-lux">WhatsApp</a> : <Todo label="numéro WhatsApp" />}</li>
@@ -32,7 +32,7 @@ const wa = whatsappLink('Bonjour Euro Space Medical, je souhaite un devis pour m
           </ul>
         </div>
         <div class="border border-[var(--color-line)] p-8">
-          <p class="caption text-[var(--color-gold-deep)]">Et ensuite ?</p>
+          <p class="caption text-[var(--color-teal-ink)]">Et ensuite ?</p>
           <ol class="mt-5 space-y-4 text-[0.95rem]">
             <li class="flex gap-3"><span class="num text-2xl leading-none">01</span>Nous étudions votre demande.</li>
             <li class="flex gap-3"><span class="num text-2xl leading-none">02</span>Nous vous appelons pour préciser le besoin.</li>

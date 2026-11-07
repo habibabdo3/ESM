@@ -19,17 +19,17 @@ const fmt = new Intl.DateTimeFormat('fr-MA', { dateStyle: 'long' });
   jsonld={[breadcrumb(base, crumbs)]}
   context="Guides"
 >
-  <PageHero eyebrow="Guides" h1="Guides et conseils d’aménagement" intro="Des réponses concrètes aux questions que se posent les praticiens avant d’ouvrir, de rénover ou d’agrandir leur structure." crumbs={crumbs} variant="pediatrie" />
+  <PageHero eyebrow="Guides" h1="Guides et conseils d’aménagement" intro="Des réponses concrètes aux questions que se posent les praticiens avant d’ouvrir, de rénover ou d’agrandir leur structure." crumbs={crumbs} photo="plansDessin" />
   <section class="py-20 lg:py-28">
     <div class="container-lux">
       {posts.length > 0 && (
         <ul class="grid gap-x-10 gap-y-14 md:grid-cols-2 lg:grid-cols-3">
           {posts.map((p, i) => (
             <li class="card-lux group relative" data-reveal style={`--i:${i % 3}`}>
-              <p class="caption text-[var(--color-stone-ink)]">{fmt.format(p.data.date)}</p>
+              <p class="caption text-[var(--color-muted)]">{fmt.format(p.data.date)}</p>
               <h2 class="mt-3 text-[1.7rem]"><a href={postPath(p.id)} class="no-underline after:absolute after:inset-0">{p.data.h1}</a></h2>
               <span class="card-rule mt-4 block h-px w-16 bg-[var(--color-gold)]"></span>
-              <p class="mt-4 text-[0.95rem] text-[var(--color-stone-ink)]">{p.data.description}</p>
+              <p class="mt-4 text-[0.95rem] text-[var(--color-muted)]">{p.data.description}</p>
             </li>
           ))}
         </ul>
@@ -38,7 +38,7 @@ const fmt = new Intl.DateTimeFormat('fr-MA', { dateStyle: 'long' });
         <div class:list={[posts.length > 0 && 'mt-24']}>
           <h2 class="text-[2.2rem]">À paraître</h2>
           <ul class="mt-8 divide-y divide-[var(--color-line)] border-y border-[var(--color-line)]">
-            {upcoming.map((t) => <li class="py-4 font-[family-name:var(--font-display)] text-[1.35rem] text-[var(--color-stone-ink)]">{t}</li>)}
+            {upcoming.map((t) => <li class="py-4 font-[family-name:var(--font-display)] text-[1.35rem] text-[var(--color-muted)]">{t}</li>)}
           </ul>
         </div>
       )}
