@@ -131,7 +131,7 @@ header/footer → tous les services et spécialités ; fil d'Ariane partout.
 - **Typo** : Manrope (titres, boutons) + Inter (texte), `@fontsource-variable`. Héros 56–72 px, sections 36–44 px,
   cartes 21–24 px, texte 16–18 px. Paragraphes ≤ 3 lignes (`paragraphs()` dans `lib/content.ts`).
 - **Composants** : `PageHero` (fond warm + `visual` photo ou dessin 4:3), `Photo` (AVIF/WebP), `Visual`, `SectionHeading`,
-  `ProcessSteps` (Découvrir · Concevoir · Construire · Livrer ; frise animée sur l'accueil), `SpecIndex`, `ServiceIndex`, `CtaBand` (navy + photo optionnelle), cartes à filet supérieur, `.link-more` « Découvrir → »,
+  `ProcessSteps` (Découvrir · Concevoir · Construire · Livrer ; pages internes), `SpecIndex` (/specialites/), `SpecPlan` (accueil), `ServiceIndex`, `CtaBand` (navy + photo optionnelle), cartes à filet supérieur, `.link-more` « Découvrir → »,
   `.btn-primary` (navy ; blanc automatiquement sur fond navy), `.btn-ghost-dark` / `.btn-ghost-light`.
 - **Photos** (revue du 2026-11-08) : 11 photos sous licence libre (Unsplash, Wikimedia CC0 / CC BY / CC BY-SA),
   registre `src/lib/photos.ts` (alt, auteur, licence, source), crédits détaillés en mentions légales, légende
@@ -145,17 +145,18 @@ header/footer → tous les services et spécialités ; fil d'Ariane partout.
 - **Langue des titres** : tout en français ; l'anglais seulement pour la signature *Designing medical spaces.*
 - **Footer** : 4 colonnes (Entreprise · Expertises · Spécialités médicales · Ressources et contact), liens ≥ 15 px,
   barre légale discrète ; sur mobile, Expertises et Ressources côte à côte, spécialités sur 2 colonnes.
-- **Mouvement (immersif depuis le 2026-11-08, v1.4.0)** : accueil = parcours 3D three.js (`clinic-scene.ts`, chargé à la
+- **Mouvement (immersif, v1.5.0 du 2026-11-08)** : accueil = parcours 3D three.js (`clinic-scene.ts`, chargé à la
   demande) piloté par GSAP ScrollTrigger (`motion-home.ts`) : plan coté → réseaux → murs → coupe équipée → PV.
-  **Le texte ne couvre pas la maquette** : titre en colonne gauche (maquette décalée), puis légende compacte en bas à
-  gauche + sommaire des étapes à droite. Le parcours tient lieu de méthode (pas de section méthode en double).
-  **2 épinglages maximum par page** (parcours + expertises) ; manifeste mot à mot avec images insérées, piliers
-  dessinés au trait, image révélée, bandeau défilant. Pages internes : `data-reveal` + survols
-  200–400 ms. `transform`/`opacity` (ou couleur) uniquement. Classe `webgl` posée dans le `<head>` seulement si WebGL
-  et pas de « réduire les animations » ; sinon tout est lisible, empilé, sans épinglage. Gris d’animation ≥ 3:1.
-  Ouverture d’images par `clip-path` (pas d’animation de largeur).
-- **Pas de grilles de cartes** sur l’accueil et les hubs : panneaux plein cadre, index typographiques (`SpecIndex`,
-  `ServiceIndex`), listes éditoriales. Références : taste-skill (Leonxlnx) et UI UX Pro Max (nextlevelbuilder),
+  **Le texte ne couvre jamais la maquette** : au départ, planche encadrée (cartouche) à côté du titre (sous le titre
+  sur mobile), qui s'étire en plein écran au défilement ; ensuite légende compacte + sommaire des étapes.
+  Le parcours tient lieu de méthode. **2 épinglages maximum par page** (parcours + bandes d'expertises). Puis :
+  comparatif « Avec ESM », bandeau, plan des spécialités (`SpecPlan`), projets types en cartes empilées (CSS sticky).
+  Pages internes : `data-reveal` + survols 200–400 ms. `transform`/`opacity`/`clip-path` (ou couleur) ; seule
+  exception : `flex-grow` des 4 bandes d'expertises. Gris d’animation ≥ 3:1.
+  **Appareils** (script du `<head>`) : pas de 3D si « réduire les animations », économiseur de données ou < 2 Go ;
+  classe `gl-lite` (sans ombres, 1×, 30 i/s) si < 4 Go, ≤ 4 cœurs ou 2G/3G ; repli si perte du contexte WebGL.
+- **Pas de grilles de cartes** sur l’accueil et les hubs : bandes d'images, plan des spécialités, comparatif, index
+  typographiques (`SpecIndex`, `ServiceIndex`), listes éditoriales, cartes empilées. Références : taste-skill (Leonxlnx) et UI UX Pro Max (nextlevelbuilder),
   palette et polices de marque prioritaires sur leurs suggestions.
 - **SDK** `paycii/ssagency-sdk-angular` : référence en lecture seule (principes d’`AbstractThreeScene`, versions gsap
   et three identiques). **Ne jamais le modifier.** La scène three.js est indépendante du framework (portable en Angular).

@@ -33,7 +33,7 @@ const { overlayHeader = false, context, ...seo } = Astro.props;
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
     <link rel="sitemap" href="/sitemap-index.xml" />
-    <script is:inline>(function(){var h=document.documentElement;h.classList.add('js');try{if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;var c=document.createElement('canvas');if(c.getContext('webgl2')||c.getContext('webgl'))h.classList.add('webgl')}catch(e){}})()</script>
+    <script is:inline>(function(){var h=document.documentElement,n=navigator;h.classList.add('js');try{if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;var c=n.connection||{},m=n.deviceMemory||4,k=n.hardwareConcurrency||4;if(c.saveData||m<2)return;var g=document.createElement('canvas'),x=g.getContext('webgl2')||g.getContext('webgl');if(!x)return;var l=x.getExtension('WEBGL_lose_context');l&&l.loseContext();h.classList.add('webgl');if(m<4||k<=4||/2g|3g/.test(c.effectiveType||''))h.classList.add('gl-lite')}catch(e){}})()</script>
     <Seo {...seo} />
   </head>
   <body>

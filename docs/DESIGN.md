@@ -72,19 +72,23 @@ Règles automatiques : dans un conteneur `bg-[var(--color-navy…)]`, les titres
   radiologie, salle d'endoscopie haut de gamme, chantier médical réel, rendus 3D.
 - **Elles ne représentent pas des réalisations ESM** : légende « Image d'illustration » ; jamais dans le portfolio.
 
-## Mouvement (immersif, v1.4.0 du 2026-11-08)
+## Accueil et mouvement (v1.5.0 du 2026-11-08)
 
-- **Accueil — parcours 3D** (600 vh) : plan d'architecte coté (poché navy, cotes, portes, fenêtres, surfaces, emprises,
-  circuit patient or, marche en avant, nord) → réseaux encastrés (teal = fluides, or foncé = électricité) → murs et
-  menuiseries → coupe à 1,15 m, sols finis, équipements → pastilles de PV teal, lumière plus chaude. Ombres douces.
-- **Le texte ne couvre jamais la maquette** : titre en colonne gauche, maquette décalée à droite (en bas sur mobile) ;
-  dès le défilement, légende compacte (blanc 82 %, flou, filet teal) en bas à gauche et sommaire des 4 étapes à droite.
-- Expertises : panneaux image + services liés (76 vw desktop, 86 vw mobile), image qui s'ouvre de droite à gauche,
-  contenu qui monte, mot géant en contour (7 % blanc) en arrière-plan, étapes 01–04 avec filet or.
-- Manifeste mot à mot (gris #7D8A95 → navy) avec trois images insérées en pilule qui s'ouvrent ; piliers dessinés au
-  trait (navy, teal, or). Bandeau défilant (60 s), index des spécialités + plan collant, image révélée.
-- Survols 200–400 ms, courbe `cubic-bezier(0.25, 0.1, 0.25, 1)` ; parcours en `scrub`. 2 épinglages max par page.
-- Sans WebGL ou avec `prefers-reduced-motion` : aucun épinglage, aucune 3D, contenu empilé et lisible.
+- **Héros** : surtitre (signature + « Partout au Maroc »), titre 800 sur 3 lignes qui montent, « soigner » teal
+  souligné or, chapô et actions sous un filet. La maquette est une **planche encadrée** (fond mist, coins 8 px,
+  cartouche « Plan type · Cabinet dentaire · Illustration ESM ») à droite du titre (en bas sur mobile) ; au premier
+  défilement le titre sort et la planche s'étire en plein écran (`clip-path`).
+- **Parcours 3D** (600 vh) : plan coté → réseaux (teal fluides, or électricité) → murs → coupe à 1,15 m équipée →
+  pastilles de PV ; légende compacte en bas à gauche, sommaire des 4 étapes à droite.
+- **Expertises** : 4 bandes d'images jointives (2 px navy) ; la bande ouverte (×4,2) montre numéro en contour or,
+  titre, texte, services ; les autres un libellé vertical. Défilement épinglé + survol ; mobile : panneaux empilés.
+- **Pourquoi ESM** : tableau « Plusieurs prestataires / Avec ESM », colonne ESM navy + teinte teal qui se remplit.
+- **Spécialités** : plan d'un centre médical (murs navy 5 px, cloisons 2 px, trame pointillée, débattements de porte),
+  pièce active teal, cartouche sous le plan. Mobile : plan sur 2 colonnes.
+- **Réalisations** (sans étude de cas) : projets types en cartes navy empilées (sticky), la carte recouverte recule.
+- Survols 200–400 ms, courbe `cubic-bezier(0.25, 0.1, 0.25, 1)`. 2 épinglages max par page.
+- Sans WebGL, appareil modeste ou `prefers-reduced-motion` : aucun épinglage, aucune 3D, contenu empilé et lisible ;
+  mode `gl-lite` pour les appareils intermédiaires.
 
 ## Navigation
 

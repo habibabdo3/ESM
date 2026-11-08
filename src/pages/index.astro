@@ -1,25 +1,25 @@
 ---
 /**
  * Accueil immersif : un seul parcours continu.
- * 1. #journey — maquette 3D épinglée : plan coté → réseaux → murs → coupe équipée → réception. Titre en colonne gauche
- *    au départ, puis légende compacte en bas à gauche et sommaire des étapes à droite : la maquette occupe l'écran.
- * 2. Expertises — panneaux image + services liés, défilement horizontal épinglé, mot géant en arrière-plan (desktop).
- * 3. Manifeste — phrase qui s'allume mot à mot avec images insérées ; trois piliers dessinés au trait.
- * 4. Bandeau des spécialités, index des spécialités + plan collant ; 5. Réalisations — image révélée ; appel final.
- * Le parcours 3D tient lieu de méthode (Concevoir · Construire · Équiper · Livrer) : pas de section « méthode » en double.
- * Sans WebGL ou avec « réduire les animations » : même contenu, en défilement classique.
+ * 1. #journey — maquette 3D épinglée : plan coté → réseaux → murs → coupe équipée → réception. Au départ, la maquette
+ *    est une planche encadrée à côté du titre ; elle s'étire en plein écran au premier défilement. Légende compacte
+ *    + sommaire des étapes ensuite. Le parcours tient lieu de méthode.
+ * 2. Expertises — quatre bandes d'images jointives : la bande active s'élargit (défilement épinglé ou survol, desktop).
+ * 3. Pourquoi ESM — comparatif « Plusieurs prestataires / Avec ESM ».
+ * 4. Bandeau des spécialités, puis les spécialités dessinées comme le plan d'un centre médical (SpecPlan).
+ * 5. Réalisations — tant qu'aucune étude de cas n'est publiée : projets types en cartes qui s'empilent.
+ * Sans WebGL, appareil peu puissant ou « réduire les animations » : même contenu, en défilement classique.
  */
 import BaseLayout from '@/layouts/BaseLayout.astro';
-import Photo from '@/components/Photo.astro';
 import Visual from '@/components/Visual.astro';
 import PlanArt from '@/components/PlanArt.astro';
-import SpecIndex from '@/components/SpecIndex.astro';
+import SpecPlan from '@/components/SpecPlan.astro';
 import SectionHeading from '@/components/SectionHeading.astro';
 import CtaBand from '@/components/CtaBand.astro';
 import RealisationCard from '@/components/RealisationCard.astro';
-import { site } from '@/config/site';
-import { getRealisations, getServices, getSpecialites, servicePath } from '@/lib/content';
-import { expertises } from '@/lib/photos';
+import { site, BANK_DISCLAIMER } from '@/config/site';
+import { getRealisations, getServices, getSpecialites, servicePath, specialitePath } from '@/lib/content';
+import { expertises, specialiteVisual } from '@/lib/photos';
 
 const realisations = await getRealisations();
 const specialites = await getSpecialites();
@@ -31,11 +31,16 @@ const chapters = [
   { at: 0.5, num: '03', title: 'Équiper', text: 'Fauteuils, stérilisation, compresseur : tout est prévu dès les plans.', href: '/expertises/#equipement-medical' },
   { at: 0.78, num: '04', title: 'Livrer', text: 'Réception pièce par pièce, procès-verbal et dossier des ouvrages.', href: '/expertises/#accompagnement-global' },
 ];
-const why = [
-  { t: 'L’expertise médicale', d: 'Des espaces conçus autour des praticiens et de leurs contraintes de soin.' },
-  { t: 'Un seul partenaire', d: 'Un interlocuteur unique, de la première esquisse à l’installation des équipements.' },
-  { t: 'Une vision globale', d: 'Architecture, ingénierie, travaux et équipement réunis dans une même vision.' },
+const compare = [
+  { t: 'Interlocuteurs', without: 'Architecte, entreprises, fournisseurs et banque : un contact par métier.', with: 'Un interlocuteur unique, de la première esquisse à l’ouverture.' },
+  { t: 'Plans', without: 'Un plan générique, adapté ensuite à l’activité.', with: 'Le plan part de l’acte médical et des règles de votre spécialité.' },
+  { t: 'Équipements', without: 'Choisis après les travaux, réseaux à reprendre.', with: 'Prévus dès les plans : fluides et électricité dimensionnés.' },
+  { t: 'Budget', without: 'Des devis séparés, des écarts découverts en chantier.', with: 'Un budget par lot, validé avant le démarrage des travaux.' },
+  { t: 'Rénovation', without: 'Le cabinet ferme pendant toute la durée des travaux.', with: 'Des travaux phasés en site occupé quand votre activité le permet.' },
+  { t: 'Financement', without: 'Un dossier bancaire à monter seul.', with: 'Un dossier préparé et suivi avec nos banques partenaires.*' },
 ];
+const projectIds = ['cabinet-dentaire-orthodontie', 'radiologie-imagerie-medicale', 'cliniques-blocs-operatoires', 'laboratoire-analyses-medicales'];
+const projects = projectIds.map((id) => specialites.find((s) => s.id === id)).filter((s) => s !== undefined);
 ---
 
 <BaseLayout
@@ -46,26 +51,32 @@ const why = [
   <!-- 1. PARCOURS 3D -->
   <section id="journey" class="journey relative bg-[var(--color-warm)]" aria-label="Du plan à la structure livrée">
     <div class="journey-stage">
-      <div class="journey-fallback" aria-hidden="true">
-        <PlanArt variant="cabinet-dentaire-orthodontie" tone="light" class="h-full w-full" label="" />
+      <div class="journey-frame" data-journey-frame aria-hidden="true">
+        <div class="journey-fallback">
+          <PlanArt variant="cabinet-dentaire-orthodontie" tone="light" class="h-full w-full" label="" />
+        </div>
+        <canvas class="journey-canvas"></canvas>
+        <div class="journey-cartouche">
+          <span>Plan type</span>
+          <strong>Cabinet dentaire</strong>
+          <span>Illustration ESM</span>
+        </div>
       </div>
-      <canvas class="journey-canvas" aria-hidden="true"></canvas>
-      <div class="journey-veil" aria-hidden="true"></div>
 
       <div class="container-lux journey-copy">
         <div data-chapter="0" class="journey-chapter journey-hero is-active">
-          <p lang="en" class="eyebrow text-[var(--color-teal-ink)]">Designing medical spaces.</p>
-          <h1 class="journey-title mt-6">Des espaces conçus pour mieux soigner.</h1>
-          <p class="mt-5 max-w-md text-[1.08rem] leading-relaxed text-[var(--color-muted)]">
-            De la conception architecturale à l’équipement, nous accompagnons vos projets médicaux de A à Z.
-          </p>
-          <div class="mt-8 flex flex-wrap items-center gap-x-7 gap-y-4">
-            <a href="/contact/" class="btn btn-primary">Démarrer mon projet <span class="arrow" aria-hidden="true">→</span></a>
-            <a href="/expertises/" class="link-more">Nos expertises <span>→</span></a>
+          <p class="journey-kicker"><span lang="en">Designing medical spaces.</span><i aria-hidden="true"></i><span>Partout au Maroc</span></p>
+          <h1 class="journey-title">
+            <span class="ln"><span>Des espaces </span></span><span class="ln"><span>conçus pour </span></span><span class="ln"><span>mieux <em>soigner.</em></span></span>
+          </h1>
+          <div class="journey-lede">
+            <p>De la conception architecturale à l’équipement, nous accompagnons vos projets médicaux de A à Z.</p>
+            <div class="journey-actions">
+              <a href="/contact/" class="btn btn-primary">Démarrer mon projet <span class="arrow" aria-hidden="true">→</span></a>
+              <a href="/expertises/" class="link-more">Nos expertises <span>→</span></a>
+            </div>
           </div>
-          <p class="journey-hint mt-10 text-[0.85rem] font-medium text-[var(--color-muted)]" aria-hidden="true">
-            Faites défiler : le plan devient un cabinet <span class="journey-hint-arrow">↓</span>
-          </p>
+          <p class="journey-scroll" aria-hidden="true"><i></i>Faites défiler : le plan devient un cabinet</p>
         </div>
 
         {chapters.map((c) => (
@@ -89,90 +100,73 @@ const why = [
     </div>
   </section>
 
-  <!-- 2. EXPERTISES : panneaux image + services, défilement horizontal épinglé -->
-  <section data-hrail class="hrail bg-[var(--color-navy)] text-white" aria-labelledby="expertises-title">
-    <div class="hrail-inner">
-      <p class="hrail-ghost" aria-hidden="true" data-hrail-ghost>Concevoir · Construire · Équiper · Accompagner ·</p>
-      <ul data-hrail-track class="hrail-track" aria-label="Nos quatre expertises">
-        <li class="hrail-intro">
+  <!-- 2. EXPERTISES : bandes d'images jointives qui s'élargissent -->
+  <section data-strips class="strips bg-[var(--color-navy)] text-white" aria-labelledby="expertises-title">
+    <div class="strips-inner">
+      <div class="container-lux strips-head">
+        <div>
           <p class="eyebrow text-[var(--color-gold)]">Expertises</p>
-          <h2 id="expertises-title" class="mt-6 text-[clamp(2.6rem,1.6rem+3.6vw,5rem)] font-bold leading-[1.02] tracking-[-0.035em] text-white">Quatre expertises,<br />un seul partenaire.</h2>
-          <p class="mt-6 max-w-sm text-[1.08rem] leading-relaxed text-white/70">Du premier plan à l’ouverture, une seule équipe tient le fil.</p>
-          <a href="/expertises/" class="link-more mt-8 text-white">Toutes nos expertises <span>→</span></a>
-          <p class="hrail-hint mt-14 hidden text-[0.85rem] text-white/50 lg:block" aria-hidden="true">Continuez à défiler →</p>
-        </li>
-        {expertises.map((e) => (
-          <li class="hrail-panel" data-hrail-panel>
-            <article class="hrail-card" aria-labelledby={`exp-${e.id}`}>
-              <div class="hrail-media" data-hrail-media aria-hidden="true">
-                <div data-hrail-img class="hrail-img">
-                  <Visual visual={e.visual} sizes="(min-width:1024px) 46vw, 88vw" widths={[640, 1000, 1400]} />
-                </div>
-                <span class="hrail-num">{e.num}</span>
-              </div>
-              <div class="hrail-body" data-hrail-body>
-                <h3 id={`exp-${e.id}`} class="hrail-title"><a href={`/expertises/#${e.id}`}>{e.title}</a></h3>
-                <p class="hrail-text">{e.text}</p>
-                <ul class="hrail-services" aria-label={`Services : ${e.title}`}>
-                  {e.services.map((id) => (
-                    <li><a href={servicePath(id)}><span>{serviceName.get(id) ?? id}</span><span aria-hidden="true">→</span></a></li>
-                  ))}
-                </ul>
-              </div>
-            </article>
+          <h2 id="expertises-title" class="mt-5 text-white">Quatre expertises, un seul partenaire.</h2>
+        </div>
+        <a href="/expertises/" class="link-more text-white">Toutes nos expertises <span>→</span></a>
+      </div>
+      <ul class="strips-row" aria-label="Nos quatre expertises">
+        {expertises.map((e, i) => (
+          <li class:list={['strip', i === 0 && 'is-open']} data-strip>
+            <div class="strip-media" aria-hidden="true">
+              <Visual visual={e.visual} sizes="(min-width:1024px) 60vw, 100vw" widths={[640, 1000, 1400]} />
+            </div>
+            <div class="strip-shade" aria-hidden="true"></div>
+            <p class="strip-tab" aria-hidden="true"><span>{e.num}</span>{e.title}</p>
+            <div class="strip-body">
+              <span class="strip-num" aria-hidden="true">{e.num}</span>
+              <h3 class="strip-title"><a href={`/expertises/#${e.id}`}>{e.title}</a></h3>
+              <p class="strip-text">{e.text}</p>
+              <ul class="strip-services" aria-label={`Services : ${e.title}`}>
+                {e.services.map((id) => (
+                  <li><a href={servicePath(id)}><span>{serviceName.get(id) ?? id}</span><span aria-hidden="true">→</span></a></li>
+                ))}
+              </ul>
+            </div>
           </li>
         ))}
       </ul>
-      <ol class="hrail-steps" aria-hidden="true">
-        {expertises.map((e) => <li data-hrail-step><span>{e.num}</span>{e.title}<i></i></li>)}
-      </ol>
     </div>
   </section>
 
-  <!-- 3. MANIFESTE : phrase avec images insérées, piliers dessinés au trait -->
-  <section class="statement bg-white" aria-labelledby="why-title">
-    <div class="container-lux py-28 lg:py-40">
-      <p class="eyebrow text-[var(--color-teal-ink)]">Pourquoi ESM</p>
-      <h2 id="why-title" data-words class="statement-text mt-8">
-        Le regard d’un architecte, <span class="inline-media" data-inline-media aria-hidden="true"><PlanArt variant="cabinet-dentaire-orthodontie" tone="light" detail="simple" class="h-full w-full" label="" /></span> la rigueur d’un ingénieur <span class="inline-media" data-inline-media aria-hidden="true"><Photo name="chantierAmenagement" alt="" sizes="160px" widths={[160, 320]} class="h-full w-full object-cover" /></span> et un seul interlocuteur, de la première esquisse <span class="inline-media" data-inline-media aria-hidden="true"><Photo name="cabinetDentaire3" alt="" sizes="160px" widths={[160, 320]} class="h-full w-full object-cover" /></span> à l’ouverture de votre structure.
-      </h2>
-      <ul class="pillars mt-20 grid gap-14 md:grid-cols-3 md:gap-10">
-        {why.map((w, i) => (
-          <li class="pillar" data-pillar>
-            <svg class="pillar-art" viewBox="0 0 160 96" fill="none" aria-hidden="true">
-              {i === 0 && (
-                <>
-                  <path pathLength="1" d="M10 10H150V86H10Z" />
-                  <path pathLength="1" d="M70 10V48M70 66V86" />
-                  <path pathLength="1" d="M70 48A18 18 0 0 1 88 66" class="thin" />
-                  <path pathLength="1" d="M98 38h34a8 8 0 0 1 0 16h-34a8 8 0 0 1 0-16Z" class="teal" />
-                  <path pathLength="1" d="M22 72C44 72 52 46 98 46" class="gold" />
-                </>
-              )}
-              {i === 1 && (
-                <>
-                  <path pathLength="1" d="M10 16C62 16 70 48 112 48" />
-                  <path pathLength="1" d="M10 48H112" />
-                  <path pathLength="1" d="M10 80C62 80 70 48 112 48" />
-                  <path pathLength="1" d="M112 48a9 9 0 1 0 18 0a9 9 0 1 0 -18 0Z" class="teal" />
-                  <path pathLength="1" d="M130 48H152M144 41l8 7l-8 7" class="gold" />
-                </>
-              )}
-              {i === 2 && (
-                <>
-                  <path pathLength="1" d="M80 12L140 32L80 52L20 32Z" class="teal" />
-                  <path pathLength="1" d="M20 48L80 68L140 48" />
-                  <path pathLength="1" d="M20 64L80 84L140 64" />
-                  <path pathLength="1" d="M20 32V64M140 32V64M80 52V84" class="thin" />
-                </>
-              )}
-            </svg>
-            <span class="pillar-num">0{i + 1}</span>
-            <h3 class="mt-3 text-[1.375rem]">{w.t}</h3>
-            <p class="mt-3 max-w-sm text-[1rem] leading-relaxed text-[var(--color-muted)]">{w.d}</p>
-          </li>
-        ))}
-      </ul>
+  <!-- 3. POURQUOI ESM : comparatif -->
+  <section class="bg-white py-24 lg:py-32" aria-labelledby="why-title">
+    <div class="container-lux grid gap-12 lg:grid-cols-12 lg:gap-16">
+      <div class="lg:col-span-4">
+        <div class="lg:sticky lg:top-32">
+          <p class="eyebrow text-[var(--color-teal-ink)]">Pourquoi ESM</p>
+          <h2 id="why-title" class="mt-6">Un seul interlocuteur change tout.</h2>
+          <p class="mt-5 max-w-sm text-[1.05rem] leading-relaxed text-[var(--color-muted)]">Le regard d’un architecte, la rigueur d’un ingénieur, et une équipe qui tient le fil du premier plan à l’ouverture.</p>
+          <a href="/contact/" class="btn btn-primary mt-8">Parler de mon projet <span class="arrow" aria-hidden="true">→</span></a>
+        </div>
+      </div>
+      <div class="lg:col-span-8">
+        <table class="compare">
+          <caption class="sr-only">Un projet médical mené avec plusieurs prestataires, ou avec Euro Space Medical</caption>
+          <thead>
+            <tr>
+              <th scope="col"><span class="sr-only">Sujet</span></th>
+              <th scope="col">Plusieurs prestataires</th>
+              <th scope="col" class="compare-esm">Avec ESM</th>
+            </tr>
+          </thead>
+          <tbody>
+            {compare.map((r, i) => (
+              <tr data-reveal style={`--i:${i % 3}`}>
+                <th scope="row">{r.t}</th>
+                <td class="compare-without" data-label="Plusieurs prestataires">{r.without}</td>
+                <td class="compare-with" data-label="Avec ESM">{r.with}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <p class="mt-5 text-[0.85rem] text-[var(--color-muted)]">* Al Barid Bank et Bank Al Yousr. {BANK_DISCLAIMER}</p>
+      </div>
     </div>
   </section>
 
@@ -187,43 +181,53 @@ const why = [
     </div>
   </div>
 
-  <!-- 4. SPÉCIALITÉS : index typographique + plan collant -->
-  <section class="bg-[var(--color-warm)]" aria-labelledby="spec-title">
-    <div class="container-lux py-24 lg:py-32">
-      <SpecIndex items={specialites.map((s) => ({ id: s.id, short: s.data.short }))}>
-        <p class="eyebrow text-[var(--color-teal-ink)]">Spécialités</p>
-        <h2 id="spec-title" class="mt-6">Chaque spécialité a ses règles.</h2>
-        <p class="mt-5 max-w-md text-[1.05rem] leading-relaxed text-[var(--color-muted)]">Quatorze disciplines, chacune avec son plan type, ses réseaux et ses autorisations.</p>
-      </SpecIndex>
+  <!-- 4. SPÉCIALITÉS : le plan d'un centre médical -->
+  <section class="bg-[var(--color-warm)] pb-24 pt-20 lg:pb-32 lg:pt-28" aria-labelledby="spec-title">
+    <div class="container-lux">
+      <SectionHeading eyebrow="Spécialités" title="Chaque spécialité a ses règles." id="spec-title" intro="Quatorze disciplines, chacune avec son plan type, ses réseaux et ses autorisations. Ouvrez une pièce." link={{ href: '/specialites/', label: 'Toutes les spécialités' }} />
+      <div class="mt-12">
+        <SpecPlan items={specialites.map((s) => ({ id: s.id, short: s.data.short, contrainte: s.data.contraintes[0] ?? '' }))} />
+      </div>
     </div>
   </section>
 
   <!-- 5. RÉALISATIONS -->
-  <section class="bg-white py-24 lg:py-32" aria-labelledby="real-title">
+  <section class="bg-white pt-24 lg:pt-32" aria-labelledby="real-title">
     <div class="container-lux">
-      <SectionHeading eyebrow="Réalisations" title="Des espaces pensés pour soigner." id="real-title" link={realisations.length > 0 ? { href: '/realisations/', label: 'Toutes les réalisations' } : undefined} />
-      {realisations.length > 0 && (
-        <div class="mt-14 grid gap-x-8 gap-y-14 md:grid-cols-2 lg:grid-cols-3">
-          {realisations.slice(0, 3).map((r, i) => <RealisationCard entry={r} i={i} />)}
-        </div>
+      {realisations.length > 0 ? (
+        <>
+          <SectionHeading eyebrow="Réalisations" title="Des espaces pensés pour soigner." id="real-title" link={{ href: '/realisations/', label: 'Toutes les réalisations' }} />
+          <div class="mt-14 grid gap-x-8 gap-y-14 pb-24 md:grid-cols-2 lg:grid-cols-3 lg:pb-32">
+            {realisations.slice(0, 3).map((r, i) => <RealisationCard entry={r} i={i} />)}
+          </div>
+        </>
+      ) : (
+        <SectionHeading eyebrow="Réalisations" title="Les projets que nous menons." id="real-title" intro="Nos études de cas arrivent. En attendant, voici les projets types que nous concevons, construisons et équipons." />
       )}
     </div>
     {realisations.length === 0 && (
-      <div class="mt-14">
-        <figure class="reveal-frame" data-clip-reveal>
-          <div class="reveal-media">
-            <Photo name="cabinetDentaire" sizes="100vw" widths={[800, 1280, 1920]} class="h-full w-full object-cover" />
-          </div>
-          <div class="reveal-overlay">
-            <div class="container-lux">
-              <h3 class="max-w-xl text-[clamp(1.8rem,1.2rem+2vw,3rem)] font-bold leading-[1.05] text-white">Nos études de cas arrivent.</h3>
-              <p class="mt-4 max-w-lg text-[1.05rem] leading-relaxed text-white/85">Chaque projet sera présenté avec sa spécialité, sa ville et ses photos avant et après. En rendez-vous, nous vous présentons des projets comparables au vôtre.</p>
-              <a href="/contact/" class="btn btn-primary mt-8 !bg-white !text-[var(--color-navy)]">Parler de mon projet <span class="arrow" aria-hidden="true">→</span></a>
-            </div>
-          </div>
-          <figcaption class="container-lux mt-3 text-[0.8rem] text-[var(--color-muted)]">Image d’illustration, ne représente pas un projet Euro Space Medical</figcaption>
-        </figure>
-      </div>
+      <>
+        <ol class="container-lux stack" aria-label="Projets types">
+          {projects.map((s, i) => (
+            <li class="stack-item" data-stack style={`--i:${i}`}>
+              <article class="stack-card" aria-labelledby={`proj-${s.id}`}>
+                <div class="stack-media" aria-hidden="true">
+                  <Visual visual={specialiteVisual[s.id] ?? { drawing: s.id, label: 'Plan type' }} sizes="(min-width:1024px) 50vw, 100vw" widths={[640, 1000, 1400]} />
+                </div>
+                <div class="stack-body">
+                  <p class="stack-kicker">Projet type <span>{String(i + 1).padStart(2, '0')}</span> / {String(projects.length).padStart(2, '0')}</p>
+                  <h3 id={`proj-${s.id}`} class="stack-title"><a href={specialitePath(s.id)}>{s.data.short}</a></h3>
+                  <ul class="stack-list">
+                    {s.data.offre.slice(0, 4).map((o) => <li>{o}</li>)}
+                  </ul>
+                  <span class="link-more mt-8" aria-hidden="true">Voir la spécialité <span>→</span></span>
+                </div>
+              </article>
+            </li>
+          ))}
+        </ol>
+        <p class="container-lux pb-24 pt-4 text-[0.8rem] text-[var(--color-muted)] lg:pb-32">Images d’illustration et plans types : ils ne représentent pas des projets Euro Space Medical.</p>
+      </>
     )}
   </section>
 

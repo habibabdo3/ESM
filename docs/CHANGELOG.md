@@ -2,6 +2,26 @@
 
 > Ajouter chaque modification **en haut**, datée, avec : ce qui a changé, pourquoi, fichiers clés, et l'état des vérifications.
 
+## 2026-11-08 — v1.5.0 · Héros en planche, bandes d'expertises, comparatif, plan des spécialités, projets types
+
+- **Héros** : titre éditorial (lignes qui montent, « soigner » souligné or), chapô + actions sous un filet ; la
+  maquette 3D est une planche encadrée avec cartouche à côté du titre (sous le titre sur mobile) et s'étire en plein
+  écran au premier défilement ; le titre disparaît avant que la planche ne s'ouvre (plus aucun chevauchement).
+- **Expertises** : quatre bandes d'images jointives ; la bande active s'élargit (défilement épinglé ou survol) et
+  affiche numéro, texte et services liés ; mobile : panneaux empilés.
+- **Pourquoi ESM** : tableau comparatif « Plusieurs prestataires / Avec ESM » (6 lignes, colonne ESM surlignée qui se
+  remplit au défilement, mention banques + « Sous réserve d'acceptation du dossier par la banque. »).
+- **Spécialités (accueil)** : plan d'un centre médical, une pièce par spécialité (murs navy, portes, trame), pièce
+  active teintée, cartouche avec la contrainte principale (`SpecPlan.astro`). `/specialites/` garde `SpecIndex`.
+- **Réalisations** : tant qu'aucune étude de cas n'est publiée, 4 projets types en cartes qui s'empilent (photo ou plan
+  type, offre réelle de la spécialité), légende « Images d'illustration et plans types ».
+- **Appareils modestes** : WebGL désactivé si économiseur de données ou moins de 2 Go ; mode `gl-lite` (sans ombres
+  ni anticrénelage, densité 1×, 30 i/s) si moins de 4 Go, 4 cœurs ou moins, ou réseau 2G/3G ; contexte de détection
+  libéré aussitôt ; repli automatique sur le plan statique si le navigateur perd le contexte WebGL.
+- Retirés : manifeste mot à mot, images insérées, piliers dessinés, image révélée.
+- Vérifications : `astro check` 0/0/0, `npm run verify` sans erreur bloquante, axe-core 0 violation, captures 1440 et
+  390 px (modes complet et allégé) sans erreur console.
+
 ## 2026-11-08 — v1.4.0 · Maquette 3D dessinée, titre hors de la scène, sections plus riches
 
 - **Maquette 3D** (`clinic-scene.ts`) : plan coté d'architecte (poché navy, cotes 16,00 × 10,00 m, débattements de

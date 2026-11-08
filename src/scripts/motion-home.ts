@@ -1,21 +1,23 @@
 /**
  * Orchestration du parcours immersif de l'accueil (GSAP + ScrollTrigger, comme GsapService du SDK).
- * - #journey : scène 3D épinglée ; la progression du défilement pilote la maquette, la légende et le sommaire.
- * - [data-hrail] : panneaux d'expertise en défilement horizontal épinglé (desktop), mot géant en parallaxe,
- *   image qui s'ouvre, contenu qui monte, étapes actives ; défilement natif avec accroche sur mobile.
- * - [data-words] : phrase qui s'allume mot à mot ; [data-inline-media] : images insérées qui s'ouvrent.
- * - [data-pillar] : pictogrammes dessinés au trait ; [data-clip-reveal] : image dont le cadre s'ouvre.
+ * - #journey : scène 3D épinglée ; la planche encadrée s'étire en plein écran, puis la progression pilote la maquette,
+ *   la légende et le sommaire. Appareils modestes (classe `gl-lite`) : scène allégée (sans ombres, 30 i/s, 1×).
+ * - [data-strips] : bandes d'expertise ; la bande active s'élargit au défilement (épinglé, desktop) ou au survol.
+ * - [data-stack] : projets types en cartes qui s'empilent, la carte recouverte recule légèrement.
  * - [data-drag-rail] : rail glissable à la souris, flèches précédent/suivant (pages hub).
- * L'index des spécialités a son propre script (SpecIndex.astro).
- * Sans WebGL ou avec « réduire les animations » : tout reste lisible, rien n'est épinglé.
+ * Les spécialités (SpecPlan.astro) et l'index des spécialités (SpecIndex.astro) ont leur propre script.
+ * Sans WebGL, appareil trop modeste ou « réduire les animations » : tout reste lisible, rien n'est épinglé.
  */
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
+const root = document.documentElement;
 const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-const immersive = document.documentElement.classList.contains('webgl') && !reduce;
+const immersive = root.classList.contains('webgl') && !reduce;
+const lite = root.classList.contains('gl-lite');
+const clamp = (x: number, a = 0, b = 1) => Math.min(b, Math.max(a, x));
 
 /* ---------- 1. Parcours 3D ---------- */
 const journey = document.getElementById('journey');
@@ -23,9 +25,11 @@ if (journey && immersive) {
   const chapters = [...journey.querySelectorAll<HTMLElement>('[data-chapter]')];
   const navButtons = [...journey.querySelectorAll<HTMLButtonElement>('[data-goto]')];
   const bar = journey.querySelector<HTMLElement>('[data-journey-bar]');
+  const frame = journey.querySelector<HTMLElement>('[data-journey-frame]');
   const canvas = journey.querySelector<HTMLCanvasElement>('canvas');
   const stops = chapters.map((c) => Number(c.dataset.chapter));
-  let scene: { setProgress(p: number): void } | null = null;
+  const narrow = matchMedia('(max-width: 767px)');
+  let scene: { setProgress(p: number): void; dispose(): void } | null = null;
   let current = -1;
 
   const setChapter = (p: number) => {
@@ -34,7 +38,6 @@ if (journey && immersive) {
     if (idx === current) return;
     current = idx;
     chapters.forEach((c, i) => c.classList.toggle('is-active', i === idx));
-    // Le sommaire ne liste que les 4 étapes (le titre est l'étape 0)
     navButtons.forEach((b, i) => {
       const on = i === idx - 1;
       b.classList.toggle('is-active', on);
@@ -43,7 +46,15 @@ if (journey && immersive) {
     });
     journey.classList.toggle('past-hero', idx > 0);
   };
-  setChapter(0);
+
+  // Planche encadrée → plein écran (mêmes valeurs de départ que le CSS)
+  const setFrame = (p: number) => {
+    if (!frame) return;
+    const k = 1 - clamp(p / 0.09);
+    const e = k * k * (3 - 2 * k);
+    const [t, r, b, l] = narrow.matches ? [61, 4, 11, 4] : [13, 3, 9, 47];
+    frame.style.clipPath = `inset(${t * e}% ${r * e}% ${b * e}% ${l * e}% round ${8 * e}px)`;
+  };
 
   const st = ScrollTrigger.create({
     trigger: journey,
@@ -53,11 +64,15 @@ if (journey && immersive) {
     onUpdate: (self) => {
       scene?.setProgress(self.progress);
       setChapter(self.progress);
+      setFrame(self.progress);
+      journey.classList.toggle('leaving-hero', self.progress > 0.02);
       if (bar) bar.style.transform = `scaleX(${self.progress})`;
     },
   });
+  setChapter(st.progress);
+  setFrame(st.progress);
+  narrow.addEventListener('change', () => setFrame(st.progress));
 
-  // Sommaire : chaque étape renvoie au moment du parcours où elle commence
   navButtons.forEach((b) =>
     b.addEventListener('click', () => {
       const at = Number(b.dataset.goto) + 0.04;
@@ -65,164 +80,80 @@ if (journey && immersive) {
     }),
   );
 
+  // Repli propre si le navigateur retire le contexte WebGL (mémoire saturée)
+  const fallback = () => {
+    scene?.dispose();
+    scene = null;
+    root.classList.remove('webgl');
+    journey.classList.remove('scene-ready');
+    if (frame) frame.style.clipPath = '';
+    ScrollTrigger.refresh();
+  };
+  canvas?.addEventListener('webglcontextlost', (e) => {
+    e.preventDefault();
+    fallback();
+  });
+
   // La scène (three.js) se charge après le premier affichage : le titre reste l'élément principal.
   const load = () =>
     import('./clinic-scene').then(({ mountClinicScene }) => {
-      if (!canvas) return;
+      if (!canvas || !root.classList.contains('webgl')) return;
       try {
-        scene = mountClinicScene(canvas);
+        scene = mountClinicScene(canvas, lite ? { lite: true, targetFps: 30, pixelRatio: 1 } : {});
         scene.setProgress(st.progress);
         journey.classList.add('scene-ready');
       } catch {
-        document.documentElement.classList.remove('webgl');
+        fallback();
       }
     });
-  if ('requestIdleCallback' in window) (window as any).requestIdleCallback(load, { timeout: 1200 });
-  else setTimeout(load, 300);
+  if ('requestIdleCallback' in window) (window as any).requestIdleCallback(load, { timeout: 1500 });
+  else setTimeout(load, 400);
 }
 
-/* ---------- 2. Expertises : défilement horizontal épinglé ---------- */
-gsap.matchMedia().add('(min-width: 1024px) and (prefers-reduced-motion: no-preference)', () => {
-  document.querySelectorAll<HTMLElement>('[data-hrail]').forEach((section) => {
-    const track = section.querySelector<HTMLElement>('[data-hrail-track]');
-    if (!track) return;
-    const ghost = section.querySelector<HTMLElement>('[data-hrail-ghost]');
-    const panels = [...section.querySelectorAll<HTMLElement>('[data-hrail-panel]')];
-    const steps = [...section.querySelectorAll<HTMLElement>('[data-hrail-step]')];
+/* ---------- 2. Expertises : bandes qui s'élargissent ---------- */
+document.querySelectorAll<HTMLElement>('[data-strips]').forEach((section) => {
+  const strips = [...section.querySelectorAll<HTMLElement>('[data-strip]')];
+  let current = 0;
+  const open = (i: number) => {
+    if (i === current) return;
+    current = i;
+    strips.forEach((s, k) => s.classList.toggle('is-open', k === i));
+  };
+  strips.forEach((s, i) => {
+    s.addEventListener('pointerenter', (e) => (e as PointerEvent).pointerType === 'mouse' && open(i));
+    s.addEventListener('focusin', () => open(i));
+  });
+  gsap.matchMedia().add('(min-width: 1024px) and (prefers-reduced-motion: no-preference)', () => {
     section.classList.add('is-pinned');
-    const distance = () => track.scrollWidth - window.innerWidth;
-
-    const setStep = () => {
-      const mid = window.innerWidth * 0.55;
-      let idx = -1;
-      panels.forEach((p, i) => p.getBoundingClientRect().left < mid && (idx = i));
-      steps.forEach((s, i) => s.classList.toggle('is-active', i === idx));
-    };
-
-    const tween = gsap.to(track, {
-      x: () => -distance(),
-      ease: 'none',
-      scrollTrigger: {
-        trigger: section,
-        start: 'top top',
-        end: () => `+=${distance()}`,
-        pin: true,
-        scrub: 0.8,
-        invalidateOnRefresh: true,
-        onUpdate: setStep,
-      },
+    ScrollTrigger.create({
+      trigger: section,
+      start: 'top top',
+      end: () => `+=${window.innerHeight * 2.2}`,
+      pin: true,
+      onUpdate: (self) => open(Math.min(strips.length - 1, Math.floor(self.progress * strips.length))),
     });
-
-    // Mot géant : arrière-plan plus lent que les panneaux
-    if (ghost) {
-      gsap.to(ghost, {
-        xPercent: -35,
-        ease: 'none',
-        scrollTrigger: { trigger: section, start: 'top top', end: () => `+=${distance()}`, scrub: 1 },
-      });
-    }
-
-    panels.forEach((panel) => {
-      const media = panel.querySelector<HTMLElement>('[data-hrail-media]');
-      const img = panel.querySelector<HTMLElement>('[data-hrail-img]');
-      const body = panel.querySelector<HTMLElement>('[data-hrail-body]');
-      const enter = { trigger: panel, containerAnimation: tween, start: 'left 100%', end: 'left 40%', scrub: true };
-      if (media) gsap.fromTo(media, { clipPath: 'inset(0% 0% 0% 100%)' }, { clipPath: 'inset(0% 0% 0% 0%)', ease: 'none', scrollTrigger: enter });
-      if (img) {
-        gsap.fromTo(img, { xPercent: -8, scale: 1.12 }, {
-          xPercent: 8,
-          scale: 1,
-          ease: 'none',
-          scrollTrigger: { trigger: panel, containerAnimation: tween, start: 'left right', end: 'right left', scrub: true },
-        });
-      }
-      if (body) {
-        gsap.fromTo(body.children, { y: 48, opacity: 0 }, {
-          y: 0,
-          opacity: 1,
-          stagger: 0.12,
-          ease: 'none',
-          scrollTrigger: { trigger: panel, containerAnimation: tween, start: 'left 85%', end: 'left 35%', scrub: true },
-        });
-      }
-    });
-
-    return () => {
-      section.classList.remove('is-pinned');
-      steps.forEach((s) => s.classList.remove('is-active'));
-    };
+    return () => section.classList.remove('is-pinned');
   });
 });
 
-/* ---------- 3. Manifeste : mots qui s'allument, images insérées qui s'ouvrent ---------- */
-document.querySelectorAll<HTMLElement>('[data-words]').forEach((el) => {
-  if (reduce) return;
-  el.setAttribute('aria-label', (el.textContent ?? '').replace(/\s+/g, ' ').replace(/\s+([,.])/g, '$1').trim());
-  // Découpe uniquement les nœuds texte : les images insérées restent en place
-  const words: HTMLElement[] = [];
-  [...el.childNodes].forEach((node) => {
-    if (node.nodeType !== Node.TEXT_NODE) return;
-    const parts = (node.textContent ?? '').split(/(\s+)/);
-    const frag = document.createDocumentFragment();
-    parts.forEach((part) => {
-      if (!part) return;
-      if (/^\s+$/.test(part)) frag.append(document.createTextNode(' '));
-      else {
-        const w = document.createElement('span');
-        w.className = 'w';
-        w.setAttribute('aria-hidden', 'true');
-        w.textContent = part;
-        frag.append(w);
-        words.push(w);
-      }
-    });
-    node.replaceWith(frag);
-  });
-  // Gris de départ ≥ 3:1 sur blanc (texte large, WCAG AA) même au milieu de l'animation
-  gsap.fromTo(words, { color: '#7D8A95' }, {
-    color: '#142C43',
-    stagger: 0.08,
-    ease: 'none',
-    scrollTrigger: { trigger: el, start: 'top 80%', end: 'bottom 45%', scrub: true },
-  });
-  el.querySelectorAll<HTMLElement>('[data-inline-media]').forEach((m) => {
-    gsap.fromTo(m, { clipPath: 'inset(0% 50% 0% 50% round 999px)' }, {
-      clipPath: 'inset(0% 0% 0% 0% round 999px)',
-      ease: 'none',
-      scrollTrigger: { trigger: m, start: 'top 85%', end: 'top 55%', scrub: true },
-    });
-  });
-});
-
-/* ---------- 4. Piliers dessinés au trait ---------- */
+/* ---------- 3. Projets types : cartes qui s'empilent ---------- */
 if (!reduce) {
-  document.querySelectorAll<HTMLElement>('[data-pillar]').forEach((pillar) => {
-    const paths = pillar.querySelectorAll('path');
-    gsap.fromTo(paths, { strokeDashoffset: 1 }, {
-      strokeDashoffset: 0,
-      stagger: 0.15,
+  const items = [...document.querySelectorAll<HTMLElement>('[data-stack]')];
+  items.forEach((item, i) => {
+    const next = items[i + 1];
+    const card = item.firstElementChild as HTMLElement | null;
+    if (!next || !card) return;
+    gsap.to(card, {
+      scale: 0.93,
+      opacity: 0.55,
       ease: 'none',
-      scrollTrigger: { trigger: pillar, start: 'top 88%', end: 'top 50%', scrub: true },
+      transformOrigin: '50% 0%',
+      scrollTrigger: { trigger: next, start: 'top bottom', end: 'top 20%', scrub: true },
     });
   });
 }
 
-/* ---------- 5. Image révélée (le cadre s'ouvre au défilement) ---------- */
-if (!reduce) {
-  document.querySelectorAll<HTMLElement>('[data-clip-reveal]').forEach((fig) => {
-    const media = fig.querySelector<HTMLElement>('.reveal-media');
-    if (!media) return;
-    gsap.fromTo(media, { clipPath: 'inset(12% 14% 12% 14%)' }, {
-      clipPath: 'inset(0% 0% 0% 0%)',
-      ease: 'none',
-      scrollTrigger: { trigger: fig, start: 'top 85%', end: 'top 25%', scrub: true },
-    });
-    const img = media.querySelector('img');
-    if (img) gsap.fromTo(img, { scale: 1.15 }, { scale: 1, ease: 'none', scrollTrigger: { trigger: fig, start: 'top bottom', end: 'bottom top', scrub: true } });
-  });
-}
-
-/* ---------- 6. Rails glissables (pages hub) ---------- */
+/* ---------- 4. Rails glissables (pages hub) ---------- */
 document.querySelectorAll<HTMLElement>('[data-drag-rail]').forEach((wrap) => {
   const rail = wrap.querySelector<HTMLElement>('[data-rail]');
   if (!rail) return;
@@ -238,7 +169,6 @@ document.querySelectorAll<HTMLElement>('[data-drag-rail]').forEach((wrap) => {
   rail.addEventListener('scroll', update, { passive: true });
   update();
 
-  // Glisser à la souris (le doigt utilise le défilement natif)
   let down = false;
   let startX = 0;
   let startLeft = 0;
@@ -261,7 +191,6 @@ document.querySelectorAll<HTMLElement>('[data-drag-rail]').forEach((wrap) => {
     down = false;
     rail.classList.remove('is-dragging');
   });
-  // Un glissé ne doit pas ouvrir la carte sous le pointeur
   rail.addEventListener('click', (e) => {
     if (moved) {
       e.preventDefault();
