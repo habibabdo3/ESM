@@ -6,7 +6,6 @@
  *   écran (même intro, « Retour au site ») ; les étapes relancent la lecture dans la planche ; bouton pause (WCAG 2.2.2). Lecture suspendue hors écran ou onglet caché ; scène chargée
  *   à l'approche de l'écran, libérée quand on s'en éloigne sur appareil modeste (`gl-lite`).
  * - [data-strip] : desktop, la bande survolée s'élargit (première ouverte) ; mobile, accordéon au toucher.
- * - [data-cases] : la photo plein écran change quand un projet type passe au centre de l'écran.
  * Le plan des spécialités (SpecPlan.astro) a son propre script.
  */
 const root = document.documentElement;
@@ -261,36 +260,4 @@ document.querySelectorAll<HTMLElement>('[data-strips]').forEach((section) => {
       if (!open && (e as MouseEvent).detail === 0) s.querySelector<HTMLElement>('.strip-title a')?.focus({ preventScroll: true });
     });
   });
-});
-
-/* ---------- 3. Réalisations : la photo plein écran change au fil du défilement ---------- */
-document.querySelectorAll<HTMLElement>('[data-cases]').forEach((section) => {
-  const panels = [...section.querySelectorAll<HTMLElement>('[data-case]')];
-  const media = [...section.querySelectorAll<HTMLElement>('[data-case-media]')];
-  const tabs = [...section.querySelectorAll<HTMLElement>('[data-case-tab]')];
-  let current = 0;
-  const show = (i: number) => {
-    if (i < 0 || i === current) return;
-    media.forEach((m, k) => {
-      m.classList.toggle('is-prev', k === current);
-      m.classList.toggle('is-active', k === i);
-    });
-    tabs.forEach((t, k) => {
-      t.classList.toggle('is-active', k === i);
-      if (k === i) t.setAttribute('aria-current', 'true');
-      else t.removeAttribute('aria-current');
-    });
-    current = i;
-  };
-  const io = new IntersectionObserver(
-    (entries) =>
-      entries.forEach((e) => {
-        if (!e.isIntersecting) return;
-        const el = e.target as HTMLElement;
-        panels.forEach((p) => p.classList.toggle('is-active', p === el));
-        show(Number(el.dataset.case));
-      }),
-    { rootMargin: '-45% 0px -45% 0px' },
-  );
-  panels.forEach((p) => io.observe(p));
 });

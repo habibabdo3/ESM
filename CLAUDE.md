@@ -94,7 +94,7 @@ src/
                           ProcessSteps, Faq (<details>), CtaBand, QuoteForm, RelatedLinks, Breadcrumbs, MoroccoMap,
                           RealisationCard, BeforeAfter, Lightbox, StickyCta (WhatsApp mobile fixe), CookieBanner, Todo, Logo, Icon
   scripts/motion.ts       IntersectionObserver (révélations, compteurs)
-  scripts/motion-home.ts  accueil : lecture auto de la maquette, bandes d'expertises, réalisations (IntersectionObserver, sans GSAP)
+  scripts/motion-home.ts  accueil : lecture auto de la maquette (intro, vitrine, replay) et bandes d'expertises (sans GSAP)
   scripts/clinic-scene.ts scène three.js de la maquette (plan → murs → coupe équipée), chargée à la demande
   styles/global.css       design tokens + composants + animations
   pages/                  voir §5
@@ -153,9 +153,8 @@ header/footer → tous les services et spécialités ; fil d'Ariane partout.
   GSAP), lecture suspendue hors écran. Héros = titre + **brief en une phrase**
   (formulaire GET → /contact/ pré-rempli). Spécialités : plan d'un centre médical (`SpecPlan`), clic = panneau
   « page virtuelle » qui affiche l'URL réelle de la spécialité (pages statiques conservées pour le SEO). Expertises : desktop, première
-  bande ouverte et survol (choix client) ; mobile, accordéon replié au toucher. Réalisations : photos plein écran collantes qui changent
-  via IntersectionObserver, texte minimal posé sur la photo (numéro, spécialité, 3 contraintes, actions),
-  barre fine « Réalisations · Projets types » + index cliquable (pas d'écran d'introduction, choix client). Survols 200–400 ms ; `transform`/`opacity`/
+  bande ouverte et survol (choix client) ; mobile, accordéon replié au toucher. Réalisations : **section retirée de l'accueil**
+  (choix client, 2026-11-08) ; seule la grille des vraies études de cas s'affiche quand il y en a. Survols 200–400 ms ; `transform`/`opacity`/
   `clip-path`, seule exception `flex-grow` des bandes d'expertises. Contraste AA conservé pendant les animations.
   **Appareils** (script du `<head>`) : pas de 3D si « réduire les animations », économiseur de données ou < 2 Go ;
   classe `gl-lite` (sans ombres, densité ≤ 1,75×, 30 i/s) si < 4 Go, ≤ 4 cœurs ou 2G/3G ; densité ≤ 2× sinon ;

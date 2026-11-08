@@ -6,9 +6,8 @@
  * 2. Expertises — quatre bandes d'images repliées ; un clic ouvre la bande (desktop) ou l'accordéon (mobile).
  * 3. Pourquoi ESM — comparatif « Plusieurs prestataires / Avec ESM ».
  * 4. Spécialités — plan d'un centre médical ; chaque pièce ouvre un panneau (page virtuelle, URL réelle conservée).
- * 5. Réalisations — photos plein écran (collantes) qui changent au fil du défilement ; barre fine en haut
- *    (« Réalisations · Projets types » + index cliquable des 4 projets) ; sur chaque photo, l'essentiel : numéro,
- *    spécialité, trois contraintes clés, actions.
+ * 5. Réalisations — section retirée de l'accueil (choix client) ; elle réapparaît seulement quand de vraies
+ *    études de cas sont publiées.
  * Sans WebGL, appareil peu puissant ou « réduire les animations » : plan statique, même contenu.
  */
 import BaseLayout from '@/layouts/BaseLayout.astro';
@@ -19,8 +18,8 @@ import SectionHeading from '@/components/SectionHeading.astro';
 import CtaBand from '@/components/CtaBand.astro';
 import RealisationCard from '@/components/RealisationCard.astro';
 import { site, BANK_DISCLAIMER, whatsappLink } from '@/config/site';
-import { getRealisations, getServices, getSpecialites, servicePath, specialitePath } from '@/lib/content';
-import { expertises, specialiteVisual } from '@/lib/photos';
+import { getRealisations, getServices, getSpecialites, servicePath } from '@/lib/content';
+import { expertises } from '@/lib/photos';
 
 const realisations = await getRealisations();
 const specialites = await getSpecialites();
@@ -42,8 +41,6 @@ const compare = [
 ];
 const wa = whatsappLink('Bonjour, je souhaite parler de mon projet (Accueil).');
 const cities = ['Casablanca', 'Rabat', 'Marrakech', 'Tanger', 'Fès', 'Agadir', 'Meknès', 'Oujda', 'Kénitra', 'Tétouan', 'El Jadida', 'Laâyoune'];
-const projectIds = ['cabinet-dentaire-orthodontie', 'gastro-enterologie-endoscopie', 'cliniques-blocs-operatoires', 'laboratoire-analyses-medicales'];
-const projects = projectIds.map((id) => specialites.find((s) => s.id === id)).filter((s) => s !== undefined);
 ---
 
 <BaseLayout
@@ -242,60 +239,14 @@ const projects = projectIds.map((id) => specialites.find((s) => s.id === id)).fi
     </div>
   </section>
 
-  <!-- 5. RÉALISATIONS : l'image change au fil du défilement (défilement normal, rien d'épinglé) -->
-  {realisations.length > 0 ? (
+  <!-- 5. RÉALISATIONS : affichées seulement quand de vraies études de cas sont publiées -->
+  {realisations.length > 0 && (
     <section class="bg-white py-24 lg:py-32" aria-labelledby="real-title">
       <div class="container-lux">
         <SectionHeading eyebrow="Réalisations" title="Des espaces pensés pour soigner." id="real-title" link={{ href: '/realisations/', label: 'Toutes les réalisations' }} />
         <div class="mt-14 grid gap-x-8 gap-y-14 md:grid-cols-2 lg:grid-cols-3">
           {realisations.slice(0, 3).map((r, i) => <RealisationCard entry={r} i={i} />)}
         </div>
-      </div>
-    </section>
-  ) : (
-    <section class="cases" aria-labelledby="real-title" data-cases>
-      <div class="cases-stage">
-        {projects.map((s, i) => (
-          <div class:list={['cases-media', i === 0 && 'is-active']} data-case-media={i} aria-hidden="true">
-            <Visual visual={specialiteVisual[s.id] ?? { drawing: s.id, label: 'Plan type' }} sizes="100vw" widths={[800, 1280, 1920, 2400]} />
-          </div>
-        ))}
-        <div class="cases-veil" aria-hidden="true"></div>
-        <div class="container-lux cases-bar">
-          <h2 id="real-title" class="cases-label"><span>Réalisations</span> Projets types</h2>
-          <nav aria-label="Projets types">
-            <ol class="cases-tabs">
-              {projects.map((s, i) => (
-                <li>
-                  <a href={`#projet-${s.id}`} class:list={['cases-tab', i === 0 && 'is-active']} data-case-tab={i} aria-current={i === 0 ? 'true' : undefined}>
-                    <span class="cases-tab-num">{String(i + 1).padStart(2, '0')}</span>
-                    <span class="cases-tab-name">{s.data.short}</span>
-                  </a>
-                </li>
-              ))}
-            </ol>
-          </nav>
-        </div>
-        <p class="cases-caption">Images d’illustration · projets types</p>
-      </div>
-      <div class="cases-track">
-        <ol class="cases-list">
-          {projects.map((s, i) => (
-            <li class="cases-panel" data-case={i} id={`projet-${s.id}`}>
-              <div class="container-lux">
-                <p class="cases-kicker">Projet type <span>{String(i + 1).padStart(2, '0')}</span></p>
-                <h3 class="cases-title"><a href={specialitePath(s.id)}>{s.data.short}</a></h3>
-                <ul class="cases-chips" aria-label="Contraintes clés">
-                  {s.data.contraintes.slice(0, 3).map((c) => <li>{c.split(/[:;(]/)[0]?.trim()}</li>)}
-                </ul>
-                <div class="cases-actions">
-                  <a href={`/contact/?specialite=${s.id}`} class="cases-cta">Démarrer un projet similaire <span aria-hidden="true">→</span></a>
-                  <a href={specialitePath(s.id)} class="link-more text-white">La spécialité <span>→</span></a>
-                </div>
-              </div>
-            </li>
-          ))}
-        </ol>
       </div>
     </section>
   )}

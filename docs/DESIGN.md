@@ -89,10 +89,7 @@ Règles automatiques : dans un conteneur `bg-[var(--color-navy…)]`, les titres
   largeur, accroche), « Sans » en gris avec ✕, « Avec ESM » sur fond teal clair avec ✓.
 - **Spécialités** : plan d'un centre médical ; clic = panneau latéral (en-tête navy à trame, contraintes, offre
   numérotée, points à valider losange or, services en étiquettes, pied warm avec CTA + « Page complète »).
-- **Réalisations** : photos plein écran collantes (100 svh), volet vertical 1 s + léger dézoom à chaque projet,
-  voile navy en bas, compteur or en haut à droite ; sur la photo : « Projet type 0X », spécialité (Manrope 800,
-  38–86 px), 3 pastilles de contraintes (verre navy, bord blanc), CTA or + « La spécialité ». Pas d'écran d'introduction :
-  barre fine en haut (« Réalisations · Projets types » + index 01–04 cliquable, filet or sur le projet en cours). Rejouer la maquette = retour en plein écran.
+- **Réalisations** : retirée de l'accueil (choix client) ; grille des vraies études de cas seulement quand il y en a.
 - Sans WebGL, appareil modeste ou `prefers-reduced-motion` : plan statique, quatre étapes affichées en entier.
 
 ## Navigation

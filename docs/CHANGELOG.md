@@ -2,6 +2,12 @@
 
 > Ajouter chaque modification **en haut**, datée, avec : ce qui a changé, pourquoi, fichiers clés, et l'état des vérifications.
 
+## 2026-11-08 — v1.9.2 · Section Réalisations retirée de l'accueil
+
+- Section des projets types (photos plein écran) retirée de l'accueil à la demande du client, avec son script et ses
+  styles. La grille des vraies réalisations réapparaît automatiquement dès qu'une étude de cas est publiée
+  (`src/content/realisations/`). La page `/realisations/` et le lien de navigation restent inchangés.
+
 ## 2026-11-08 — v1.9.1 · Réalisations : plus d'écran d'introduction
 
 - Écran « Réalisations / Les projets que nous menons / Nos études de cas arrivent… » retiré (demande client) : la
