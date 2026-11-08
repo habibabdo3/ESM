@@ -2,6 +2,14 @@
 
 > Ajouter chaque modification **en haut**, datée, avec : ce qui a changé, pourquoi, fichiers clés, et l'état des vérifications.
 
+## 2026-11-08 — v1.2.0 · Nouveau logo choisi par le client
+
+- Logo redessiné en vecteur d’après la planche fournie : monogramme ESM dégradé navy → teal, toiture or avec cheminée,
+  arc or, nom sur deux lignes justifiées, signature or.
+- Géométrie unique `src/data/logo.json` partagée entre `Logo.astro` et `public/brand/` (11 fichiers), favicon,
+  icônes et images de partage regénérés.
+- En-tête : symbole + nom ; footer : logo blanc + signature en texte lisible ; styleguide mis à jour.
+
 ## 2026-11-08 — v1.1.0 · Affinage de la direction artistique
 
 **Fait**

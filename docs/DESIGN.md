@@ -11,16 +11,18 @@
 - **Ton visuel** : studio d’architecture premium + ingénierie médicale + identité corporate internationale.
   Moins de texte, plus d’impact visuel, beaucoup d’espace, hiérarchie nette.
 
-## Logo
+## Logo (choisi le 2026-11-08)
 
-- **Symbole** (48 × 48) : cadre de plan ouvert sur la droite (l’entrée du bâtiment), monogramme géométrique
-  **E·S·M** tracé au trait, ligne de cote en teal (précision d’ingénierie). Aucune croix, dent ou stéthoscope.
-- **Composant** : `src/components/Logo.astro` — `layout` = `horizontal | vertical | symbol`,
-  `tone` = `color | navy | white | mono`, `tagline` (signature sous le nom).
-- **Fichiers vectoriels** (texte vectorisé, aucune police requise) : `public/brand/esm-logo-horizontal(-navy|-white|-mono).svg`,
-  `esm-logo-vertical(-white|-mono).svg`, `esm-symbol(-navy|-white|-mono).svg`. Régénérer : `npm run brand`.
-- Favicon et icônes : symbole blanc et or sur carré navy.
-- Taille minimale : 24 px (symbole). Zone de protection : la hauteur du E.
+- **Symbole** : monogramme **ESM** en lettres pleines (Manrope ExtraBold élargie), dégradé navy → teal → navy ;
+  **toiture or** à double trait avec cheminée au-dessus du S et du M (l’architecture, le bâtiment) ; **arc or** sous les
+  lettres (l’accompagnement). Redessiné en vecteur d’après la planche de marque fournie par le client.
+- **Nom** : « EURO SPACE » / « MEDICAL » sur deux lignes de même largeur (navy) ; signature « DESIGNING MEDICAL
+  SPACES. » en or (or profond #9C7B42 sur fond clair, or champagne sur navy).
+- **Source unique** : `src/data/logo.json` (lettres et nom vectorisés), générée par `npm run brand`, utilisée par
+  `Logo.astro` et par les fichiers `public/brand/` (horizontal, vertical, symbole × couleur, navy, blanc, mono).
+- **Usage** : en-tête = symbole + nom (sans signature) ; footer = version blanche + signature en texte ; signature
+  intégrée au logo seulement à partir de 70 px de haut. Taille minimale du symbole : 28 px de haut.
+- Favicon et icônes : symbole blanc et or sur carré navy arrondi.
 
 ## Couleurs (répartition 65 / 20 / 10 / 4 / 1)
 

@@ -117,9 +117,12 @@ header/footer → tous les services et spécialités ; fil d'Ariane partout.
 
 - **Marque** : EURO SPACE MEDICAL (ESM) · signature *Designing medical spaces.* · « Votre projet médical, de A à Z. »
   Direction : studio d'architecture premium + ingénierie médicale. **Moins de texte, plus d'impact visuel.**
-- **Logo** : `Logo.astro` (horizontal / vertical / symbol × color / navy / white / mono) ; fichiers `public/brand/*.svg`
-  (texte vectorisé) régénérés par `npm run brand` (`scripts/generate-brand.mjs`, qui produit aussi favicon, icônes, OG).
-  Symbole : cadre-plan ouvert + monogramme E·S·M + ligne de cote teal. Jamais de croix, dent, stéthoscope.
+- **Logo** (choisi par le client le 2026-11-08) : monogramme **ESM** en dégradé navy → teal, **toiture or** au-dessus
+  (avec cheminée), **arc or** en dessous ; nom « EURO SPACE / MEDICAL » sur deux lignes de même largeur, signature or.
+  Géométrie unique `src/data/logo.json` (générée par `npm run brand` / `scripts/generate-brand.mjs`, qui produit aussi
+  `public/brand/*.svg`, favicon, icônes, OG). `Logo.astro` : layout horizontal / vertical / symbol × tone color /
+  navy / white / mono ; la signature n'apparaît qu'à partir de 70 px de haut (sinon illisible) — dans le footer elle
+  est écrite en texte sous le logo. Ne jamais utiliser l'image raster d'origine comme logo de production.
 - **Couleurs** (65 % blanc/warm, 20 % navy, 10 % mist, 4 % teal, 1 % or) : `navy #142C43` · `teal #168C91`
   (`teal-ink #0F6E72` pour petits textes) · `gold #C6A66B` (filets, numéros sur navy, jamais en fond) ·
   `warm #F7F8F7` · `mist #E9EEF0` · `ink #263746` · `slate #697782` (≥ 24 px) / `muted #5E6C77` (petit texte, AA).

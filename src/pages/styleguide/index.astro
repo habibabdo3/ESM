@@ -35,16 +35,16 @@ const files = ['esm-logo-horizontal', 'esm-logo-horizontal-navy', 'esm-logo-hori
   <section class="container-lux py-16">
     <h2>Logo</h2>
     <div class="mt-10 grid gap-6 md:grid-cols-2">
-      <div class="flex min-h-40 items-center justify-center border border-[var(--color-line)] bg-white p-8"><Logo /></div>
-      <div class="flex min-h-40 items-center justify-center bg-[var(--color-navy)] p-8"><Logo tone="white" /></div>
-      <div class="flex min-h-40 items-center justify-center border border-[var(--color-line)] bg-white p-8"><Logo layout="vertical" size={72} /></div>
+      <div class="flex min-h-40 items-center justify-center border border-[var(--color-line)] bg-white p-8"><Logo size={76} /></div>
+      <div class="flex min-h-40 items-center justify-center bg-[var(--color-navy)] p-8"><Logo tone="white" size={76} /></div>
+      <div class="flex min-h-40 items-center justify-center border border-[var(--color-line)] bg-white p-8"><Logo layout="vertical" size={84} /></div>
       <div class="flex min-h-40 items-center justify-center gap-10 border border-[var(--color-line)] bg-white p-8">
-        <Logo layout="symbol" size={64} /><Logo layout="symbol" tone="navy" size={64} />
-        <span class="text-black"><Logo layout="symbol" tone="mono" size={64} /></span>
+        <Logo layout="symbol" size={56} /><Logo layout="symbol" tone="navy" size={56} />
+        <span class="text-black"><Logo layout="symbol" tone="mono" size={56} /></span>
       </div>
     </div>
     <p class="mt-6 text-[0.95rem] text-[var(--color-muted)]">Fichiers vectoriels (texte vectorisé) : {files.map((f, i) => <>{i > 0 && ' · '}<a class="underline" href={`/brand/${f}.svg`}>{f}.svg</a></>)}</p>
-    <p class="mt-2 text-[0.95rem] text-[var(--color-muted)]">Concept : cadre-plan ouvert (l’entrée du bâtiment), monogramme géométrique E·S·M, ligne de cote (précision d’ingénierie). Zone de protection : la hauteur du E autour du logo. Taille minimale : 24 px pour le symbole.</p>
+    <p class="mt-2 text-[0.95rem] text-[var(--color-muted)]">Concept : monogramme ESM en dégradé navy → teal, toiture or (l’architecture), arc or (l’accompagnement). Nom sur deux lignes de même largeur, signature or. Zone de protection : la hauteur du E autour du logo. Taille minimale : 28 px de haut pour le symbole.</p>
   </section>
 
   <section class="bg-white py-16">

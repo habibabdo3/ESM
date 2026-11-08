@@ -1,11 +1,12 @@
 ---
 /**
- * Identité Euro Space Medical.
- * Symbole : plan d'architecte (cadre ouvert = entrée), monogramme géométrique E·S·M (le M en toiture = bâtiment),
- * ligne de cote teal (précision d'ingénierie). Pas de croix, de dent ni de stéthoscope.
- * Variantes : layout horizontal | vertical | symbol ; tone color | white | navy | mono.
- * Fichiers vectoriels autonomes (texte vectorisé) : public/brand/ — générés par `npm run brand`.
+ * Logo Euro Space Medical (choisi le 2026-11-08) : monogramme ESM en dégradé navy → teal, toiture or au-dessus,
+ * arc or en dessous ; nom sur deux lignes justifiées et signature or.
+ * Géométrie vectorielle unique : src/data/logo.json (générée par `npm run brand`, partagée avec public/brand/).
+ * layout : horizontal | vertical | symbol · tone : color | navy | white | mono · size : hauteur du symbole en px.
  */
+import logo from '@/data/logo.json';
+
 interface Props {
   layout?: 'horizontal' | 'vertical' | 'symbol';
   tone?: 'color' | 'white' | 'navy' | 'mono';
@@ -13,43 +14,47 @@ interface Props {
   class?: string;
   size?: number;
 }
-const { layout = 'horizontal', tone = 'color', tagline = true, class: cls = '', size = 40 } = Astro.props;
+const { layout = 'horizontal', tone = 'color', class: cls = '', size = 40 } = Astro.props;
+// La signature n'est lisible qu'à partir d'environ 70 px de haut : en dessous, nom seul.
+const tagline = (Astro.props.tagline ?? true) && size >= 70;
 
 const palette = {
-  color: { ink: 'var(--color-navy)', accent: 'var(--color-teal)', sub: 'var(--color-muted)' },
-  navy: { ink: 'var(--color-navy)', accent: 'var(--color-navy)', sub: 'var(--color-navy)' },
-  white: { ink: '#ffffff', accent: 'var(--color-gold)', sub: 'rgb(255 255 255 / 0.72)' },
-  mono: { ink: 'currentColor', accent: 'currentColor', sub: 'currentColor' },
+  color: { a: '#142C43', b: '#168C91', gold: '#C6A66B', word: '#142C43', tag: '#9C7B42' },
+  navy: { a: '#142C43', b: '#142C43', gold: '#142C43', word: '#142C43', tag: '#142C43' },
+  white: { a: '#FFFFFF', b: '#FFFFFF', gold: '#C6A66B', word: '#FFFFFF', tag: '#C6A66B' },
+  mono: { a: 'currentColor', b: 'currentColor', gold: 'currentColor', word: 'currentColor', tag: 'currentColor' },
 }[tone];
+
+const id = `esm-${Math.random().toString(36).slice(2, 8)}`;
+const symbolW = Math.round((size * logo.width) / logo.height);
+const wm = logo.wordmark;
+const wmH = tagline ? wm.height : wm.nameOnly.height;
+const wordHeight = layout === 'vertical' ? size * 0.62 : size * (tagline ? 0.86 : 0.62);
+const wordWidth = Math.round((wordHeight * wm.width) / wmH);
 ---
 
 <span
-  class:list={[
-    'inline-flex',
-    layout === 'vertical' ? 'flex-col items-center gap-3 text-center' : 'items-center gap-3',
-    cls,
-  ]}
+  role="img"
+  aria-label="Euro Space Medical"
+  class:list={['inline-flex shrink-0', layout === 'vertical' ? 'flex-col items-center gap-3' : 'items-center gap-3', cls]}
 >
-  <svg width={size} height={size} viewBox="0 0 48 48" aria-hidden="true" focusable="false" class="shrink-0">
-    <path d="M46.9 30V1.1H1.1v45.8h45.8v-9" fill="none" stroke={palette.ink} stroke-width="2.2" />
-    <path
-      d="M16 12H8v20h8M8 22h6M28 12h-8v10h8v10h-8M32 32V12l4 6.5 4-6.5v20"
-      fill="none"
-      stroke={palette.ink}
-      stroke-width="2.4"
-      stroke-linecap="square"
-      stroke-linejoin="miter"
-    />
-    <path d="M8 39h32M8 36.5v5M40 36.5v5" fill="none" stroke={palette.accent} stroke-width="1.6" stroke-linecap="square" />
+  <svg width={symbolW} height={size} viewBox={logo.viewBox} aria-hidden="true" focusable="false">
+    <defs>
+      <linearGradient id={id} x1="0" x2="1">
+        <stop offset="0" stop-color={palette.a} />
+        <stop offset="0.5" stop-color={palette.b} />
+        <stop offset="1" stop-color={palette.a} />
+      </linearGradient>
+    </defs>
+    <g transform={logo.lettersTransform}><path d={logo.letters} fill={`url(#${id})`} /></g>
+    <path d={logo.roof} fill="none" stroke={palette.gold} stroke-width="3.2" />
+    <path d={logo.chimney} fill="none" stroke={palette.gold} stroke-width="3.2" />
+    <path d={logo.swoosh} fill={palette.gold} />
   </svg>
   {layout !== 'symbol' && (
-    <span class="flex flex-col leading-none" style={`color:${palette.ink}`}>
-      <span class="font-[family-name:var(--font-display)] text-[0.95rem] font-bold tracking-[0.16em] whitespace-nowrap">EURO SPACE MEDICAL</span>
-      {tagline && (
-        <span lang="en" class="mt-1.5 text-[0.66rem] font-semibold tracking-[0.18em] whitespace-nowrap" style={`color:${palette.sub}`}>
-          DESIGNING MEDICAL SPACES.
-        </span>
-      )}
-    </span>
+    <svg width={wordWidth} height={Math.round(wordHeight)} viewBox={`0 0 ${wm.width} ${wmH}`} aria-hidden="true" focusable="false" class="wordmark">
+      <path d={wm.name} fill={palette.word} />
+      {tagline && <path d={wm.tag} fill={palette.tag} />}
+    </svg>
   )}
 </span>
