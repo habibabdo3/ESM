@@ -3,10 +3,11 @@
  * Accueil : défilement normal partout (aucune section épinglée, aucun effet piloté par le défilement).
  * 1. Héros — titre + brief de projet en une phrase (formulaire GET vers /contact/, pré-rempli) ; à côté, la maquette 3D
  *    se construit seule (plan → réseaux → murs → coupe équipée → PV), étapes cliquables, bouton pause (WCAG 2.2.2).
- * 2. Expertises — quatre bandes d'images jointives, la bande survolée s'élargit (desktop).
+ * 2. Expertises — quatre bandes d'images repliées ; un clic ouvre la bande (desktop) ou l'accordéon (mobile).
  * 3. Pourquoi ESM — comparatif « Plusieurs prestataires / Avec ESM ».
  * 4. Spécialités — plan d'un centre médical ; chaque pièce ouvre un panneau (page virtuelle, URL réelle conservée).
- * 5. Réalisations — projets types : l'image collante change au fil du défilement.
+ * 5. Réalisations — projets types : l'image collante change au fil du défilement ; à droite (dessous sur mobile),
+ *    une fiche projet (plan type, contraintes, livrables, points à valider, services) qui se dessine à l'arrivée.
  * Sans WebGL, appareil peu puissant ou « réduire les animations » : plan statique, même contenu.
  */
 import BaseLayout from '@/layouts/BaseLayout.astro';
@@ -135,7 +136,7 @@ const projects = projectIds.map((id) => specialites.find((s) => s.id === id)).fi
     </div>
   </section>
 
-  <!-- 2. EXPERTISES : bandes d'images jointives qui s'élargissent -->
+  <!-- 2. EXPERTISES : bandes d'images repliées, ouvertes au clic -->
   <section data-strips class="strips bg-[var(--color-navy)] text-white" aria-labelledby="expertises-title">
     <div class="strips-inner">
       <div class="container-lux strips-head">
@@ -146,14 +147,18 @@ const projects = projectIds.map((id) => specialites.find((s) => s.id === id)).fi
         <a href="/expertises/" class="link-more text-white">Toutes nos expertises <span>→</span></a>
       </div>
       <ul class="strips-row" aria-label="Nos quatre expertises">
-        {expertises.map((e, i) => (
-          <li class:list={['strip', i === 0 && 'is-open']} data-strip>
+        {expertises.map((e) => (
+          <li class="strip" data-strip>
             <div class="strip-media" aria-hidden="true">
               <Visual visual={e.visual} sizes="(min-width:1024px) 60vw, 100vw" widths={[640, 1000, 1400]} />
             </div>
             <div class="strip-shade" aria-hidden="true"></div>
-            <p class="strip-tab" aria-hidden="true"><span>{e.num}</span>{e.title}</p>
-            <div class="strip-body">
+            <button type="button" class="strip-toggle" data-strip-toggle aria-expanded="false" aria-controls={`strip-${e.id}`}>
+              <span class="strip-tab"><span class="strip-tab-num">{e.num}</span><span class="strip-tab-title">{e.title}</span></span>
+              <span class="strip-plus" aria-hidden="true"></span>
+              <span class="sr-only">Afficher le détail</span>
+            </button>
+            <div class="strip-body" id={`strip-${e.id}`}>
               <span class="strip-num" aria-hidden="true">{e.num}</span>
               <h3 class="strip-title"><a href={`/expertises/#${e.id}`}>{e.title}</a></h3>
               <p class="strip-text">{e.text}</p>
@@ -265,14 +270,39 @@ const projects = projectIds.map((id) => specialites.find((s) => s.id === id)).fi
         </div>
         <ol class="cases-list" aria-label="Projets types">
           {projects.map((s, i) => (
-            <li class:list={['cases-item', i === 0 && 'is-active']} data-case={i}>
-              <p class="cases-kicker">Projet type <span>{String(i + 1).padStart(2, '0')}</span></p>
-              <h3 class="cases-title"><a href={specialitePath(s.id)}>{s.data.short}</a></h3>
+            <li class:list={['cases-item', i === 0 && 'is-active is-seen']} data-case={i}>
+              <span class="cases-ghost" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+              <p class="cases-kicker">Projet type <span>{String(i + 1).padStart(2, '0')}</span> · {s.data.short}</p>
+              <h3 class="cases-title"><a href={specialitePath(s.id)}>{s.data.h1}</a></h3>
               <p class="cases-text">{s.data.description}</p>
-              <ul class="cases-offre">
-                {s.data.offre.slice(0, 4).map((o) => <li>{o}</li>)}
-              </ul>
-              <a href={`/contact/?specialite=${s.id}`} class="link-more mt-8 text-white">Démarrer un projet similaire <span>→</span></a>
+              <dl class="fiche">
+                <div class="fiche-row" style="--d:0">
+                  <dt>Plan type</dt>
+                  <dd class="fiche-plan">
+                    <PlanArt variant={s.id} tone="light" detail="simple" class="h-full w-full" label={`Illustration : plan type — ${s.data.short}`} />
+                  </dd>
+                </div>
+                <div class="fiche-row" style="--d:1">
+                  <dt>Contraintes</dt>
+                  <dd><ul class="fiche-chips">{s.data.contraintes.slice(0, 3).map((c) => <li>{c.split(/[:;(]/)[0]?.trim()}</li>)}</ul></dd>
+                </div>
+                <div class="fiche-row" style="--d:2">
+                  <dt>Livrables</dt>
+                  <dd><ol class="fiche-steps">{s.data.offre.slice(0, 4).map((o) => <li>{o}</li>)}</ol></dd>
+                </div>
+                <div class="fiche-row" style="--d:3">
+                  <dt>À valider</dt>
+                  <dd><ul class="fiche-checks">{s.data.aValider.slice(0, 2).map((a) => <li>{a}</li>)}</ul></dd>
+                </div>
+                <div class="fiche-row" style="--d:4">
+                  <dt>Services</dt>
+                  <dd><ul class="fiche-tags">{s.data.servicesLies.slice(0, 4).map((id) => <li><a href={servicePath(id)}>{serviceName.get(id) ?? id}</a></li>)}</ul></dd>
+                </div>
+              </dl>
+              <div class="cases-actions">
+                <a href={`/contact/?specialite=${s.id}`} class="cases-cta">Démarrer un projet similaire <span aria-hidden="true">→</span></a>
+                <a href={specialitePath(s.id)} class="link-more text-white">La spécialité <span>→</span></a>
+              </div>
             </li>
           ))}
         </ol>

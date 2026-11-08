@@ -83,13 +83,16 @@ Règles automatiques : dans un conteneur `bg-[var(--color-navy…)]`, les titres
   l'ouverture » en haut à gauche, « Passer l'introduction → » en haut à droite, en bas à gauche le titre de l'étape
   (Manrope 800, 42–80 px), son texte et 4 barres teal ; à la fin, la planche se réduit vers sa place (1 s).
   Ensuite : maquette livrée en rotation lente, boutons ronds blancs « ↻ Revoir la construction » et pause.
-- **Expertises** : 4 bandes d'images jointives, la bande survolée s'élargit (×4,2) ; mobile : panneaux empilés.
+- **Expertises** : 4 bandes d'images jointives **repliées** (voile navy 72 %, numéro en contour or, titre, rond « + ») ;
+  clic : la bande s'ouvre (×4,2), détail + services, rond blanc « × » ; mobile : accordéon de rangées de 6 rem.
 - **Pourquoi ESM** : tableau comparatif, colonne ESM navy + teinte teal ; mobile : fiches qui glissent (84 % de
   largeur, accroche), « Sans » en gris avec ✕, « Avec ESM » sur fond teal clair avec ✓.
 - **Spécialités** : plan d'un centre médical ; clic = panneau latéral (en-tête navy à trame, contraintes, offre
   numérotée, points à valider losange or, services en étiquettes, pied warm avec CTA + « Page complète »).
 - **Réalisations** : image collante 56 % (desktop) / 42 svh (mobile), volet vertical 900 ms à chaque projet, compteur
-  or, filet or sur le projet en cours.
+  or, filet or sur le projet en cours ; à droite (dessous sur mobile) une **fiche projet** : numéro géant en contour,
+  titre, description, tableau à libellés or (plan type, contraintes en pastilles teal, livrables numérotés, points à
+  valider ✓, services en étiquettes) dont les lignes se dessinent, CTA or.
 - Sans WebGL, appareil modeste ou `prefers-reduced-motion` : plan statique, quatre étapes affichées en entier.
 
 ## Navigation

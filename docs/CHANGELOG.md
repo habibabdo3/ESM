@@ -2,6 +2,18 @@
 
 > Ajouter chaque modification **en haut**, datée, avec : ce qui a changé, pourquoi, fichiers clés, et l'état des vérifications.
 
+## 2026-11-08 — v1.8.0 · Expertises repliées au clic, fiche projet des réalisations
+
+- **Expertises** : les quatre bandes sont repliées au départ (numéro en contour or, titre, bouton « + ») ; un clic
+  ouvre la bande (desktop : elle s'élargit ×4,2, les autres passent en libellé vertical, « × » pour refermer ;
+  mobile : accordéon, image + détail). Boutons `aria-expanded`, détail `inert` quand replié, Échap referme. Sans JS,
+  tout reste déplié.
+- **Réalisations** : chaque projet type devient une **fiche projet** façon cartouche d'architecte : grand numéro en
+  contour, titre (H1 de la spécialité), description, puis tableau « Plan type » (dessin), « Contraintes »
+  (pastilles), « Livrables » (numérotés), « À valider » (✓), « Services » (liens) ; les lignes se dessinent à
+  l'arrivée du projet ; CTA or « Démarrer un projet similaire » + « La spécialité ». Données réelles du contenu.
+- Vérifications : `npm run verify` sans erreur bloquante, axe-core 0 violation, captures 1440 et 390 px.
+
 ## 2026-11-08 — v1.7.0 · Introduction plein écran mémorisée, maquette en vitrine, comparatif glissant, correctif mobile
 
 - **Correctif mobile important** : le tableau « Pourquoi ESM » élargissait la page à 1 059 px sur téléphone (le
