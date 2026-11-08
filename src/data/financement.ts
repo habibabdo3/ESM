@@ -19,7 +19,7 @@ export const partners = [
       'Crédit professionnel et dossier Intelaka accompagnés de A à Z pour financer l’aménagement et l’équipement de votre cabinet. Sous réserve d’acceptation.',
     h1: A ? 'Financer votre cabinet avec Al Barid Bank' : 'Crédit professionnel et Intelaka pour votre cabinet',
     accroche: A
-      ? 'Partenaire d’Euro Space Medical : dossier Intelaka accompagné de A à Z et traité en priorité avec Al Barid Bank.'
+      ? 'Partenaire d’Euro Space Medical : votre dossier de crédit professionnel ou Intelaka, préparé et suivi de A à Z.'
       : 'Dossier Intelaka et crédit professionnel accompagnés de A à Z avec notre banque partenaire.',
     contexte: A
       ? 'Al Barid Bank finance les professionnels et les TPE. Elle a signé des conventions avec le Conseil national de l’Ordre des médecins et avec l’Ordre national des médecins dentistes, qui prévoient des crédits professionnels pour l’investissement, l’aménagement et l’équipement des cabinets. Euro Space Medical est son partenaire pour l’aménagement : nous préparons le dossier technique et financier, la banque l’instruit.'
@@ -46,13 +46,13 @@ export const partners = [
       'Mourabaha équipement et Ijara : un financement participatif pour aménager et équiper votre cabinet ou votre clinique. Sous réserve d’acceptation.',
     h1: A ? 'Financement participatif avec Bank Al Yousr' : 'Financement participatif : Mourabaha et Ijara',
     accroche: A
-      ? 'Partenaire d’Euro Space Medical : conditions préférentielles pour nos clients avec Bank Al Yousr, en financement participatif (Mourabaha, Ijara).'
-      : 'Un financement conforme à la finance participative, avec des conditions négociées pour nos clients.',
+      ? 'Partenaire d’Euro Space Medical : un financement participatif (Mourabaha, Ijara) pour aménager et équiper votre structure.'
+      : 'Un financement conforme à la finance participative, préparé avec vous de A à Z.',
     contexte: A
       ? 'Banque participative du groupe Banque Populaire, Bank Al Yousr propose une offre dédiée aux professionnels de santé : médecins, cliniques et laboratoires. Ses produits sont conformes aux avis du Comité Charia pour la finance participative. Euro Space Medical lui transmet un dossier complet : devis détaillé, factures pro forma des équipements et plans.'
       : 'Notre banque partenaire en finance participative propose une offre dédiée aux professionnels de santé : médecins, cliniques et laboratoires.',
     pourQui: [
-      'Praticiens qui souhaitent un financement sans intérêt, conforme à la finance participative',
+      'Praticiens qui souhaitent un financement conforme à la finance participative',
       'Cliniques, centres d’imagerie et laboratoires qui s’équipent',
       'Médecins et dentistes en première installation',
       'Structures existantes qui rénovent ou renouvellent leur plateau technique',

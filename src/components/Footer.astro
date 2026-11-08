@@ -1,4 +1,5 @@
 ---
+/** Footer navy en 4 colonnes : Entreprise · Expertises · Spécialités médicales · Ressources et contact. */
 import Logo from './Logo.astro';
 import { site } from '@/config/site';
 import { getSpecialites, specialitePath } from '@/lib/content';
@@ -6,66 +7,66 @@ import { expertises } from '@/lib/photos';
 
 const specialites = await getSpecialites();
 const year = new Date().getFullYear();
-const col = 'mt-5 space-y-2.5 text-[0.92rem] text-white/75';
+const head = 'font-[family-name:var(--font-display)] text-[0.95rem] font-bold text-white';
+const list = 'mt-6 space-y-3 text-[0.98rem] text-white/75';
 ---
 
 <footer class="bg-[var(--color-navy)] text-white">
-  <div class="container-lux grid gap-12 pb-14 pt-20 lg:grid-cols-12">
-    <div class="lg:col-span-3">
-      <Logo tone="white" size={42} />
-      <p class="mt-6 max-w-sm text-[0.95rem] leading-relaxed text-white/75">
+  <div class="container-lux grid grid-cols-2 gap-x-8 gap-y-12 pb-16 pt-20 lg:grid-cols-12 lg:gap-x-12 lg:pt-24">
+    <div class="col-span-2 lg:col-span-3">
+      <Logo tone="white" size={44} />
+      <p class="mt-7 max-w-xs text-[0.98rem] leading-relaxed text-white/75">
         Architecture, ingénierie, travaux et équipement de structures médicales, partout au Maroc.
       </p>
-      <ul class="mt-8 space-y-2 text-[0.95rem]">
-        {site.phone && <li><a href={`tel:${site.phone.replace(/\s/g, '')}`} class="link-lux">{site.phone}</a></li>}
-        {site.email && <li><a href={`mailto:${site.email}`} class="link-lux">{site.email}</a></li>}
-        {site.address && <li class="text-white/75">{site.address}, {site.hq}</li>}
-        {!site.phone && !site.email && <li><a href="/contact/" class="link-lux">Nous écrire depuis le formulaire de contact</a></li>}
+      <ul class={list}>
+        <li><a href="/a-propos/" class="link-lux">À propos</a></li>
+        <li><a href="/realisations/" class="link-lux">Réalisations</a></li>
+        <li><a href="/zones-intervention/" class="link-lux">Zones d’intervention</a></li>
       </ul>
-      {(site.instagram || site.facebook) && (
-        <ul class="mt-6 flex gap-6 text-[0.9rem] font-semibold">
-          {site.instagram && <li><a href={site.instagram} rel="noopener" target="_blank" class="link-lux">Instagram</a></li>}
-          {site.facebook && <li><a href={site.facebook} rel="noopener" target="_blank" class="link-lux">Facebook</a></li>}
-        </ul>
-      )}
     </div>
 
-    <nav aria-label="Expertises" class="lg:col-span-2">
-      <p class="eyebrow text-[var(--color-gold)]">Expertises</p>
-      <ul class={col}>
+    <nav aria-label="Expertises" class="col-span-1 lg:col-span-2">
+      <p class={head}>Expertises</p>
+      <ul class={list}>
         {expertises.map((e) => <li><a href={`/expertises/#${e.id}`} class="link-lux">{e.title}</a></li>)}
         <li><a href="/services/" class="link-lux">Tous les services</a></li>
-        <li><a href="/renovation-cabinet-clinique/" class="link-lux">Rénovation en site occupé</a></li>
       </ul>
     </nav>
 
-    <nav aria-label="Spécialités" class="lg:col-span-4">
-      <p class="eyebrow text-[var(--color-gold)]">Spécialités</p>
-      <ul class="mt-5 grid grid-cols-2 gap-x-6 gap-y-2.5 text-[0.88rem] text-white/75">
+    <nav aria-label="Spécialités médicales" class="col-span-2 lg:order-none lg:col-span-4">
+      <p class={head}>Spécialités médicales</p>
+      <ul class="mt-6 grid grid-cols-2 gap-x-6 gap-y-3 text-[0.95rem] text-white/75 lg:text-[0.98rem]">
         {specialites.map((s) => <li><a href={specialitePath(s.id)} class="link-lux">{s.data.short}</a></li>)}
       </ul>
     </nav>
 
-    <nav aria-label="Ressources" class="lg:col-span-3">
-      <p class="eyebrow text-[var(--color-gold)]">Ressources</p>
-      <ul class={col}>
-        <li><a href="/realisations/" class="link-lux">Réalisations</a></li>
+    <div class="col-span-1 row-start-2 col-start-2 lg:col-span-3 lg:row-auto lg:col-start-auto">
+      <p class={head}>Ressources et contact</p>
+      <ul class={list}>
         <li><a href="/financement/" class="link-lux">Financement</a></li>
         <li><a href="/premiere-installation/" class="link-lux">Première installation</a></li>
-        <li><a href="/amenagement-cabinet-medical/" class="link-lux">Aménagement de cabinet</a></li>
-        <li><a href="/zones-intervention/" class="link-lux">Zones d’intervention</a></li>
         <li><a href="/blog/" class="link-lux">Guides</a></li>
         <li><a href="/glossaire/" class="link-lux">Glossaire</a></li>
-        <li><a href="/faq/" class="link-lux">FAQ</a></li>
-        <li><a href="/a-propos/" class="link-lux">À propos</a></li>
-        <li><a href="/contact/" class="link-lux">Contact</a></li>
+        <li><a href="/faq/" class="link-lux">Questions fréquentes</a></li>
       </ul>
-    </nav>
+      <ul class="mt-8 space-y-2 border-t border-white/15 pt-6 text-[0.98rem]">
+        {site.phone && <li><a href={`tel:${site.phone.replace(/\s/g, '')}`} class="link-lux">{site.phone}</a></li>}
+        {site.email && <li><a href={`mailto:${site.email}`} class="link-lux">{site.email}</a></li>}
+        {site.address && <li class="text-white/75">{site.address}, {site.hq}</li>}
+        {(site.instagram || site.facebook) && (
+          <li class="flex gap-5 pt-1">
+            {site.instagram && <a href={site.instagram} rel="noopener" target="_blank" class="link-lux">Instagram</a>}
+            {site.facebook && <a href={site.facebook} rel="noopener" target="_blank" class="link-lux">Facebook</a>}
+          </li>
+        )}
+      </ul>
+      <a href="/contact/" class="btn btn-primary mt-6 hidden lg:inline-flex">Parler de mon projet</a>
+    </div>
   </div>
 
   <div class="border-t border-white/10">
-    <div class="container-lux flex flex-col gap-4 py-6 pb-28 text-[0.82rem] text-white/60 md:flex-row md:items-center md:justify-between md:pb-6">
-      <p>© {year} {site.name}. Tous droits réservés.</p>
+    <div class="container-lux flex flex-col gap-4 py-6 pb-24 text-[0.85rem] text-white/60 md:flex-row md:items-center md:justify-between md:pb-6">
+      <p>© {year} {site.name}</p>
       <ul class="flex flex-wrap gap-x-6 gap-y-2">
         <li><a href="/mentions-legales/" class="link-lux">Mentions légales</a></li>
         <li><a href="/conditions-utilisation/" class="link-lux">Conditions d’utilisation</a></li>

@@ -1,0 +1,22 @@
+---
+/** En-tête de section standard : libellé, titre (h2), introduction courte optionnelle, lien optionnel à droite. */
+interface Props {
+  eyebrow: string;
+  title: string;
+  id?: string;
+  intro?: string;
+  link?: { href: string; label: string };
+  tone?: 'light' | 'navy';
+  class?: string;
+}
+const { eyebrow, title, id, intro, link, tone = 'light', class: cls = '' } = Astro.props;
+const navy = tone === 'navy';
+---
+<div class:list={['flex flex-col justify-between gap-6 md:flex-row md:items-end', cls]} data-reveal>
+  <div class="max-w-2xl">
+    <p class:list={['eyebrow', navy ? 'text-[var(--color-gold)]' : 'text-[var(--color-teal-ink)]']}>{eyebrow}</p>
+    <h2 id={id} class:list={['mt-5', navy && 'text-white']}>{title}</h2>
+    {intro && <p class:list={['mt-4 text-[1.08rem] leading-relaxed', navy ? 'text-white/75' : 'text-[var(--color-muted)]']}>{intro}</p>}
+  </div>
+  {link && <a href={link.href} class="link-more shrink-0 self-start md:self-auto">{link.label} <span>→</span></a>}
+</div>

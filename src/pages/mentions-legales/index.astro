@@ -21,7 +21,13 @@ import { photos } from '@/lib/photos';
   <ul>
     <li>Polices <strong>Manrope</strong> et <strong>Inter</strong> : licence SIL Open Font License 1.1, hébergées sur notre serveur.</li>
     <li>Logo, plans schématiques, carte et images de partage : créations originales d’{site.name}.</li>
-    <li>Photographies d’illustration : <a href="https://unsplash.com/license" rel="noopener">licence Unsplash</a>. Elles illustrent des espaces de soin et <strong>ne représentent pas des réalisations d’{site.name}</strong>. Sources : {Object.values(photos).map((p, i) => <>{i > 0 && ', '}<a href={p.unsplash} rel="noopener">photo {i + 1}</a></>)}.</li>
+    <li>Photographies d’illustration : elles illustrent des espaces de soin et <strong>ne représentent pas des réalisations d’{site.name}</strong>. Les photos sous licence Creative Commons BY-SA sont redimensionnées et diffusées sous la même licence.
+      <ul>
+        {Object.values(photos).map((p) => (
+          <li><a href={p.source} rel="noopener">{p.alt}</a> — {p.author}, <a href={p.licenseUrl} rel="noopener license">{p.license}</a></li>
+        ))}
+      </ul>
+    </li>
     <li>Photos de réalisations : publiées avec l’accord écrit de chaque client.</li>
   </ul>
   <h2>Illustrations</h2>

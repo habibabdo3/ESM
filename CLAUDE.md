@@ -31,8 +31,9 @@
 4. Loi 09-08 (CNDP) : consentement cookies (`CookieBanner`), mention dans le formulaire, page confidentialité.
    Analytique (Plausible) et pixel Meta **chargés uniquement après consentement**.
 5. **Banques** : partenariats **signés** avec Al Barid Bank et Bank Al Yousr (confirmé le 2026-11-05) → noms affichés
-   par défaut (`BANK_CLAIMS_APPROVED` ≠ `false`). Formulations autorisées : « dossier Intelaka traité en priorité avec
-   Al Barid Bank », « conditions préférentielles avec Bank Al Yousr (Mourabaha, Ijara) ». Toujours afficher
+   par défaut (`BANK_CLAIMS_APPROVED` ≠ `false`). Formulations neutres uniquement (« partenaire d'Euro Space Medical »,
+   « dossier préparé et suivi de A à Z »). « Traité en priorité » et « conditions préférentielles » retirés le 2026-11-08 :
+   à rétablir seulement avec l'accord écrit de chaque banque sur ces mots. Toujours afficher
    « Sous réserve d'acceptation du dossier par la banque. » (`BANK_DISCLAIMER`). **Aucun taux, montant, durée ou délai
    chiffré** sans accord écrit spécifique. Ne jamais promettre de taux d'acceptation. Logos : en attente des fichiers officiels.
 6. Chiffres affichés = uniquement des faits vérifiables (ex. 14 spécialités, 10 services, 12 régions = périmètre de l'offre).
@@ -51,7 +52,8 @@
    « Tout refuser » aussi visible que « Tout accepter », retrait = rechargement. Pas de dark pattern : aucune case ni
    option pré-cochée dans le formulaire. Pas de « gratuit » ni d'affirmation sur l'organisation (bureau d'études
    intégré, artisans formés, antennes) tant que l'entreprise ne l'a pas confirmé. Polices sous licence OFL,
-   logo et plans originaux, photos d'illustration sous licence Unsplash (créditées), photos clients avec accord écrit.
+   logo et plans originaux, photos d'illustration sous licence libre (créditées avec auteur et licence), photos clients
+   avec accord écrit.
 
 ## 3. Stack et commandes
 
@@ -123,11 +125,21 @@ header/footer → tous les services et spécialités ; fil d'Ariane partout.
   `warm #F7F8F7` · `mist #E9EEF0` · `ink #263746` · `slate #697782` (≥ 24 px) / `muted #5E6C77` (petit texte, AA).
 - **Typo** : Manrope (titres, boutons) + Inter (texte), `@fontsource-variable`. Héros 56–72 px, sections 36–44 px,
   cartes 21–24 px, texte 16–18 px. Paragraphes ≤ 3 lignes (`paragraphs()` dans `lib/content.ts`).
-- **Composants** : `PageHero` (fond warm + photo 4:3), `Photo` (AVIF/WebP), `ProcessSteps` (Discover · Design · Build ·
-  Deliver), `CtaBand` (navy + photo optionnelle), cartes à filet supérieur, `.link-more` « Découvrir → »,
+- **Composants** : `PageHero` (fond warm + `visual` photo ou dessin 4:3), `Photo` (AVIF/WebP), `Visual`, `SectionHeading`,
+  `ProcessSteps` (Découvrir · Concevoir · Construire · Livrer), `CtaBand` (navy + photo optionnelle), cartes à filet supérieur, `.link-more` « Découvrir → »,
   `.btn-primary` (navy ; blanc automatiquement sur fond navy), `.btn-ghost-dark` / `.btn-ghost-light`.
-- **Photos** : licence Unsplash, registre `src/lib/photos.ts` (alt + source), crédits en mentions légales, légende
+- **Photos** (revue du 2026-11-08) : 11 photos sous licence libre (Unsplash, Wikimedia CC0 / CC BY / CC BY-SA),
+  registre `src/lib/photos.ts` (alt, auteur, licence, source), crédits détaillés en mentions légales, légende
   « Image d'illustration ». Ce ne sont **pas** des réalisations ESM : jamais dans le portfolio.
+  **Règle visuelle** : pages hub (index, financement, FAQ, légal, contact) sans visuel ; pages détail avec une photo
+  pertinente (`serviceVisual`, `specialiteVisual`) ou, à défaut, un **dessin technique original** (`PlanArt` via
+  `Visual.astro`) — jamais de photo hors sujet ; une photo au plus deux fois, toujours en contexte.
+- **Gabarit page service** : héros → « L'essentiel » (3 cartes savoirFaire + termes) → approche (paragraphes courts +
+  schéma) → livrables en étapes numérotées (+ carte CTA) → « Termes techniques expliqués » (accordéon, définitions
+  du glossaire/lexique) → FAQ → liens associés (3 colonnes) → CTA. Composant `SectionHeading` pour tous les en-têtes.
+- **Langue des titres** : tout en français ; l'anglais seulement pour la signature *Designing medical spaces.*
+- **Footer** : 4 colonnes (Entreprise · Expertises · Spécialités médicales · Ressources et contact), liens ≥ 15 px,
+  barre légale discrète ; sur mobile, Expertises et Ressources côte à côte, spécialités sur 2 colonnes.
 - **Mouvement** : 200–400 ms, `transform`/`opacity` uniquement, `data-reveal`, zoom 1,03 au survol. Pas de parallaxe,
   pas d'effet continu. `prefers-reduced-motion` respecté.
 - **Navigation** : Accueil · Expertises (`/expertises/`) · Réalisations · À propos · Contact + « Parler de mon projet ».

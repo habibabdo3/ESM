@@ -1,7 +1,11 @@
 ---
+/**
+ * En-tête de page interne : fil d'Ariane, libellé, H1, introduction courte, appel à l'action, visuel 4:3.
+ * Pages « hub » (index, financement, légal…) : sans visuel. Pages détail : photo pertinente ou dessin technique.
+ */
 import Breadcrumbs from './Breadcrumbs.astro';
-import Photo from './Photo.astro';
-import type { PhotoKey } from '@/lib/photos';
+import Visual from './Visual.astro';
+import type { PhotoKey, Visual as VisualT } from '@/lib/photos';
 
 interface Props {
   eyebrow: string;
@@ -9,17 +13,19 @@ interface Props {
   intro?: string;
   crumbs: { name: string; path: string }[];
   photo?: PhotoKey;
+  visual?: VisualT;
   ctaLabel?: string;
   ctaHref?: string;
 }
 const { eyebrow, h1, intro, crumbs, photo, ctaLabel, ctaHref = '/contact/' } = Astro.props;
+const visual: VisualT | undefined = Astro.props.visual ?? (photo ? { photo } : undefined);
 ---
 <section class="border-b border-[var(--color-line)] bg-[var(--color-warm)]">
-  <div class:list={['container-lux grid items-center gap-10 pb-14 pt-10 lg:pb-20 lg:pt-14', photo && 'lg:grid-cols-12 lg:gap-16']}>
-    <div class:list={[photo ? 'lg:col-span-6' : 'max-w-4xl']}>
+  <div class:list={['container-lux grid items-center gap-10 pb-14 pt-10 lg:pb-20 lg:pt-14', visual && 'lg:grid-cols-12 lg:gap-16']}>
+    <div class:list={[visual ? 'lg:col-span-6' : 'max-w-4xl']}>
       <Breadcrumbs items={crumbs} tone="dark" />
       <p class="eyebrow fade-up mt-10 text-[var(--color-teal-ink)]">{eyebrow}</p>
-      <h1 class="mt-5 text-[var(--color-navy)]"><span class="line-mask"><span>{h1}</span></span></h1>
+      <h1 class="mt-5"><span class="line-mask"><span>{h1}</span></span></h1>
       {intro && <p class="fade-up mt-6 max-w-2xl text-[1.12rem] leading-relaxed text-[var(--color-muted)]" style="--i:2">{intro}</p>}
       {ctaLabel && (
         <div class="fade-up mt-9 flex flex-wrap gap-3" style="--i:3">
@@ -28,11 +34,12 @@ const { eyebrow, h1, intro, crumbs, photo, ctaLabel, ctaHref = '/contact/' } = A
       )}
       <slot />
     </div>
-    {photo && (
+    {visual && (
       <div class="lg:col-span-6">
         <div class="aspect-[4/3] overflow-hidden rounded-[var(--radius-photo)] bg-[var(--color-mist)]">
-          <Photo name={photo} eager sizes="(min-width:1024px) 45vw, 100vw" widths={[480, 800, 1200]} class="h-full w-full object-cover" />
+          <Visual visual={visual} eager sizes="(min-width:1024px) 45vw, 100vw" widths={[480, 800, 1200]} />
         </div>
+        {'photo' in visual && <p class="mt-2.5 text-[0.78rem] text-[var(--color-muted)]">Image d’illustration</p>}
       </div>
     )}
   </div>

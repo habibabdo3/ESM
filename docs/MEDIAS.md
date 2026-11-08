@@ -3,6 +3,13 @@
 > Objectif : remplacer les plans SVG (`PlanArt`) par de vraies images aux endroits où elles prouvent le savoir-faire,
 > et nourrir Instagram / Facebook. Chaque visuel est relié à un emplacement précis du site et à son animation.
 
+## 0. Ce qui manque le plus (constat du 2026-11-08)
+
+Les banques d'images libres ne fournissent pas de photos haut de gamme pour : **salle scanner / cone beam, salle de
+radiologie, salle d'endoscopie, chantier médical en cours, rendus 3D**. Ces pages utilisent aujourd'hui un dessin
+technique. Les photos de vos projets (ou une banque payante : Adobe Stock, Getty) les remplaceront directement :
+il suffit de les ajouter dans `src/assets/photos/` et de les déclarer dans `src/lib/photos.ts`.
+
 ## 1. Priorités
 
 | Priorité | Média | Où sur le site | Animation qui le met en valeur |

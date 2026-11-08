@@ -1,13 +1,13 @@
 ---
-interface Props { items: { q: string; a: string }[]; title?: string; tone?: 'light' | 'sand' }
-const { items, title = 'Questions fréquentes', tone = 'light' } = Astro.props;
+interface Props { items: { q: string; a: string }[]; title?: string; eyebrow?: string; tone?: 'light' | 'sand' }
+const { items, title = 'Questions fréquentes', eyebrow = 'FAQ', tone = 'light' } = Astro.props;
 const hid = 'faq-' + title.normalize('NFD').replace(/[^\w]+/g, '-').toLowerCase();
 ---
 {items.length > 0 && (
   <section class:list={['py-20 lg:py-28', tone === 'sand' ? 'bg-[var(--color-mist)]' : '']} aria-labelledby={hid}>
     <div class="container-lux grid gap-12 lg:grid-cols-12">
       <div class="lg:col-span-4">
-        <p class="eyebrow text-[var(--color-teal-ink)]">FAQ</p>
+        <p class="eyebrow text-[var(--color-teal-ink)]">{eyebrow}</p>
         <h2 id={hid} class="mt-5">{title}</h2>
       </div>
       <div class="lg:col-span-8">

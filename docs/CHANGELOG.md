@@ -2,6 +2,29 @@
 
 > Ajouter chaque modification **en haut**, datée, avec : ce qui a changé, pourquoi, fichiers clés, et l'état des vérifications.
 
+## 2026-11-08 — v1.1.0 · Affinage de la direction artistique
+
+**Fait**
+- Photographie : 10 photos faibles ou hors sujet retirées ; 5 photos sous licence libre ajoutées (bloc opératoire,
+  équipements intégrés, unité d'endoscopie, aménagement intérieur en cours, circulation à lumière naturelle),
+  crédits détaillés (auteur, licence, source). Règle : hubs sans visuel, pages détail avec photo pertinente ou
+  dessin technique original (`Visual`), une photo au plus deux fois.
+- Accueil en français (« Des espaces conçus pour mieux soigner. »), signature anglaise seule conservée ; transition
+  héros → expertises sans double marge (photo à cheval sur les deux fonds) ; processus Découvrir · Concevoir ·
+  Construire · Livrer ; « Pourquoi ESM » et CTA final en français.
+- Nouveau gabarit de page service (L'essentiel, approche + schéma, livrables numérotés, termes expliqués en
+  accordéon, FAQ, liens associés en 3 colonnes). Pages spécialités : approche + carte technique quand le héros est
+  un dessin.
+- Composants `SectionHeading`, `Visual` ; `PageHero` accepte une photo ou un dessin.
+- Footer en 4 colonnes, liens plus grands, version mobile compacte ; logo d'en-tête agrandi.
+- Révélations au défilement déclenchées dès l'entrée dans l'écran (corrige des blocs vides sur mobile).
+- Financement : « traité en priorité » et « conditions préférentielles » retirés (non validés par écrit) ;
+  « financement sans intérêt » reformulé.
+- Images de partage regénérées en français.
+
+**Vérifications** : `npm run verify` OK · axe-core OK sur 19 pages · aucune erreur console · aucun débordement
+(390 / 1 440 px) · Lighthouse mobile : accueil 99/100/100/100, service 100 ×4, spécialité 100 ×4, CLS 0.
+
 ## 2026-11-07 — v1.0.0 · Refonte complète de l'identité et du site
 
 **Fait**

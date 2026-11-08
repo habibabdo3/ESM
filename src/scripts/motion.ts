@@ -1,6 +1,6 @@
 /**
  * Animations au défilement — CSS + IntersectionObserver, sans bibliothèque.
- * - [data-reveal] / [data-reveal-img] : déclenchement unique à 20 % de visibilité
+ * - [data-reveal] / [data-reveal-img] : déclenchement unique dès l'entrée dans l'écran
  * - [data-count] : compteur animé une fois (chiffres réels uniquement)
  */
 const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -14,9 +14,12 @@ const io = new IntersectionObserver(
       io.unobserve(e.target);
     }
   },
-  { threshold: 0.2 },
+  // Déclenchement dès l'entrée dans l'écran : un seuil en % ne serait jamais atteint par un bloc très haut (mobile).
+  { threshold: 0, rootMargin: '0px 0px -8% 0px' },
 );
-document.querySelectorAll('[data-reveal],[data-reveal-img],[data-count]').forEach((el) => io.observe(el));
+const targets = document.querySelectorAll('[data-reveal],[data-reveal-img],[data-count]');
+if ('IntersectionObserver' in window) targets.forEach((el) => io.observe(el));
+else targets.forEach((el) => el.classList.add('is-in'));
 
 function countUp(el: HTMLElement) {
   const target = Number(el.dataset.count);

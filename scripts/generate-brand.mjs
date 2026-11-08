@@ -94,9 +94,9 @@ await sharp(Buffer.from(appIcon(180))).png().toFile('public/icons/apple-touch-ic
 
 // Images de partage 1200×630 : photo + voile navy + logo blanc + titre
 const ogPages = {
-  default: { photo: 'hall-clinique', lines: ['Designing spaces', 'for better healthcare.'], sub: 'Votre projet médical, de A à Z.' },
+  default: { photo: 'hall-clinique', lines: ['Des espaces conçus', 'pour mieux soigner.'], sub: 'Votre projet médical, de A à Z.' },
   amenagement: { photo: 'cabinet-dentaire', lines: ['Aménagement de', 'cabinet médical'], sub: 'Étude · Conception · Travaux · Équipement' },
-  renovation: { photo: 'bloc-operatoire', lines: ['Rénover sans', 'interrompre vos soins'], sub: 'Rénovation en site occupé' },
+  renovation: { photo: 'chantier-amenagement', lines: ['Rénover sans', 'interrompre vos soins'], sub: 'Rénovation en site occupé' },
 };
 for (const [name, p] of Object.entries(ogPages)) {
   const bg = await sharp(`src/assets/photos/${p.photo}.jpg`).resize(1200, 630, { fit: 'cover' }).toBuffer();

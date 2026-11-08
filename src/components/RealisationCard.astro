@@ -14,5 +14,5 @@ const spec = (await getSpecialites()).find((s) => s.id === d.specialite);
   <p class="mt-5 text-[0.82rem] font-semibold text-[var(--color-teal-ink)]">{spec?.data.short ?? d.specialite}{d.categorie && ` · ${d.categorie}`}</p>
   <h3 class="mt-1.5 text-[1.375rem] text-[var(--color-navy)]"><a href={realisationPath(entry.id)} class="no-underline after:absolute after:inset-0">{d.title}</a></h3>
   <p class="mt-1 text-[0.95rem] text-[var(--color-muted)]">{d.ville}</p>
-  <span class="link-more mt-4" lang="en" aria-hidden="true">View project <span>→</span></span>
+  <span class="link-more mt-4" aria-hidden="true">Voir le projet <span>→</span></span>
 </article>

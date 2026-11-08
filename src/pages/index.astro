@@ -1,6 +1,8 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import Photo from '@/components/Photo.astro';
+import Visual from '@/components/Visual.astro';
+import SectionHeading from '@/components/SectionHeading.astro';
 import ProcessSteps from '@/components/ProcessSteps.astro';
 import CtaBand from '@/components/CtaBand.astro';
 import RealisationCard from '@/components/RealisationCard.astro';
@@ -10,9 +12,9 @@ import { expertises } from '@/lib/photos';
 
 const realisations = await getRealisations();
 const why = [
-  { t: 'Medical expertise', d: 'Des espaces conçus autour des praticiens et de leurs contraintes de soin.' },
-  { t: 'One project partner', d: 'Un seul interlocuteur, de la première esquisse à l’installation des équipements.' },
-  { t: 'Global vision', d: 'Architecture, ingénierie, travaux et équipement réunis dans une même vision.' },
+  { t: 'L’expertise médicale', d: 'Des espaces conçus autour des praticiens et de leurs contraintes de soin.' },
+  { t: 'Un seul partenaire', d: 'Un interlocuteur unique, de la première esquisse à l’installation des équipements.' },
+  { t: 'Une vision globale', d: 'Architecture, ingénierie, travaux et équipement réunis dans une même vision.' },
 ];
 ---
 
@@ -21,19 +23,19 @@ const why = [
   description="Conception, construction, rénovation et équipement de cabinets, cliniques, centres d’imagerie et laboratoires, partout au Maroc, de l’étude à la livraison."
   context="Accueil"
 >
-  <!-- HÉROS -->
+  <!-- HÉROS : le texte sur fond warm, la photo à cheval sur la transition warm → blanc -->
   <section class="bg-[var(--color-warm)]">
-    <div class="container-lux grid gap-10 pb-12 pt-14 lg:grid-cols-12 lg:items-end lg:gap-16 lg:pb-16 lg:pt-24">
+    <div class="container-lux grid gap-8 pb-12 pt-12 lg:grid-cols-12 lg:items-end lg:gap-16 lg:pb-16 lg:pt-20">
       <div class="lg:col-span-7">
-        <p class="eyebrow fade-up text-[var(--color-teal-ink)]">Votre projet médical, de A à Z.</p>
-        <h1 lang="en" class="mt-6 text-[clamp(2.6rem,1.4rem+4.6vw,4.5rem)] font-bold leading-[1.04] tracking-[-0.035em] text-[var(--color-navy)]">
-          <span class="line-mask"><span style="--i:0">Designing spaces</span></span>
-          <span class="line-mask"><span style="--i:1">for better healthcare.</span></span>
+        <p lang="en" class="eyebrow fade-up text-[var(--color-teal-ink)]">Designing medical spaces.</p>
+        <h1 class="mt-6 text-[clamp(2.5rem,1.3rem+4.4vw,4.5rem)] font-bold leading-[1.05] tracking-[-0.035em]">
+          <span class="line-mask"><span style="--i:0">Des espaces conçus</span></span>
+          <span class="line-mask"><span style="--i:1">pour mieux soigner.</span></span>
         </h1>
       </div>
       <div class="lg:col-span-5">
         <p class="fade-up text-[1.15rem] leading-relaxed text-[var(--color-muted)]" style="--i:2">
-          De l’étude à la réalisation, nous donnons vie à vos projets médicaux.
+          De la conception architecturale à l’équipement, nous accompagnons vos projets médicaux de A à Z.
         </p>
         <div class="fade-up mt-8 flex flex-wrap gap-3" style="--i:3">
           <a href="/contact/" class="btn btn-primary">Démarrer mon projet <span class="arrow" aria-hidden="true">→</span></a>
@@ -41,32 +43,28 @@ const why = [
         </div>
       </div>
     </div>
-    <figure class="container-lux pb-20 lg:pb-28">
+  </section>
+  <div class="bg-[linear-gradient(to_bottom,var(--color-warm)_0,var(--color-warm)_50%,var(--color-white)_50%,var(--color-white)_100%)]">
+    <figure class="container-lux">
       <div class="aspect-[4/3] overflow-hidden rounded-[var(--radius-photo)] bg-[var(--color-mist)] sm:aspect-[16/9] lg:aspect-[21/9]">
         <Photo name="hallClinique" eager sizes="(min-width:1280px) 1184px, 100vw" widths={[640, 960, 1280, 1600, 2000, 2400]} class="h-full w-full object-cover" />
       </div>
       <figcaption class="mt-3 text-[0.8rem] text-[var(--color-muted)]">Image d’illustration</figcaption>
     </figure>
-  </section>
+  </div>
 
   <!-- EXPERTISES -->
-  <section class="bg-white py-24 lg:py-32" aria-labelledby="expertises-title">
+  <section class="bg-white pb-24 pt-20 lg:pb-32 lg:pt-28" aria-labelledby="expertises-title">
     <div class="container-lux">
-      <div class="flex flex-col justify-between gap-6 md:flex-row md:items-end">
-        <div data-reveal>
-          <p class="eyebrow text-[var(--color-teal-ink)]">Expertises</p>
-          <h2 id="expertises-title" class="mt-5 max-w-xl text-[var(--color-navy)]">Quatre expertises, un seul partenaire.</h2>
-        </div>
-        <a href="/expertises/" class="link-more self-start md:self-auto">Toutes nos expertises <span>→</span></a>
-      </div>
+      <SectionHeading eyebrow="Expertises" title="Quatre expertises, un seul partenaire." id="expertises-title" link={{ href: '/expertises/', label: 'Toutes nos expertises' }} />
       <ul class="mt-14 grid gap-x-8 gap-y-14 sm:grid-cols-2 lg:grid-cols-4">
         {expertises.map((e, i) => (
           <li class="card-lux group relative" data-reveal style={`--i:${i}`}>
-            <div class="card-media aspect-[4/3] overflow-hidden sm:aspect-[4/5] rounded-[var(--radius-photo)] bg-[var(--color-mist)]">
-              <Photo name={e.photo} sizes="(min-width:1024px) 22vw, (min-width:640px) 45vw, 100vw" widths={[400, 600, 800]} class="h-full w-full object-cover" />
+            <div class="card-media aspect-[4/3] overflow-hidden rounded-[var(--radius-photo)] bg-[var(--color-mist)] sm:aspect-[4/5]">
+              <Visual visual={e.visual} sizes="(min-width:1024px) 22vw, (min-width:640px) 45vw, 100vw" widths={[400, 600, 800]} />
             </div>
             <p class="num mt-6 text-[0.9rem]">{e.num}</p>
-            <h3 class="mt-2 text-[1.375rem] text-[var(--color-navy)]">
+            <h3 class="mt-2 text-[1.375rem]">
               <a href={`/expertises/#${e.id}`} class="no-underline after:absolute after:inset-0">{e.title}</a>
             </h3>
             <p class="mt-2 text-[0.98rem] leading-relaxed text-[var(--color-muted)]">{e.text}</p>
@@ -77,13 +75,10 @@ const why = [
     </div>
   </section>
 
-  <!-- PROCESS -->
+  <!-- MÉTHODE -->
   <section class="py-24 lg:py-32" aria-labelledby="process-title">
     <div class="container-lux">
-      <div data-reveal>
-        <p class="eyebrow text-[var(--color-teal-ink)]">Notre méthode</p>
-        <h2 id="process-title" class="mt-5 max-w-2xl text-[var(--color-navy)]">Un processus clair, du premier rendez-vous à l’ouverture.</h2>
-      </div>
+      <SectionHeading eyebrow="Notre méthode" title="Un processus clair, du premier rendez-vous à l’ouverture." id="process-title" />
       <div class="mt-16"><ProcessSteps /></div>
     </div>
   </section>
@@ -91,13 +86,7 @@ const why = [
   <!-- RÉALISATIONS -->
   <section class="bg-[var(--color-mist)] py-24 lg:py-32" aria-labelledby="real-title">
     <div class="container-lux">
-      <div class="flex flex-col justify-between gap-6 md:flex-row md:items-end">
-        <div data-reveal>
-          <p class="eyebrow text-[var(--color-teal-ink)]">Réalisations</p>
-          <h2 id="real-title" class="mt-5 max-w-xl text-[var(--color-navy)]">Des espaces pensés pour soigner.</h2>
-        </div>
-        {realisations.length > 0 && <a href="/realisations/" class="link-more self-start md:self-auto">Toutes les réalisations <span>→</span></a>}
-      </div>
+      <SectionHeading eyebrow="Réalisations" title="Des espaces pensés pour soigner." id="real-title" link={realisations.length > 0 ? { href: '/realisations/', label: 'Toutes les réalisations' } : undefined} />
       {realisations.length > 0 ? (
         <div class="mt-14 grid gap-x-8 gap-y-14 md:grid-cols-2 lg:grid-cols-3">
           {realisations.slice(0, 3).map((r, i) => <RealisationCard entry={r} i={i} />)}
@@ -111,8 +100,8 @@ const why = [
             <figcaption class="mt-3 text-[0.8rem] text-[var(--color-muted)]">Image d’illustration, ne représente pas un projet Euro Space Medical</figcaption>
           </figure>
           <div class="lg:col-span-5" data-reveal style="--i:1">
-            <h3 class="text-[1.5rem] text-[var(--color-navy)]">Nos études de cas arrivent.</h3>
-            <p class="mt-4 text-[1.02rem] leading-relaxed text-[var(--color-muted)]">Chaque projet sera présenté avec sa spécialité, sa ville et ses photos avant et après. Nous vous présentons des projets comparables au vôtre en rendez-vous.</p>
+            <h3 class="text-[1.5rem]">Nos études de cas arrivent.</h3>
+            <p class="mt-4 text-[1.02rem] leading-relaxed text-[var(--color-muted)]">Chaque projet sera présenté avec sa spécialité, sa ville et ses photos avant et après. En rendez-vous, nous vous présentons des projets comparables au vôtre.</p>
             <a href="/contact/" class="btn btn-primary mt-8">Parler de mon projet <span class="arrow" aria-hidden="true">→</span></a>
           </div>
         </div>
@@ -123,14 +112,11 @@ const why = [
   <!-- POURQUOI ESM -->
   <section class="bg-white py-24 lg:py-32" aria-labelledby="why-title">
     <div class="container-lux">
-      <div data-reveal>
-        <p class="eyebrow text-[var(--color-teal-ink)]">Pourquoi ESM</p>
-        <h2 id="why-title" class="mt-5 max-w-2xl text-[var(--color-navy)]">Le regard d’un architecte, la rigueur d’un ingénieur.</h2>
-      </div>
+      <SectionHeading eyebrow="Pourquoi ESM" title="Le regard d’un architecte, la rigueur d’un ingénieur." id="why-title" />
       <ul class="mt-14 grid gap-12 md:grid-cols-3 md:gap-10">
         {why.map((w, i) => (
           <li class="border-t-2 border-[var(--color-navy)] pt-7" data-reveal style={`--i:${i}`}>
-            <h3 lang="en" class="text-[1.375rem] text-[var(--color-navy)]">{w.t}</h3>
+            <h3 class="text-[1.375rem]">{w.t}</h3>
             <p class="mt-3 max-w-sm text-[1rem] leading-relaxed text-[var(--color-muted)]">{w.d}</p>
           </li>
         ))}
@@ -140,8 +126,7 @@ const why = [
 
   <CtaBand
     context="Accueil"
-    title="Let’s build your next medical space."
-    titleLang="en"
+    title="Construisons votre prochain espace médical."
     text="Vous avez un projet de cabinet, de clinique ou de centre médical ?"
     photo="cabinetDentaire3"
   />

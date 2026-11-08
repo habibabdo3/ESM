@@ -54,14 +54,20 @@ Règles automatiques : dans un conteneur `bg-[var(--color-navy…)]`, les titres
 - Une idée par section, un titre par section, deux phrases maximum par carte.
 - En-tête des pages internes (`PageHero`) : fond warm, fil d’Ariane, libellé teal, H1 navy, une phrase, photo 4:3.
 
-## Photographie
+## Photographie (revue du 2026-11-08)
 
-- Photos d’illustration **licence Unsplash**, sans visage de patient ni « médecin souriant » : espaces de soin,
-  plans, chantier. Registre : `src/lib/photos.ts` (texte alternatif, source). Crédits : `/mentions-legales/`.
-- **Elles ne représentent pas des réalisations ESM** : légende « Image d’illustration » quand le contexte peut prêter à
-  confusion ; jamais dans le portfolio. À remplacer par les photos des projets ESM (docs/MEDIAS.md).
-- Composant `Photo` : AVIF + WebP, `srcset`, chargement différé sauf image principale.
-- Illustrations : `PlanArt` (plans schématiques) en version claire pour les cartes spécialités et les plans types.
+- Direction : photographie d'architecture, lumière naturelle, balance des blancs neutre, aucun filtre bleu, aucun
+  visage de patient, aucun « médecin souriant ».
+- Banque actuelle : 11 photos sous licence libre (Unsplash ; Wikimedia Commons en CC0, CC BY 2.0/4.0, CC BY-SA 3.0),
+  registre `src/lib/photos.ts` avec auteur, licence et source ; crédits complets sur `/mentions-legales/`.
+- Retirées le 2026-11-08 : chantier générique, bloc opératoire daté, accueil daté avec signalétique étrangère,
+  couloir de bureau, façade non médicale, chambre, clichés sur négatoscope, plans dessinés à la main.
+- **Règle** : pages hub sans visuel ; pages détail avec photo pertinente ou, à défaut, dessin technique original
+  (`PlanArt`, cadre identique, étiquette « Plan type — … »). Une photo au plus deux fois, toujours en contexte.
+- Ratios : héros d'accueil 21:9 (16:9 tablette, 4:3 mobile), en-têtes 4:3, cartes expertises 4:5 (4:3 mobile).
+- Manques connus (photographie à produire ou à acheter, voir docs/MEDIAS.md) : salle scanner/CBCT, salle de
+  radiologie, salle d'endoscopie haut de gamme, chantier médical réel, rendus 3D.
+- **Elles ne représentent pas des réalisations ESM** : légende « Image d'illustration » ; jamais dans le portfolio.
 
 ## Mouvement
 

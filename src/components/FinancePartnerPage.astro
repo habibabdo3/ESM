@@ -22,7 +22,7 @@ const faq = [
 const crumbs = [{ name: 'Accueil', path: '/' }, { name: 'Financement', path: '/financement/' }, { name: p.short, path: p.path }];
 ---
 <BaseLayout title={p.title} description={p.description} noindex={!bankClaimsApproved} jsonld={[breadcrumb(base, crumbs), faqPage(faq)]} context={`Financement ${p.short}`}>
-  <PageHero eyebrow="Financement" h1={p.h1} intro={p.accroche} crumbs={crumbs} photo="accueilClinique" ctaLabel="Simuler le financement de mon projet">
+  <PageHero eyebrow="Financement" h1={p.h1} intro={p.accroche} crumbs={crumbs} ctaLabel="Simuler le financement de mon projet">
     <p class="mt-6 text-[0.88rem] italic text-[var(--color-muted)]">{BANK_DISCLAIMER}</p>
   </PageHero>
 
