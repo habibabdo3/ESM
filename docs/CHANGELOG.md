@@ -2,6 +2,16 @@
 
 > Ajouter chaque modification **en haut**, datée, avec : ce qui a changé, pourquoi, fichiers clés, et l'état des vérifications.
 
+## 2026-11-08 — v1.9.3 · Corrections de texte demandées par le client
+
+- Bandeau cookies : « Nécessaires — … (toujours **actifs**) » (accord avec « Nécessaires »).
+- Étape « Livrer » (`ProcessSteps`) : « Nous réceptionnons les travaux et préparons l’ouverture de votre structure. »
+  (au lieu de « … préparons votre structure à ouvrir »).
+- « Rénovation sans fermer » remplacé partout par « sans interrompre votre activité » (ou « en site occupé ») :
+  expertise Construction & rénovation, H1 de `/renovation-cabinet-clinique/`, titre et H1 du guide (URL inchangée,
+  pas de redirection nécessaire), question de FAQ du service, description de `/faq/` (152 caractères).
+- Vérifications : `npm run verify` sans erreur bloquante ; aucune occurrence restante dans le build.
+
 ## 2026-11-08 — v1.9.2 · Section Réalisations retirée de l'accueil
 
 - Section des projets types (photos plein écran) retirée de l'accueil à la demande du client, avec son script et ses

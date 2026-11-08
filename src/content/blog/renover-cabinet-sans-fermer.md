@@ -1,7 +1,7 @@
 ---
-title: "Rénover sans fermer : la méthode en site occupé"
+title: "Rénover sans interrompre votre activité : site occupé"
 description: "Phasage, cloisons étanches, maîtrise des poussières et du bruit : la méthode pour rénover un cabinet ou une clinique sans interrompre l’activité."
-h1: "Rénover sans fermer : méthode en site occupé"
+h1: "Rénover sans interrompre votre activité : la méthode en site occupé"
 date: 2026-11-05
 draft: false
 servicesLies: ["renovation-cabinet-clinique-site-occupe", "travaux-amenagement-cabinet-clinique"]

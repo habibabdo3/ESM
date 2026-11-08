@@ -109,7 +109,7 @@ export const expertises = [
     id: 'construction-renovation',
     num: '02',
     title: 'Construction & rénovation',
-    text: 'Travaux clés en main, réseaux techniques et rénovation sans fermer.',
+    text: 'Travaux clés en main, réseaux techniques et rénovation sans interrompre votre activité.',
     visual: { photo: 'chantierAmenagement' } as Visual,
     services: [
       'travaux-amenagement-cabinet-clinique',
