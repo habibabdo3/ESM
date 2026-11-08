@@ -2,6 +2,11 @@
 
 > Ajouter chaque modification **en haut**, datée, avec : ce qui a changé, pourquoi, fichiers clés, et l'état des vérifications.
 
+## 2026-11-08 — v1.8.1 · Expertises desktop comme avant
+
+- Desktop : retour au comportement précédent (première bande ouverte, la bande survolée s'élargit, libellés
+  verticaux sur les autres, pas de bouton « + »/« × »). Mobile : l'accordéon replié au toucher est conservé.
+
 ## 2026-11-08 — v1.8.0 · Expertises repliées au clic, fiche projet des réalisations
 
 - **Expertises** : les quatre bandes sont repliées au départ (numéro en contour or, titre, bouton « + ») ; un clic

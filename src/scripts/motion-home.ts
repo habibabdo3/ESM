@@ -5,7 +5,7 @@
  *   localStorage `esm-intro-v1`), la maquette livrée tourne lentement ; « Revoir la construction » et les étapes
  *   relancent la lecture ; bouton pause (WCAG 2.2.2). Lecture suspendue hors écran ou onglet caché ; scène chargée
  *   à l'approche de l'écran, libérée quand on s'en éloigne sur appareil modeste (`gl-lite`).
- * - [data-strip] : bandes repliées ; un clic (bouton, aria-expanded) ouvre une bande, Échap la referme.
+ * - [data-strip] : desktop, la bande survolée s'élargit (première ouverte) ; mobile, accordéon au toucher.
  * - [data-cases] : l'image collante change quand un projet type passe au centre de l'écran ; sa fiche se dessine.
  * Le plan des spécialités (SpecPlan.astro) a son propre script.
  */
@@ -205,9 +205,12 @@ if (journey && frame && canvas && immersive) {
   ).observe(frame);
 }
 
-/* ---------- 2. Expertises : bandes repliées, ouvertes au clic ---------- */
+/* ---------- 2. Expertises ---------- */
+// Desktop : comme avant — première bande ouverte, la bande survolée (ou cliquée, ou ciblée au clavier) s'élargit.
+// Mobile : accordéon replié, un toucher ouvre ou referme une bande.
 document.querySelectorAll<HTMLElement>('[data-strips]').forEach((section) => {
   const strips = [...section.querySelectorAll<HTMLElement>('[data-strip]')];
+  const desktop = matchMedia('(min-width: 1024px)');
   const set = (i: number) => {
     strips.forEach((s, k) => {
       const on = k === i;
@@ -218,21 +221,19 @@ document.querySelectorAll<HTMLElement>('[data-strips]').forEach((section) => {
     });
     section.classList.toggle('has-open', i >= 0);
   };
-  set(-1); // repliées au départ (sans JS, tout reste déplié et accessible)
-  strips.forEach((s, i) =>
+  const reset = () => set(desktop.matches ? 0 : -1);
+  reset();
+  desktop.addEventListener('change', reset);
+  strips.forEach((s, i) => {
+    s.addEventListener('pointerenter', (e) => desktop.matches && (e as PointerEvent).pointerType === 'mouse' && set(i));
+    s.addEventListener('focusin', () => desktop.matches && set(i));
     s.querySelector('[data-strip-toggle]')?.addEventListener('click', (e) => {
       const open = s.classList.contains('is-open');
-      set(open ? -1 : i);
+      if (desktop.matches) set(i);
+      else set(open ? -1 : i);
       // Au clavier seulement (detail = 0) : le focus passe au titre de la bande ouverte
       if (!open && (e as MouseEvent).detail === 0) s.querySelector<HTMLElement>('.strip-title a')?.focus({ preventScroll: true });
-    }),
-  );
-  section.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && section.classList.contains('has-open')) {
-      const open = strips.find((s) => s.classList.contains('is-open'));
-      set(-1);
-      open?.querySelector<HTMLElement>('[data-strip-toggle]')?.focus();
-    }
+    });
   });
 });
 

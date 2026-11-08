@@ -152,8 +152,8 @@ header/footer → tous les services et spécialités ; fil d'Ariane partout.
   lentement ; « Revoir la construction », étapes cliquables, **bouton pause obligatoire** (`motion-home.ts`, sans
   GSAP), lecture suspendue hors écran. Héros = titre + **brief en une phrase**
   (formulaire GET → /contact/ pré-rempli). Spécialités : plan d'un centre médical (`SpecPlan`), clic = panneau
-  « page virtuelle » qui affiche l'URL réelle de la spécialité (pages statiques conservées pour le SEO). Expertises : bandes **repliées
-  jusqu'au clic** (accordéon sur mobile). Réalisations : image collante (CSS sticky) qui change via
+  « page virtuelle » qui affiche l'URL réelle de la spécialité (pages statiques conservées pour le SEO). Expertises : desktop, première
+  bande ouverte et survol (choix client) ; mobile, accordéon replié au toucher. Réalisations : image collante (CSS sticky) qui change via
   IntersectionObserver + fiche projet (plan type, contraintes, livrables, à valider, services). Survols 200–400 ms ; `transform`/`opacity`/
   `clip-path`, seule exception `flex-grow` des bandes d'expertises. Contraste AA conservé pendant les animations.
   **Appareils** (script du `<head>`) : pas de 3D si « réduire les animations », économiseur de données ou < 2 Go ;
