@@ -1,0 +1,62 @@
+---
+/**
+ * Index typographique des spécialités + plan type collant (desktop) qui suit la ligne active.
+ * Ligne active : survol, focus clavier, ou ligne au centre de l'écran pendant le défilement.
+ * Utilisé sur l'accueil et sur /specialites/. Le titre de la section est passé dans le slot.
+ */
+import PlanArt from './PlanArt.astro';
+import { specialitePath } from '@/lib/content';
+
+interface Props { items: { id: string; short: string; sub?: string }[]; label?: string }
+const { items, label = 'Spécialités médicales' } = Astro.props;
+---
+<div class="spec-index grid gap-12 lg:grid-cols-12 lg:gap-16" data-spec-index>
+  <div class="lg:col-span-6">
+    <slot />
+    <ol class="spec-list mt-14" aria-label={label}>
+      {items.map((s, i) => (
+        <li data-spec={i} class:list={['spec-row', i === 0 && 'is-active']}>
+          <a href={specialitePath(s.id)} class="spec-link">
+            <span class="spec-n" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+            <span>
+              <span class="spec-name">{s.short}</span>
+              {s.sub && <span class="spec-sub">{s.sub}</span>}
+            </span>
+            <span class="spec-arrow" aria-hidden="true">→</span>
+          </a>
+        </li>
+      ))}
+    </ol>
+  </div>
+  <div class="hidden lg:col-span-6 lg:block" aria-hidden="true">
+    <div class="spec-stage">
+      {items.map((s, i) => (
+        <figure data-spec-plan={i} class:list={['spec-plan', i === 0 && 'is-active']}>
+          <PlanArt variant={s.id} tone="light" class="h-full w-full" label="" />
+          <figcaption class="spec-cap"><span>Plan type</span>{s.short}</figcaption>
+        </figure>
+      ))}
+    </div>
+  </div>
+</div>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-spec-index]').forEach((root) => {
+    const rows = [...root.querySelectorAll<HTMLElement>('[data-spec]')];
+    const plans = [...root.querySelectorAll<HTMLElement>('[data-spec-plan]')];
+    const activate = (i: number) => {
+      rows.forEach((r, k) => r.classList.toggle('is-active', k === i));
+      plans.forEach((p, k) => p.classList.toggle('is-active', k === i));
+    };
+    rows.forEach((row, i) => {
+      row.addEventListener('pointerenter', () => activate(i));
+      row.addEventListener('focusin', () => activate(i));
+    });
+    // La ligne qui traverse le milieu de l'écran devient active
+    const io = new IntersectionObserver(
+      (entries) => entries.forEach((e) => e.isIntersecting && activate(rows.indexOf(e.target as HTMLElement))),
+      { rootMargin: '-48% 0px -48% 0px' },
+    );
+    rows.forEach((r) => io.observe(r));
+  });
+</script>

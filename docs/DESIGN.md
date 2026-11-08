@@ -53,7 +53,8 @@ Règles automatiques : dans un conteneur `bg-[var(--color-navy…)]`, les titres
 
 - Conteneur `.container-lux` (80 rem), gouttières 20 / 32 / 48 px. Sections `py-20 lg:py-28` (accueil : 24 / 32).
 - Alternance blanc → warm → soft grey → navy. Grilles alignées, filets d’1 px, coins 2 px, ombres très rares.
-- Une idée par section, un titre par section, deux phrases maximum par carte.
+- Une idée par section, un titre par section. Pas de grille de cartes sur l’accueil et les hubs : panneaux plein cadre,
+  index typographiques, listes éditoriales.
 - En-tête des pages internes (`PageHero`) : fond warm, fil d’Ariane, libellé teal, H1 navy, une phrase, photo 4:3.
 
 ## Photographie (revue du 2026-11-08)
@@ -71,12 +72,16 @@ Règles automatiques : dans un conteneur `bg-[var(--color-navy…)]`, les titres
   radiologie, salle d'endoscopie haut de gamme, chantier médical réel, rendus 3D.
 - **Elles ne représentent pas des réalisations ESM** : légende « Image d'illustration » ; jamais dans le portfolio.
 
-## Mouvement
+## Mouvement (immersif, v1.3.0 du 2026-11-08)
 
-- 200–400 ms, courbe `cubic-bezier(0.25, 0.1, 0.25, 1)`. Uniquement `transform` et `opacity`.
-- Révélation courte au défilement (`data-reveal`, 12 px + fondu), titres en fondu court, zoom 1,03 au survol des cartes,
-  soulignement teal de la navigation, transitions de page natives (250 ms).
-- Supprimés : zoom continu du héros, parallaxe, révélations longues. `prefers-reduced-motion` : tout désactivé.
+- **Accueil** : parcours 3D (maquette blanche à arêtes navy, circuit patient or, coupe à 1,15 m avec chapeaux navy,
+  sols teintés teal/or, équipements teal/navy), 520 vh de défilement, 4 chapitres en fondu, barre de progression teal.
+- Expertises : panneaux plein cadre (62 vw desktop, 86 vw mobile), numéro en contour or, image qui glisse moins vite
+  que son cadre, barre de progression or ; mobile = défilement natif avec accroche.
+- Manifeste mot à mot (gris #7D8A95 → navy), bandeau défilant des spécialités (60 s, arrêté si animations réduites),
+  index des spécialités + plan collant, méthode en frise verticale + compteur, image révélée par ouverture du cadre.
+- Survols 200–400 ms, courbe `cubic-bezier(0.25, 0.1, 0.25, 1)` ; parcours en `scrub`. 2 épinglages max par page.
+- Sans WebGL ou avec `prefers-reduced-motion` : aucun épinglage, aucune 3D, contenu empilé et lisible.
 
 ## Navigation
 

@@ -93,7 +93,9 @@ src/
   components/             Seo, Header, Footer, PageHero, Photo, PlanArt (plans SVG), ServiceCard, SpecialtyCard,
                           ProcessSteps, Faq (<details>), CtaBand, QuoteForm, RelatedLinks, Breadcrumbs, MoroccoMap,
                           RealisationCard, BeforeAfter, Lightbox, StickyCta (WhatsApp mobile fixe), CookieBanner, Todo, Logo, Icon
-  scripts/motion.ts       IntersectionObserver (révélations, compteurs) + parallaxe desktop
+  scripts/motion.ts       IntersectionObserver (révélations, compteurs)
+  scripts/motion-home.ts  accueil : GSAP ScrollTrigger (parcours 3D, panneaux épinglés, texte mot à mot, frise, révélation)
+  scripts/clinic-scene.ts scène three.js de la maquette (plan → murs → coupe équipée), chargée à la demande
   styles/global.css       design tokens + composants + animations
   pages/                  voir §5
 api/devis.js              fonction serverless Vercel (Resend), champ piège + limitation de débit
@@ -129,7 +131,7 @@ header/footer → tous les services et spécialités ; fil d'Ariane partout.
 - **Typo** : Manrope (titres, boutons) + Inter (texte), `@fontsource-variable`. Héros 56–72 px, sections 36–44 px,
   cartes 21–24 px, texte 16–18 px. Paragraphes ≤ 3 lignes (`paragraphs()` dans `lib/content.ts`).
 - **Composants** : `PageHero` (fond warm + `visual` photo ou dessin 4:3), `Photo` (AVIF/WebP), `Visual`, `SectionHeading`,
-  `ProcessSteps` (Découvrir · Concevoir · Construire · Livrer), `CtaBand` (navy + photo optionnelle), cartes à filet supérieur, `.link-more` « Découvrir → »,
+  `ProcessSteps` (Découvrir · Concevoir · Construire · Livrer ; frise animée sur l'accueil), `SpecIndex`, `ServiceIndex`, `CtaBand` (navy + photo optionnelle), cartes à filet supérieur, `.link-more` « Découvrir → »,
   `.btn-primary` (navy ; blanc automatiquement sur fond navy), `.btn-ghost-dark` / `.btn-ghost-light`.
 - **Photos** (revue du 2026-11-08) : 11 photos sous licence libre (Unsplash, Wikimedia CC0 / CC BY / CC BY-SA),
   registre `src/lib/photos.ts` (alt, auteur, licence, source), crédits détaillés en mentions légales, légende
@@ -143,7 +145,16 @@ header/footer → tous les services et spécialités ; fil d'Ariane partout.
 - **Langue des titres** : tout en français ; l'anglais seulement pour la signature *Designing medical spaces.*
 - **Footer** : 4 colonnes (Entreprise · Expertises · Spécialités médicales · Ressources et contact), liens ≥ 15 px,
   barre légale discrète ; sur mobile, Expertises et Ressources côte à côte, spécialités sur 2 colonnes.
-- **Mouvement** : 200–400 ms, `transform`/`opacity` uniquement, `data-reveal`, zoom 1,03 au survol. Pas de parallaxe,
+- **Mouvement (immersif depuis le 2026-11-08, v1.3.0)** : accueil = parcours 3D three.js (`clinic-scene.ts`, chargé à la
+  demande) piloté par GSAP ScrollTrigger (`motion-home.ts`) ; **2 épinglages maximum par page** (parcours + expertises) ;
+  texte mot à mot, frise qui se remplit, image révélée, bandeau défilant. Pages internes : `data-reveal` + survols
+  200–400 ms. `transform`/`opacity` (ou couleur) uniquement. Classe `webgl` posée dans le `<head>` seulement si WebGL
+  et pas de « réduire les animations » ; sinon tout est lisible, empilé, sans épinglage. Gris d’animation ≥ 3:1.
+- **Pas de grilles de cartes** sur l’accueil et les hubs : panneaux plein cadre, index typographiques (`SpecIndex`,
+  `ServiceIndex`), listes éditoriales. Références : taste-skill (Leonxlnx) et UI UX Pro Max (nextlevelbuilder),
+  palette et polices de marque prioritaires sur leurs suggestions.
+- **SDK** `paycii/ssagency-sdk-angular` : référence en lecture seule (principes d’`AbstractThreeScene`, versions gsap
+  et three identiques). **Ne jamais le modifier.** La scène three.js est indépendante du framework (portable en Angular).
   pas d'effet continu. `prefers-reduced-motion` respecté.
 - **Navigation** : Accueil · Expertises (`/expertises/`) · Réalisations · À propos · Contact + « Parler de mon projet ».
 

@@ -2,6 +2,25 @@
 
 > Ajouter chaque modification **en haut**, datée, avec : ce qui a changé, pourquoi, fichiers clés, et l'état des vérifications.
 
+## 2026-11-08 — v1.3.0 · Accueil immersif 3D, fin des grilles de cartes
+
+- **Parcours 3D** (`src/scripts/clinic-scene.ts`, three.js 0.170, chargé à la demande) : la maquette d’un cabinet
+  dentaire passe du plan (circuit patient or) aux murs, puis en coupe à 1,15 m avec sols teintés et équipements ;
+  quatre chapitres (Concevoir, Construire, Équiper, Livrer) pilotés par le défilement (GSAP ScrollTrigger 3.15).
+  Principes repris d’`AbstractThreeScene` du SDK `paycii/ssagency-sdk-angular` (cadence plafonnée, pause hors écran,
+  libération des ressources). Le SDK n’a pas été modifié.
+- **Après le héros, plus de cartes** (direction taste-skill + UI UX Pro Max, palette et polices de marque conservées) :
+  expertises en panneaux plein cadre à défilement horizontal épinglé avec profondeur d’image ; manifeste
+  « Pourquoi ESM » qui s’allume mot à mot ; bandeau défilant des 14 spécialités ; index typographique des spécialités
+  avec plan type collant (`SpecIndex.astro`) ; méthode en frise verticale qui se remplit avec compteur ; image
+  révélée au défilement pour les réalisations.
+- `/specialites/` : grille de cartes remplacée par `SpecIndex` ; `/services/` : liste éditoriale `ServiceIndex`
+  (balayage navy au survol).
+- Détection WebGL + « réduire les animations » dans le `<head>` (classe `webgl`) : sans elle, contenu empilé, rien
+  d’épinglé, aucun script 3D chargé.
+- Vérifications : `astro check` 0/0/0, `npm run verify` sans erreur bloquante, axe-core 0 violation (accueil mobile,
+  /services/, /specialites/), captures 1440 et 390 px sans erreur console.
+
 ## 2026-11-08 — v1.2.0 · Nouveau logo choisi par le client
 
 - Logo redessiné en vecteur d’après la planche fournie : monogramme ESM dégradé navy → teal, toiture or avec cheminée,

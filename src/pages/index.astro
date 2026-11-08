@@ -1,16 +1,39 @@
 ---
+/**
+ * Accueil immersif : un seul parcours continu.
+ * 1. #journey — maquette 3D épinglée (plan → murs → équipements → salle de soins), 5 chapitres pilotés par le défilement.
+ * 2. Expertises — panneaux plein cadre en défilement horizontal épinglé (desktop) / accroche native (mobile).
+ * 3. Manifeste — texte qui s'allume mot à mot ; bandeau défilant des spécialités.
+ * 4. Spécialités — index typographique, plan collant qui change avec la ligne active.
+ * 5. Méthode — frise qui se remplit au défilement ; 6. Réalisations — image révélée ; appel final.
+ * Sans WebGL ou avec « réduire les animations » : même contenu, en défilement classique.
+ */
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import Photo from '@/components/Photo.astro';
 import Visual from '@/components/Visual.astro';
+import PlanArt from '@/components/PlanArt.astro';
+import SpecIndex from '@/components/SpecIndex.astro';
 import SectionHeading from '@/components/SectionHeading.astro';
-import ProcessSteps from '@/components/ProcessSteps.astro';
 import CtaBand from '@/components/CtaBand.astro';
 import RealisationCard from '@/components/RealisationCard.astro';
 import { site } from '@/config/site';
-import { getRealisations } from '@/lib/content';
+import { getRealisations, getSpecialites } from '@/lib/content';
 import { expertises } from '@/lib/photos';
 
 const realisations = await getRealisations();
+const specialites = await getSpecialites();
+const chapters = [
+  { at: 0.2, num: '01', title: 'Concevoir', text: 'Le plan part de l’acte de soin : trois circuits qui ne se croisent pas.', href: '/expertises/#etude-conception' },
+  { at: 0.42, num: '02', title: 'Construire', text: 'Cloisons, réseaux et fluides montent lot par lot, contrôlés à chaque étape.', href: '/expertises/#construction-renovation' },
+  { at: 0.56, num: '03', title: 'Équiper', text: 'Fauteuils, autoclave, compresseur : chaque équipement est prévu dès les plans.', href: '/expertises/#equipement-medical' },
+  { at: 0.82, num: '04', title: 'Livrer', text: 'Réception par lot, procès-verbal, dossier des ouvrages : votre structure est prête.', href: '/expertises/#accompagnement-global' },
+];
+const steps = [
+  { n: '01', t: 'Découvrir', d: 'Nous comprenons votre pratique, votre local et vos contraintes.' },
+  { n: '02', t: 'Concevoir', d: 'Nous concevons le plan, les réseaux et le budget par lot.' },
+  { n: '03', t: 'Construire', d: 'Nous coordonnons les travaux et l’installation des équipements.' },
+  { n: '04', t: 'Livrer', d: 'Nous réceptionnons et préparons votre structure à ouvrir.' },
+];
 const why = [
   { t: 'L’expertise médicale', d: 'Des espaces conçus autour des praticiens et de leurs contraintes de soin.' },
   { t: 'Un seul partenaire', d: 'Un interlocuteur unique, de la première esquisse à l’installation des équipements.' },
@@ -23,99 +46,91 @@ const why = [
   description="Conception, construction, rénovation et équipement de cabinets, cliniques, centres d’imagerie et laboratoires, partout au Maroc, de l’étude à la livraison."
   context="Accueil"
 >
-  <!-- HÉROS : le texte sur fond warm, la photo à cheval sur la transition warm → blanc -->
-  <section class="bg-[var(--color-warm)]">
-    <div class="container-lux grid gap-8 pb-12 pt-12 lg:grid-cols-12 lg:items-end lg:gap-16 lg:pb-16 lg:pt-20">
-      <div class="lg:col-span-7">
-        <p lang="en" class="eyebrow fade-up text-[var(--color-teal-ink)]">Designing medical spaces.</p>
-        <h1 class="mt-6 text-[clamp(2.5rem,1.3rem+4.4vw,4.5rem)] font-bold leading-[1.05] tracking-[-0.035em]">
-          <span class="line-mask"><span style="--i:0">Des espaces conçus</span></span>
-          <span class="line-mask"><span style="--i:1">pour mieux soigner.</span></span>
-        </h1>
+  <!-- 1. PARCOURS 3D -->
+  <section id="journey" class="journey relative bg-[var(--color-warm)]" aria-label="Du plan à la structure livrée">
+    <div class="journey-stage">
+      <div class="journey-fallback" aria-hidden="true">
+        <PlanArt variant="cabinet-dentaire-orthodontie" tone="light" class="h-full w-full" label="" />
       </div>
-      <div class="lg:col-span-5">
-        <p class="fade-up text-[1.15rem] leading-relaxed text-[var(--color-muted)]" style="--i:2">
-          De la conception architecturale à l’équipement, nous accompagnons vos projets médicaux de A à Z.
-        </p>
-        <div class="fade-up mt-8 flex flex-wrap gap-3" style="--i:3">
-          <a href="/contact/" class="btn btn-primary">Démarrer mon projet <span class="arrow" aria-hidden="true">→</span></a>
-          <a href="/expertises/" class="btn btn-ghost-dark">Découvrir nos expertises</a>
+      <canvas class="journey-canvas" aria-hidden="true"></canvas>
+      <div class="journey-veil" aria-hidden="true"></div>
+
+      <div class="container-lux journey-copy">
+        <div data-chapter="0" class="journey-chapter journey-hero is-active">
+          <p lang="en" class="eyebrow text-[var(--color-teal-ink)]">Designing medical spaces.</p>
+          <h1 class="mt-6 max-w-3xl text-[clamp(2.5rem,1.3rem+4.4vw,4.75rem)] font-bold leading-[1.03] tracking-[-0.035em]">
+            Des espaces conçus pour mieux soigner.
+          </h1>
+          <p class="mt-6 max-w-xl text-[1.15rem] leading-relaxed text-[var(--color-muted)]">
+            De la conception architecturale à l’équipement, nous accompagnons vos projets médicaux de A à Z.
+          </p>
+          <div class="mt-9 flex flex-wrap gap-3">
+            <a href="/contact/" class="btn btn-primary">Démarrer mon projet <span class="arrow" aria-hidden="true">→</span></a>
+            <a href="/expertises/" class="btn btn-ghost-dark bg-white/70">Découvrir nos expertises</a>
+          </div>
+          <p class="journey-hint mt-12 text-[0.85rem] font-medium text-[var(--color-muted)]" aria-hidden="true">
+            Faites défiler : le plan devient un cabinet <span class="journey-hint-arrow">↓</span>
+          </p>
         </div>
+
+        {chapters.map((c) => (
+          <div data-chapter={c.at} class="journey-chapter">
+            <p class="num text-[1rem]">{c.num} / 04</p>
+            <h2 class="mt-3 text-[clamp(2.4rem,1.6rem+3vw,4rem)] font-bold tracking-[-0.03em]">{c.title}</h2>
+            <p class="mt-4 max-w-md text-[1.12rem] leading-relaxed text-[var(--color-muted)]">{c.text}</p>
+            <a href={c.href} class="link-more mt-6">En savoir plus <span>→</span></a>
+          </div>
+        ))}
       </div>
+
+      <div class="journey-progress" aria-hidden="true"><span data-journey-bar></span></div>
     </div>
   </section>
-  <div class="bg-[linear-gradient(to_bottom,var(--color-warm)_0,var(--color-warm)_50%,var(--color-white)_50%,var(--color-white)_100%)]">
-    <figure class="container-lux">
-      <div class="aspect-[4/3] overflow-hidden rounded-[var(--radius-photo)] bg-[var(--color-mist)] sm:aspect-[16/9] lg:aspect-[21/9]">
-        <Photo name="hallClinique" eager sizes="(min-width:1280px) 1184px, 100vw" widths={[640, 960, 1280, 1600, 2000, 2400]} class="h-full w-full object-cover" />
-      </div>
-      <figcaption class="mt-3 text-[0.8rem] text-[var(--color-muted)]">Image d’illustration</figcaption>
-    </figure>
-  </div>
 
-  <!-- EXPERTISES -->
-  <section class="bg-white pb-24 pt-20 lg:pb-32 lg:pt-28" aria-labelledby="expertises-title">
-    <div class="container-lux">
-      <SectionHeading eyebrow="Expertises" title="Quatre expertises, un seul partenaire." id="expertises-title" link={{ href: '/expertises/', label: 'Toutes nos expertises' }} />
-      <ul class="mt-14 grid gap-x-8 gap-y-14 sm:grid-cols-2 lg:grid-cols-4">
-        {expertises.map((e, i) => (
-          <li class="card-lux group relative" data-reveal style={`--i:${i}`}>
-            <div class="card-media aspect-[4/3] overflow-hidden rounded-[var(--radius-photo)] bg-[var(--color-mist)] sm:aspect-[4/5]">
-              <Visual visual={e.visual} sizes="(min-width:1024px) 22vw, (min-width:640px) 45vw, 100vw" widths={[400, 600, 800]} />
-            </div>
-            <p class="num mt-6 text-[0.9rem]">{e.num}</p>
-            <h3 class="mt-2 text-[1.375rem]">
-              <a href={`/expertises/#${e.id}`} class="no-underline after:absolute after:inset-0">{e.title}</a>
-            </h3>
-            <p class="mt-2 text-[0.98rem] leading-relaxed text-[var(--color-muted)]">{e.text}</p>
-            <span class="link-more mt-4" aria-hidden="true">Découvrir <span>→</span></span>
+  <!-- 2. EXPERTISES : panneaux plein cadre, défilement horizontal épinglé -->
+  <section data-hrail class="hrail bg-[var(--color-navy)] text-white" aria-labelledby="expertises-title">
+    <div class="hrail-inner">
+      <ul data-hrail-track class="hrail-track" aria-label="Nos quatre expertises">
+        <li class="hrail-intro">
+          <p class="eyebrow text-[var(--color-gold)]">Expertises</p>
+          <h2 id="expertises-title" class="mt-6 text-[clamp(2.6rem,1.6rem+3.6vw,5rem)] font-bold leading-[1.02] tracking-[-0.035em] text-white">Quatre expertises,<br />un seul partenaire.</h2>
+          <p class="mt-6 max-w-sm text-[1.08rem] leading-relaxed text-white/70">Du premier plan à l’ouverture, une seule équipe tient le fil.</p>
+          <a href="/expertises/" class="link-more mt-8 text-white">Toutes nos expertises <span>→</span></a>
+          <p class="hrail-hint mt-14 hidden text-[0.85rem] text-white/50 lg:block" aria-hidden="true">Continuez à défiler →</p>
+        </li>
+        {expertises.map((e) => (
+          <li class="hrail-panel group">
+            <a href={`/expertises/#${e.id}`} class="hrail-link" aria-label={`${e.title} : ${e.text}`}>
+              <div class="hrail-media" aria-hidden="true">
+                <div data-hrail-img class="hrail-img">
+                  <Visual visual={e.visual} sizes="(min-width:1024px) 62vw, 92vw" widths={[640, 1000, 1400]} />
+                </div>
+                <div class="hrail-shade"></div>
+              </div>
+              <span class="hrail-num" aria-hidden="true">{e.num}</span>
+              <div class="hrail-text">
+                <h3 class="text-[clamp(1.9rem,1.3rem+2vw,3rem)] font-bold leading-[1.05] tracking-[-0.03em] text-white">{e.title}</h3>
+                <p class="mt-3 max-w-md text-[1.05rem] leading-relaxed text-white/80">{e.text}</p>
+                <span class="hrail-more" aria-hidden="true">Découvrir <span>→</span></span>
+              </div>
+            </a>
           </li>
         ))}
       </ul>
+      <div class="hrail-progress" aria-hidden="true"><span data-hrail-bar></span></div>
     </div>
   </section>
 
-  <!-- MÉTHODE -->
-  <section class="py-24 lg:py-32" aria-labelledby="process-title">
-    <div class="container-lux">
-      <SectionHeading eyebrow="Notre méthode" title="Un processus clair, du premier rendez-vous à l’ouverture." id="process-title" />
-      <div class="mt-16"><ProcessSteps /></div>
-    </div>
-  </section>
-
-  <!-- RÉALISATIONS -->
-  <section class="bg-[var(--color-mist)] py-24 lg:py-32" aria-labelledby="real-title">
-    <div class="container-lux">
-      <SectionHeading eyebrow="Réalisations" title="Des espaces pensés pour soigner." id="real-title" link={realisations.length > 0 ? { href: '/realisations/', label: 'Toutes les réalisations' } : undefined} />
-      {realisations.length > 0 ? (
-        <div class="mt-14 grid gap-x-8 gap-y-14 md:grid-cols-2 lg:grid-cols-3">
-          {realisations.slice(0, 3).map((r, i) => <RealisationCard entry={r} i={i} />)}
-        </div>
-      ) : (
-        <div class="mt-14 grid items-center gap-10 lg:grid-cols-12 lg:gap-16">
-          <figure class="lg:col-span-7" data-reveal>
-            <div class="aspect-[16/10] overflow-hidden rounded-[var(--radius-photo)] bg-white">
-              <Photo name="cabinetDentaire" sizes="(min-width:1024px) 55vw, 100vw" widths={[640, 960, 1280]} class="h-full w-full object-cover" />
-            </div>
-            <figcaption class="mt-3 text-[0.8rem] text-[var(--color-muted)]">Image d’illustration, ne représente pas un projet Euro Space Medical</figcaption>
-          </figure>
-          <div class="lg:col-span-5" data-reveal style="--i:1">
-            <h3 class="text-[1.5rem]">Nos études de cas arrivent.</h3>
-            <p class="mt-4 text-[1.02rem] leading-relaxed text-[var(--color-muted)]">Chaque projet sera présenté avec sa spécialité, sa ville et ses photos avant et après. En rendez-vous, nous vous présentons des projets comparables au vôtre.</p>
-            <a href="/contact/" class="btn btn-primary mt-8">Parler de mon projet <span class="arrow" aria-hidden="true">→</span></a>
-          </div>
-        </div>
-      )}
-    </div>
-  </section>
-
-  <!-- POURQUOI ESM -->
-  <section class="bg-white py-24 lg:py-32" aria-labelledby="why-title">
-    <div class="container-lux">
-      <SectionHeading eyebrow="Pourquoi ESM" title="Le regard d’un architecte, la rigueur d’un ingénieur." id="why-title" />
-      <ul class="mt-14 grid gap-12 md:grid-cols-3 md:gap-10">
+  <!-- 3. MANIFESTE : texte cinétique -->
+  <section class="statement bg-white" aria-labelledby="why-title">
+    <div class="container-lux py-28 lg:py-44">
+      <p class="eyebrow text-[var(--color-teal-ink)]">Pourquoi ESM</p>
+      <h2 id="why-title" data-words class="statement-text mt-8">Le regard d’un architecte, la rigueur d’un ingénieur, et un seul interlocuteur de la première esquisse à l’ouverture de votre structure.</h2>
+      <ul class="mt-20 grid gap-12 md:grid-cols-3 md:gap-10">
         {why.map((w, i) => (
-          <li class="border-t-2 border-[var(--color-navy)] pt-7" data-reveal style={`--i:${i}`}>
+          <li class="relative pt-7" data-reveal style={`--i:${i}`}>
+            <span class="absolute left-0 top-0 block h-px w-full bg-[var(--color-line)]"></span>
+            <span data-draw-line class="absolute left-0 top-0 block h-[2px] w-full bg-[var(--color-teal)]"></span>
             <h3 class="text-[1.375rem]">{w.t}</h3>
             <p class="mt-3 max-w-sm text-[1rem] leading-relaxed text-[var(--color-muted)]">{w.d}</p>
           </li>
@@ -124,10 +139,84 @@ const why = [
     </div>
   </section>
 
-  <CtaBand
-    context="Accueil"
-    title="Construisons votre prochain espace médical."
-    text="Vous avez un projet de cabinet, de clinique ou de centre médical ?"
-    photo="cabinetDentaire3"
-  />
+  <!-- Bandeau défilant (décoratif) -->
+  <div class="marquee bg-[var(--color-warm)]" aria-hidden="true">
+    <div class="marquee-track">
+      {[0, 1].map(() => (
+        <span class="marquee-group">
+          {specialites.map((s) => <span class="marquee-item">{s.data.short}<i></i></span>)}
+        </span>
+      ))}
+    </div>
+  </div>
+
+  <!-- 4. SPÉCIALITÉS : index typographique + plan collant -->
+  <section class="bg-[var(--color-warm)]" aria-labelledby="spec-title">
+    <div class="container-lux py-24 lg:py-32">
+      <SpecIndex items={specialites.map((s) => ({ id: s.id, short: s.data.short }))}>
+        <p class="eyebrow text-[var(--color-teal-ink)]">Spécialités</p>
+        <h2 id="spec-title" class="mt-6">Chaque spécialité a ses règles.</h2>
+        <p class="mt-5 max-w-md text-[1.05rem] leading-relaxed text-[var(--color-muted)]">Quatorze disciplines, chacune avec son plan type, ses réseaux et ses autorisations.</p>
+      </SpecIndex>
+    </div>
+  </section>
+
+  <!-- 5. MÉTHODE : frise qui se remplit au défilement -->
+  <section class="method bg-[var(--color-navy)] text-white" aria-labelledby="process-title" data-method>
+    <div class="container-lux grid gap-14 py-24 lg:grid-cols-12 lg:gap-16 lg:py-36">
+      <div class="lg:col-span-5">
+        <div class="lg:sticky lg:top-32">
+          <p class="eyebrow text-[var(--color-gold)]">Notre méthode</p>
+          <h2 id="process-title" class="mt-6 text-white">Un processus clair, du premier rendez-vous à l’ouverture.</h2>
+          <p class="method-counter mt-12 hidden lg:block" aria-hidden="true"><span data-method-num>01</span><small>/ 04</small></p>
+        </div>
+      </div>
+      <ol class="method-steps lg:col-span-7">
+        <span class="method-line" aria-hidden="true"><span data-method-bar></span></span>
+        {steps.map((s, i) => (
+          <li data-step={i} class="method-step">
+            <span class="method-dot" aria-hidden="true"></span>
+            <span class="num text-[0.95rem]">{s.n}</span>
+            <h3 class="mt-3 text-[clamp(1.8rem,1.3rem+1.6vw,2.6rem)] text-white">{s.t}</h3>
+            <p class="mt-3 max-w-md text-[1.05rem] leading-relaxed text-white/75">{s.d}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <!-- 6. RÉALISATIONS -->
+  <section class="bg-white py-24 lg:py-32" aria-labelledby="real-title">
+    <div class="container-lux">
+      <SectionHeading eyebrow="Réalisations" title="Des espaces pensés pour soigner." id="real-title" link={realisations.length > 0 ? { href: '/realisations/', label: 'Toutes les réalisations' } : undefined} />
+      {realisations.length > 0 && (
+        <div class="mt-14 grid gap-x-8 gap-y-14 md:grid-cols-2 lg:grid-cols-3">
+          {realisations.slice(0, 3).map((r, i) => <RealisationCard entry={r} i={i} />)}
+        </div>
+      )}
+    </div>
+    {realisations.length === 0 && (
+      <div class="mt-14">
+        <figure class="reveal-frame" data-clip-reveal>
+          <div class="reveal-media">
+            <Photo name="cabinetDentaire" sizes="100vw" widths={[800, 1280, 1920]} class="h-full w-full object-cover" />
+          </div>
+          <div class="reveal-overlay">
+            <div class="container-lux">
+              <h3 class="max-w-xl text-[clamp(1.8rem,1.2rem+2vw,3rem)] font-bold leading-[1.05] text-white">Nos études de cas arrivent.</h3>
+              <p class="mt-4 max-w-lg text-[1.05rem] leading-relaxed text-white/85">Chaque projet sera présenté avec sa spécialité, sa ville et ses photos avant et après. En rendez-vous, nous vous présentons des projets comparables au vôtre.</p>
+              <a href="/contact/" class="btn btn-primary mt-8 !bg-white !text-[var(--color-navy)]">Parler de mon projet <span class="arrow" aria-hidden="true">→</span></a>
+            </div>
+          </div>
+          <figcaption class="container-lux mt-3 text-[0.8rem] text-[var(--color-muted)]">Image d’illustration, ne représente pas un projet Euro Space Medical</figcaption>
+        </figure>
+      </div>
+    )}
+  </section>
+
+  <CtaBand context="Accueil" title="Construisons votre prochain espace médical." text="Vous avez un projet de cabinet, de clinique ou de centre médical ?" photo="cabinetDentaire3" />
 </BaseLayout>
+
+<script>
+  import '@/scripts/motion-home';
+</script>

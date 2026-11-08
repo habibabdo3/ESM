@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import PageHero from '@/components/PageHero.astro';
-import SpecialtyCard from '@/components/SpecialtyCard.astro';
+import SpecIndex from '@/components/SpecIndex.astro';
 import CtaBand from '@/components/CtaBand.astro';
 import { getSpecialites } from '@/lib/content';
 import { breadcrumb } from '@/lib/schema';
@@ -18,9 +18,11 @@ const crumbs = [{ name: 'Accueil', path: '/' }, { name: 'Spécialités', path: '
 >
   <PageHero eyebrow="Spécialités" h1="Quatorze spécialités, autant d’exigences" intro="Radioprotection, salles propres, fluides, acoustique, étanchéité : le plan part de l’acte médical. Choisissez votre discipline pour découvrir ses contraintes et notre offre." crumbs={crumbs} />
   <section class="py-20 lg:py-28">
-    <h2 class="sr-only">Nos quatorze spécialités</h2>
-    <div class="container-lux grid gap-x-8 gap-y-16 sm:grid-cols-2 lg:grid-cols-3">
-      {specialites.map((s, i) => <SpecialtyCard id={s.id} short={s.data.short} contrainte={s.data.contraintes[0]} i={i} />)}
+    <div class="container-lux">
+      <SpecIndex items={specialites.map((s) => ({ id: s.id, short: s.data.short, sub: s.data.contraintes[0] }))}>
+        <h2 class="max-w-xl">Choisissez votre discipline.</h2>
+        <p class="mt-5 max-w-md text-[1.05rem] leading-relaxed text-[var(--color-muted)]">Survolez une spécialité pour voir son plan type, ouvrez-la pour ses contraintes et notre offre.</p>
+      </SpecIndex>
     </div>
   </section>
   <CtaBand context="Spécialités" />

@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import PageHero from '@/components/PageHero.astro';
-import ServiceCard from '@/components/ServiceCard.astro';
+import ServiceIndex from '@/components/ServiceIndex.astro';
 import ProcessSteps from '@/components/ProcessSteps.astro';
 import CtaBand from '@/components/CtaBand.astro';
 import { getServices } from '@/lib/content';
@@ -32,8 +32,8 @@ const crumbs = [{ name: 'Accueil', path: '/' }, { name: 'Services', path: '/serv
   </section>
   <section class="py-20 lg:py-28">
     <h2 class="sr-only">Nos dix services</h2>
-    <div class="container-lux grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-      {services.map((s, i) => <ServiceCard id={s.id} order={s.data.order} short={s.data.short} h1={s.data.h1} intro={s.data.intro} description={s.data.description} termes={s.data.termes} i={i} />)}
+    <div class="container-lux">
+      <ServiceIndex items={services.map((s) => ({ id: s.id, order: s.data.order, short: s.data.short, excerpt: s.data.description, termes: s.data.termes }))} />
     </div>
   </section>
   <section class="bg-[var(--color-navy)] py-20 text-[var(--color-warm)] lg:py-28">

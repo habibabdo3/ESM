@@ -1,0 +1,23 @@
+---
+/** Liste éditoriale des services : grandes lignes typographiques, fond navy qui balaie la ligne au survol. */
+import { servicePath, pad } from '@/lib/content';
+interface Props { items: { id: string; order: number; short: string; excerpt: string; termes?: string[] }[] }
+const { items } = Astro.props;
+---
+<ol class="svc-list" aria-label="Nos services">
+  {items.map((s) => (
+    <li class="svc-row" data-reveal>
+      <a href={servicePath(s.id)} class="svc-link">
+        <span class="svc-n" aria-hidden="true">{pad(s.order)}</span>
+        <span class="svc-name">{s.short}</span>
+        <span class="svc-body">
+          <span class="svc-excerpt">{s.excerpt}</span>
+          {s.termes && s.termes.length > 0 && (
+            <span class="svc-terms">{s.termes.map((t) => <span>{t}</span>)}</span>
+          )}
+        </span>
+        <span class="svc-arrow" aria-hidden="true">→</span>
+      </a>
+    </li>
+  ))}
+</ol>
