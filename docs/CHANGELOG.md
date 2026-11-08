@@ -2,6 +2,25 @@
 
 > Ajouter chaque modification **en haut**, datée, avec : ce qui a changé, pourquoi, fichiers clés, et l'état des vérifications.
 
+## 2026-11-08 — v1.6.0 · Défilement normal, brief de projet, spécialités en panneau, réalisations qui défilent
+
+- **Défilement normal partout** : plus aucune section épinglée ni effet piloté par le défilement sur l'accueil ;
+  GSAP n'est plus chargé (script d'accueil allégé, IntersectionObserver uniquement).
+- **Maquette 3D en lecture automatique** dans la planche du héros (28 s par construction, pause de 3,5 s, boucle),
+  étapes cliquables avec barres de progression, bouton pause (WCAG 2.2.2), lecture suspendue hors écran.
+  Chargée seulement à l'approche de l'écran ; libérée quand on s'en éloigne sur appareil modeste.
+- **Netteté sur téléphone** : densité de pixels jusqu'à 2× (1,75× en mode allégé), anticrénelage toujours actif.
+- **Héros** : titre sur deux lignes + **brief de projet en une phrase** (« Je prépare une [création] en [spécialité] à
+  [ville] ») qui ouvre /contact/ avec le formulaire pré-rempli (nature, spécialité, ville) ; lien WhatsApp si
+  renseigné. Plus de boutons classiques.
+- **Spécialités** : clic sur une pièce du plan = panneau latéral (« page virtuelle » : contraintes, offre, points à
+  valider, services liés, CTA) ; l'adresse devient celle de la vraie page (partageable, indexée), « Retour » ferme.
+- **Expertises** : bandes d'images au survol, sans épinglage.
+- **Réalisations** : image collante qui change (volet vertical) quand chaque projet type passe au centre de l'écran ;
+  filet or sur le projet en cours. Cartes empilées retirées.
+- Vérifications : `astro check` 0/0/0, `npm run verify` sans erreur bloquante, axe-core 0 violation, captures 1440,
+  1280 et 390 px (3×) sans erreur console, panneau + historique testés.
+
 ## 2026-11-08 — v1.5.0 · Héros en planche, bandes d'expertises, comparatif, plan des spécialités, projets types
 
 - **Héros** : titre éditorial (lignes qui montent, « soigner » souligné or), chapô + actions sous un filet ; la

@@ -94,7 +94,7 @@ src/
                           ProcessSteps, Faq (<details>), CtaBand, QuoteForm, RelatedLinks, Breadcrumbs, MoroccoMap,
                           RealisationCard, BeforeAfter, Lightbox, StickyCta (WhatsApp mobile fixe), CookieBanner, Todo, Logo, Icon
   scripts/motion.ts       IntersectionObserver (révélations, compteurs)
-  scripts/motion-home.ts  accueil : GSAP ScrollTrigger (parcours 3D, panneaux épinglés, texte mot à mot, frise, révélation)
+  scripts/motion-home.ts  accueil : lecture auto de la maquette, bandes d'expertises, réalisations (IntersectionObserver, sans GSAP)
   scripts/clinic-scene.ts scène three.js de la maquette (plan → murs → coupe équipée), chargée à la demande
   styles/global.css       design tokens + composants + animations
   pages/                  voir §5
@@ -145,16 +145,17 @@ header/footer → tous les services et spécialités ; fil d'Ariane partout.
 - **Langue des titres** : tout en français ; l'anglais seulement pour la signature *Designing medical spaces.*
 - **Footer** : 4 colonnes (Entreprise · Expertises · Spécialités médicales · Ressources et contact), liens ≥ 15 px,
   barre légale discrète ; sur mobile, Expertises et Ressources côte à côte, spécialités sur 2 colonnes.
-- **Mouvement (immersif, v1.5.0 du 2026-11-08)** : accueil = parcours 3D three.js (`clinic-scene.ts`, chargé à la
-  demande) piloté par GSAP ScrollTrigger (`motion-home.ts`) : plan coté → réseaux → murs → coupe équipée → PV.
-  **Le texte ne couvre jamais la maquette** : au départ, planche encadrée (cartouche) à côté du titre (sous le titre
-  sur mobile), qui s'étire en plein écran au défilement ; ensuite légende compacte + sommaire des étapes.
-  Le parcours tient lieu de méthode. **2 épinglages maximum par page** (parcours + bandes d'expertises). Puis :
-  comparatif « Avec ESM », bandeau, plan des spécialités (`SpecPlan`), projets types en cartes empilées (CSS sticky).
-  Pages internes : `data-reveal` + survols 200–400 ms. `transform`/`opacity`/`clip-path` (ou couleur) ; seule
-  exception : `flex-grow` des 4 bandes d'expertises. Gris d’animation ≥ 3:1.
+- **Mouvement (v1.6.0 du 2026-11-08)** : **défilement normal, rien d'épinglé, rien de piloté par le défilement**
+  (demande client : « c'est l'utilisateur qui contrôle la vitesse »). Accueil : maquette 3D three.js
+  (`clinic-scene.ts`) en **lecture automatique** dans la planche du héros (`motion-home.ts`, sans GSAP), étapes
+  cliquables, **bouton pause obligatoire**, lecture suspendue hors écran. Héros = titre + **brief en une phrase**
+  (formulaire GET → /contact/ pré-rempli). Spécialités : plan d'un centre médical (`SpecPlan`), clic = panneau
+  « page virtuelle » qui affiche l'URL réelle de la spécialité (pages statiques conservées pour le SEO). Réalisations :
+  image collante (CSS sticky) qui change via IntersectionObserver. Survols 200–400 ms ; `transform`/`opacity`/
+  `clip-path`, seule exception `flex-grow` des bandes d'expertises. Contraste AA conservé pendant les animations.
   **Appareils** (script du `<head>`) : pas de 3D si « réduire les animations », économiseur de données ou < 2 Go ;
-  classe `gl-lite` (sans ombres, 1×, 30 i/s) si < 4 Go, ≤ 4 cœurs ou 2G/3G ; repli si perte du contexte WebGL.
+  classe `gl-lite` (sans ombres, densité ≤ 1,75×, 30 i/s) si < 4 Go, ≤ 4 cœurs ou 2G/3G ; densité ≤ 2× sinon ;
+  scène chargée à l'approche de l'écran ; repli sur le plan statique si perte du contexte WebGL.
 - **Pas de grilles de cartes** sur l’accueil et les hubs : bandes d'images, plan des spécialités, comparatif, index
   typographiques (`SpecIndex`, `ServiceIndex`), listes éditoriales, cartes empilées. Références : taste-skill (Leonxlnx) et UI UX Pro Max (nextlevelbuilder),
   palette et polices de marque prioritaires sur leurs suggestions.

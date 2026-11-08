@@ -13,7 +13,9 @@
  * Principes repris d'AbstractThreeScene (SDK @paycii/ui-framework, non modifié) : boucle hors framework, plafond
  * d'images/s, pause onglet caché et hors écran, densité de pixels plafonnée, libération complète des ressources.
  * Ombres douces recalculées seulement quand la maquette change (pas à chaque image). Mode `lite` pour les appareils
- * modestes : ni ombres ni anticrénelage, densité 1×, 30 images/s (choisi dans BaseLayout via deviceMemory, etc.).
+ * modestes : sans ombres, densité 1,75× max, 30 images/s (choisi dans BaseLayout via deviceMemory, etc.).
+ * La scène se cadre dans son conteneur (planche du héros) et ne dépend plus du défilement : la progression
+ * est fournie par la lecture automatique de motion-home.ts.
  */
 import {
   AmbientLight, Box3, BoxGeometry, BufferGeometry, CanvasTexture, CatmullRomCurve3, CurvePath, CylinderGeometry,
@@ -111,15 +113,16 @@ export interface ClinicScene {
 export interface ClinicSceneOptions {
   targetFps?: number;
   pixelRatio?: number;
-  /** Appareil modeste (peu de mémoire, peu de cœurs, économiseur de données) : sans ombres ni anticrénelage. */
+  /** Appareil modeste (peu de mémoire, peu de cœurs, réseau lent) : sans ombres, densité plafonnée à 1,75×. */
   lite?: boolean;
 }
 
 export function mountClinicScene(canvas: HTMLCanvasElement, opts: ClinicSceneOptions = {}): ClinicScene {
   const lite = opts.lite ?? false;
   const targetFps = opts.targetFps ?? 45;
-  const renderer = new WebGLRenderer({ canvas, antialias: !lite, alpha: true, powerPreference: 'low-power' });
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, opts.pixelRatio ?? 1.5));
+  // Netteté : jusqu'à 2× (écrans de téléphone denses) ; anticrénelage conservé même en mode allégé
+  const renderer = new WebGLRenderer({ canvas, antialias: true, alpha: true, powerPreference: lite ? 'low-power' : 'default' });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, opts.pixelRatio ?? (lite ? 1.75 : 2)));
   renderer.outputColorSpace = SRGBColorSpace;
   renderer.shadowMap.enabled = !lite;
   renderer.shadowMap.type = PCFSoftShadowMap;
@@ -570,7 +573,7 @@ export function mountClinicScene(canvas: HTMLCanvasElement, opts: ClinicSceneOpt
 
   // ---------- Caméra : plan → réseaux → axonométrie → orbite → salles de soins ----------
   const keys: { p: number; pos: Vector3; look: Vector3 }[] = [
-    { p: 0.0, pos: new Vector3(0.6, 34, 5.8), look: new Vector3(0.6, 0, 0.6) },
+    { p: 0.0, pos: new Vector3(0.6, 26, 5.2), look: new Vector3(0.6, 0, 0.6) },
     { p: 0.22, pos: new Vector3(0.6, 23, 7.2), look: new Vector3(0.6, 0, 0.4) },
     { p: 0.36, pos: new Vector3(6, 17, 15), look: new Vector3(0.4, 0, 0) },
     { p: 0.52, pos: new Vector3(15, 12.5, 15), look: new Vector3(0, 0.6, 0) },
@@ -597,7 +600,7 @@ export function mountClinicScene(canvas: HTMLCanvasElement, opts: ClinicSceneOpt
     height = Math.max(1, Math.round(r.height));
     renderer.setSize(width, height, false);
     camera.aspect = width / height;
-    camera.fov = width / height < 0.8 ? 58 : 38;
+    camera.fov = width / height < 1 ? 50 : 38;
     renderer.shadowMap.needsUpdate = true;
     camera.updateProjectionMatrix();
   }
@@ -669,14 +672,8 @@ export function mountClinicScene(canvas: HTMLCanvasElement, opts: ClinicSceneOpt
     camPos.lerpVectors(a.pos, b.pos, lt);
     camLook.lerpVectors(a.look, b.look, lt);
     const drift = Math.sin(t * 0.00025) * 0.35;
-    // Cadrage : maquette à droite du titre au départ, puis plein écran ; sur mobile, sous le titre puis au-dessus de la légende
-    const hero = 1 - span(p, 0, 0.09);
-    const narrow = width / height < 0.8;
-    const zoom = narrow ? 1 + 0.5 * hero : 1;
-    camera.position.set((camPos.x + drift) * zoom, camPos.y * zoom, (camPos.z - drift * 0.5) * zoom);
+    camera.position.set(camPos.x + drift, camPos.y, camPos.z - drift * 0.5);
     camera.lookAt(camLook);
-    if (narrow) camera.setViewOffset(width, height, 0, height * (-0.25 * hero + 0.12 * (1 - hero)), width, height);
-    else camera.setViewOffset(width, height, -width * 0.23 * hero, height * 0.04 * (1 - hero), width, height);
     camera.updateProjectionMatrix();
   }
 
@@ -686,7 +683,7 @@ export function mountClinicScene(canvas: HTMLCanvasElement, opts: ClinicSceneOpt
     if (!visible || !pageVisible) return;
     if (now - last < 1000 / targetFps) return;
     last = now;
-    smooth += (progress - smooth) * 0.12;
+    smooth += (progress - smooth) * (progress < smooth - 0.2 ? 0.06 : 0.12);
     apply(smooth, now);
     if (!lite && Math.abs(smooth - shadowAt) > 0.0005) {
       renderer.shadowMap.needsUpdate = true;

@@ -101,10 +101,17 @@ const lbl = 'text-[0.78rem] font-semibold uppercase tracking-[0.12em] text-[var(
   const status = document.getElementById('form-status');
   const params = new URLSearchParams(location.search);
   const pre = params.get('specialite');
-  if (form && pre) {
-    const sel = form.querySelector<HTMLSelectElement>('#f-structure');
-    if (sel && [...sel.options].some((o) => o.value === pre)) sel.value = pre;
-  }
+  // Pré-remplissage depuis l'accueil (« Je prépare une … en … à … ») ou une page spécialité
+  const preset = (id: string, value: string | null) => {
+    const el = form?.querySelector<HTMLSelectElement | HTMLInputElement>(id);
+    if (!el || !value) return;
+    if (el instanceof HTMLSelectElement) {
+      if ([...el.options].some((o) => o.value === value)) el.value = value;
+    } else el.value = value.slice(0, 80);
+  };
+  preset('#f-structure', pre);
+  preset('#f-nature', params.get('nature'));
+  preset('#f-ville', params.get('ville'));
   form?.addEventListener('submit', async (e) => {
     e.preventDefault();
     if (!status) return;

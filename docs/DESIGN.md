@@ -72,23 +72,21 @@ Règles automatiques : dans un conteneur `bg-[var(--color-navy…)]`, les titres
   radiologie, salle d'endoscopie haut de gamme, chantier médical réel, rendus 3D.
 - **Elles ne représentent pas des réalisations ESM** : légende « Image d'illustration » ; jamais dans le portfolio.
 
-## Accueil et mouvement (v1.5.0 du 2026-11-08)
+## Accueil et mouvement (v1.6.0 du 2026-11-08)
 
-- **Héros** : surtitre (signature + « Partout au Maroc »), titre 800 sur 3 lignes qui montent, « soigner » teal
-  souligné or, chapô et actions sous un filet. La maquette est une **planche encadrée** (fond mist, coins 8 px,
-  cartouche « Plan type · Cabinet dentaire · Illustration ESM ») à droite du titre (en bas sur mobile) ; au premier
-  défilement le titre sort et la planche s'étire en plein écran (`clip-path`).
-- **Parcours 3D** (600 vh) : plan coté → réseaux (teal fluides, or électricité) → murs → coupe à 1,15 m équipée →
-  pastilles de PV ; légende compacte en bas à gauche, sommaire des 4 étapes à droite.
-- **Expertises** : 4 bandes d'images jointives (2 px navy) ; la bande ouverte (×4,2) montre numéro en contour or,
-  titre, texte, services ; les autres un libellé vertical. Défilement épinglé + survol ; mobile : panneaux empilés.
-- **Pourquoi ESM** : tableau « Plusieurs prestataires / Avec ESM », colonne ESM navy + teinte teal qui se remplit.
-- **Spécialités** : plan d'un centre médical (murs navy 5 px, cloisons 2 px, trame pointillée, débattements de porte),
-  pièce active teal, cartouche sous le plan. Mobile : plan sur 2 colonnes.
-- **Réalisations** (sans étude de cas) : projets types en cartes navy empilées (sticky), la carte recouverte recule.
-- Survols 200–400 ms, courbe `cubic-bezier(0.25, 0.1, 0.25, 1)`. 2 épinglages max par page.
-- Sans WebGL, appareil modeste ou `prefers-reduced-motion` : aucun épinglage, aucune 3D, contenu empilé et lisible ;
-  mode `gl-lite` pour les appareils intermédiaires.
+- **Règle** : défilement normal ; aucune section épinglée, aucun effet dont la vitesse dépend du défilement.
+- **Héros** : surtitre, titre 800 sur deux lignes (« soigner » teal souligné or), chapô, puis **brief en une phrase**
+  dans un encart blanc à filet teal : « Je prépare une [création ▾] en [spécialité ▾] à [ville] . » (champs soulignés
+  teal), bouton navy + carré or « → », lien WhatsApp. À droite (dessous sur mobile) : planche mist coins 8 px,
+  cartouche, bouton pause rond, maquette 3D qui se construit seule ; sous la planche, 4 étapes à barres de progression
+  teal et le texte de l'étape en cours.
+- **Expertises** : 4 bandes d'images jointives, la bande survolée s'élargit (×4,2) ; mobile : panneaux empilés.
+- **Pourquoi ESM** : tableau comparatif, colonne ESM navy + teinte teal.
+- **Spécialités** : plan d'un centre médical ; clic = panneau latéral (en-tête navy à trame, contraintes, offre
+  numérotée, points à valider losange or, services en étiquettes, pied warm avec CTA + « Page complète »).
+- **Réalisations** : image collante 56 % (desktop) / 42 svh (mobile), volet vertical 900 ms à chaque projet, compteur
+  or, filet or sur le projet en cours.
+- Sans WebGL, appareil modeste ou `prefers-reduced-motion` : plan statique, quatre étapes affichées en entier.
 
 ## Navigation
 
