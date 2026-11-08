@@ -145,17 +145,20 @@ header/footer → tous les services et spécialités ; fil d'Ariane partout.
 - **Langue des titres** : tout en français ; l'anglais seulement pour la signature *Designing medical spaces.*
 - **Footer** : 4 colonnes (Entreprise · Expertises · Spécialités médicales · Ressources et contact), liens ≥ 15 px,
   barre légale discrète ; sur mobile, Expertises et Ressources côte à côte, spécialités sur 2 colonnes.
-- **Mouvement (immersif depuis le 2026-11-08, v1.3.0)** : accueil = parcours 3D three.js (`clinic-scene.ts`, chargé à la
-  demande) piloté par GSAP ScrollTrigger (`motion-home.ts`) ; **2 épinglages maximum par page** (parcours + expertises) ;
-  texte mot à mot, frise qui se remplit, image révélée, bandeau défilant. Pages internes : `data-reveal` + survols
+- **Mouvement (immersif depuis le 2026-11-08, v1.4.0)** : accueil = parcours 3D three.js (`clinic-scene.ts`, chargé à la
+  demande) piloté par GSAP ScrollTrigger (`motion-home.ts`) : plan coté → réseaux → murs → coupe équipée → PV.
+  **Le texte ne couvre pas la maquette** : titre en colonne gauche (maquette décalée), puis légende compacte en bas à
+  gauche + sommaire des étapes à droite. Le parcours tient lieu de méthode (pas de section méthode en double).
+  **2 épinglages maximum par page** (parcours + expertises) ; manifeste mot à mot avec images insérées, piliers
+  dessinés au trait, image révélée, bandeau défilant. Pages internes : `data-reveal` + survols
   200–400 ms. `transform`/`opacity` (ou couleur) uniquement. Classe `webgl` posée dans le `<head>` seulement si WebGL
   et pas de « réduire les animations » ; sinon tout est lisible, empilé, sans épinglage. Gris d’animation ≥ 3:1.
+  Ouverture d’images par `clip-path` (pas d’animation de largeur).
 - **Pas de grilles de cartes** sur l’accueil et les hubs : panneaux plein cadre, index typographiques (`SpecIndex`,
   `ServiceIndex`), listes éditoriales. Références : taste-skill (Leonxlnx) et UI UX Pro Max (nextlevelbuilder),
   palette et polices de marque prioritaires sur leurs suggestions.
 - **SDK** `paycii/ssagency-sdk-angular` : référence en lecture seule (principes d’`AbstractThreeScene`, versions gsap
   et three identiques). **Ne jamais le modifier.** La scène three.js est indépendante du framework (portable en Angular).
-  pas d'effet continu. `prefers-reduced-motion` respecté.
 - **Navigation** : Accueil · Expertises (`/expertises/`) · Réalisations · À propos · Contact + « Parler de mon projet ».
 
 ## 7. Variables d'environnement (Vercel → Settings → Environment Variables)

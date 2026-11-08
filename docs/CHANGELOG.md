@@ -2,6 +2,23 @@
 
 > Ajouter chaque modification **en haut**, datée, avec : ce qui a changé, pourquoi, fichiers clés, et l'état des vérifications.
 
+## 2026-11-08 — v1.4.0 · Maquette 3D dessinée, titre hors de la scène, sections plus riches
+
+- **Maquette 3D** (`clinic-scene.ts`) : plan coté d'architecte (poché navy, cotes 16,00 × 10,00 m, débattements de
+  portes, fenêtres, surfaces des pièces, emprises des équipements, marche en avant, flèche du nord) ; réseaux encastrés
+  (fluides teal, électricité or) qui se dessinent depuis le local technique ; menuiseries et vitrages ; coupe à 1,15 m ;
+  19 équipements détaillés (units avec scialytique et tabourets, accueil, attente, paillasse de stérilisation avec
+  autoclave, compresseur, aspiration, TGBT, sanitaires, plantes) ; ombres douces ; pastilles de PV à la livraison.
+  Dimensions d'un plan d'illustration, pas d'un projet réel.
+- **Texte hors de la scène** : titre en colonne gauche (maquette décalée à droite), qui disparaît dès le premier
+  défilement ; étapes en légende compacte en bas à gauche ; sommaire cliquable des 4 étapes à droite (desktop).
+- **Section « méthode » retirée de l'accueil** : le parcours 3D (Concevoir · Construire · Équiper · Livrer) la remplace.
+- **Expertises** : panneaux image + services liés (liens internes), image qui s'ouvre, contenu qui monte, mot géant en
+  arrière-plan, étapes 01–04 actives.
+- **Manifeste** : images insérées dans la phrase, qui s'ouvrent au défilement ; trois piliers dessinés au trait.
+- Vérifications : `astro check` 0/0/0, `npm run verify` sans erreur bloquante, axe-core 0 violation, captures 1440 et
+  390 px sans erreur console.
+
 ## 2026-11-08 — v1.3.0 · Accueil immersif 3D, fin des grilles de cartes
 
 - **Parcours 3D** (`src/scripts/clinic-scene.ts`, three.js 0.170, chargé à la demande) : la maquette d’un cabinet

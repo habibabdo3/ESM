@@ -72,14 +72,17 @@ Règles automatiques : dans un conteneur `bg-[var(--color-navy…)]`, les titres
   radiologie, salle d'endoscopie haut de gamme, chantier médical réel, rendus 3D.
 - **Elles ne représentent pas des réalisations ESM** : légende « Image d'illustration » ; jamais dans le portfolio.
 
-## Mouvement (immersif, v1.3.0 du 2026-11-08)
+## Mouvement (immersif, v1.4.0 du 2026-11-08)
 
-- **Accueil** : parcours 3D (maquette blanche à arêtes navy, circuit patient or, coupe à 1,15 m avec chapeaux navy,
-  sols teintés teal/or, équipements teal/navy), 520 vh de défilement, 4 chapitres en fondu, barre de progression teal.
-- Expertises : panneaux plein cadre (62 vw desktop, 86 vw mobile), numéro en contour or, image qui glisse moins vite
-  que son cadre, barre de progression or ; mobile = défilement natif avec accroche.
-- Manifeste mot à mot (gris #7D8A95 → navy), bandeau défilant des spécialités (60 s, arrêté si animations réduites),
-  index des spécialités + plan collant, méthode en frise verticale + compteur, image révélée par ouverture du cadre.
+- **Accueil — parcours 3D** (600 vh) : plan d'architecte coté (poché navy, cotes, portes, fenêtres, surfaces, emprises,
+  circuit patient or, marche en avant, nord) → réseaux encastrés (teal = fluides, or foncé = électricité) → murs et
+  menuiseries → coupe à 1,15 m, sols finis, équipements → pastilles de PV teal, lumière plus chaude. Ombres douces.
+- **Le texte ne couvre jamais la maquette** : titre en colonne gauche, maquette décalée à droite (en bas sur mobile) ;
+  dès le défilement, légende compacte (blanc 82 %, flou, filet teal) en bas à gauche et sommaire des 4 étapes à droite.
+- Expertises : panneaux image + services liés (76 vw desktop, 86 vw mobile), image qui s'ouvre de droite à gauche,
+  contenu qui monte, mot géant en contour (7 % blanc) en arrière-plan, étapes 01–04 avec filet or.
+- Manifeste mot à mot (gris #7D8A95 → navy) avec trois images insérées en pilule qui s'ouvrent ; piliers dessinés au
+  trait (navy, teal, or). Bandeau défilant (60 s), index des spécialités + plan collant, image révélée.
 - Survols 200–400 ms, courbe `cubic-bezier(0.25, 0.1, 0.25, 1)` ; parcours en `scrub`. 2 épinglages max par page.
 - Sans WebGL ou avec `prefers-reduced-motion` : aucun épinglage, aucune 3D, contenu empilé et lisible.
 

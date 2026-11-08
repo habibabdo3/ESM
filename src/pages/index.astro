@@ -1,11 +1,12 @@
 ---
 /**
  * Accueil immersif : un seul parcours continu.
- * 1. #journey — maquette 3D épinglée (plan → murs → équipements → salle de soins), 5 chapitres pilotés par le défilement.
- * 2. Expertises — panneaux plein cadre en défilement horizontal épinglé (desktop) / accroche native (mobile).
- * 3. Manifeste — texte qui s'allume mot à mot ; bandeau défilant des spécialités.
- * 4. Spécialités — index typographique, plan collant qui change avec la ligne active.
- * 5. Méthode — frise qui se remplit au défilement ; 6. Réalisations — image révélée ; appel final.
+ * 1. #journey — maquette 3D épinglée : plan coté → réseaux → murs → coupe équipée → réception. Titre en colonne gauche
+ *    au départ, puis légende compacte en bas à gauche et sommaire des étapes à droite : la maquette occupe l'écran.
+ * 2. Expertises — panneaux image + services liés, défilement horizontal épinglé, mot géant en arrière-plan (desktop).
+ * 3. Manifeste — phrase qui s'allume mot à mot avec images insérées ; trois piliers dessinés au trait.
+ * 4. Bandeau des spécialités, index des spécialités + plan collant ; 5. Réalisations — image révélée ; appel final.
+ * Le parcours 3D tient lieu de méthode (Concevoir · Construire · Équiper · Livrer) : pas de section « méthode » en double.
  * Sans WebGL ou avec « réduire les animations » : même contenu, en défilement classique.
  */
 import BaseLayout from '@/layouts/BaseLayout.astro';
@@ -17,22 +18,18 @@ import SectionHeading from '@/components/SectionHeading.astro';
 import CtaBand from '@/components/CtaBand.astro';
 import RealisationCard from '@/components/RealisationCard.astro';
 import { site } from '@/config/site';
-import { getRealisations, getSpecialites } from '@/lib/content';
+import { getRealisations, getServices, getSpecialites, servicePath } from '@/lib/content';
 import { expertises } from '@/lib/photos';
 
 const realisations = await getRealisations();
 const specialites = await getSpecialites();
+const services = await getServices();
+const serviceName = new Map(services.map((s) => [s.id, s.data.short]));
 const chapters = [
-  { at: 0.2, num: '01', title: 'Concevoir', text: 'Le plan part de l’acte de soin : trois circuits qui ne se croisent pas.', href: '/expertises/#etude-conception' },
-  { at: 0.42, num: '02', title: 'Construire', text: 'Cloisons, réseaux et fluides montent lot par lot, contrôlés à chaque étape.', href: '/expertises/#construction-renovation' },
-  { at: 0.56, num: '03', title: 'Équiper', text: 'Fauteuils, autoclave, compresseur : chaque équipement est prévu dès les plans.', href: '/expertises/#equipement-medical' },
-  { at: 0.82, num: '04', title: 'Livrer', text: 'Réception par lot, procès-verbal, dossier des ouvrages : votre structure est prête.', href: '/expertises/#accompagnement-global' },
-];
-const steps = [
-  { n: '01', t: 'Découvrir', d: 'Nous comprenons votre pratique, votre local et vos contraintes.' },
-  { n: '02', t: 'Concevoir', d: 'Nous concevons le plan, les réseaux et le budget par lot.' },
-  { n: '03', t: 'Construire', d: 'Nous coordonnons les travaux et l’installation des équipements.' },
-  { n: '04', t: 'Livrer', d: 'Nous réceptionnons et préparons votre structure à ouvrir.' },
+  { at: 0.1, num: '01', title: 'Concevoir', text: 'Plan coté, circuits patients séparés, emprise de chaque équipement.', href: '/expertises/#etude-conception' },
+  { at: 0.28, num: '02', title: 'Construire', text: 'Réseaux encastrés, cloisons et menuiseries, contrôlés lot par lot.', href: '/expertises/#construction-renovation' },
+  { at: 0.5, num: '03', title: 'Équiper', text: 'Fauteuils, stérilisation, compresseur : tout est prévu dès les plans.', href: '/expertises/#equipement-medical' },
+  { at: 0.78, num: '04', title: 'Livrer', text: 'Réception pièce par pièce, procès-verbal et dossier des ouvrages.', href: '/expertises/#accompagnement-global' },
 ];
 const why = [
   { t: 'L’expertise médicale', d: 'Des espaces conçus autour des praticiens et de leurs contraintes de soin.' },
@@ -58,38 +55,44 @@ const why = [
       <div class="container-lux journey-copy">
         <div data-chapter="0" class="journey-chapter journey-hero is-active">
           <p lang="en" class="eyebrow text-[var(--color-teal-ink)]">Designing medical spaces.</p>
-          <h1 class="mt-6 max-w-3xl text-[clamp(2.5rem,1.3rem+4.4vw,4.75rem)] font-bold leading-[1.03] tracking-[-0.035em]">
-            Des espaces conçus pour mieux soigner.
-          </h1>
-          <p class="mt-6 max-w-xl text-[1.15rem] leading-relaxed text-[var(--color-muted)]">
+          <h1 class="journey-title mt-6">Des espaces conçus pour mieux soigner.</h1>
+          <p class="mt-5 max-w-md text-[1.08rem] leading-relaxed text-[var(--color-muted)]">
             De la conception architecturale à l’équipement, nous accompagnons vos projets médicaux de A à Z.
           </p>
-          <div class="mt-9 flex flex-wrap gap-3">
+          <div class="mt-8 flex flex-wrap items-center gap-x-7 gap-y-4">
             <a href="/contact/" class="btn btn-primary">Démarrer mon projet <span class="arrow" aria-hidden="true">→</span></a>
-            <a href="/expertises/" class="btn btn-ghost-dark bg-white/70">Découvrir nos expertises</a>
+            <a href="/expertises/" class="link-more">Nos expertises <span>→</span></a>
           </div>
-          <p class="journey-hint mt-12 text-[0.85rem] font-medium text-[var(--color-muted)]" aria-hidden="true">
+          <p class="journey-hint mt-10 text-[0.85rem] font-medium text-[var(--color-muted)]" aria-hidden="true">
             Faites défiler : le plan devient un cabinet <span class="journey-hint-arrow">↓</span>
           </p>
         </div>
 
         {chapters.map((c) => (
-          <div data-chapter={c.at} class="journey-chapter">
-            <p class="num text-[1rem]">{c.num} / 04</p>
-            <h2 class="mt-3 text-[clamp(2.4rem,1.6rem+3vw,4rem)] font-bold tracking-[-0.03em]">{c.title}</h2>
-            <p class="mt-4 max-w-md text-[1.12rem] leading-relaxed text-[var(--color-muted)]">{c.text}</p>
-            <a href={c.href} class="link-more mt-6">En savoir plus <span>→</span></a>
+          <div data-chapter={c.at} class="journey-chapter journey-caption">
+            <p class="journey-caption-num"><span>{c.num}</span> / 04</p>
+            <h2 class="journey-caption-title">{c.title}</h2>
+            <p class="journey-caption-text">{c.text}</p>
+            <a href={c.href} class="link-more mt-4">En savoir plus <span>→</span></a>
           </div>
         ))}
       </div>
 
+      <nav class="journey-nav" aria-label="Étapes du parcours">
+        <ol>
+          {chapters.map((c) => (
+            <li><button type="button" data-goto={c.at}><span class="journey-nav-num">{c.num}</span><span class="journey-nav-label">{c.title}</span></button></li>
+          ))}
+        </ol>
+      </nav>
       <div class="journey-progress" aria-hidden="true"><span data-journey-bar></span></div>
     </div>
   </section>
 
-  <!-- 2. EXPERTISES : panneaux plein cadre, défilement horizontal épinglé -->
+  <!-- 2. EXPERTISES : panneaux image + services, défilement horizontal épinglé -->
   <section data-hrail class="hrail bg-[var(--color-navy)] text-white" aria-labelledby="expertises-title">
     <div class="hrail-inner">
+      <p class="hrail-ghost" aria-hidden="true" data-hrail-ghost>Concevoir · Construire · Équiper · Accompagner ·</p>
       <ul data-hrail-track class="hrail-track" aria-label="Nos quatre expertises">
         <li class="hrail-intro">
           <p class="eyebrow text-[var(--color-gold)]">Expertises</p>
@@ -99,39 +102,73 @@ const why = [
           <p class="hrail-hint mt-14 hidden text-[0.85rem] text-white/50 lg:block" aria-hidden="true">Continuez à défiler →</p>
         </li>
         {expertises.map((e) => (
-          <li class="hrail-panel group">
-            <a href={`/expertises/#${e.id}`} class="hrail-link" aria-label={`${e.title} : ${e.text}`}>
-              <div class="hrail-media" aria-hidden="true">
+          <li class="hrail-panel" data-hrail-panel>
+            <article class="hrail-card" aria-labelledby={`exp-${e.id}`}>
+              <div class="hrail-media" data-hrail-media aria-hidden="true">
                 <div data-hrail-img class="hrail-img">
-                  <Visual visual={e.visual} sizes="(min-width:1024px) 62vw, 92vw" widths={[640, 1000, 1400]} />
+                  <Visual visual={e.visual} sizes="(min-width:1024px) 46vw, 88vw" widths={[640, 1000, 1400]} />
                 </div>
-                <div class="hrail-shade"></div>
+                <span class="hrail-num">{e.num}</span>
               </div>
-              <span class="hrail-num" aria-hidden="true">{e.num}</span>
-              <div class="hrail-text">
-                <h3 class="text-[clamp(1.9rem,1.3rem+2vw,3rem)] font-bold leading-[1.05] tracking-[-0.03em] text-white">{e.title}</h3>
-                <p class="mt-3 max-w-md text-[1.05rem] leading-relaxed text-white/80">{e.text}</p>
-                <span class="hrail-more" aria-hidden="true">Découvrir <span>→</span></span>
+              <div class="hrail-body" data-hrail-body>
+                <h3 id={`exp-${e.id}`} class="hrail-title"><a href={`/expertises/#${e.id}`}>{e.title}</a></h3>
+                <p class="hrail-text">{e.text}</p>
+                <ul class="hrail-services" aria-label={`Services : ${e.title}`}>
+                  {e.services.map((id) => (
+                    <li><a href={servicePath(id)}><span>{serviceName.get(id) ?? id}</span><span aria-hidden="true">→</span></a></li>
+                  ))}
+                </ul>
               </div>
-            </a>
+            </article>
           </li>
         ))}
       </ul>
-      <div class="hrail-progress" aria-hidden="true"><span data-hrail-bar></span></div>
+      <ol class="hrail-steps" aria-hidden="true">
+        {expertises.map((e) => <li data-hrail-step><span>{e.num}</span>{e.title}<i></i></li>)}
+      </ol>
     </div>
   </section>
 
-  <!-- 3. MANIFESTE : texte cinétique -->
+  <!-- 3. MANIFESTE : phrase avec images insérées, piliers dessinés au trait -->
   <section class="statement bg-white" aria-labelledby="why-title">
-    <div class="container-lux py-28 lg:py-44">
+    <div class="container-lux py-28 lg:py-40">
       <p class="eyebrow text-[var(--color-teal-ink)]">Pourquoi ESM</p>
-      <h2 id="why-title" data-words class="statement-text mt-8">Le regard d’un architecte, la rigueur d’un ingénieur, et un seul interlocuteur de la première esquisse à l’ouverture de votre structure.</h2>
-      <ul class="mt-20 grid gap-12 md:grid-cols-3 md:gap-10">
+      <h2 id="why-title" data-words class="statement-text mt-8">
+        Le regard d’un architecte, <span class="inline-media" data-inline-media aria-hidden="true"><PlanArt variant="cabinet-dentaire-orthodontie" tone="light" detail="simple" class="h-full w-full" label="" /></span> la rigueur d’un ingénieur <span class="inline-media" data-inline-media aria-hidden="true"><Photo name="chantierAmenagement" alt="" sizes="160px" widths={[160, 320]} class="h-full w-full object-cover" /></span> et un seul interlocuteur, de la première esquisse <span class="inline-media" data-inline-media aria-hidden="true"><Photo name="cabinetDentaire3" alt="" sizes="160px" widths={[160, 320]} class="h-full w-full object-cover" /></span> à l’ouverture de votre structure.
+      </h2>
+      <ul class="pillars mt-20 grid gap-14 md:grid-cols-3 md:gap-10">
         {why.map((w, i) => (
-          <li class="relative pt-7" data-reveal style={`--i:${i}`}>
-            <span class="absolute left-0 top-0 block h-px w-full bg-[var(--color-line)]"></span>
-            <span data-draw-line class="absolute left-0 top-0 block h-[2px] w-full bg-[var(--color-teal)]"></span>
-            <h3 class="text-[1.375rem]">{w.t}</h3>
+          <li class="pillar" data-pillar>
+            <svg class="pillar-art" viewBox="0 0 160 96" fill="none" aria-hidden="true">
+              {i === 0 && (
+                <>
+                  <path pathLength="1" d="M10 10H150V86H10Z" />
+                  <path pathLength="1" d="M70 10V48M70 66V86" />
+                  <path pathLength="1" d="M70 48A18 18 0 0 1 88 66" class="thin" />
+                  <path pathLength="1" d="M98 38h34a8 8 0 0 1 0 16h-34a8 8 0 0 1 0-16Z" class="teal" />
+                  <path pathLength="1" d="M22 72C44 72 52 46 98 46" class="gold" />
+                </>
+              )}
+              {i === 1 && (
+                <>
+                  <path pathLength="1" d="M10 16C62 16 70 48 112 48" />
+                  <path pathLength="1" d="M10 48H112" />
+                  <path pathLength="1" d="M10 80C62 80 70 48 112 48" />
+                  <path pathLength="1" d="M112 48a9 9 0 1 0 18 0a9 9 0 1 0 -18 0Z" class="teal" />
+                  <path pathLength="1" d="M130 48H152M144 41l8 7l-8 7" class="gold" />
+                </>
+              )}
+              {i === 2 && (
+                <>
+                  <path pathLength="1" d="M80 12L140 32L80 52L20 32Z" class="teal" />
+                  <path pathLength="1" d="M20 48L80 68L140 48" />
+                  <path pathLength="1" d="M20 64L80 84L140 64" />
+                  <path pathLength="1" d="M20 32V64M140 32V64M80 52V84" class="thin" />
+                </>
+              )}
+            </svg>
+            <span class="pillar-num">0{i + 1}</span>
+            <h3 class="mt-3 text-[1.375rem]">{w.t}</h3>
             <p class="mt-3 max-w-sm text-[1rem] leading-relaxed text-[var(--color-muted)]">{w.d}</p>
           </li>
         ))}
@@ -161,31 +198,7 @@ const why = [
     </div>
   </section>
 
-  <!-- 5. MÉTHODE : frise qui se remplit au défilement -->
-  <section class="method bg-[var(--color-navy)] text-white" aria-labelledby="process-title" data-method>
-    <div class="container-lux grid gap-14 py-24 lg:grid-cols-12 lg:gap-16 lg:py-36">
-      <div class="lg:col-span-5">
-        <div class="lg:sticky lg:top-32">
-          <p class="eyebrow text-[var(--color-gold)]">Notre méthode</p>
-          <h2 id="process-title" class="mt-6 text-white">Un processus clair, du premier rendez-vous à l’ouverture.</h2>
-          <p class="method-counter mt-12 hidden lg:block" aria-hidden="true"><span data-method-num>01</span><small>/ 04</small></p>
-        </div>
-      </div>
-      <ol class="method-steps lg:col-span-7">
-        <span class="method-line" aria-hidden="true"><span data-method-bar></span></span>
-        {steps.map((s, i) => (
-          <li data-step={i} class="method-step">
-            <span class="method-dot" aria-hidden="true"></span>
-            <span class="num text-[0.95rem]">{s.n}</span>
-            <h3 class="mt-3 text-[clamp(1.8rem,1.3rem+1.6vw,2.6rem)] text-white">{s.t}</h3>
-            <p class="mt-3 max-w-md text-[1.05rem] leading-relaxed text-white/75">{s.d}</p>
-          </li>
-        ))}
-      </ol>
-    </div>
-  </section>
-
-  <!-- 6. RÉALISATIONS -->
+  <!-- 5. RÉALISATIONS -->
   <section class="bg-white py-24 lg:py-32" aria-labelledby="real-title">
     <div class="container-lux">
       <SectionHeading eyebrow="Réalisations" title="Des espaces pensés pour soigner." id="real-title" link={realisations.length > 0 ? { href: '/realisations/', label: 'Toutes les réalisations' } : undefined} />

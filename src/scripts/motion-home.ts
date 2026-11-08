@@ -1,11 +1,12 @@
 /**
  * Orchestration du parcours immersif de l'accueil (GSAP + ScrollTrigger, comme GsapService du SDK).
- * - #journey : scène 3D épinglée, la progression du défilement pilote la maquette et les chapitres.
- * - [data-hrail] : panneaux plein cadre, défilement horizontal épinglé (desktop) ; accroche native sur mobile.
- * - [data-words] : texte qui s'allume mot à mot (l'index des spécialités a son propre script : SpecIndex.astro).
- * - [data-method] : frise et compteur · [data-clip-reveal] : image dont le cadre s'ouvre.
- * - [data-drag-rail] : rail glissable à la souris, flèches précédent/suivant.
- * - [data-draw-line] : filet qui se dessine au défilement.
+ * - #journey : scène 3D épinglée ; la progression du défilement pilote la maquette, la légende et le sommaire.
+ * - [data-hrail] : panneaux d'expertise en défilement horizontal épinglé (desktop), mot géant en parallaxe,
+ *   image qui s'ouvre, contenu qui monte, étapes actives ; défilement natif avec accroche sur mobile.
+ * - [data-words] : phrase qui s'allume mot à mot ; [data-inline-media] : images insérées qui s'ouvrent.
+ * - [data-pillar] : pictogrammes dessinés au trait ; [data-clip-reveal] : image dont le cadre s'ouvre.
+ * - [data-drag-rail] : rail glissable à la souris, flèches précédent/suivant (pages hub).
+ * L'index des spécialités a son propre script (SpecIndex.astro).
  * Sans WebGL ou avec « réduire les animations » : tout reste lisible, rien n'est épinglé.
  */
 import { gsap } from 'gsap';
@@ -20,39 +21,57 @@ const immersive = document.documentElement.classList.contains('webgl') && !reduc
 const journey = document.getElementById('journey');
 if (journey && immersive) {
   const chapters = [...journey.querySelectorAll<HTMLElement>('[data-chapter]')];
+  const navButtons = [...journey.querySelectorAll<HTMLButtonElement>('[data-goto]')];
   const bar = journey.querySelector<HTMLElement>('[data-journey-bar]');
   const canvas = journey.querySelector<HTMLCanvasElement>('canvas');
+  const stops = chapters.map((c) => Number(c.dataset.chapter));
   let scene: { setProgress(p: number): void } | null = null;
   let current = -1;
 
   const setChapter = (p: number) => {
-    const stops = chapters.map((c) => Number(c.dataset.chapter));
     let idx = 0;
     stops.forEach((s, i) => p >= s && (idx = i));
     if (idx === current) return;
     current = idx;
     chapters.forEach((c, i) => c.classList.toggle('is-active', i === idx));
+    // Le sommaire ne liste que les 4 étapes (le titre est l'étape 0)
+    navButtons.forEach((b, i) => {
+      const on = i === idx - 1;
+      b.classList.toggle('is-active', on);
+      if (on) b.setAttribute('aria-current', 'step');
+      else b.removeAttribute('aria-current');
+    });
+    journey.classList.toggle('past-hero', idx > 0);
   };
   setChapter(0);
 
-  ScrollTrigger.create({
+  const st = ScrollTrigger.create({
     trigger: journey,
     start: 'top top',
     end: 'bottom bottom',
     scrub: true,
-    onUpdate: (st) => {
-      scene?.setProgress(st.progress);
-      setChapter(st.progress);
-      if (bar) bar.style.transform = `scaleX(${st.progress})`;
+    onUpdate: (self) => {
+      scene?.setProgress(self.progress);
+      setChapter(self.progress);
+      if (bar) bar.style.transform = `scaleX(${self.progress})`;
     },
   });
 
-  // La scène (three.js) se charge après le premier affichage : le texte du héros reste l'élément principal.
+  // Sommaire : chaque étape renvoie au moment du parcours où elle commence
+  navButtons.forEach((b) =>
+    b.addEventListener('click', () => {
+      const at = Number(b.dataset.goto) + 0.04;
+      window.scrollTo({ top: st.start + (st.end - st.start) * at, behavior: 'smooth' });
+    }),
+  );
+
+  // La scène (three.js) se charge après le premier affichage : le titre reste l'élément principal.
   const load = () =>
     import('./clinic-scene').then(({ mountClinicScene }) => {
       if (!canvas) return;
       try {
         scene = mountClinicScene(canvas);
+        scene.setProgress(st.progress);
         journey.classList.add('scene-ready');
       } catch {
         document.documentElement.classList.remove('webgl');
@@ -62,86 +81,133 @@ if (journey && immersive) {
   else setTimeout(load, 300);
 }
 
-/* ---------- 2. Expertises : panneaux plein cadre en défilement horizontal épinglé ---------- */
+/* ---------- 2. Expertises : défilement horizontal épinglé ---------- */
 gsap.matchMedia().add('(min-width: 1024px) and (prefers-reduced-motion: no-preference)', () => {
-    const kills: Array<() => void> = [];
-    document.querySelectorAll<HTMLElement>('[data-hrail]').forEach((section) => {
-      const track = section.querySelector<HTMLElement>('[data-hrail-track]');
-      const bar = section.querySelector<HTMLElement>('[data-hrail-bar]');
-      if (!track) return;
-      section.classList.add('is-pinned');
-      const distance = () => track.scrollWidth - window.innerWidth;
-      const tween = gsap.to(track, {
-        x: () => -distance(),
-        ease: 'none',
-        scrollTrigger: {
-          trigger: section,
-          start: 'top top',
-          end: () => `+=${distance()}`,
-          pin: true,
-          scrub: 0.8,
-          invalidateOnRefresh: true,
-          onUpdate: (st) => bar && (bar.style.transform = `scaleX(${st.progress})`),
-        },
-      });
-      // Profondeur : l'image glisse moins vite que son cadre
-      const imgs = [...section.querySelectorAll<HTMLElement>('[data-hrail-img]')].map((img) =>
-        gsap.fromTo(img, { xPercent: -8 }, {
-          xPercent: 8,
-          ease: 'none',
-          scrollTrigger: { trigger: img.parentElement, containerAnimation: tween, start: 'left right', end: 'right left', scrub: true },
-        }),
-      );
-      kills.push(() => {
-        imgs.forEach((t) => { t.scrollTrigger?.kill(); t.kill(); });
-        tween.scrollTrigger?.kill();
-        tween.kill();
-        section.classList.remove('is-pinned');
-        gsap.set(track, { clearProps: 'transform' });
-      });
+  document.querySelectorAll<HTMLElement>('[data-hrail]').forEach((section) => {
+    const track = section.querySelector<HTMLElement>('[data-hrail-track]');
+    if (!track) return;
+    const ghost = section.querySelector<HTMLElement>('[data-hrail-ghost]');
+    const panels = [...section.querySelectorAll<HTMLElement>('[data-hrail-panel]')];
+    const steps = [...section.querySelectorAll<HTMLElement>('[data-hrail-step]')];
+    section.classList.add('is-pinned');
+    const distance = () => track.scrollWidth - window.innerWidth;
+
+    const setStep = () => {
+      const mid = window.innerWidth * 0.55;
+      let idx = -1;
+      panels.forEach((p, i) => p.getBoundingClientRect().left < mid && (idx = i));
+      steps.forEach((s, i) => s.classList.toggle('is-active', i === idx));
+    };
+
+    const tween = gsap.to(track, {
+      x: () => -distance(),
+      ease: 'none',
+      scrollTrigger: {
+        trigger: section,
+        start: 'top top',
+        end: () => `+=${distance()}`,
+        pin: true,
+        scrub: 0.8,
+        invalidateOnRefresh: true,
+        onUpdate: setStep,
+      },
     });
-    return () => kills.forEach((k) => k());
+
+    // Mot géant : arrière-plan plus lent que les panneaux
+    if (ghost) {
+      gsap.to(ghost, {
+        xPercent: -35,
+        ease: 'none',
+        scrollTrigger: { trigger: section, start: 'top top', end: () => `+=${distance()}`, scrub: 1 },
+      });
+    }
+
+    panels.forEach((panel) => {
+      const media = panel.querySelector<HTMLElement>('[data-hrail-media]');
+      const img = panel.querySelector<HTMLElement>('[data-hrail-img]');
+      const body = panel.querySelector<HTMLElement>('[data-hrail-body]');
+      const enter = { trigger: panel, containerAnimation: tween, start: 'left 100%', end: 'left 40%', scrub: true };
+      if (media) gsap.fromTo(media, { clipPath: 'inset(0% 0% 0% 100%)' }, { clipPath: 'inset(0% 0% 0% 0%)', ease: 'none', scrollTrigger: enter });
+      if (img) {
+        gsap.fromTo(img, { xPercent: -8, scale: 1.12 }, {
+          xPercent: 8,
+          scale: 1,
+          ease: 'none',
+          scrollTrigger: { trigger: panel, containerAnimation: tween, start: 'left right', end: 'right left', scrub: true },
+        });
+      }
+      if (body) {
+        gsap.fromTo(body.children, { y: 48, opacity: 0 }, {
+          y: 0,
+          opacity: 1,
+          stagger: 0.12,
+          ease: 'none',
+          scrollTrigger: { trigger: panel, containerAnimation: tween, start: 'left 85%', end: 'left 35%', scrub: true },
+        });
+      }
+    });
+
+    return () => {
+      section.classList.remove('is-pinned');
+      steps.forEach((s) => s.classList.remove('is-active'));
+    };
+  });
 });
 
-/* ---------- 3. Texte qui s'allume mot à mot ---------- */
+/* ---------- 3. Manifeste : mots qui s'allument, images insérées qui s'ouvrent ---------- */
 document.querySelectorAll<HTMLElement>('[data-words]').forEach((el) => {
   if (reduce) return;
-  const words = (el.textContent ?? '').trim().split(/\s+/);
-  el.setAttribute('aria-label', words.join(' '));
-  const esc = (w: string) => w.replace(/[&<>"]/g, (c) => `&#${c.charCodeAt(0)};`);
-  el.innerHTML = words.map((w) => `<span class="w" aria-hidden="true">${esc(w)}</span>`).join(' ');
+  el.setAttribute('aria-label', (el.textContent ?? '').replace(/\s+/g, ' ').replace(/\s+([,.])/g, '$1').trim());
+  // Découpe uniquement les nœuds texte : les images insérées restent en place
+  const words: HTMLElement[] = [];
+  [...el.childNodes].forEach((node) => {
+    if (node.nodeType !== Node.TEXT_NODE) return;
+    const parts = (node.textContent ?? '').split(/(\s+)/);
+    const frag = document.createDocumentFragment();
+    parts.forEach((part) => {
+      if (!part) return;
+      if (/^\s+$/.test(part)) frag.append(document.createTextNode(' '));
+      else {
+        const w = document.createElement('span');
+        w.className = 'w';
+        w.setAttribute('aria-hidden', 'true');
+        w.textContent = part;
+        frag.append(w);
+        words.push(w);
+      }
+    });
+    node.replaceWith(frag);
+  });
   // Gris de départ ≥ 3:1 sur blanc (texte large, WCAG AA) même au milieu de l'animation
-  gsap.fromTo(el.querySelectorAll('.w'), { color: '#7D8A95' }, {
+  gsap.fromTo(words, { color: '#7D8A95' }, {
     color: '#142C43',
     stagger: 0.08,
     ease: 'none',
     scrollTrigger: { trigger: el, start: 'top 80%', end: 'bottom 45%', scrub: true },
   });
-});
-
-/* ---------- 5. Méthode : frise et compteur ---------- */
-document.querySelectorAll<HTMLElement>('[data-method]').forEach((root) => {
-  const bar = root.querySelector<HTMLElement>('[data-method-bar]');
-  const num = root.querySelector<HTMLElement>('[data-method-num]');
-  const steps = [...root.querySelectorAll<HTMLElement>('[data-step]')];
-  if (bar && !reduce) {
-    gsap.fromTo(bar, { scaleY: 0 }, {
-      scaleY: 1,
+  el.querySelectorAll<HTMLElement>('[data-inline-media]').forEach((m) => {
+    gsap.fromTo(m, { clipPath: 'inset(0% 50% 0% 50% round 999px)' }, {
+      clipPath: 'inset(0% 0% 0% 0% round 999px)',
       ease: 'none',
-      scrollTrigger: { trigger: bar.parentElement, start: 'top 60%', end: 'bottom 60%', scrub: true },
-    });
-  }
-  steps.forEach((step, i) => {
-    ScrollTrigger.create({
-      trigger: step,
-      start: 'top 62%',
-      onEnter: () => { step.classList.add('is-on'); if (num) num.textContent = String(i + 1).padStart(2, '0'); },
-      onLeaveBack: () => { step.classList.remove('is-on'); if (num) num.textContent = String(Math.max(i, 1)).padStart(2, '0'); },
+      scrollTrigger: { trigger: m, start: 'top 85%', end: 'top 55%', scrub: true },
     });
   });
 });
 
-/* ---------- 6. Image révélée (le cadre s'ouvre au défilement) ---------- */
+/* ---------- 4. Piliers dessinés au trait ---------- */
+if (!reduce) {
+  document.querySelectorAll<HTMLElement>('[data-pillar]').forEach((pillar) => {
+    const paths = pillar.querySelectorAll('path');
+    gsap.fromTo(paths, { strokeDashoffset: 1 }, {
+      strokeDashoffset: 0,
+      stagger: 0.15,
+      ease: 'none',
+      scrollTrigger: { trigger: pillar, start: 'top 88%', end: 'top 50%', scrub: true },
+    });
+  });
+}
+
+/* ---------- 5. Image révélée (le cadre s'ouvre au défilement) ---------- */
 if (!reduce) {
   document.querySelectorAll<HTMLElement>('[data-clip-reveal]').forEach((fig) => {
     const media = fig.querySelector<HTMLElement>('.reveal-media');
@@ -156,7 +222,7 @@ if (!reduce) {
   });
 }
 
-/* ---------- 7. Rails glissables (pages hub) ---------- */
+/* ---------- 6. Rails glissables (pages hub) ---------- */
 document.querySelectorAll<HTMLElement>('[data-drag-rail]').forEach((wrap) => {
   const rail = wrap.querySelector<HTMLElement>('[data-rail]');
   if (!rail) return;
@@ -204,15 +270,3 @@ document.querySelectorAll<HTMLElement>('[data-drag-rail]').forEach((wrap) => {
     }
   }, true);
 });
-
-/* ---------- 8. Filets qui se dessinent ---------- */
-if (!reduce) {
-  document.querySelectorAll<HTMLElement>('[data-draw-line]').forEach((line) => {
-    gsap.fromTo(line, { scaleX: 0 }, {
-      scaleX: 1,
-      ease: 'none',
-      transformOrigin: 'left center',
-      scrollTrigger: { trigger: line.parentElement ?? line, start: 'top 75%', end: 'bottom 60%', scrub: true },
-    });
-  });
-}
