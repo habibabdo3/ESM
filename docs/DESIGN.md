@@ -78,10 +78,14 @@ Règles automatiques : dans un conteneur `bg-[var(--color-navy…)]`, les titres
 - **Héros** : surtitre, titre 800 sur deux lignes (« soigner » teal souligné or), chapô, puis **brief en une phrase**
   dans un encart blanc à filet teal : « Je prépare une [création ▾] en [spécialité ▾] à [ville] . » (champs soulignés
   teal), bouton navy + carré or « → », lien WhatsApp. À droite (dessous sur mobile) : planche mist coins 8 px,
-  cartouche, bouton pause rond, maquette 3D qui se construit seule ; sous la planche, 4 étapes à barres de progression
-  teal et le texte de l'étape en cours.
+  maquette 3D ; sous la planche, 4 étapes à barres de progression teal et le texte de l'étape en cours.
+- **Introduction** (première visite seulement, mémorisée) : planche plein écran fond warm, « ESM — Du plan à
+  l'ouverture » en haut à gauche, « Passer l'introduction → » en haut à droite, en bas à gauche le titre de l'étape
+  (Manrope 800, 42–80 px), son texte et 4 barres teal ; à la fin, la planche se réduit vers sa place (1 s).
+  Ensuite : maquette livrée en rotation lente, boutons ronds blancs « ↻ Revoir la construction » et pause.
 - **Expertises** : 4 bandes d'images jointives, la bande survolée s'élargit (×4,2) ; mobile : panneaux empilés.
-- **Pourquoi ESM** : tableau comparatif, colonne ESM navy + teinte teal.
+- **Pourquoi ESM** : tableau comparatif, colonne ESM navy + teinte teal ; mobile : fiches qui glissent (84 % de
+  largeur, accroche), « Sans » en gris avec ✕, « Avec ESM » sur fond teal clair avec ✓.
 - **Spécialités** : plan d'un centre médical ; clic = panneau latéral (en-tête navy à trame, contraintes, offre
   numérotée, points à valider losange or, services en étiquettes, pied warm avec CTA + « Page complète »).
 - **Réalisations** : image collante 56 % (desktop) / 42 svh (mobile), volet vertical 900 ms à chaque projet, compteur

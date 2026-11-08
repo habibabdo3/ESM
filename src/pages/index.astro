@@ -92,19 +92,32 @@ const projects = projectIds.map((id) => specialites.find((s) => s.id === id)).fi
       </div>
 
       <div class="journey-scene">
-        <div class="journey-frame" data-journey-frame>
-          <div class="journey-fallback" aria-hidden="true">
-            <PlanArt variant="cabinet-dentaire-orthodontie" tone="light" class="h-full w-full" label="" />
+        <div class="journey-slot">
+          <div class="journey-frame" data-journey-frame>
+            <div class="journey-fallback" aria-hidden="true">
+              <PlanArt variant="cabinet-dentaire-orthodontie" tone="light" class="h-full w-full" label="" />
+            </div>
+            <canvas class="journey-canvas" aria-hidden="true"></canvas>
+            <!-- Introduction plein écran (première visite) -->
+            <div class="intro-ui">
+              <p class="intro-brand"><span>ESM</span> Du plan à l’ouverture</p>
+              <button type="button" class="intro-skip" data-intro-skip>Passer l’introduction <span aria-hidden="true">→</span></button>
+              <div class="intro-caption" aria-live="polite">
+                <p class="intro-num"><span data-intro-num>01</span> / 04</p>
+                <p class="intro-title" data-intro-title>{chapters[0]?.title}</p>
+                <p class="intro-text" data-intro-text>{chapters[0]?.text}</p>
+                <div class="intro-bars" aria-hidden="true">{chapters.map(() => <span><i data-intro-bar></i></span>)}</div>
+              </div>
+            </div>
+            <div class="journey-controls">
+              <button type="button" class="journey-replay" data-journey-replay>
+                <span class="journey-replay-icon" aria-hidden="true">↻</span> Revoir la construction
+              </button>
+              <button type="button" class="journey-pause" data-journey-pause aria-pressed="false" aria-label="Mettre l’animation en pause">
+                <span class="journey-pause-icon" aria-hidden="true"></span>
+              </button>
+            </div>
           </div>
-          <canvas class="journey-canvas" aria-hidden="true"></canvas>
-          <div class="journey-cartouche" aria-hidden="true">
-            <span>Plan type</span>
-            <strong>Cabinet dentaire</strong>
-            <span>Illustration ESM</span>
-          </div>
-          <button type="button" class="journey-pause" data-journey-pause aria-pressed="false" aria-label="Mettre l’animation en pause">
-            <span class="journey-pause-icon" aria-hidden="true"></span>
-          </button>
         </div>
         <ol class="journey-steps" aria-label="Du plan à la livraison">
           {chapters.map((c, i) => (
@@ -158,8 +171,8 @@ const projects = projectIds.map((id) => specialites.find((s) => s.id === id)).fi
 
   <!-- 3. POURQUOI ESM : comparatif -->
   <section class="bg-white py-24 lg:py-32" aria-labelledby="why-title">
-    <div class="container-lux grid gap-12 lg:grid-cols-12 lg:gap-16">
-      <div class="lg:col-span-4">
+    <div class="container-lux grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-16">
+      <div class="min-w-0 lg:col-span-4">
         <div class="lg:sticky lg:top-32">
           <p class="eyebrow text-[var(--color-teal-ink)]">Pourquoi ESM</p>
           <h2 id="why-title" class="mt-6">Un seul interlocuteur change tout.</h2>
@@ -167,7 +180,7 @@ const projects = projectIds.map((id) => specialites.find((s) => s.id === id)).fi
           <a href="/contact/" class="btn btn-primary mt-8">Parler de mon projet <span class="arrow" aria-hidden="true">→</span></a>
         </div>
       </div>
-      <div class="lg:col-span-8">
+      <div class="min-w-0 lg:col-span-8">
         <table class="compare">
           <caption class="sr-only">Un projet médical mené avec plusieurs prestataires, ou avec Euro Space Medical</caption>
           <thead>
@@ -177,7 +190,7 @@ const projects = projectIds.map((id) => specialites.find((s) => s.id === id)).fi
               <th scope="col" class="compare-esm">Avec ESM</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody tabindex="0" aria-label="Comparatif, faites défiler">
             {compare.map((r, i) => (
               <tr data-reveal style={`--i:${i % 3}`}>
                 <th scope="row">{r.t}</th>
@@ -187,6 +200,7 @@ const projects = projectIds.map((id) => specialites.find((s) => s.id === id)).fi
             ))}
           </tbody>
         </table>
+        <p class="compare-hint" aria-hidden="true">Faites glisser pour comparer →</p>
         <p class="mt-5 text-[0.85rem] text-[var(--color-muted)]">* Al Barid Bank et Bank Al Yousr. {BANK_DISCLAIMER}</p>
       </div>
     </div>

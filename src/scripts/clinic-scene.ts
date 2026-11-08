@@ -107,6 +107,8 @@ const span = (p: number, a: number, b: number) => ease(clamp((p - a) / (b - a)))
 
 export interface ClinicScene {
   setProgress(p: number): void;
+  /** Lente rotation autour du cabinet livré (vitrine du héros une fois la construction terminée). */
+  setOrbit(on: boolean): void;
   dispose(): void;
 }
 
@@ -585,6 +587,8 @@ export function mountClinicScene(canvas: HTMLCanvasElement, opts: ClinicSceneOpt
 
   let progress = 0;
   let smooth = 0;
+  let orbit = false;
+  let orbitAngle = 0;
   let shadowAt = -1;
   let width = 0;
   let height = 0;
@@ -600,7 +604,7 @@ export function mountClinicScene(canvas: HTMLCanvasElement, opts: ClinicSceneOpt
     height = Math.max(1, Math.round(r.height));
     renderer.setSize(width, height, false);
     camera.aspect = width / height;
-    camera.fov = width / height < 1 ? 50 : 38;
+    camera.fov = width / height < 1 ? 46 : 38;
     renderer.shadowMap.needsUpdate = true;
     camera.updateProjectionMatrix();
   }
@@ -672,6 +676,23 @@ export function mountClinicScene(canvas: HTMLCanvasElement, opts: ClinicSceneOpt
     camPos.lerpVectors(a.pos, b.pos, lt);
     camLook.lerpVectors(a.look, b.look, lt);
     const drift = Math.sin(t * 0.00025) * 0.35;
+    // Écran en portrait (introduction plein écran sur téléphone) : on recule pour garder tout le plan
+    const aspect = width / height;
+    if (aspect < 1.1) {
+      const fit = Math.pow(1.1 / aspect, 0.8);
+      camPos.x = camLook.x + (camPos.x - camLook.x) * fit;
+      camPos.y = camLook.y + (camPos.y - camLook.y) * fit;
+      camPos.z = camLook.z + (camPos.z - camLook.z) * fit;
+    }
+    if (orbitAngle) {
+      // Rotation autour du point visé : la maquette livrée tourne lentement comme une vidéo
+      const dx = camPos.x - camLook.x;
+      const dz = camPos.z - camLook.z;
+      const c = Math.cos(orbitAngle);
+      const s2 = Math.sin(orbitAngle);
+      camPos.x = camLook.x + dx * c - dz * s2;
+      camPos.z = camLook.z + dx * s2 + dz * c;
+    }
     camera.position.set(camPos.x + drift, camPos.y, camPos.z - drift * 0.5);
     camera.lookAt(camLook);
     camera.updateProjectionMatrix();
@@ -682,7 +703,9 @@ export function mountClinicScene(canvas: HTMLCanvasElement, opts: ClinicSceneOpt
     frame = requestAnimationFrame(loop);
     if (!visible || !pageVisible) return;
     if (now - last < 1000 / targetFps) return;
+    const dt = last ? now - last : 0;
     last = now;
+    if (orbit && smooth > 0.99) orbitAngle += Math.min(dt, 100) * 0.00008;
     smooth += (progress - smooth) * (progress < smooth - 0.2 ? 0.06 : 0.12);
     apply(smooth, now);
     if (!lite && Math.abs(smooth - shadowAt) > 0.0005) {
@@ -707,6 +730,10 @@ export function mountClinicScene(canvas: HTMLCanvasElement, opts: ClinicSceneOpt
   return {
     setProgress(p: number) {
       progress = clamp(p);
+    },
+    setOrbit(on: boolean) {
+      orbit = on;
+      if (!on) orbitAngle = 0;
     },
     dispose() {
       disposed = true;

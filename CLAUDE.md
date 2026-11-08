@@ -147,8 +147,10 @@ header/footer → tous les services et spécialités ; fil d'Ariane partout.
   barre légale discrète ; sur mobile, Expertises et Ressources côte à côte, spécialités sur 2 colonnes.
 - **Mouvement (v1.6.0 du 2026-11-08)** : **défilement normal, rien d'épinglé, rien de piloté par le défilement**
   (demande client : « c'est l'utilisateur qui contrôle la vitesse »). Accueil : maquette 3D three.js
-  (`clinic-scene.ts`) en **lecture automatique** dans la planche du héros (`motion-home.ts`, sans GSAP), étapes
-  cliquables, **bouton pause obligatoire**, lecture suspendue hors écran. Héros = titre + **brief en une phrase**
+  (`clinic-scene.ts`) : **introduction plein écran à la première visite** (mémorisée dans `localStorage`
+  `esm-intro-v1`, « Passer », Échap, molette), puis la planche rejoint le héros où la maquette livrée tourne
+  lentement ; « Revoir la construction », étapes cliquables, **bouton pause obligatoire** (`motion-home.ts`, sans
+  GSAP), lecture suspendue hors écran. Héros = titre + **brief en une phrase**
   (formulaire GET → /contact/ pré-rempli). Spécialités : plan d'un centre médical (`SpecPlan`), clic = panneau
   « page virtuelle » qui affiche l'URL réelle de la spécialité (pages statiques conservées pour le SEO). Réalisations :
   image collante (CSS sticky) qui change via IntersectionObserver. Survols 200–400 ms ; `transform`/`opacity`/
@@ -156,6 +158,8 @@ header/footer → tous les services et spécialités ; fil d'Ariane partout.
   **Appareils** (script du `<head>`) : pas de 3D si « réduire les animations », économiseur de données ou < 2 Go ;
   classe `gl-lite` (sans ombres, densité ≤ 1,75×, 30 i/s) si < 4 Go, ≤ 4 cœurs ou 2G/3G ; densité ≤ 2× sinon ;
   scène chargée à l'approche de l'écran ; repli sur le plan statique si perte du contexte WebGL.
+- **Mobile** : aucune page ne doit dépasser la largeur d'écran (sinon le téléphone dézoome tout : rendu flou).
+  Colonnes de grille `grid-cols-1` / `min-w-0` autour des rangées qui défilent ; vérifier `scrollWidth` à 390 px.
 - **Pas de grilles de cartes** sur l’accueil et les hubs : bandes d'images, plan des spécialités, comparatif, index
   typographiques (`SpecIndex`, `ServiceIndex`), listes éditoriales, cartes empilées. Références : taste-skill (Leonxlnx) et UI UX Pro Max (nextlevelbuilder),
   palette et polices de marque prioritaires sur leurs suggestions.

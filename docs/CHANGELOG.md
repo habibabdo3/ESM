@@ -2,6 +2,23 @@
 
 > Ajouter chaque modification **en haut**, datée, avec : ce qui a changé, pourquoi, fichiers clés, et l'état des vérifications.
 
+## 2026-11-08 — v1.7.0 · Introduction plein écran mémorisée, maquette en vitrine, comparatif glissant, correctif mobile
+
+- **Correctif mobile important** : le tableau « Pourquoi ESM » élargissait la page à 1 059 px sur téléphone (le
+  navigateur dézoomait tout l'accueil → rendu flou/pixelisé). Colonnes de grille en `minmax(0, 1fr)` + `min-w-0` :
+  largeur de page = largeur d'écran sur toutes les pages testées.
+- **Introduction plein écran à la première visite** (accueil, 3D disponible) : la maquette se construit en ~20 s avec
+  le titre de l'étape en cours ; « Passer l'introduction », Échap, molette ou glissement l'interrompent ; à la fin, la
+  planche rejoint sa place à côté du titre. **Mémorisée** (`localStorage` `esm-intro-v1`) : au rechargement, plus
+  d'intro. Garde-fou : si la scène n'est pas prête en 7 s, la page s'affiche normalement.
+- **Héros ensuite** : la maquette livrée tourne lentement (vitrine) ; bouton « Revoir la construction » + pause ; les
+  étapes relancent la lecture à partir de l'étape choisie.
+- Cartouche « Plan type · Cabinet dentaire · Illustration ESM » retiré (peu lisible).
+- **Pourquoi ESM sur mobile** : une rangée de fiches qui glisse (une par sujet : sans / avec ESM), indication
+  « Faites glisser pour comparer ».
+- Higgsfield : connecteur actif mais en lecture seule dans cette session (catalogue, historique, crédits) — aucune
+  génération possible ici ; compte gratuit à 0 crédit.
+
 ## 2026-11-08 — v1.6.0 · Défilement normal, brief de projet, spécialités en panneau, réalisations qui défilent
 
 - **Défilement normal partout** : plus aucune section épinglée ni effet piloté par le défilement sur l'accueil ;
