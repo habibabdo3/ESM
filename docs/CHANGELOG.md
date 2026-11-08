@@ -2,6 +2,14 @@
 
 > Ajouter chaque modification **en haut**, datée, avec : ce qui a changé, pourquoi, fichiers clés, et l'état des vérifications.
 
+## 2026-11-08 — v1.9.1 · Réalisations : plus d'écran d'introduction
+
+- Écran « Réalisations / Les projets que nous menons / Nos études de cas arrivent… » retiré (demande client) : la
+  section s'ouvre directement sur le premier projet. En haut des photos, une barre fine « Réalisations · Projets
+  types » + un index cliquable des 4 projets (numéro + nom sur desktop, numéros sur mobile) qui suit le défilement
+  (filet or sur le projet en cours). Voile sombre en haut de la photo pour la lisibilité.
+- Vérifications : `npm run verify`, axe-core 0 violation, largeur mobile = écran, captures 1440 et 390 px.
+
 ## 2026-11-08 — v1.9.0 · Correctif CSS perdu, réalisations en photos plein écran, « Revoir » en plein écran
 
 - **Correctif** : trois blocs CSS supprimés par erreur en v1.6.0 sont rétablis — bandeau défilant des spécialités

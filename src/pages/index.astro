@@ -6,8 +6,9 @@
  * 2. Expertises — quatre bandes d'images repliées ; un clic ouvre la bande (desktop) ou l'accordéon (mobile).
  * 3. Pourquoi ESM — comparatif « Plusieurs prestataires / Avec ESM ».
  * 4. Spécialités — plan d'un centre médical ; chaque pièce ouvre un panneau (page virtuelle, URL réelle conservée).
- * 5. Réalisations — photos plein écran (collantes) qui changent au fil du défilement ; sur chaque photo, l'essentiel :
- *    numéro, spécialité, trois contraintes clés, actions.
+ * 5. Réalisations — photos plein écran (collantes) qui changent au fil du défilement ; barre fine en haut
+ *    (« Réalisations · Projets types » + index cliquable des 4 projets) ; sur chaque photo, l'essentiel : numéro,
+ *    spécialité, trois contraintes clés, actions.
  * Sans WebGL, appareil peu puissant ou « réduire les animations » : plan statique, même contenu.
  */
 import BaseLayout from '@/layouts/BaseLayout.astro';
@@ -253,27 +254,34 @@ const projects = projectIds.map((id) => specialites.find((s) => s.id === id)).fi
     </section>
   ) : (
     <section class="cases" aria-labelledby="real-title" data-cases>
-      <div class="cases-stage" aria-hidden="true">
+      <div class="cases-stage">
         {projects.map((s, i) => (
-          <div class:list={['cases-media', i === 0 && 'is-active']} data-case-media={i}>
+          <div class:list={['cases-media', i === 0 && 'is-active']} data-case-media={i} aria-hidden="true">
             <Visual visual={specialiteVisual[s.id] ?? { drawing: s.id, label: 'Plan type' }} sizes="100vw" widths={[800, 1280, 1920, 2400]} />
           </div>
         ))}
-        <div class="cases-veil"></div>
-        <p class="cases-count"><span data-case-count>01</span> / {String(projects.length).padStart(2, '0')}</p>
-        <p class="cases-caption">Images d’illustration</p>
+        <div class="cases-veil" aria-hidden="true"></div>
+        <div class="container-lux cases-bar">
+          <h2 id="real-title" class="cases-label"><span>Réalisations</span> Projets types</h2>
+          <nav aria-label="Projets types">
+            <ol class="cases-tabs">
+              {projects.map((s, i) => (
+                <li>
+                  <a href={`#projet-${s.id}`} class:list={['cases-tab', i === 0 && 'is-active']} data-case-tab={i} aria-current={i === 0 ? 'true' : undefined}>
+                    <span class="cases-tab-num">{String(i + 1).padStart(2, '0')}</span>
+                    <span class="cases-tab-name">{s.data.short}</span>
+                  </a>
+                </li>
+              ))}
+            </ol>
+          </nav>
+        </div>
+        <p class="cases-caption">Images d’illustration · projets types</p>
       </div>
       <div class="cases-track">
-        <div class="cases-panel cases-panel--intro" data-case="0">
-          <div class="container-lux">
-            <p class="eyebrow text-[var(--color-gold)]">Réalisations</p>
-            <h2 id="real-title" class="cases-head-title">Les projets que nous menons.</h2>
-            <p class="cases-head-text">Nos études de cas arrivent. Voici les projets types que nous concevons, construisons et équipons.</p>
-          </div>
-        </div>
-        <ol class="cases-list" aria-label="Projets types">
+        <ol class="cases-list">
           {projects.map((s, i) => (
-            <li class="cases-panel" data-case={i}>
+            <li class="cases-panel" data-case={i} id={`projet-${s.id}`}>
               <div class="container-lux">
                 <p class="cases-kicker">Projet type <span>{String(i + 1).padStart(2, '0')}</span></p>
                 <h3 class="cases-title"><a href={specialitePath(s.id)}>{s.data.short}</a></h3>

@@ -267,7 +267,7 @@ document.querySelectorAll<HTMLElement>('[data-strips]').forEach((section) => {
 document.querySelectorAll<HTMLElement>('[data-cases]').forEach((section) => {
   const panels = [...section.querySelectorAll<HTMLElement>('[data-case]')];
   const media = [...section.querySelectorAll<HTMLElement>('[data-case-media]')];
-  const count = section.querySelector<HTMLElement>('[data-case-count]');
+  const tabs = [...section.querySelectorAll<HTMLElement>('[data-case-tab]')];
   let current = 0;
   const show = (i: number) => {
     if (i < 0 || i === current) return;
@@ -275,7 +275,11 @@ document.querySelectorAll<HTMLElement>('[data-cases]').forEach((section) => {
       m.classList.toggle('is-prev', k === current);
       m.classList.toggle('is-active', k === i);
     });
-    if (count) count.textContent = String(i + 1).padStart(2, '0');
+    tabs.forEach((t, k) => {
+      t.classList.toggle('is-active', k === i);
+      if (k === i) t.setAttribute('aria-current', 'true');
+      else t.removeAttribute('aria-current');
+    });
     current = i;
   };
   const io = new IntersectionObserver(

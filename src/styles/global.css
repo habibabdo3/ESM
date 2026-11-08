@@ -2071,28 +2071,99 @@
 .cases-media .bg-white\/90 {
   display: none;
 }
+/* Barre fine en haut de la photo : libellé + index cliquable des projets */
+.cases-bar {
+  position: absolute;
+  z-index: 6;
+  left: 0;
+  right: 0;
+  top: 5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.cases-label {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgb(255 255 255 / 0.85);
+}
+.cases-label span {
+  margin-right: 0.6rem;
+  color: var(--color-gold);
+}
+.cases-tabs {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.5rem;
+}
+.cases-tab {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  min-height: 44px;
+  padding-top: 0.6rem;
+  border-top: 2px solid rgb(255 255 255 / 0.3);
+  color: rgb(255 255 255 / 0.75);
+  text-decoration: none;
+  transition: color 300ms var(--ease-lux), border-color 300ms var(--ease-lux);
+}
+.cases-tab-num {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 0.85rem;
+}
+.cases-tab-name {
+  display: none;
+  font-size: 0.88rem;
+  line-height: 1.3;
+}
+.cases-tab:hover,
+.cases-tab.is-active {
+  color: var(--color-white);
+}
+.cases-tab.is-active {
+  border-color: var(--color-gold);
+}
+.cases-tab.is-active .cases-tab-num {
+  color: var(--color-gold);
+}
+.cases-tab:focus-visible {
+  outline: 2px solid var(--color-white);
+  outline-offset: 3px;
+}
 .cases-veil {
   position: absolute;
   inset: 0;
   z-index: 3;
   background:
-    linear-gradient(0deg, rgb(20 44 67 / 0.92) 0%, rgb(20 44 67 / 0.55) 38%, rgb(20 44 67 / 0) 70%),
-    linear-gradient(90deg, rgb(20 44 67 / 0.45) 0%, rgb(20 44 67 / 0) 55%);
+    linear-gradient(180deg, rgb(20 44 67 / 0.85) 0%, rgb(20 44 67 / 0.55) 16%, rgb(20 44 67 / 0) 32%),
+    linear-gradient(0deg, rgb(20 44 67 / 0.92) 0%, rgb(20 44 67 / 0.55) 38%, rgb(20 44 67 / 0) 70%);
 }
-.cases-count {
-  position: absolute;
-  z-index: 4;
-  right: 1.25rem;
-  top: 5.5rem;
-  font-family: var(--font-display);
-  font-weight: 800;
-  font-size: 0.95rem;
-  letter-spacing: 0.06em;
-  color: rgb(255 255 255 / 0.8);
-}
-.cases-count span {
-  font-size: 2.6rem;
-  color: var(--color-gold);
+@media (min-width: 768px) {
+  .cases-bar {
+    top: 6.5rem;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 3rem;
+  }
+  .cases-label {
+    padding-top: 0.7rem;
+    white-space: nowrap;
+  }
+  .cases-bar nav {
+    flex: 1;
+    max-width: 46rem;
+  }
+  .cases-tabs {
+    gap: 1.25rem;
+  }
+  .cases-tab-name {
+    display: block;
+  }
 }
 .cases-caption {
   position: absolute;
@@ -2116,25 +2187,6 @@
 }
 .cases-panel > .container-lux {
   width: 100%;
-}
-.cases-panel--intro {
-  align-items: center;
-}
-.cases-head-title {
-  margin-top: 1.25rem;
-  max-width: 14ch;
-  font-size: clamp(2.6rem, 1.6rem + 4vw, 5.2rem);
-  font-weight: 800;
-  line-height: 0.98;
-  letter-spacing: -0.045em;
-  color: var(--color-white);
-}
-.cases-head-text {
-  margin-top: 1.25rem;
-  max-width: 28rem;
-  font-size: 1.08rem;
-  line-height: 1.6;
-  color: rgb(255 255 255 / 0.85);
 }
 .cases-kicker {
   font-family: var(--font-display);
@@ -2222,13 +2274,6 @@
 .js .cases-panel.is-active > .container-lux > *:nth-child(3) { transition-delay: 160ms; }
 .js .cases-panel.is-active > .container-lux > *:nth-child(4) { transition-delay: 240ms; }
 @media (min-width: 1024px) {
-  .cases-count {
-    right: max(3rem, calc((100vw - 80rem) / 2 + 3rem));
-    top: 7rem;
-  }
-  .cases-count span {
-    font-size: 4.5rem;
-  }
   .cases-caption {
     right: max(3rem, calc((100vw - 80rem) / 2 + 3rem));
     bottom: 1.5rem;
@@ -2240,9 +2285,6 @@
 @media (max-width: 767px) {
   .cases-panel {
     padding-bottom: 5.5rem;
-  }
-  .cases-count {
-    top: 5rem;
   }
 }
 
