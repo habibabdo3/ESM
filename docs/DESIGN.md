@@ -89,10 +89,10 @@ Règles automatiques : dans un conteneur `bg-[var(--color-navy…)]`, les titres
   largeur, accroche), « Sans » en gris avec ✕, « Avec ESM » sur fond teal clair avec ✓.
 - **Spécialités** : plan d'un centre médical ; clic = panneau latéral (en-tête navy à trame, contraintes, offre
   numérotée, points à valider losange or, services en étiquettes, pied warm avec CTA + « Page complète »).
-- **Réalisations** : image collante 56 % (desktop) / 42 svh (mobile), volet vertical 900 ms à chaque projet, compteur
-  or, filet or sur le projet en cours ; à droite (dessous sur mobile) une **fiche projet** : numéro géant en contour,
-  titre, description, tableau à libellés or (plan type, contraintes en pastilles teal, livrables numérotés, points à
-  valider ✓, services en étiquettes) dont les lignes se dessinent, CTA or.
+- **Réalisations** : photos plein écran collantes (100 svh), volet vertical 1 s + léger dézoom à chaque projet,
+  voile navy en bas, compteur or en haut à droite ; sur la photo : « Projet type 0X », spécialité (Manrope 800,
+  38–86 px), 3 pastilles de contraintes (verre navy, bord blanc), CTA or + « La spécialité ». Introduction de section
+  sur la première photo. Rejouer la maquette = retour en plein écran.
 - Sans WebGL, appareil modeste ou `prefers-reduced-motion` : plan statique, quatre étapes affichées en entier.
 
 ## Navigation

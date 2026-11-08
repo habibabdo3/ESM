@@ -6,8 +6,8 @@
  * 2. Expertises — quatre bandes d'images repliées ; un clic ouvre la bande (desktop) ou l'accordéon (mobile).
  * 3. Pourquoi ESM — comparatif « Plusieurs prestataires / Avec ESM ».
  * 4. Spécialités — plan d'un centre médical ; chaque pièce ouvre un panneau (page virtuelle, URL réelle conservée).
- * 5. Réalisations — projets types : l'image collante change au fil du défilement ; à droite (dessous sur mobile),
- *    une fiche projet (plan type, contraintes, livrables, points à valider, services) qui se dessine à l'arrivée.
+ * 5. Réalisations — photos plein écran (collantes) qui changent au fil du défilement ; sur chaque photo, l'essentiel :
+ *    numéro, spécialité, trois contraintes clés, actions.
  * Sans WebGL, appareil peu puissant ou « réduire les animations » : plan statique, même contenu.
  */
 import BaseLayout from '@/layouts/BaseLayout.astro';
@@ -41,7 +41,7 @@ const compare = [
 ];
 const wa = whatsappLink('Bonjour, je souhaite parler de mon projet (Accueil).');
 const cities = ['Casablanca', 'Rabat', 'Marrakech', 'Tanger', 'Fès', 'Agadir', 'Meknès', 'Oujda', 'Kénitra', 'Tétouan', 'El Jadida', 'Laâyoune'];
-const projectIds = ['cabinet-dentaire-orthodontie', 'radiologie-imagerie-medicale', 'cliniques-blocs-operatoires', 'laboratoire-analyses-medicales'];
+const projectIds = ['cabinet-dentaire-orthodontie', 'gastro-enterologie-endoscopie', 'cliniques-blocs-operatoires', 'laboratoire-analyses-medicales'];
 const projects = projectIds.map((id) => specialites.find((s) => s.id === id)).filter((s) => s !== undefined);
 ---
 
@@ -102,7 +102,7 @@ const projects = projectIds.map((id) => specialites.find((s) => s.id === id)).fi
             <!-- Introduction plein écran (première visite) -->
             <div class="intro-ui">
               <p class="intro-brand"><span>ESM</span> Du plan à l’ouverture</p>
-              <button type="button" class="intro-skip" data-intro-skip>Passer l’introduction <span aria-hidden="true">→</span></button>
+              <button type="button" class="intro-skip" data-intro-skip><span data-skip-label>Passer l’introduction</span> <span aria-hidden="true">→</span></button>
               <div class="intro-caption" aria-live="polite">
                 <p class="intro-num"><span data-intro-num>01</span> / 04</p>
                 <p class="intro-title" data-intro-title>{chapters[0]?.title}</p>
@@ -256,52 +256,34 @@ const projects = projectIds.map((id) => specialites.find((s) => s.id === id)).fi
       <div class="cases-stage" aria-hidden="true">
         {projects.map((s, i) => (
           <div class:list={['cases-media', i === 0 && 'is-active']} data-case-media={i}>
-            <Visual visual={specialiteVisual[s.id] ?? { drawing: s.id, label: 'Plan type' }} sizes="(min-width:1024px) 56vw, 100vw" widths={[640, 1000, 1400, 1800]} />
+            <Visual visual={specialiteVisual[s.id] ?? { drawing: s.id, label: 'Plan type' }} sizes="100vw" widths={[800, 1280, 1920, 2400]} />
           </div>
         ))}
+        <div class="cases-veil"></div>
         <p class="cases-count"><span data-case-count>01</span> / {String(projects.length).padStart(2, '0')}</p>
-        <p class="cases-caption">Image d’illustration ou plan type</p>
+        <p class="cases-caption">Images d’illustration</p>
       </div>
-      <div class="cases-content">
-        <div class="cases-head">
-          <p class="eyebrow text-[var(--color-gold)]">Réalisations</p>
-          <h2 id="real-title" class="mt-6 text-white">Les projets que nous menons.</h2>
-          <p class="mt-5 max-w-md text-[1.05rem] leading-relaxed text-white/70">Nos études de cas arrivent. En attendant, voici les projets types que nous concevons, construisons et équipons.</p>
+      <div class="cases-track">
+        <div class="cases-panel cases-panel--intro" data-case="0">
+          <div class="container-lux">
+            <p class="eyebrow text-[var(--color-gold)]">Réalisations</p>
+            <h2 id="real-title" class="cases-head-title">Les projets que nous menons.</h2>
+            <p class="cases-head-text">Nos études de cas arrivent. Voici les projets types que nous concevons, construisons et équipons.</p>
+          </div>
         </div>
         <ol class="cases-list" aria-label="Projets types">
           {projects.map((s, i) => (
-            <li class:list={['cases-item', i === 0 && 'is-active is-seen']} data-case={i}>
-              <span class="cases-ghost" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
-              <p class="cases-kicker">Projet type <span>{String(i + 1).padStart(2, '0')}</span> · {s.data.short}</p>
-              <h3 class="cases-title"><a href={specialitePath(s.id)}>{s.data.h1}</a></h3>
-              <p class="cases-text">{s.data.description}</p>
-              <dl class="fiche">
-                <div class="fiche-row" style="--d:0">
-                  <dt>Plan type</dt>
-                  <dd class="fiche-plan">
-                    <PlanArt variant={s.id} tone="light" detail="simple" class="h-full w-full" label={`Illustration : plan type — ${s.data.short}`} />
-                  </dd>
+            <li class="cases-panel" data-case={i}>
+              <div class="container-lux">
+                <p class="cases-kicker">Projet type <span>{String(i + 1).padStart(2, '0')}</span></p>
+                <h3 class="cases-title"><a href={specialitePath(s.id)}>{s.data.short}</a></h3>
+                <ul class="cases-chips" aria-label="Contraintes clés">
+                  {s.data.contraintes.slice(0, 3).map((c) => <li>{c.split(/[:;(]/)[0]?.trim()}</li>)}
+                </ul>
+                <div class="cases-actions">
+                  <a href={`/contact/?specialite=${s.id}`} class="cases-cta">Démarrer un projet similaire <span aria-hidden="true">→</span></a>
+                  <a href={specialitePath(s.id)} class="link-more text-white">La spécialité <span>→</span></a>
                 </div>
-                <div class="fiche-row" style="--d:1">
-                  <dt>Contraintes</dt>
-                  <dd><ul class="fiche-chips">{s.data.contraintes.slice(0, 3).map((c) => <li>{c.split(/[:;(]/)[0]?.trim()}</li>)}</ul></dd>
-                </div>
-                <div class="fiche-row" style="--d:2">
-                  <dt>Livrables</dt>
-                  <dd><ol class="fiche-steps">{s.data.offre.slice(0, 4).map((o) => <li>{o}</li>)}</ol></dd>
-                </div>
-                <div class="fiche-row" style="--d:3">
-                  <dt>À valider</dt>
-                  <dd><ul class="fiche-checks">{s.data.aValider.slice(0, 2).map((a) => <li>{a}</li>)}</ul></dd>
-                </div>
-                <div class="fiche-row" style="--d:4">
-                  <dt>Services</dt>
-                  <dd><ul class="fiche-tags">{s.data.servicesLies.slice(0, 4).map((id) => <li><a href={servicePath(id)}>{serviceName.get(id) ?? id}</a></li>)}</ul></dd>
-                </div>
-              </dl>
-              <div class="cases-actions">
-                <a href={`/contact/?specialite=${s.id}`} class="cases-cta">Démarrer un projet similaire <span aria-hidden="true">→</span></a>
-                <a href={specialitePath(s.id)} class="link-more text-white">La spécialité <span>→</span></a>
               </div>
             </li>
           ))}

@@ -149,18 +149,20 @@ header/footer → tous les services et spécialités ; fil d'Ariane partout.
   (demande client : « c'est l'utilisateur qui contrôle la vitesse »). Accueil : maquette 3D three.js
   (`clinic-scene.ts`) : **introduction plein écran à la première visite** (mémorisée dans `localStorage`
   `esm-intro-v1`, « Passer », Échap, molette), puis la planche rejoint le héros où la maquette livrée tourne
-  lentement ; « Revoir la construction », étapes cliquables, **bouton pause obligatoire** (`motion-home.ts`, sans
+  lentement ; « Revoir la construction » repasse en plein écran, étapes cliquables, **bouton pause obligatoire** (`motion-home.ts`, sans
   GSAP), lecture suspendue hors écran. Héros = titre + **brief en une phrase**
   (formulaire GET → /contact/ pré-rempli). Spécialités : plan d'un centre médical (`SpecPlan`), clic = panneau
   « page virtuelle » qui affiche l'URL réelle de la spécialité (pages statiques conservées pour le SEO). Expertises : desktop, première
-  bande ouverte et survol (choix client) ; mobile, accordéon replié au toucher. Réalisations : image collante (CSS sticky) qui change via
-  IntersectionObserver + fiche projet (plan type, contraintes, livrables, à valider, services). Survols 200–400 ms ; `transform`/`opacity`/
+  bande ouverte et survol (choix client) ; mobile, accordéon replié au toucher. Réalisations : photos plein écran collantes qui changent
+  via IntersectionObserver, texte minimal posé sur la photo (numéro, spécialité, 3 contraintes, actions). Survols 200–400 ms ; `transform`/`opacity`/
   `clip-path`, seule exception `flex-grow` des bandes d'expertises. Contraste AA conservé pendant les animations.
   **Appareils** (script du `<head>`) : pas de 3D si « réduire les animations », économiseur de données ou < 2 Go ;
   classe `gl-lite` (sans ombres, densité ≤ 1,75×, 30 i/s) si < 4 Go, ≤ 4 cœurs ou 2G/3G ; densité ≤ 2× sinon ;
   scène chargée à l'approche de l'écran ; repli sur le plan statique si perte du contexte WebGL.
 - **Mobile** : aucune page ne doit dépasser la largeur d'écran (sinon le téléphone dézoome tout : rendu flou).
   Colonnes de grille `grid-cols-1` / `min-w-0` autour des rangées qui défilent ; vérifier `scrollWidth` à 390 px.
+  Avant de remplacer un bloc de `global.css` par découpage, vérifier qu'aucune classe utilisée n'a disparu
+  (incident v1.6.0 : bandeau, `SpecIndex` et `ServiceIndex` sans styles).
 - **Pas de grilles de cartes** sur l’accueil et les hubs : bandes d'images, plan des spécialités, comparatif, index
   typographiques (`SpecIndex`, `ServiceIndex`), listes éditoriales, cartes empilées. Références : taste-skill (Leonxlnx) et UI UX Pro Max (nextlevelbuilder),
   palette et polices de marque prioritaires sur leurs suggestions.

@@ -2,11 +2,11 @@
  * Accueil : défilement normal, aucun épinglage, aucun effet piloté par le défilement (sans GSAP : script léger).
  * - Héros : à la première visite, introduction plein écran (la maquette se construit, ~20 s, « Passer » / Échap /
  *   molette), puis la planche rejoint sa place à côté du titre. Ensuite (et à chaque retour : mémorisé dans
- *   localStorage `esm-intro-v1`), la maquette livrée tourne lentement ; « Revoir la construction » et les étapes
- *   relancent la lecture ; bouton pause (WCAG 2.2.2). Lecture suspendue hors écran ou onglet caché ; scène chargée
+ *   localStorage `esm-intro-v1`), la maquette livrée tourne lentement ; « Revoir la construction » repasse en plein
+ *   écran (même intro, « Retour au site ») ; les étapes relancent la lecture dans la planche ; bouton pause (WCAG 2.2.2). Lecture suspendue hors écran ou onglet caché ; scène chargée
  *   à l'approche de l'écran, libérée quand on s'en éloigne sur appareil modeste (`gl-lite`).
  * - [data-strip] : desktop, la bande survolée s'élargit (première ouverte) ; mobile, accordéon au toucher.
- * - [data-cases] : l'image collante change quand un projet type passe au centre de l'écran ; sa fiche se dessine.
+ * - [data-cases] : la photo plein écran change quand un projet type passe au centre de l'écran.
  * Le plan des spécialités (SpecPlan.astro) a son propre script.
  */
 const root = document.documentElement;
@@ -134,8 +134,28 @@ if (journey && frame && canvas && immersive) {
   };
   requestAnimationFrame(tick);
 
+  // « Revoir la construction » : la planche repasse en plein écran, rejoue, puis reprend sa place
+  const skipLabel = journey.querySelector<HTMLElement>('[data-skip-label]');
+  const enterFull = () => {
+    const slot = frame.parentElement!.getBoundingClientRect();
+    intro = true;
+    if (skipLabel) skipLabel.textContent = 'Retour au site';
+    frame.style.transition = 'none';
+    Object.assign(frame.style, { position: 'fixed', top: `${slot.top}px`, left: `${slot.left}px`, width: `${slot.width}px`, height: `${slot.height}px`, zIndex: '80', borderRadius: '8px' });
+    void frame.offsetWidth;
+    frame.style.transition = 'top 1s var(--ease-lux), left 1s var(--ease-lux), width 1s var(--ease-lux), height 1s var(--ease-lux), border-radius 1s var(--ease-lux)';
+    Object.assign(frame.style, { top: '0px', left: '0px', width: '100vw', height: '100svh', borderRadius: '0px' });
+    root.classList.add('intro');
+    const done = () => frame.removeAttribute('style');
+    frame.addEventListener('transitionend', (e) => e.propertyName === 'width' && done(), { once: true });
+    setTimeout(done, 1400);
+    armSkip();
+    skipBtn?.focus({ preventScroll: true });
+    play(0);
+  };
+
   // Commandes : revoir, pause, étapes, passer l'intro (bouton, Échap, molette, glissement)
-  replayBtn?.addEventListener('click', () => play(0));
+  replayBtn?.addEventListener('click', enterFull);
   steps.forEach((s, i) => s.querySelector('button')?.addEventListener('click', () => play(STOPS[i]! + 0.001)));
   pauseBtn?.addEventListener('click', () => {
     paused = !paused;
@@ -154,10 +174,16 @@ if (journey && frame && canvas && immersive) {
     endIntro(true);
   };
   skipBtn?.addEventListener('click', skip);
+  window.addEventListener('keydown', (e) => e.key === 'Escape' && skip());
+  function armSkip() {
+    // Laisse passer le geste qui a lancé la lecture, puis molette ou glissement referment le plein écran
+    setTimeout(() => {
+      window.addEventListener('wheel', skip, { passive: true, once: true });
+      window.addEventListener('touchmove', skip, { passive: true, once: true });
+    }, 400);
+  }
   if (intro) {
-    window.addEventListener('keydown', (e) => e.key === 'Escape' && skip());
-    window.addEventListener('wheel', skip, { passive: true, once: true });
-    window.addEventListener('touchmove', skip, { passive: true, once: true });
+    armSkip();
     skipBtn?.focus({ preventScroll: true });
   }
 
@@ -237,9 +263,9 @@ document.querySelectorAll<HTMLElement>('[data-strips]').forEach((section) => {
   });
 });
 
-/* ---------- 3. Réalisations : l'image change au fil du défilement ---------- */
+/* ---------- 3. Réalisations : la photo plein écran change au fil du défilement ---------- */
 document.querySelectorAll<HTMLElement>('[data-cases]').forEach((section) => {
-  const items = [...section.querySelectorAll<HTMLElement>('[data-case]')];
+  const panels = [...section.querySelectorAll<HTMLElement>('[data-case]')];
   const media = [...section.querySelectorAll<HTMLElement>('[data-case-media]')];
   const count = section.querySelector<HTMLElement>('[data-case-count]');
   let current = 0;
@@ -249,14 +275,18 @@ document.querySelectorAll<HTMLElement>('[data-cases]').forEach((section) => {
       m.classList.toggle('is-prev', k === current);
       m.classList.toggle('is-active', k === i);
     });
-    items.forEach((it, k) => it.classList.toggle('is-active', k === i));
-    items[i]?.classList.add('is-seen');
     if (count) count.textContent = String(i + 1).padStart(2, '0');
     current = i;
   };
   const io = new IntersectionObserver(
-    (entries) => entries.forEach((e) => e.isIntersecting && show(items.indexOf(e.target as HTMLElement))),
+    (entries) =>
+      entries.forEach((e) => {
+        if (!e.isIntersecting) return;
+        const el = e.target as HTMLElement;
+        panels.forEach((p) => p.classList.toggle('is-active', p === el));
+        show(Number(el.dataset.case));
+      }),
     { rootMargin: '-45% 0px -45% 0px' },
   );
-  items.forEach((it) => io.observe(it));
+  panels.forEach((p) => io.observe(p));
 });

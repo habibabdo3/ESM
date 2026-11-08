@@ -2,6 +2,20 @@
 
 > Ajouter chaque modification **en haut**, datée, avec : ce qui a changé, pourquoi, fichiers clés, et l'état des vérifications.
 
+## 2026-11-08 — v1.9.0 · Correctif CSS perdu, réalisations en photos plein écran, « Revoir » en plein écran
+
+- **Correctif** : trois blocs CSS supprimés par erreur en v1.6.0 sont rétablis — bandeau défilant des spécialités
+  (sur mobile, les noms s'affichaient en un bloc de texte brut), index des spécialités de `/specialites/` et liste
+  éditoriale de `/services/`. Contrôle ajouté : chaque classe personnalisée utilisée dans les composants existe en CSS.
+- **Réalisations** : photos plein écran collantes qui changent au fil du défilement (volet vertical, léger zoom) ;
+  sur chaque photo, seulement l'essentiel : « Projet type 0X », spécialité en grand, trois contraintes clés en
+  pastilles, « Démarrer un projet similaire » + « La spécialité ». Fiche détaillée retirée (trop de texte, doublons).
+  Radiologie (dessin) remplacée par gastro-entérologie (photo d'endoscopie) pour n'avoir que des photos.
+- **« Revoir la construction »** : la planche repasse en plein écran (même mise en scène que l'introduction, bouton
+  « Retour au site », Échap / molette / glissement), puis reprend sa place dans le héros.
+- Vérifications : `npm run verify` sans erreur bloquante, axe-core 0 violation, largeur mobile = écran, captures
+  1440 et 390 px sans erreur console.
+
 ## 2026-11-08 — v1.8.1 · Expertises desktop comme avant
 
 - Desktop : retour au comportement précédent (première bande ouverte, la bande survolée s'élargit, libellés
