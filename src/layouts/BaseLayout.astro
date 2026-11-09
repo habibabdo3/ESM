@@ -5,6 +5,9 @@ import Header from '@/components/Header.astro';
 import Footer from '@/components/Footer.astro';
 import StickyCta from '@/components/StickyCta.astro';
 import CookieBanner from '@/components/CookieBanner.astro';
+import Logo from '@/components/Logo.astro';
+import Icon from '@/components/Icon.astro';
+import { whatsappLink } from '@/config/site';
 import displayFont from '@fontsource-variable/manrope/files/manrope-latin-wght-normal.woff2?url';
 import textFont from '@fontsource-variable/inter/files/inter-latin-wght-normal.woff2?url';
 
@@ -17,8 +20,11 @@ interface Props {
   jsonld?: Record<string, unknown>[];
   overlayHeader?: boolean;
   context?: string;
+  /** Pages d'annonce : en-tête réduit (logo + WhatsApp), pied de page légal, barre mobile « WhatsApp / devis ». */
+  minimal?: boolean;
 }
-const { overlayHeader = false, context, ...seo } = Astro.props;
+const { overlayHeader = false, context, minimal = false, ...seo } = Astro.props;
+const wa = minimal ? whatsappLink(`Bonjour Euro Space Medical, je consulte la page « ${context ?? seo.title} » et je souhaite parler de mon projet.`) : null;
 ---
 
 <!doctype html>
@@ -37,12 +43,45 @@ const { overlayHeader = false, context, ...seo } = Astro.props;
     <Seo {...seo} />
   </head>
   <body>
-    <Header overlay={overlayHeader} />
+    {minimal ? (
+      <header class="lp-header">
+        <div class="container-lux flex h-[4.5rem] items-center justify-between gap-4">
+          <a href="/" aria-label="Euro Space Medical, accueil"><Logo size={40} tagline={false} /></a>
+          {wa ? (
+            <a href={wa} target="_blank" rel="noopener" class="lp-header-wa"><Icon name="whatsapp" size={18} /> <span>WhatsApp</span></a>
+          ) : (
+            <a href="#devis" class="lp-header-wa">Être rappelé</a>
+          )}
+        </div>
+      </header>
+    ) : (
+      <Header overlay={overlayHeader} />
+    )}
     <main id="contenu">
       <slot />
     </main>
-    <Footer />
-    <StickyCta context={context ?? seo.title} />
+    {minimal ? (
+      <footer class="lp-footer">
+        <div class="container-lux flex flex-wrap items-center justify-between gap-x-6 gap-y-3">
+          <p>© {new Date().getFullYear()} Euro Space Medical</p>
+          <ul class="flex flex-wrap gap-x-5 gap-y-2">
+            <li><a href="/mentions-legales/">Mentions légales</a></li>
+            <li><a href="/confidentialite/">Confidentialité</a></li>
+            <li><a href="/cookies/">Cookies</a></li>
+            <li><button type="button" data-cookie-open>Gérer les cookies</button></li>
+          </ul>
+        </div>
+      </footer>
+      <div class="lp-sticky" style="padding-bottom: env(safe-area-inset-bottom)">
+        {wa && <a href={wa} target="_blank" rel="noopener"><Icon name="whatsapp" size={20} /> WhatsApp</a>}
+        <a href="#devis" class="lp-sticky-devis">Recevoir mon devis</a>
+      </div>
+    ) : (
+      <>
+        <Footer />
+        <StickyCta context={context ?? seo.title} />
+      </>
+    )}
     <CookieBanner />
     <script>import '@/scripts/motion';</script>
   </body>

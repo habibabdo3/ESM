@@ -1,6 +1,19 @@
 ---
+/**
+ * Formulaire de demande de devis → POST JSON /api/devis.
+ * - `variant="full"` (page contact) : tous les champs ; `variant="short"` (pages d'annonce) : nom, téléphone, ville,
+ *   structure, nature, e-mail facultatif — moins de champs, plus de demandes.
+ * - `structure` / `nature` : valeurs pré-sélectionnées (pages d'annonce) ; l'URL (?specialite=, ?nature=, ?ville=)
+ *   pré-remplit aussi le formulaire.
+ * - Champs cachés : source de campagne (utm_*, fbclid, page d'arrivée) et identifiant d'événement du Lead.
+ * - Succès : la demande est marquée puis le visiteur va sur /merci/, où le Lead est compté une seule fois.
+ */
 import { getSpecialites } from '@/lib/content';
 import { bankClaimsApproved, BANK_DISCLAIMER, whatsappLink } from '@/config/site';
+
+interface Props { variant?: 'full' | 'short'; structure?: string; nature?: 'Création' | 'Rénovation' | 'Extension'; submitLabel?: string }
+const { variant = 'full', structure, nature, submitLabel = 'Envoyer ma demande' } = Astro.props;
+const short = variant === 'short';
 
 const specialites = await getSpecialites();
 const financement = bankClaimsApproved
@@ -9,9 +22,10 @@ const financement = bankClaimsApproved
 const wa = whatsappLink('Bonjour, je souhaite un devis pour mon projet médical.');
 const field = 'mt-2 block w-full border border-[var(--color-line)] bg-white px-4 py-3 text-[1rem] text-[var(--color-ink)] transition focus:border-[var(--color-teal-ink)] focus:outline-none focus-visible:outline-2 focus-visible:outline-[var(--color-gold)]';
 const lbl = 'text-[0.78rem] font-semibold uppercase tracking-[0.12em] text-[var(--color-ink)]';
+const attrFields = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'fbclid', 'landing'];
 ---
 
-<form id="quote-form" class="grid gap-6 sm:grid-cols-2" method="post" action="/api/devis" novalidate>
+<form id="quote-form" class="grid gap-6 sm:grid-cols-2" method="post" action="/api/devis" novalidate data-short={short ? '' : undefined}>
   <div>
     <label for="f-nom" class={lbl}>Nom et prénom *</label>
     <input id="f-nom" name="nom" autocomplete="name" required class={field} />
@@ -21,8 +35,8 @@ const lbl = 'text-[0.78rem] font-semibold uppercase tracking-[0.12em] text-[var(
     <input id="f-tel" name="telephone" type="tel" autocomplete="tel" required inputmode="tel" class={field} />
   </div>
   <div>
-    <label for="f-email" class={lbl}>E-mail *</label>
-    <input id="f-email" name="email" type="email" autocomplete="email" required class={field} />
+    <label for="f-email" class={lbl}>E-mail{short ? ' (facultatif)' : ' *'}</label>
+    <input id="f-email" name="email" type="email" autocomplete="email" required={!short} class={field} />
   </div>
   <div>
     <label for="f-ville" class={lbl}>Ville *</label>
@@ -32,7 +46,7 @@ const lbl = 'text-[0.78rem] font-semibold uppercase tracking-[0.12em] text-[var(
     <label for="f-structure" class={lbl}>Type de structure *</label>
     <select id="f-structure" name="structure" required class={field}>
       <option value="">Choisir…</option>
-      {specialites.map((s) => <option value={s.id}>{s.data.short}</option>)}
+      {specialites.map((s) => <option value={s.id} selected={s.id === structure}>{s.data.short}</option>)}
       <option value="autre">Autre</option>
     </select>
   </div>
@@ -40,46 +54,50 @@ const lbl = 'text-[0.78rem] font-semibold uppercase tracking-[0.12em] text-[var(
     <label for="f-nature" class={lbl}>Nature du projet *</label>
     <select id="f-nature" name="nature" required class={field}>
       <option value="">Choisir…</option>
-      <option>Création</option>
-      <option>Rénovation</option>
-      <option>Extension</option>
+      {['Création', 'Rénovation', 'Extension'].map((n) => <option selected={n === nature}>{n}</option>)}
     </select>
   </div>
-  <div>
-    <label for="f-surface" class={lbl}>Surface approximative (m²)</label>
-    <input id="f-surface" name="surface" type="number" min="5" max="100000" inputmode="numeric" class={field} />
-  </div>
-  <div>
-    <label for="f-calendrier" class={lbl}>Calendrier souhaité</label>
-    <select id="f-calendrier" name="calendrier" class={field}>
-      <option value="">Choisir…</option>
-      <option>Dans les 3 mois</option>
-      <option>Dans 3 à 6 mois</option>
-      <option>Dans 6 à 12 mois</option>
-      <option>Plus tard / à définir</option>
-    </select>
-  </div>
-  <fieldset class="sm:col-span-2">
-    <legend class={lbl}>Souhaitez-vous un financement ?</legend>
-    <div class="mt-3 flex flex-wrap gap-x-6 gap-y-3">
-      {financement.map((f) => (
-        <label class="inline-flex items-center gap-2 text-[0.95rem]">
-          <input type="radio" name="financement" value={f} class="h-4 w-4 accent-[var(--color-teal-ink)]" /> {f}
-        </label>
-      ))}
-    </div>
-    <p class="mt-2 text-[0.8rem] text-[var(--color-muted)]">{BANK_DISCLAIMER}</p>
-  </fieldset>
-  <div class="sm:col-span-2">
-    <label for="f-message" class={lbl}>Votre projet</label>
-    <textarea id="f-message" name="message" rows="5" class={field} placeholder="Local, nombre de salles, équipements prévus, contraintes…"></textarea>
-  </div>
+  {!short && (
+    <>
+      <div>
+        <label for="f-surface" class={lbl}>Surface approximative (m²)</label>
+        <input id="f-surface" name="surface" type="number" min="5" max="100000" inputmode="numeric" class={field} />
+      </div>
+      <div>
+        <label for="f-calendrier" class={lbl}>Calendrier souhaité</label>
+        <select id="f-calendrier" name="calendrier" class={field}>
+          <option value="">Choisir…</option>
+          <option>Dans les 3 mois</option>
+          <option>Dans 3 à 6 mois</option>
+          <option>Dans 6 à 12 mois</option>
+          <option>Plus tard / à définir</option>
+        </select>
+      </div>
+      <fieldset class="sm:col-span-2">
+        <legend class={lbl}>Souhaitez-vous un financement ?</legend>
+        <div class="mt-3 flex flex-wrap gap-x-6 gap-y-3">
+          {financement.map((f) => (
+            <label class="inline-flex items-center gap-2 text-[0.95rem]">
+              <input type="radio" name="financement" value={f} class="h-4 w-4 accent-[var(--color-teal-ink)]" /> {f}
+            </label>
+          ))}
+        </div>
+        <p class="mt-2 text-[0.8rem] text-[var(--color-muted)]">{BANK_DISCLAIMER}</p>
+      </fieldset>
+      <div class="sm:col-span-2">
+        <label for="f-message" class={lbl}>Votre projet</label>
+        <textarea id="f-message" name="message" rows="5" class={field} placeholder="Local, nombre de salles, équipements prévus, contraintes…"></textarea>
+      </div>
+    </>
+  )}
   <!-- Champ piège anti-spam : invisible pour les humains -->
   <div class="absolute -left-[9999px]" aria-hidden="true">
     <label for="f-site">Ne pas remplir</label>
     <input id="f-site" name="site_web" tabindex="-1" autocomplete="off" />
   </div>
   <input type="hidden" name="page" value={Astro.url.pathname} />
+  <input type="hidden" name="event_id" value="" />
+  {attrFields.map((k) => <input type="hidden" name={k} value="" data-attr={k} />)}
   <div class="sm:col-span-2">
     <label class="flex items-start gap-3 text-[0.88rem] leading-relaxed text-[var(--color-muted)]">
       <input type="checkbox" name="consentement" required class="mt-1 h-4 w-4 shrink-0 accent-[var(--color-teal-ink)]" />
@@ -90,17 +108,18 @@ const lbl = 'text-[0.78rem] font-semibold uppercase tracking-[0.12em] text-[var(
     </label>
   </div>
   <div class="flex flex-wrap items-center gap-4 sm:col-span-2">
-    <button type="submit" class="btn btn-primary">Envoyer ma demande <span class="arrow" aria-hidden="true">→</span></button>
+    <button type="submit" class="btn btn-primary">{submitLabel} <span class="arrow" aria-hidden="true">→</span></button>
     <p class="text-[0.8rem] text-[var(--color-muted)]">* Champs obligatoires</p>
   </div>
   <p id="form-status" role="status" aria-live="polite" class="text-[0.95rem] sm:col-span-2" data-wa={wa ?? ''}></p>
 </form>
 
 <script>
+  import { captureAttribution, getAttribution, markLead, newEventId } from '@/scripts/track';
+
   const form = document.getElementById('quote-form') as HTMLFormElement | null;
   const status = document.getElementById('form-status');
   const params = new URLSearchParams(location.search);
-  const pre = params.get('specialite');
   // Pré-remplissage depuis l'accueil (« Je prépare une … en … à … ») ou une page spécialité
   const preset = (id: string, value: string | null) => {
     const el = form?.querySelector<HTMLSelectElement | HTMLInputElement>(id);
@@ -109,9 +128,18 @@ const lbl = 'text-[0.78rem] font-semibold uppercase tracking-[0.12em] text-[var(
       if ([...el.options].some((o) => o.value === value)) el.value = value;
     } else el.value = value.slice(0, 80);
   };
-  preset('#f-structure', pre);
+  preset('#f-structure', params.get('specialite'));
   preset('#f-nature', params.get('nature'));
   preset('#f-ville', params.get('ville'));
+
+  // Source de campagne de la session (utm_*, fbclid, page d'arrivée) : relevée ici aussi, l'ordre des scripts
+  // de la page n'étant pas garanti, puis jointe au moment de l'envoi
+  captureAttribution();
+  const fillAttribution = () => {
+    const attr = getAttribution();
+    form?.querySelectorAll<HTMLInputElement>('[data-attr]').forEach((i) => (i.value = attr[i.dataset.attr ?? ''] ?? ''));
+  };
+
   form?.addEventListener('submit', async (e) => {
     e.preventDefault();
     if (!status) return;
@@ -122,21 +150,26 @@ const lbl = 'text-[0.78rem] font-semibold uppercase tracking-[0.12em] text-[var(
     const btn = form.querySelector<HTMLButtonElement>('button[type=submit]');
     btn?.setAttribute('disabled', '');
     status.textContent = 'Envoi en cours…';
+    fillAttribution();
+    const eventId = newEventId();
+    const eventInput = form.querySelector<HTMLInputElement>('[name="event_id"]');
+    if (eventInput) eventInput.value = eventId;
     try {
+      const data = new FormData(form);
       const res = await fetch('/api/devis', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(Object.fromEntries(new FormData(form))),
+        body: JSON.stringify(Object.fromEntries(data)),
       });
       if (!res.ok) throw new Error(String(res.status));
-      form.reset();
-      status.textContent = 'Merci. Votre demande a bien été envoyée : nous revenons vers vous rapidement.';
+      markLead(eventId, String(data.get('structure') ?? ''));
+      status.textContent = 'Merci. Votre demande a bien été envoyée.';
+      location.assign('/merci/');
     } catch {
       const wa = status.dataset.wa;
       status.innerHTML = wa
         ? `L’envoi n’a pas abouti. Vous pouvez nous écrire directement sur <a class="underline" href="${wa}" target="_blank" rel="noopener">WhatsApp</a>.`
         : 'L’envoi n’a pas abouti. Merci de réessayer dans quelques minutes.';
-    } finally {
       btn?.removeAttribute('disabled');
     }
   });

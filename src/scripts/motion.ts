@@ -2,7 +2,13 @@
  * Animations au défilement — CSS + IntersectionObserver, sans bibliothèque.
  * - [data-reveal] / [data-reveal-img] : déclenchement unique dès l'entrée dans l'écran
  * - [data-count] : compteur animé une fois (chiffres réels uniquement)
+ * Charge aussi le suivi des campagnes (track.ts) : attribution utm_* et clics de contact.
  */
+import { captureAttribution, initContactTracking } from './track';
+
+captureAttribution();
+initContactTracking();
+
 const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 const io = new IntersectionObserver(

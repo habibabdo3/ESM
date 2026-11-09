@@ -61,6 +61,10 @@
 ├── /a-propos/                      Piliers, équipe*, assurances*, partenaires*
 ├── /contact/                       Formulaire de devis + contact direct
 ├── /mentions-legales/ · /conditions-utilisation/ · /confidentialite/ · /cookies/ · /plan-du-site/
+├── /merci/                        Remerciement après devis (noindex) : compte le Lead une fois
+├── /lp/cabinet-dentaire/           Page d'annonce Meta (noindex, hors sitemap), formulaire court
+├── /lp/premiere-installation/      Page d'annonce Meta (noindex, hors sitemap), nature « Création »
+├── /lp/renovation/                 Page d'annonce Meta (noindex, hors sitemap), nature « Rénovation »
 ├── /styleguide/                    Interne (noindex) : tokens et animations
 └── 404 · robots.txt · sitemap-index.xml
 ```

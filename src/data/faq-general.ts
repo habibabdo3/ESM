@@ -10,7 +10,7 @@ export const faqGeneral = [
     a: 'Nous couvrons quatorze familles de structures, du cabinet dentaire au bloc opératoire, en passant par l’imagerie, les laboratoires et la rééducation. Chaque plan part de l’acte médical et des contraintes propres à votre spécialité.',
   },
   {
-    q: 'Pouvez-vous rénover mon cabinet sans le fermer ?',
+    q: 'Pouvez-vous rénover mon cabinet sans interrompre mon activité ?',
     a: 'Dans la plupart des cas, oui. Les travaux sont découpés en phases, les zones de chantier sont isolées par des cloisons étanches et les accès et fluides critiques sont maintenus pendant toute la durée du chantier.',
   },
   {

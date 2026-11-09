@@ -1,0 +1,100 @@
+---
+/**
+ * Page d'annonce (Meta Ads) — une par campagne (src/data/campagnes.ts). noindex, hors sitemap.
+ * Structure : en-tête réduit · promesse + 3 points + formulaire court (#devis) · photo · méthode en 4 étapes ·
+ * pourquoi ESM · FAQ · rappel final. Le Lead est compté sur /merci/ après envoi (track.ts).
+ */
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import QuoteForm from '@/components/QuoteForm.astro';
+import Photo from '@/components/Photo.astro';
+import ProcessSteps from '@/components/ProcessSteps.astro';
+import Faq from '@/components/Faq.astro';
+import { campagnes, type Campagne } from '@/data/campagnes';
+import { faqGeneral } from '@/data/faq-general';
+import { getServices, getSpecialites } from '@/lib/content';
+import { BANK_DISCLAIMER, bankClaimsApproved, whatsappLink } from '@/config/site';
+
+export function getStaticPaths() {
+  return campagnes.map((c) => ({ params: { slug: c.slug }, props: { c } }));
+}
+const { c } = Astro.props as { c: Campagne };
+
+let faq: { q: string; a: string }[] = [];
+const src = c.faq;
+if (src.from === 'general') faq = faqGeneral.filter((f) => src.questions.includes(f.q));
+else if (src.from === 'specialite') faq = (await getSpecialites()).find((s) => s.id === src.id)?.data.faq ?? [];
+else faq = (await getServices()).find((s) => s.id === src.id)?.data.faq ?? [];
+const wa = whatsappLink(`Bonjour Euro Space Medical, je consulte la page « ${c.title} » et je souhaite parler de mon projet.`);
+const bankLine = bankClaimsApproved
+  ? 'Dossier bancaire préparé et suivi avec Al Barid Bank et Bank Al Yousr, partenaires d’Euro Space Medical.'
+  : 'Dossier bancaire préparé et suivi de A à Z avec nos partenaires.';
+const why = [
+  { t: 'Un seul interlocuteur', d: 'De la première esquisse à l’ouverture : plans, travaux, équipement et suivi.' },
+  { t: 'Votre spécialité d’abord', d: 'Le plan part de l’acte médical et des règles de votre discipline.' },
+  { t: 'Zéro surprise', d: 'Un budget par lot, validé avant le démarrage des travaux.' },
+];
+---
+<BaseLayout title={c.title} description={c.description} noindex minimal context={c.title}>
+  <section class="lp-hero">
+    <div class="container-lux lp-hero-grid">
+      <div class="lp-hero-copy">
+        <p class="eyebrow text-[var(--color-teal-ink)]">{c.eyebrow}</p>
+        <h1 class="lp-title">{c.h1}</h1>
+        <p class="lp-lede">{c.lede}</p>
+        <ul class="lp-points">
+          {c.points.map((p) => <li>{p}</li>)}
+          {c.bank && <li>{bankLine}<sup>*</sup></li>}
+        </ul>
+        {c.bank && <p class="lp-note">* {BANK_DISCLAIMER}</p>}
+      </div>
+      <div class="lp-form" id="devis">
+        <h2 class="lp-form-title">Recevoir mon devis</h2>
+        <p class="lp-form-text">Quelques informations suffisent : un membre de l’équipe vous rappelle pour en parler.</p>
+        <div class="mt-6">
+          <QuoteForm variant="short" structure={c.structure} nature={c.nature} submitLabel="Être rappelé" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <figure class="lp-photo">
+    <Photo name={c.photo} sizes="100vw" widths={[800, 1280, 1920]} class="h-full w-full object-cover" />
+    <figcaption>Image d’illustration</figcaption>
+  </figure>
+
+  <section class="py-20 lg:py-28" aria-labelledby="lp-method">
+    <div class="container-lux">
+      <p class="eyebrow text-[var(--color-teal-ink)]">Notre méthode</p>
+      <h2 id="lp-method" class="mt-5 max-w-2xl">Un processus clair, du premier rendez-vous à l’ouverture.</h2>
+      <div class="mt-14"><ProcessSteps /></div>
+    </div>
+  </section>
+
+  <section class="bg-[var(--color-navy)] py-20 text-white lg:py-28" aria-labelledby="lp-why">
+    <div class="container-lux">
+      <p class="eyebrow text-[var(--color-gold)]">Pourquoi Euro Space Medical</p>
+      <h2 id="lp-why" class="mt-5 max-w-2xl text-white">Le regard d’un architecte, la rigueur d’un ingénieur.</h2>
+      <ul class="mt-12 grid gap-10 md:grid-cols-3">
+        {why.map((w, i) => (
+          <li class="border-t border-white/15 pt-6">
+            <span class="num text-[0.95rem]">0{i + 1}</span>
+            <h3 class="mt-3 text-[1.35rem] text-white">{w.t}</h3>
+            <p class="mt-2 text-[1rem] leading-relaxed text-white/75">{w.d}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <Faq items={faq} title="Vos questions" eyebrow="FAQ" tone="sand" />
+
+  <section class="py-20 lg:py-24" aria-labelledby="lp-end">
+    <div class="container-lux flex flex-col items-start justify-between gap-8 md:flex-row md:items-center">
+      <h2 id="lp-end" class="max-w-xl">Parlons de votre projet.</h2>
+      <div class="flex flex-wrap items-center gap-4">
+        <a href="#devis" class="btn btn-primary">Recevoir mon devis <span class="arrow" aria-hidden="true">→</span></a>
+        {wa && <a href={wa} target="_blank" rel="noopener" class="btn btn-ghost-dark">WhatsApp</a>}
+      </div>
+    </div>
+  </section>
+</BaseLayout>

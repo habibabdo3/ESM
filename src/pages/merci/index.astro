@@ -1,0 +1,57 @@
+---
+/**
+ * Page de remerciement après une demande de devis (noindex, exclue du sitemap).
+ * Le Lead (Meta / Plausible) n'est compté qu'ici, une seule fois par demande : le formulaire marque la demande
+ * (sessionStorage) avant la redirection, la page la consomme. Recharger la page ne compte pas un second Lead.
+ */
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { whatsappLink } from '@/config/site';
+
+const wa = whatsappLink('Bonjour, je viens d’envoyer une demande de devis et je souhaite ajouter une précision.');
+const steps = [
+  { n: '01', t: 'Nous étudions votre demande', d: 'Votre spécialité, votre local et votre calendrier.' },
+  { n: '02', t: 'Nous vous appelons', d: 'Pour préciser le projet, les équipements prévus et le financement.' },
+  { n: '03', t: 'Nous vous proposons la suite', d: 'Visite du local, étude de faisabilité ou premier budget par lot.' },
+];
+---
+<BaseLayout
+  title="Demande envoyée"
+  description="Votre demande de devis a bien été transmise à Euro Space Medical. Voici les prochaines étapes de votre projet de cabinet, de clinique ou de centre médical."
+  noindex
+  context="Merci"
+>
+  <section class="bg-[var(--color-warm)] pb-24 pt-36 lg:pb-32 lg:pt-44">
+    <div class="container-lux grid gap-14 lg:grid-cols-12 lg:gap-16">
+      <div class="lg:col-span-6">
+        <p class="eyebrow text-[var(--color-teal-ink)]">Demande envoyée</p>
+        <h1 class="mt-6 text-[clamp(2.4rem,1.4rem+3.6vw,4rem)] font-extrabold leading-[1.02] tracking-[-0.04em]">Merci, votre demande est bien reçue.</h1>
+        <p class="mt-6 max-w-md text-[1.08rem] leading-relaxed text-[var(--color-muted)]">Un membre de l’équipe Euro Space Medical revient vers vous pour en parler.</p>
+        <div class="mt-9 flex flex-wrap items-center gap-x-7 gap-y-4">
+          {wa && <a href={wa} target="_blank" rel="noopener" class="btn btn-primary">Ajouter une précision sur WhatsApp <span class="arrow" aria-hidden="true">→</span></a>}
+          <a href="/" class="link-more">Retour à l’accueil <span>→</span></a>
+        </div>
+      </div>
+      <div class="lg:col-span-6">
+        <h2 class="text-[1.4rem]">Les prochaines étapes</h2>
+        <ol class="mt-6 border-t border-[var(--color-line)]">
+          {steps.map((s) => (
+            <li class="flex gap-5 border-b border-[var(--color-line)] py-5">
+              <span class="num text-[1rem]">{s.n}</span>
+              <span>
+                <span class="block font-[family-name:var(--font-display)] text-[1.15rem] font-bold text-[var(--color-navy)]">{s.t}</span>
+                <span class="mt-1 block text-[0.98rem] text-[var(--color-muted)]">{s.d}</span>
+              </span>
+            </li>
+          ))}
+        </ol>
+        <p class="mt-8 text-[0.95rem] text-[var(--color-muted)]">En attendant, nos guides répondent aux questions les plus fréquentes : <a href="/blog/" class="underline underline-offset-2">budget, autorisations, réception de chantier, financement</a>.</p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  import { consumeLead, track } from '@/scripts/track';
+  const lead = consumeLead();
+  if (lead) track('Lead', { content_name: lead.structure || 'devis', page: '/merci/' }, lead.eventId);
+</script>

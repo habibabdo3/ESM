@@ -2239,6 +2239,196 @@
   }
 }
 
+/* =====================================================================
+   PAGES D'ANNONCE (/lp/…) — en-tête réduit, promesse + formulaire court
+   ===================================================================== */
+.lp-header {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background: rgb(255 255 255 / 0.95);
+  border-bottom: 1px solid var(--color-line);
+  backdrop-filter: blur(8px);
+}
+.lp-header-wa {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 44px;
+  padding: 0 1.1rem;
+  border: 1px solid var(--color-navy);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: var(--color-navy);
+  text-decoration: none;
+  transition: background-color 200ms var(--ease-lux), color 200ms var(--ease-lux);
+}
+.lp-header-wa:hover {
+  background: var(--color-navy);
+  color: var(--color-white);
+}
+.lp-hero {
+  background: var(--color-warm);
+  padding: 3rem 0 4rem;
+}
+.lp-hero-grid {
+  display: grid;
+  gap: 2.5rem;
+}
+.lp-title {
+  margin-top: 1.1rem;
+  font-size: clamp(2.2rem, 1.3rem + 3.2vw, 3.8rem);
+  font-weight: 800;
+  line-height: 1.02;
+  letter-spacing: -0.04em;
+  color: var(--color-navy);
+}
+.lp-lede {
+  margin-top: 1.1rem;
+  max-width: 34rem;
+  font-size: 1.08rem;
+  line-height: 1.6;
+  color: var(--color-muted);
+}
+.lp-points {
+  margin-top: 1.75rem;
+  display: grid;
+  gap: 0.75rem;
+}
+.lp-points li {
+  position: relative;
+  padding-left: 2rem;
+  font-size: 1.02rem;
+  line-height: 1.5;
+  color: var(--color-ink);
+}
+.lp-points li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  top: 0.05rem;
+  display: grid;
+  place-items: center;
+  width: 1.35rem;
+  height: 1.35rem;
+  border-radius: 999px;
+  background: var(--color-teal);
+  color: var(--color-white);
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+.lp-points sup {
+  color: var(--color-teal-ink);
+}
+.lp-note {
+  margin-top: 1rem;
+  font-size: 0.85rem;
+  color: var(--color-muted);
+}
+.lp-form {
+  scroll-margin-top: 5.5rem;
+  padding: 1.75rem 1.25rem;
+  background: var(--color-white);
+  border: 1px solid var(--color-line);
+  border-top: 3px solid var(--color-teal);
+  box-shadow: 0 30px 70px -45px rgb(20 44 67 / 0.45);
+}
+.lp-form-title {
+  font-size: 1.6rem;
+}
+.lp-form-text {
+  margin-top: 0.5rem;
+  font-size: 0.95rem;
+  color: var(--color-muted);
+}
+.lp-photo {
+  position: relative;
+  margin: 0;
+  height: min(60svh, 34rem);
+  overflow: hidden;
+}
+.lp-photo figcaption {
+  position: absolute;
+  right: 1rem;
+  bottom: 0.75rem;
+  padding: 0.2rem 0.55rem;
+  background: rgb(20 44 67 / 0.7);
+  font-size: 0.72rem;
+  color: rgb(255 255 255 / 0.85);
+}
+.lp-footer {
+  padding: 2rem 0 6rem;
+  border-top: 1px solid var(--color-line);
+  font-size: 0.88rem;
+  color: var(--color-muted);
+}
+.lp-footer a,
+.lp-footer button {
+  color: var(--color-muted);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+.lp-footer a:hover,
+.lp-footer button:hover {
+  color: var(--color-navy);
+}
+.lp-sticky {
+  position: fixed;
+  inset: auto 0 0;
+  z-index: 30;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  background: var(--color-navy);
+  border-top: 1px solid var(--color-navy-3, #24496a);
+}
+.lp-sticky a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  height: 3.5rem;
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-white);
+  text-decoration: none;
+}
+.lp-sticky .lp-sticky-devis {
+  background: var(--color-gold);
+  color: var(--color-navy);
+}
+@media (min-width: 768px) {
+  .lp-sticky {
+    display: none;
+  }
+  .lp-footer {
+    padding-bottom: 2rem;
+  }
+  .lp-form {
+    padding: 2.25rem 2rem;
+  }
+}
+@media (min-width: 1024px) {
+  .lp-hero {
+    padding: 4.5rem 0 5.5rem;
+  }
+  .lp-hero-grid {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+    align-items: start;
+    gap: 4rem;
+  }
+  .lp-hero-copy {
+    position: sticky;
+    top: 7rem;
+    padding-top: 1.5rem;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .marquee-track {
     animation: none;

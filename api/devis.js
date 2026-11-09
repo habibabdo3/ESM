@@ -8,7 +8,8 @@
  *  - origine vérifiée (même domaine que le site ou SITE_URL) ;
  *  - champ piège `site_web` ; limitation de débit par IP (5 / 10 min, mémoire de l'instance :
  *    protection de base, à compléter par le pare-feu Vercel si le spam augmente) ;
- *  - validation stricte : champs obligatoires, listes fermées, longueurs maximales, e-mail, téléphone ;
+ *  - validation stricte : champs obligatoires, listes fermées, longueurs maximales, e-mail (si fourni), téléphone ;
+ *  - source de campagne (utm_*, fbclid, page d'arrivée) et event_id du Lead acceptés, tronqués, échappés ;
  *  - échappement HTML du contenu et suppression des retours à la ligne dans l'objet de l'e-mail ;
  *  - réponses génériques : aucun détail interne (clé, erreur du fournisseur) n'est renvoyé au navigateur.
  */
@@ -20,8 +21,12 @@ const MAX_BODY_BYTES = 20_000;
 const LIMITS = {
   nom: 120, telephone: 30, email: 160, ville: 80, structure: 80, nature: 20, surface: 7,
   calendrier: 40, financement: 80, message: 3000, page: 200, consentement: 10, site_web: 200,
+  // Source de campagne (pages d'annonce Meta) et identifiant d'événement du Lead
+  utm_source: 100, utm_medium: 100, utm_campaign: 100, utm_content: 100, utm_term: 100, fbclid: 300, landing: 200,
+  event_id: 64,
 };
-const REQUIRED = ['nom', 'telephone', 'email', 'ville', 'structure', 'nature', 'consentement'];
+// E-mail facultatif (formulaire court des pages d'annonce) mais vérifié s'il est fourni ; téléphone obligatoire.
+const REQUIRED = ['nom', 'telephone', 'ville', 'structure', 'nature', 'consentement'];
 const NATURES = ['Création', 'Rénovation', 'Extension'];
 const CALENDRIERS = ['', 'Dans les 3 mois', 'Dans 3 à 6 mois', 'Dans 6 à 12 mois', 'Plus tard / à définir'];
 
@@ -79,7 +84,7 @@ export default async function handler(req, res) {
 
   const missing = REQUIRED.filter((k) => !data[k]);
   if (missing.length) return res.status(400).json({ ok: false, error: 'missing', fields: missing });
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(data.email)) return res.status(400).json({ ok: false, error: 'email' });
+  if (data.email && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(data.email)) return res.status(400).json({ ok: false, error: 'email' });
   if (!/^[+\d][\d\s().-]{5,}$/.test(data.telephone)) return res.status(400).json({ ok: false, error: 'telephone' });
   if (!NATURES.includes(data.nature)) return res.status(400).json({ ok: false, error: 'nature' });
   if (!CALENDRIERS.includes(data.calendrier)) return res.status(400).json({ ok: false, error: 'calendrier' });
@@ -92,9 +97,13 @@ export default async function handler(req, res) {
   }
 
   const fields = ['nom', 'telephone', 'email', 'ville', 'structure', 'nature', 'surface', 'calendrier', 'financement', 'message', 'page'];
-  const rows = fields
-    .map((k) => `<tr><th align="left" style="padding:4px 12px 4px 0">${k}</th><td>${esc(data[k])}</td></tr>`)
-    .join('');
+  const row = (k) => `<tr><th align="left" style="padding:4px 12px 4px 0">${k}</th><td>${esc(data[k])}</td></tr>`;
+  const rows = fields.map(row).join('');
+  // Origine de la demande : annonce (utm_*, fbclid) ou visite directe
+  const source = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'landing', 'fbclid', 'event_id'].filter((k) => data[k]);
+  const sourceHtml = source.length
+    ? `<h3>Origine de la demande</h3><table>${source.map(row).join('')}</table>`
+    : '<p>Origine : visite directe ou référencement naturel.</p>';
 
   try {
     const r = await fetch('https://api.resend.com/emails', {
@@ -103,9 +112,9 @@ export default async function handler(req, res) {
       body: JSON.stringify({
         from: QUOTE_FROM_EMAIL,
         to: QUOTE_TO_EMAIL.split(',').map((s) => s.trim()).filter(Boolean),
-        reply_to: data.email,
-        subject: oneLine(`Demande de devis — ${data.structure} — ${data.ville}`).slice(0, 200),
-        html: `<h2>Nouvelle demande de devis</h2><table>${rows}</table>`,
+        ...(data.email ? { reply_to: data.email } : {}),
+        subject: oneLine(`${data.utm_source || data.fbclid ? '[Annonce] ' : ''}Demande de devis — ${data.structure} — ${data.ville}`).slice(0, 200),
+        html: `<h2>Nouvelle demande de devis</h2><table>${rows}</table>${sourceHtml}`,
       }),
     });
     if (!r.ok) return res.status(502).json({ ok: false, error: 'mail_failed' });

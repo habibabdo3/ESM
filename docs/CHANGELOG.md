@@ -2,6 +2,28 @@
 
 > Ajouter chaque modification **en haut**, datée, avec : ce qui a changé, pourquoi, fichiers clés, et l'état des vérifications.
 
+## 2026-11-09 — v2.0.0 · Prêt pour les campagnes Meta : conversions, attribution, page merci, pages d'annonce
+
+- **Événements de conversion** (`src/scripts/track.ts`) : `Lead` (demande de devis envoyée, compté une seule fois
+  sur `/merci/`, `eventID` unique), `Contact` (clic WhatsApp, téléphone, e-mail, sur tout le site). Envoyés à Meta
+  et Plausible **uniquement après consentement** (catégories « Publicité » / « Mesure d'audience »).
+- **Attribution** : `utm_*`, `fbclid` et page d'arrivée gardés le temps de la session (sessionStorage, sans cookie)
+  et joints à la demande ; `api/devis.js` les accepte (liste blanche, longueurs), l'e-mail affiche « [Annonce] »
+  dans l'objet et un tableau « Origine de la demande ». E-mail désormais facultatif côté serveur (vérifié s'il est
+  fourni) pour le formulaire court ; téléphone toujours obligatoire.
+- **Page `/merci/`** (noindex, hors sitemap) : confirmation, prochaines étapes, WhatsApp ; le formulaire y redirige.
+- **Pages d'annonce** `/lp/cabinet-dentaire/`, `/lp/premiere-installation/`, `/lp/renovation/` (noindex, hors
+  sitemap, `src/data/campagnes.ts`) : en-tête réduit (`BaseLayout minimal`), promesse + 3 points, formulaire court
+  (`QuoteForm variant="short"`), photo, méthode, pourquoi ESM, FAQ issue du contenu existant, barre mobile
+  « WhatsApp / Recevoir mon devis », mention bancaire obligatoire.
+- Confidentialité et cookies mis à jour (source de campagne jointe à la demande ; stockages locaux listés).
+  FAQ générale : « sans interrompre mon activité » au lieu de « sans le fermer ».
+- Guide `docs/META-ADS.md` (liens d'annonce, événements, tests, API Conversions à venir).
+- Vérifications : `astro check` 0/0/0, `npm run verify` sans erreur bloquante, test de bout en bout (lien d'annonce →
+  formulaire court → `/merci/` : source transmise, `Contact` puis `Lead` comptés une fois, même après rechargement),
+  test de l'API (e-mail facultatif, e-mail invalide refusé, échappement HTML, téléphone obligatoire), axe-core
+  0 violation et largeur mobile = écran sur les 3 pages d'annonce, `/merci/`, `/contact/`, `/cookies/`, `/confidentialite/`.
+
 ## 2026-11-08 — v1.9.3 · Corrections de texte demandées par le client
 
 - Bandeau cookies : « Nécessaires — … (toujours **actifs**) » (accord avec « Nécessaires »).

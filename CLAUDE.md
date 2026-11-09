@@ -96,6 +96,8 @@ src/
   scripts/motion.ts       IntersectionObserver (révélations, compteurs)
   scripts/motion-home.ts  accueil : lecture auto de la maquette (intro, vitrine, replay) et bandes d'expertises (sans GSAP)
   scripts/clinic-scene.ts scène three.js de la maquette (plan → murs → coupe équipée), chargée à la demande
+  scripts/track.ts        conversions Meta/Plausible (Lead, Contact) après consentement + attribution utm_*/fbclid
+  data/campagnes.ts       pages d'annonce Meta (/lp/…) : textes, pré-réglages du formulaire, FAQ
   styles/global.css       design tokens + composants + animations
   pages/                  voir §5
 api/devis.js              fonction serverless Vercel (Resend), champ piège + limitation de débit
@@ -104,13 +106,14 @@ src/lib/photos.ts         registre des photos (alt, source Unsplash), photo par 
 src/assets/photos/        photos d'illustration (optimisées au build en AVIF/WebP)
 ```
 
-## 5. Pages (72 générées) — détail dans `docs/ARCHITECTURE.md`
+## 5. Pages (76 générées) — détail dans `docs/ARCHITECTURE.md`
 
 `/` · `/expertises/` (4 expertises) · `/services/` + 10 · `/specialites/` + 14 · `/amenagement-cabinet-medical/` (pilier) + 12 régions ·
 `/renovation-cabinet-clinique/` (pilier) · `/premiere-installation/` · `/zones-intervention/` · `/financement/` +
 `/al-barid-bank/` + `/bank-al-yousr/` · `/realisations/` (noindex tant que vide) + `[slug]` · `/blog/` + 12 guides publiés ·
 `/glossaire/` (121 termes, DefinedTermSet) · `/faq/` · `/a-propos/` · `/contact/` · `/mentions-legales/` · `/conditions-utilisation/` · `/confidentialite/` · `/cookies/` ·
-`/plan-du-site/` · `/styleguide/` (noindex) · `404` · `robots.txt` · `sitemap-index.xml` (exclut les noindex, liste dans `astro.config.mjs`).
+`/plan-du-site/` · `/styleguide/` (noindex) · `/merci/` (noindex) · `/lp/cabinet-dentaire/`, `/lp/premiere-installation/`,
+`/lp/renovation/` (pages d'annonce Meta, noindex, hors sitemap) · `404` · `robots.txt` · `sitemap-index.xml` (exclut les noindex, liste dans `astro.config.mjs`).
 
 Maillage : chaque spécialité → ≥ 3 services ; chaque service → spécialités liées + 4 services suivants ;
 header/footer → tous les services et spécialités ; fil d'Ariane partout.
@@ -170,14 +173,24 @@ header/footer → tous les services et spécialités ; fil d'Ariane partout.
   et three identiques). **Ne jamais le modifier.** La scène three.js est indépendante du framework (portable en Angular).
 - **Navigation** : Accueil · Expertises (`/expertises/`) · Réalisations · À propos · Contact + « Parler de mon projet ».
 
-## 7. Variables d'environnement (Vercel → Settings → Environment Variables)
+## 7. Campagnes Meta (v2.0.0 du 2026-11-09 — guide complet `docs/META-ADS.md`)
+
+- Événements : `PageView`, `Contact` (clic WhatsApp / téléphone / e-mail), `Lead` (compté **une seule fois sur
+  `/merci/`**, `eventID` unique transmis aussi au serveur pour une future API Conversions). Rien n'est envoyé sans le
+  consentement « Publicité » (ou « Mesure d'audience » pour Plausible).
+- Attribution : `utm_*`, `fbclid`, page d'arrivée (sessionStorage, sans cookie) joints à la demande de devis ;
+  e-mail « [Annonce] … » + tableau « Origine de la demande ».
+- Pages d'annonce : uniquement des affirmations déjà présentes sur le site ; formulaire court (e-mail facultatif) ;
+  mention bancaire obligatoire. Ne jamais mettre de prix, délai ou taux dans une annonce.
+
+## 8. Variables d'environnement (Vercel → Settings → Environment Variables)
 
 `SITE_URL`, `PUBLIC_PHONE`, `PUBLIC_EMAIL`, `PUBLIC_WHATSAPP` (212…), `PUBLIC_ADDRESS`, `PUBLIC_INSTAGRAM_URL`,
 `PUBLIC_FACEBOOK_URL`, `BANK_CLAIMS_APPROVED`, `PUBLIC_PLAUSIBLE_DOMAIN`, `PUBLIC_META_PIXEL_ID`,
 `RESEND_API_KEY`, `QUOTE_TO_EMAIL`, `QUOTE_FROM_EMAIL`. Voir `.env.example`. Jamais de secret dans le dépôt.
 Sans `SITE_URL`, le canonical utilise `VERCEL_PROJECT_PRODUCTION_URL`.
 
-## 8. Conventions
+## 9. Conventions
 
 - Ajouter une **spécialité / un service / une région** : nouvelle entrée JSON (id = slug sans accents), puis
   `node scripts/check-lengths.mjs src/data/<fichier>.json` et `npm run verify`.
@@ -200,7 +213,7 @@ Sans `SITE_URL`, le canonical utilise `VERCEL_PROJECT_PRODUCTION_URL`.
 - **Services** : `intro` riche en termes techniques ; `termes` (4 étiquettes affichées sur les cartes de `/services/`)
   et `savoirFaire` (3 points, section « Notre savoir-faire technique » sur chaque page service).
 
-## 9. État actuel et prochaines étapes
+## 10. État actuel et prochaines étapes
 
 Voir `docs/CHANGELOG.md` (journal), **`docs/MEDIAS.md`** (brief photo/vidéo) et **`docs/BESOINS.md`** (liste complète des informations à fournir + benchmark
 international + ajouts recommandés). En bref, il manque : coordonnées, identifiants légaux, équipe et assurances,
